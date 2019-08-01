@@ -13,10 +13,16 @@ class Config {
       flowerConfig = xml.parse(flowerConfigXml);
     }
 
-    String roseConfigXml = await rootBundle.loadString('assets/roseConfig.xml');
-    roseConfig = xml.parse(roseConfigXml);
+    if (roseConfig == null) {
+      String roseConfigXml =
+          await rootBundle.loadString('assets/roseConfig.xml');
+      roseConfig = xml.parse(roseConfigXml);
+    }
 
-    String propConfigXml = await rootBundle.loadString('assets/propConfig.xml');
-    propConfig = xml.parse(propConfigXml);
+    if (propConfig == null) {
+      String propConfigXml =
+          await rootBundle.loadString('assets/propConfig.xml');
+      propConfig = xml.parse(propConfigXml);
+    }
   }
 }
