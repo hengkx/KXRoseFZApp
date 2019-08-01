@@ -9,7 +9,7 @@ class Soil {
   String plantShowName;
   int type;
   String typeName;
-  String decorpotName;
+  String decorpotName = "";
   String status;
 
   int charm;
@@ -19,13 +19,21 @@ class Soil {
   int speed;
 
   Soil(dynamic soil) {
-    charm = soil["attribute"]["charm"];
-    exp = soil["attribute"]["exp"];
-    increase = soil["attribute"]["increase"];
-    lucky = soil["attribute"]["lucky"];
-    speed = soil["attribute"]["speed"];
-
     type = soil["SoilType"];
+
+    if (type == 3) {
+      charm = soil["hpattribute"]["charm"];
+      exp = soil["hpattribute"]["exp"];
+      increase = soil["hpattribute"]["increase"];
+      speed = soil["hpattribute"]["speed"];
+    } else {
+      charm = soil["attribute"]["charm"];
+      exp = soil["attribute"]["exp"];
+      increase = soil["attribute"]["increase"];
+      lucky = soil["attribute"]["lucky"];
+      speed = soil["attribute"]["speed"];
+    }
+
     typeName = getSoilType(soil["SoilType"]);
     if (soil["soilsate"] == 50) {
       plantShowName = "[枯萎]";
@@ -104,5 +112,12 @@ class Soil {
     if (res.length > 0) {
       return res[0];
     }
+  }
+
+  String getAttrString() {
+    if (this.type == 3) {
+      return "加速: ${this.speed / 10}% 增产: ${this.increase / 10}% 魅力: ${this.charm / 10}% 经验: ${this.exp / 10}%";
+    }
+    return "加速: ${this.speed}% 增产: ${this.increase}% 魅力: ${this.charm}% 经验: ${this.exp}% 幸运值: ${this.lucky}";
   }
 }
