@@ -79,6 +79,7 @@ class _PlantState extends State<Plant> {
             var soil = soils[index];
 
             return GestureDetector(
+              behavior: HitTestBehavior.opaque,
               child: Column(
                 children: <Widget>[
                   Row(
