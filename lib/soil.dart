@@ -65,7 +65,7 @@ class Soil {
       case 1:
         return "水盆";
       case 2:
-        return "仙盆(花架)";
+        return "仙盆"; // 仙盆不能种植
       case 3:
         return "仙盆";
     }

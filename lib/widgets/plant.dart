@@ -70,6 +70,20 @@ class _PlantState extends State<Plant> {
         });
   }
 
+  Color getSoilTypeColor(int type) {
+    switch (type) {
+      case 0:
+        return Colors.brown[700];
+      case 1:
+        return Colors.blue;
+      case 2:
+        return Colors.grey;
+      case 3:
+        return Colors.orange;
+    }
+    return Colors.red;
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -84,7 +98,23 @@ class _PlantState extends State<Plant> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Text(soil.typeName),
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        alignment: Alignment(0, 0),
+                        height: 18,
+                        width: 36,
+                        decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                          border: new Border.all(
+                              width: 1, color: getSoilTypeColor(soil.type)),
+                        ),
+                        child: Text(soil.typeName,
+                            style: new TextStyle(
+                              color: getSoilTypeColor(soil.type),
+                              fontSize: 10,
+                            )),
+                      ),
                       Text(soil.plantShowName),
                       Text(soil.gainTime != null
                           ? soil.gainTime.toString()
@@ -93,16 +123,22 @@ class _PlantState extends State<Plant> {
                   ),
                   Row(
                     children: <Widget>[
-                      Text("加速:"),
-                      Text("${soil.speed}%"),
-                      Text("增产:"),
-                      Text("${soil.increase}%"),
-                      Text("魅力:"),
-                      Text("${soil.charm}%"),
-                      Text("经验:"),
-                      Text("${soil.exp}%"),
-                      Text("幸运值:"),
-                      Text("${soil.lucky}"),
+                      Text(
+                          "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸运值: ${soil.lucky}",
+                          style: new TextStyle(
+                            color: Colors.grey[500],
+                            fontSize: 12,
+                          )),
+                      // Text("加速:"),
+                      // Text("${soil.speed}%"),
+                      // Text("增产:"),
+                      // Text("${soil.increase}%"),
+                      // Text("魅力:"),
+                      // Text("${soil.charm}%"),
+                      // Text("经验:"),
+                      // Text("${soil.exp}%"),
+                      // Text("幸运值:"),
+                      // Text("${soil.lucky}"),
                     ],
                   ),
                 ],
