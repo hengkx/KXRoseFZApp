@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 import '../utils/mg.dart';
 import '../soil.dart';
 import '../config.dart';
+
+final dateFormat = new DateFormat('MM-dd hh:mm');
 
 class Plant extends StatefulWidget {
   @override
@@ -94,54 +97,77 @@ class _PlantState extends State<Plant> {
 
             return GestureDetector(
               behavior: HitTestBehavior.opaque,
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(left: 10),
-                        alignment: Alignment(0, 0),
-                        height: 18,
-                        width: 36,
-                        decoration: new BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                          border: new Border.all(
-                              width: 1, color: getSoilTypeColor(soil.type)),
-                        ),
-                        child: Text(soil.typeName,
-                            style: new TextStyle(
-                              color: getSoilTypeColor(soil.type),
-                              fontSize: 10,
-                            )),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(right: 10),
+                            alignment: Alignment(0, 0),
+                            height: 18,
+                            width: 36,
+                            decoration: new BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0)),
+                              border: new Border.all(
+                                  width: 1, color: getSoilTypeColor(soil.type)),
+                            ),
+                            child: Text(soil.typeName,
+                                style: new TextStyle(
+                                  color: getSoilTypeColor(soil.type),
+                                  fontSize: 10,
+                                )),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                Text(soil.plantShowName),
+                                Text(soil.status,
+                                    style: new TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          Text(
+                              soil.gainTime != null
+                                  ? dateFormat.format(soil.gainTime)
+                                  : "",
+                              style: new TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              )),
+                        ],
                       ),
-                      Text(soil.plantShowName),
-                      Text(soil.gainTime != null
-                          ? soil.gainTime.toString()
-                          : ""),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                          "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸运值: ${soil.lucky}",
-                          style: new TextStyle(
-                            color: Colors.grey[500],
-                            fontSize: 12,
-                          )),
-                      // Text("加速:"),
-                      // Text("${soil.speed}%"),
-                      // Text("增产:"),
-                      // Text("${soil.increase}%"),
-                      // Text("魅力:"),
-                      // Text("${soil.charm}%"),
-                      // Text("经验:"),
-                      // Text("${soil.exp}%"),
-                      // Text("幸运值:"),
-                      // Text("${soil.lucky}"),
-                    ],
-                  ),
-                ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                            "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸运值: ${soil.lucky}",
+                            style: new TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            )),
+                        // Text("加速:"),
+                        // Text("${soil.speed}%"),
+                        // Text("增产:"),
+                        // Text("${soil.increase}%"),
+                        // Text("魅力:"),
+                        // Text("${soil.charm}%"),
+                        // Text("经验:"),
+                        // Text("${soil.exp}%"),
+                        // Text("幸运值:"),
+                        // Text("${soil.lucky}"),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               onTap: () {
                 print(soil);
@@ -156,7 +182,7 @@ class _PlantState extends State<Plant> {
             //     "text $index ${getSoilPlantShowName(soil["soilsate"], soil["season"])} ${getSoilType(soil["SoilType"])}");
           },
           separatorBuilder: (BuildContext context, int index) {
-            return new Container(height: 1.0, color: Colors.red);
+            return new Container(height: 1.0, color: Colors.grey[300]);
           },
           itemCount: soils.length),
     );
