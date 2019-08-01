@@ -39,25 +39,12 @@ class MyHomePageState extends State<MyHomePage> {
   String usernic = '';
   List<Soil> soils = new List<Soil>();
 
-  void loadPlant() async {
-    dynamic data = await HttpUtil.getInstance()
-        .post("rosary0908_get_plant_info_self", data: {
-      "selforfriend": 0,
-      "benew0908": 1,
-      "cgiVersion": 43,
-      "ossType": 2
+  Future<void> loadPlant() async {
+    var data = await MGUtil.getPlantInfo();
+
+    this.setState(() {
+      soils = data;
     });
-    // print(data);
-    if (data['result'] == 0) {
-      for (var i = 1; i <= data["soilcount"]; i++) {
-        Soil soil = new Soil(data["soil$i"][0]);
-        soil.no = i;
-        soils.add(soil);
-      }
-      this.setState(() {
-        soils = soils;
-      });
-    }
   }
 
   @override
@@ -148,54 +135,57 @@ class MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("开心玫瑰辅助"),
       ),
-      body: new ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            var soil = soils[index];
+      body: RefreshIndicator(
+        onRefresh: loadPlant,
+        child: ListView.separated(
+            itemBuilder: (BuildContext context, int index) {
+              var soil = soils[index];
 
-            return GestureDetector(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text(soil.typeName),
-                      Text(soil.plantShowName),
-                      Text(soil.gainTime != null
-                          ? soil.gainTime.toString()
-                          : ""),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text("加速:"),
-                      Text("${soil.speed}%"),
-                      Text("增产:"),
-                      Text("${soil.increase}%"),
-                      Text("魅力:"),
-                      Text("${soil.charm}%"),
-                      Text("经验:"),
-                      Text("${soil.exp}%"),
-                      Text("幸运值:"),
-                      Text("${soil.lucky}"),
-                    ],
-                  ),
-                ],
-              ),
-              onTap: () {
-                print(soil);
-                showMySimpleDialog(context, soil);
-                // showMyMaterialDialog(context);
-              },
-            );
+              return GestureDetector(
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(soil.typeName),
+                        Text(soil.plantShowName),
+                        Text(soil.gainTime != null
+                            ? soil.gainTime.toString()
+                            : ""),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text("加速:"),
+                        Text("${soil.speed}%"),
+                        Text("增产:"),
+                        Text("${soil.increase}%"),
+                        Text("魅力:"),
+                        Text("${soil.charm}%"),
+                        Text("经验:"),
+                        Text("${soil.exp}%"),
+                        Text("幸运值:"),
+                        Text("${soil.lucky}"),
+                      ],
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  print(soil);
+                  showMySimpleDialog(context, soil);
+                  // showMyMaterialDialog(context);
+                },
+              );
 
-            // return new Text(
-            //     "${soil.plantShowName} ${soil.charm} $index ${soil.typeName} ${soil.decorpotName}");
-            // // return new Text(
-            //     "text $index ${getSoilPlantShowName(soil["soilsate"], soil["season"])} ${getSoilType(soil["SoilType"])}");
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return new Container(height: 1.0, color: Colors.red);
-          },
-          itemCount: soils.length),
+              // return new Text(
+              //     "${soil.plantShowName} ${soil.charm} $index ${soil.typeName} ${soil.decorpotName}");
+              // // return new Text(
+              //     "text $index ${getSoilPlantShowName(soil["soilsate"], soil["season"])} ${getSoilType(soil["SoilType"])}");
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return new Container(height: 1.0, color: Colors.red);
+            },
+            itemCount: soils.length),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: login,
         tooltip: '换号',
