@@ -37,7 +37,6 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
      * 监听页面加载url
      */
     flutterWebviewPlugin.onUrlChanged.listen((String url) {
-      print(url);
       if (url == "https://meigui.qq.com/other/loginproxy.https.html?type=0") {
         flutterWebviewPlugin
             .getCookies()
@@ -51,7 +50,7 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
               await SharedPreferences.getInstance();
           sharedPreferences.setString('cookies', cookies);
 
-          Navigator.pushNamed(context, "/");
+          Navigator.pop(context);
         });
       }
     });
