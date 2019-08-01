@@ -10,6 +10,7 @@ class Soil {
   int type;
   String typeName;
   String decorpotName;
+  String status;
 
   int charm;
   int exp;
@@ -56,6 +57,7 @@ class Soil {
         decorpotName = props[0].getAttribute("name");
       }
     }
+    status = getStatus(soil["rosestate"]);
   }
 
   getSoilType(int type) {
@@ -68,6 +70,23 @@ class Soil {
         return "仙盆"; // 仙盆不能种植
       case 3:
         return "仙盆";
+    }
+  }
+
+  String getStatus(int rosestate) {
+    switch (rosestate) {
+      case 1:
+        return "[种子]";
+      case 2:
+        return "[发芽]";
+      case 3:
+        return "[嫩叶]";
+      case 4:
+        return "[花蕾]";
+      case 5:
+        return "[开花]";
+      default:
+        return "[空]";
     }
   }
 
