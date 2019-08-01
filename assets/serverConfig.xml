@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ServerInfo>
+	<CGILink url="">
+		<link id="LOAD_REPORT" url="https://log.minigame.qq.com/qz-cgi/rosary_notify_swfloadingdata"/>
+		<!-- 玫瑰园进宝宝乐园 -->
+		<link id="GOTOPETGAME_URL" url="https://meigui.qq.com/inc/rosetopet.html"/>
+		<!-- 获取好友列表 -->
+		<link id="FRIEND_DATA" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_friends_info"/>
+		<!--拉取花园信息  --> 
+		<link id="GET_USERINFO" url="https://cgi.meigui.qq.com/cgi-bin/rosary0908_get_user_info"/>
+		<!-- 拉取花园信息-->
+		<link id="GET_GARDEN_SELF_1" url="https://cgi.meigui.qq.com/cgi-bin/rosary0909_get_init_first_self"/>
+		<!-- 拉取花园信息-->
+		<link id="GET_GARDEN_FRIEND_1" url="https://cgi.meigui.qq.com/cgi-bin/rosary0909_get_init_first_friend"/>
+		<!--   拉取玫瑰信息-->
+		<link id="GET_GARDEN_2" url="https://cgi.meigui.qq.com/cgi-bin/rosary0907_get_init_second"/>
+		<!--  获取用户种玫瑰的材料--> 
+		<link id="LIST_MATERIALS_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_list_materials"/>
+		<!--  开始玩--> 
+		<link id="BEGIN_PLAY_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_begin_play"/>
+		<!--  继续玩--> 
+		<link id="PLAY_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_play"/>
+		<!-- 魔法屋的指引动画播放完成  -->
+		<link id="MAGIC_FLASH_OVER" url="https://cgi.meigui.qq.com/cgi-bin/rosary_mixed_inf"/>
+		<link id="GET_USERS_FLOWERSTATUS" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_friend_flowerstatus"/>
+		<!-- 摆放玫瑰-->
+		<link id="REPLACE_ROSES" url="https://cgi.meigui.qq.com/cgi-bin/rosary0912_put"/>
+		<!-- 种玫瑰-->
+		<link id="MAKE_ROSE_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_make_rose"/>
+		<!--  开锦囊-->
+		<link id="OPEN_CHIP_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_open_chip"/>
+		<!--  采玫瑰-->
+		<link id="GATHER_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_gather"/>
+		<!-- 宝贝兑换原料-->
+		<link id="EXCHANGE_CROWRY_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_exchange_crowry"/>
+		<!--  免费赠送,浇水-->
+		<link id="SEND_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_send"/>
+		<!--  邀请好友-->
+		<link id="INVITE_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_invite_friend"/>
+		<!-- 领取特权 --> 
+		<link id="SALARY_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_get_salary"/>
+		<!--  设置/取消隐藏--> 
+		<link id="HIDE_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0907_maskorunmask"/>
+		<!--   锁定/解锁-->
+		<link id="LOCK_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_lockorunlock"/>
+		<!--  大奖榜 -->
+		<link id="BIG_AWARD_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_big_award"/>
+		<!--  获取用户携带的宝宝信息-->
+		<link id="PET_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_get_takeon_pets"/>
+		<!-- 宝宝续费 -->
+		<link id="PET_PAY_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_pets_pay"/>
+		<!--  获取用户携带的宝宝信息-->
+		<link id="DIG_PET_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_dig_pet"/>
+		<!--  获取用户种植园信息-->
+		<link id="GET_PLANT_INFO" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_get_plant_info"/>
+		<!--  -->
+		<link id="MAKE_COMBINE_INFO" url="https://cgi.meigui.qq.com/cgi-bin/rosary_converter"/>
+		<!--  获取自己种植园信息-->
+		<link id="GET_PLANT_INFO_SELF" url="https://cgi.meigui.qq.com/cgi-bin/rosary0908_get_plant_info_self"/>
+		<!--  获取好友种植园信息-->
+		<link id="GET_PLANT_INFO_FRIEND" url="https://cgi.meigui.qq.com/cgi-bin/rosary0908_get_plant_info_friend"/>
+		<!--  称号变更-->
+		<link id="SEND_TITLE_DATA" url="https://cgi.meigui.qq.com/cgi-bin/rosary_set_title"/>
+		<!--  锄地-->
+		<link id="HOE" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_hoe"/>
+		<!--  种植玫瑰-->
+		<link id="SOIL_PLANT_ROSE" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_soil_plant_rose"/>
+		<!--  收获玫瑰-->
+		<link id="GAIN" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_gain"/>
+		<!--  领取免费玫瑰种子-->
+		<link id="GET_FREESEED" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_get_freeseed"/>
+		<!--  给养分， 给阳光， 修剪-->
+		<link id="PLANT_ACTION" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_plant_action"/>
+		<!--  偷花-->
+		<link id="STEAL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_steal"/>
+		<!--  开垦种植园-->
+		<link id="EXPAND" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_expand"/>
+		<!--  使用小铲子-->
+		<link id="USE_SPADE" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_plant_use_spade"/>
+		<!-- 使用化肥 -->
+		<link id="USE_FERTILIZER" url="https://cgi.meigui.qq.com/cgi-bin/rosary0906_use_fertilizer"/>
+		
+		<link id="GET_MESSAGE" url="https://cgi.meigui.qq.com/cgi-bin/rosary0904_get_message"/>
+		
+		<link id="SEND_NEWER_GIFT" url="https://cgi.meigui.qq.com/cgi-bin/rosary0912_send_newyearsgift"/>
+		<!-- 停服礼包 -->
+		<link id="STOP_GIFT" url="https://cgi.meigui.qq.com/cgi-bin/rosary_stop_service_compensate"/>
+		
+		<!--  购买鲜花种子--> 
+		<link id="BUY_SEED_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0908_rosemoney_buy_seed"/>
+		<!--  赠送玫瑰 41-48--> 
+		<link id="PRESENT_CHARMFLOWER_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_sale"/>
+		<!--  购买原料、万能种子、幸运药水 10-14--> 
+		<link id="BUY_METERIAL_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0903_sale"/>
+		<!--购买化肥和精华 1-4  --> 
+		<link id="BUY_FERTILIZER_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0906_buy_fertilizer"/>
+		<!-- 购买装饰 --> 
+		<link id="BUY_DECORATION_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0906_buy_decorate"/>
+		<!-- 出售鲜花 --> 
+		<link id="SELL_FLOWER_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0907_sale_vegetable"/>
+		<!--  使用装饰--> 
+		<link id="CHANGE_DECORATION_URL" url="https://cgi.meigui.qq.com/cgi-bin/rosary0906_use_decorate"/>
+		<!-- 喂养宝宝 --> 
+		<link id="FEED_PET" url="https://cgi.meigui.qq.com/cgi-bin/rosary0906_feed_pet_jinghua"/>
+		<!--清空系统消息  --> 
+		<link id="CLEAR_MESSAGE" url="https://cgi.meigui.qq.com/cgi-bin/rosary0908_clear_message"/>
+		<!--领取任务  -->
+		<link id="RECEIVE_TASK" url="https://cgi.meigui.qq.com/cgi-bin/rosary0909_receive_flashman_task"/>
+		<!--  嫁接的cgi请求-->
+		<link id="PLANT_GRAFT" url="https://cgi.meigui.qq.com/cgi-bin/rosary1003_plant_graft"/>
+		<!-- 天赋宝宝任务 -->
+		<link id="GET_ACHIEVEMENT" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_achievement"/>
+		<!--  密钥合成-->
+		<link id="KEYS_COMBINE" url="https://cgi.meigui.qq.com/cgi-bin/rosary_make_key"/>
+		<!-- 喂养宝宝 -->
+		<link id="PET_FEED" url="https://cgi.meigui.qq.com/cgi-bin/rosary_talent_pet_feed"/>
+		<!--  派遣侦查-->
+		<link id="USE_PET_DETECT" url="https://cgi.meigui.qq.com/cgi-bin/rosary_detect_user"/>
+		<!--  修改宝宝的状态-->
+		<link id="SET_PET_SHOW_STATUSE" url="https://cgi.meigui.qq.com/cgi-bin/rosary_set_pet_status"/>
+		<!-- 修改宝宝的昵称 -->
+		<link id="SET_PET_NICK" url="https://cgi.meigui.qq.com/cgi-bin/rosary_set_pet_neck"/>
+		<!-- 使用女神的眼泪 -->
+		<link id="USE_GODDNESS_TEAR" url="https://cgi.meigui.qq.com/cgi-bin/rosary_god_tear"/>
+		<!--获取限量销售的鲜花，修改后的协议  --> 
+		<link id="GET_LIMIT_SALE" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_props_info"/>
+		<!-- 新的任务协议,把主线，剧情，和活动任务都合并过来，原来的协议废弃掉-->
+		<link id="GET_TASK" url="https://cgi.meigui.qq.com/cgi-bin/rosary_task"/>
+		
+		<link id="MARKET_PROCESS" url="https://cgi.meigui.qq.com/cgi-bin/rosary_shop_process"/>
+		
+		<!--  该天赋宝宝访问每个探险地图的次数;-->
+		<link id="GET_ADVENTURE_STATUSE" url="https://cgi.meigui.qq.com/cgi-bin/talent_pet_adventure"/>
+		<!-- 特惠物品; -->
+		<link id="DISOUNT_INFO" url="https://cgi.meigui.qq.com/cgi-bin/rosary_preferential_sale"/>
+		<!--  蓝钻每日礼包-->
+		<link id="GET_VIPDAYLY_GIFT" url="https://cgi.meigui.qq.com/cgi-bin/rosary0912_gamevip_gifts"/>
+		<!-- 新年礼包 --> 
+		<link id="GET_NEWYEAR_GIFT" url="https://cgi.meigui.qq.com/cgi-bin/rosary0912_newyear_gifts"/>
+		<!-- 五一世博兑换场景 -->
+		<link id="LABORDAY_EXCHANGE_LABOR_SCENE" url="https://cgi.meigui.qq.com/cgi-bin/rosary_labordaychip_change_scene"/>
+		<!--  获取鲜花活动信息-->
+		<link id="FLOWER_ACTINO_INFO" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_action_flowerinfo"/>
+		<!--领取成就任务和奖品  -->
+		<link id="SUBMIT_ACHIVEMENT_TASK" url="https://cgi.meigui.qq.com/cgi-bin/rosary_accept_achievement_task"/>
+		<!-- 获取成就任务状态 -->
+		<link id="GET_ACHIVEMENT_TASK" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_achievement_task_flag"/>
+		<!-- 世界排行  玫瑰魅力 --> 
+		<link id="WORLD_RANK" url="https://cgi.meigui.qq.com/cgi-bin/rosary_get_word_rank"/>
+		<!-- 天赋宝宝的 任务查询 领取 完成 --> 
+		<link id="LEVEL_ADJUST" url="https://cgi.meigui.qq.com/cgi-bin/rosary_level_adjust"/>
+		
+		<link id="BUY_GAME_PROPS" url="https://cgi.meigui.qq.com/cgi-bin/rosary_buy_game_props"/>
+		
+		<!-- 付费花种子购买 -->
+		<link id="QB_BUY_FLOWER_SEED" url="https://cgi.meigui.qq.com/cgi-bin/rosary_qb_buy_seed"/>
+
+		<link id="ROSEARY_PAY_PET" url="https://cgi.meigui.qq.com/cgi-bin/rosary_pets_feed"/>
+		<!--续费宝宝  -->
+		<link id="NORMAL_PET_URL" url="https://qqgamecdnimg.qq.com/cdn/pet/"/>
+		
+		<!--  魔法花园CGI-->
+		<link id="MGCGIURL" url="https://cgi.meigui.qq.com/cgi-bin/rosary_gourd_oper"/>
+		<!--  魔法花园CGI-->
+		<link id="ROSESEED_UPGRADE" url="https://cgi.meigui.qq.com/cgi-bin/rosary_activity_oper"/>
+		<!-- 人气top10 -->
+		<link id="SCROLL_MESSAGE" url="https://meigui.qq.com/crontab/1hour/scrollMessages.js"/>
+		<!-- 天赋宝宝PK -->
+		<link id="TALEN_PK_OPER" url="https://cgi.meigui.qq.com/cgi-bin/rosary_talentpk_oper"/>
+		<!-- 米大师 -->
+		<link id="RoseCoin" url="https://cgi.meigui.qq.com/cgi-bin/rosary_diamond"/>
+	</CGILink>
+</ServerInfo>
+
+
