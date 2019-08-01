@@ -7,9 +7,11 @@ class Config {
   static xml.XmlDocument propConfig;
 
   static init() async {
-    String flowerConfigXml =
-        await rootBundle.loadString('assets/flowerConfig.xml');
-    flowerConfig = xml.parse(flowerConfigXml);
+    if (flowerConfig == null) {
+      String flowerConfigXml =
+          await rootBundle.loadString('assets/flowerConfig.xml');
+      flowerConfig = xml.parse(flowerConfigXml);
+    }
 
     String roseConfigXml = await rootBundle.loadString('assets/roseConfig.xml');
     roseConfig = xml.parse(roseConfigXml);

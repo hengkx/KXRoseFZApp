@@ -5,11 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return LoginState();
+    return _LoginState();
   }
 }
 
-class LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   FlutterWebviewPlugin flutterWebviewPlugin = FlutterWebviewPlugin();
 
   @override

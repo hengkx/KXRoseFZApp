@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import '../utils/mg.dart';
+import '../soil.dart';
+import '../config.dart';
+
+class Plant extends StatefulWidget {
+  @override
+  _PlantState createState() {
+    return new _PlantState();
+  }
+}
+
+class _PlantState extends State<Plant> {
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {
+    await Config.init();
+    await loadPlant();
+  }
+
+  List<Soil> soils = new List<Soil>();
+
+  Future<void> loadPlant() async {
+    var data = await MGUtil.getPlantInfo();
+
+    this.setState(() {
+      soils = data;
+    });
+  }
+
+  List<Widget> getChildrens(BuildContext context, Soil soil) {
+    List fertilizers = new List();
+    fertilizers.add({"id": 506, "name": "普通时效化肥"});
+    fertilizers.add({"id": 507, "name": "急速时效化肥"});
+    fertilizers.add({"id": 508, "name": "增产时效化肥"});
+    fertilizers.add({"id": 1, "name": "普通化肥"});
+    fertilizers.add({"id": 2, "name": "急速化肥"});
+    fertilizers.add({"id": 3, "name": "增产化肥"});
+    fertilizers.add({"id": 31004, "name": "超级急速化肥"});
+
+    List<Widget> childrens = new List<Widget>();
+
+    fertilizers.forEach((item) {
+      childrens.add(new SimpleDialogOption(
+        child: new Text(item["name"]),
+        onPressed: () async {
+          var data = await MGUtil.useFertilizer(soil.no, item["id"]);
+          print(data.toJson());
+          Navigator.of(context).pop(item["name"]);
+        },
+      ));
+    });
+    return childrens;
+  }
+
+  void showMySimpleDialog(BuildContext context, Soil soil) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return new SimpleDialog(
+            title: new Text("使用化肥"),
+            children: getChildrens(context, soil),
+          );
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: loadPlant,
+      child: ListView.separated(
+          itemBuilder: (BuildContext context, int index) {
+            var soil = soils[index];
+
+            return GestureDetector(
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(soil.typeName),
+                      Text(soil.plantShowName),
+                      Text(soil.gainTime != null
+                          ? soil.gainTime.toString()
+                          : ""),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text("加速:"),
+                      Text("${soil.speed}%"),
+                      Text("增产:"),
+                      Text("${soil.increase}%"),
+                      Text("魅力:"),
+                      Text("${soil.charm}%"),
+                      Text("经验:"),
+                      Text("${soil.exp}%"),
+                      Text("幸运值:"),
+                      Text("${soil.lucky}"),
+                    ],
+                  ),
+                ],
+              ),
+              onTap: () {
+                print(soil);
+                showMySimpleDialog(context, soil);
+                // showMyMaterialDialog(context);
+              },
+            );
+
+            // return new Text(
+            //     "${soil.plantShowName} ${soil.charm} $index ${soil.typeName} ${soil.decorpotName}");
+            // // return new Text(
+            //     "text $index ${getSoilPlantShowName(soil["soilsate"], soil["season"])} ${getSoilType(soil["SoilType"])}");
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return new Container(height: 1.0, color: Colors.red);
+          },
+          itemCount: soils.length),
+    );
+  }
+}
