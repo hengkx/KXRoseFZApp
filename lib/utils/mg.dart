@@ -9,7 +9,7 @@ class MGUtil {
     return GetUserInfoResponse.fromJson(data);
   }
 
-  static Future<GetInitFirstResponse> getInitFirst() async {
+  static Future<dynamic> getInitFirst() async {
     var params = {
       "selforfriend": 0,
       "common": 1,
@@ -19,7 +19,7 @@ class MGUtil {
     };
     var res = await HttpUtil.getInstance()
         .post("rosary0909_get_init_first_self", data: params);
-    return GetInitFirstResponse.fromJson(res);
+    return res;
   }
 
   static Future<UseFertilizerResponse> useFertilizer(int no, int type) async {

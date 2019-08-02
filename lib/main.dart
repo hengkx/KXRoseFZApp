@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import './pages/home.dart';
 import './pages/login.dart';
-import './pages/select_flower.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +15,6 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (_) => HomePage(),
-        '/selectFlower': (_) => SelectFlowerPage(),
         '/login': (_) => LoginPage(),
       },
       initialRoute: '/',
