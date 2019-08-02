@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:KXRoseFZApp/user_config.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart' as xml;
+import 'package:path_provider/path_provider.dart';
 
 class Config {
   static xml.XmlDocument flowerConfig;
   static xml.XmlDocument roseConfig;
   static xml.XmlDocument propConfig;
+  static UserConfig userConfig;
 
   static init() async {
     if (flowerConfig == null) {
@@ -23,6 +28,20 @@ class Config {
       String propConfigXml =
           await rootBundle.loadString('assets/propConfig.xml');
       propConfig = xml.parse(propConfigXml);
+    }
+
+    if (userConfig == null) {
+      final directory = await getApplicationDocumentsDirectory();
+      final userConfigPath = "${directory.path}/userConfig.json";
+
+      File file = new File(userConfigPath);
+      String userConfigJson = "";
+      if (!await file.exists()) {
+        userConfigJson = await rootBundle.loadString('assets/userConfig.json');
+      } else {
+        userConfigJson = await file.readAsString();
+      }
+      userConfig = UserConfig.fromJson(json.decode(userConfigJson));
     }
   }
 }

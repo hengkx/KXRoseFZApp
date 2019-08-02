@@ -1,0 +1,9 @@
+{
+  "speeds": [
+    { "id": 507, "name": "急速时效化肥", "use": true, "time": 300 },
+    { "id": 506, "name": "普通时效化肥", "use": true, "time": 0 },
+    { "id": 1, "name": "普通化肥", "use": false, "time": 0 },
+    { "id": 2, "name": "急速化肥", "use": false, "time": 0 },
+    { "id": 31004, "name": "超级急速化肥", "use": false, "time": 0 }
+  ]
+}
