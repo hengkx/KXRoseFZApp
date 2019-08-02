@@ -77,7 +77,7 @@ class _PlantState extends State<Plant> {
   Color getSoilTypeColor(int type) {
     switch (type) {
       case 0:
-        return Colors.brown[700];
+        return Colors.brown[900];
       case 1:
         return Colors.blue;
       case 2:
@@ -113,37 +113,45 @@ class _PlantState extends State<Plant> {
                             width: 36,
                             decoration: new BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(4.0),
+                              ),
                               border: new Border.all(
-                                  width: 1, color: getSoilTypeColor(soil.type)),
+                                width: 1,
+                                color: getSoilTypeColor(soil.type),
+                              ),
                             ),
-                            child: Text(soil.typeName,
-                                style: new TextStyle(
-                                  color: getSoilTypeColor(soil.type),
-                                  fontSize: 10,
-                                )),
+                            child: Text(
+                              soil.typeName,
+                              style: new TextStyle(
+                                color: getSoilTypeColor(soil.type),
+                                fontSize: 10,
+                              ),
+                            ),
                           ),
                           Expanded(
                             child: Row(
                               children: <Widget>[
                                 Text(soil.plantShowName),
-                                Text(soil.status,
-                                    style: new TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                    )),
+                                Text(
+                                  soil.status,
+                                  style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 10,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           Text(
-                              soil.gainTime != null
-                                  ? dateFormat.format(soil.gainTime)
-                                  : "",
-                              style: new TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
-                              )),
+                            soil.gainTime != null
+                                ? dateFormat.format(soil.gainTime)
+                                : "",
+                            style: new TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                          ),
                         ],
                       ),
                     ),
