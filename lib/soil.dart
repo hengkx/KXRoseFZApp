@@ -1,3 +1,5 @@
+import 'package:xml/xml.dart';
+
 import 'config.dart';
 
 class Soil {
@@ -8,9 +10,11 @@ class Soil {
   DateTime gainTime;
   String plantShowName;
   int type;
+  int soilsate;
   String typeName;
   String decorpotName = "";
   String status;
+  int rosestate;
 
   int charm;
   int exp;
@@ -35,12 +39,13 @@ class Soil {
     }
 
     typeName = getSoilType(soil["SoilType"]);
-    if (soil["soilsate"] == 50) {
+    soilsate = soil["soilsate"];
+    if (soilsate == 50) {
       plantShowName = "[枯萎]";
-    } else if (soil["soilsate"] == 51) {
+    } else if (soilsate == 51) {
       plantShowName = "[空盆]";
     } else {
-      var flower = getFlowerInfoById(soil["soilsate"]);
+      var flower = getFlowerInfoById(soilsate);
       if (flower != null) {
         plantShowName = flower.getAttribute("name");
         var season = flower.getAttribute("season");
@@ -65,7 +70,19 @@ class Soil {
         decorpotName = props[0].getAttribute("name");
       }
     }
-    status = getStatus(soil["rosestate"]);
+    rosestate = soil["rosestate"];
+    status = getStatus(rosestate);
+  }
+
+  static getGainTime(int id, String beginTime) {
+    var flower = getFlowerInfoById(id);
+
+    var strTimes = beginTime.toString().split("-");
+    var plantTime = DateTime.parse(
+        "${strTimes[0]}-${strTimes[1]}-${strTimes[2]} ${strTimes[3]}:${strTimes[4]}:${strTimes[5]}");
+
+    var times = flower.getAttribute("times").split(",");
+    return plantTime.add(new Duration(minutes: int.parse(times[3])));
   }
 
   getSoilType(int type) {
@@ -98,7 +115,7 @@ class Soil {
     }
   }
 
-  getFlowerInfoById(int id) {
+  static XmlElement getFlowerInfoById(int id) {
     var res = Config.flowerConfig
         .findAllElements("item")
         .where((xe) => xe.getAttribute("id") == "$id")
@@ -112,6 +129,7 @@ class Soil {
     if (res.length > 0) {
       return res[0];
     }
+    return null;
   }
 
   String getAttrString() {

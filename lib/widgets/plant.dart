@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
+import '../pages/plant_oper.dart';
 import '../utils/mg.dart';
 import '../soil.dart';
 import '../config.dart';
 
-final dateFormat = new DateFormat('MM-dd hh:mm');
+final dateFormat = new DateFormat('MM-dd HH:mm');
 
 class Plant extends StatefulWidget {
   @override
@@ -183,7 +184,10 @@ class _PlantState extends State<Plant> {
               ),
               onTap: () {
                 print(soil);
-                showMySimpleDialog(context, soil);
+                // showMySimpleDialog(context, soil);
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PlantOperPage(soil: soil),
+                ));
                 // showMyMaterialDialog(context);
               },
             );

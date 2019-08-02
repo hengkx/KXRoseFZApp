@@ -9,6 +9,19 @@ class MGUtil {
     return GetUserInfoResponse.fromJson(data);
   }
 
+  static Future<GetInitFirstResponse> getInitFirst() async {
+    var params = {
+      "selforfriend": 0,
+      "common": 1,
+      "ossType": 3,
+      "benew0908": 5,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance()
+        .post("rosary0909_get_init_first_self", data: params);
+    return GetInitFirstResponse.fromJson(res);
+  }
+
   static Future<UseFertilizerResponse> useFertilizer(int no, int type) async {
     var params = {
       "usetype": type,
@@ -19,6 +32,45 @@ class MGUtil {
     var res = await HttpUtil.getInstance()
         .post("rosary0906_use_fertilizer", data: params);
     return UseFertilizerResponse.fromJson(res);
+  }
+
+  static Future<PlantResponse> plant(int no, int id) async {
+    var params = {
+      "soilno": no,
+      "rosetype": id,
+      "ossType": 4,
+      "benew0908": 2,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance()
+        .post("rosary0904_soil_plant_rose", data: params);
+    return PlantResponse.fromJson(res);
+  }
+
+  static Future<GainResponse> gain(int no) async {
+    var params = {
+      "soilno": no,
+      "ossType": 5,
+      "flag": 0,
+      "benew0908": 8,
+      "version": 1,
+      "cgiVersion": 43,
+    };
+    var res =
+        await HttpUtil.getInstance().post("rosary0904_gain", data: params);
+    return GainResponse.fromJson(res);
+  }
+
+  static Future<HoeResponse> hoe(int no) async {
+    var params = {
+      "soilno": no,
+      "ossType": 7,
+      "benew0908": 2,
+      "ver": 1,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance().post("rosary0904_hoe", data: params);
+    return HoeResponse.fromJson(res);
   }
 
   static Future<List<Soil>> getPlantInfo() async {

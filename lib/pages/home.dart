@@ -72,13 +72,13 @@ class _HomePageState extends State<HomePage> {
       body: usernic != ''
           ? (choiceIndex == 0 ? Plant() : SettingWidget())
           : Text("请先登录"),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: login,
-      //   tooltip: '换号',
-      //   child: Text(
-      //     '换号',
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: login,
+        tooltip: '换号',
+        child: Text(
+          '换号',
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(

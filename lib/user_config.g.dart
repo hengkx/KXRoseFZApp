@@ -9,8 +9,9 @@ part of 'user_config.dart';
 UserConfig _$UserConfigFromJson(Map<String, dynamic> json) {
   return UserConfig(
     speeds: (json['speeds'] as List)
-        ?.map(
-            (e) => e == null ? null : Speed.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null
+            ? null
+            : SpeedFertilizer.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
@@ -20,8 +21,8 @@ Map<String, dynamic> _$UserConfigToJson(UserConfig instance) =>
       'speeds': instance.speeds,
     };
 
-Speed _$SpeedFromJson(Map<String, dynamic> json) {
-  return Speed(
+SpeedFertilizer _$SpeedFertilizerFromJson(Map<String, dynamic> json) {
+  return SpeedFertilizer(
     id: json['id'] as int,
     name: json['name'] as String,
     use: json['use'] as bool,
@@ -29,7 +30,8 @@ Speed _$SpeedFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$SpeedToJson(Speed instance) => <String, dynamic>{
+Map<String, dynamic> _$SpeedFertilizerToJson(SpeedFertilizer instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'use': instance.use,

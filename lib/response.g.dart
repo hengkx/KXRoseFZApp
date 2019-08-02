@@ -21,6 +21,161 @@ Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
       'uin': instance.uin,
     };
 
+FruitGift _$FruitGiftFromJson(Map<String, dynamic> json) {
+  return FruitGift(
+    type: json['type'] as int,
+    id: json['id'] as int,
+    count: json['count'] as int,
+    name: json['name'] as String,
+  );
+}
+
+Map<String, dynamic> _$FruitGiftToJson(FruitGift instance) => <String, dynamic>{
+      'type': instance.type,
+      'id': instance.id,
+      'count': instance.count,
+      'name': instance.name,
+    };
+
+Gift _$GiftFromJson(Map<String, dynamic> json) {
+  return Gift(
+    miliandanadd: json['miliandanadd'] as int,
+    tips: json['tips'] as String,
+  );
+}
+
+Map<String, dynamic> _$GiftToJson(Gift instance) => <String, dynamic>{
+      'miliandanadd': instance.miliandanadd,
+      'tips': instance.tips,
+    };
+
+GetInitFirstResponse _$GetInitFirstResponseFromJson(Map<String, dynamic> json) {
+  return GetInitFirstResponse(
+    result: json['result'],
+    resultstr: json['resultstr'],
+    uin: json['uin'],
+    timeCommonFerti: json['prop506'] as int ?? 0,
+    timeQuickFerti: json['prop507'] as int ?? 0,
+    timeMoreFerti: json['prop508'] as int ?? 0,
+    moreferti: json['moreferti'] as int,
+    superQuickFerti: json['prop31004'] as int ?? 0,
+    commonferti: json['commonferti'] as int,
+    quickferti: json['quickferti'] as int,
+  );
+}
+
+Map<String, dynamic> _$GetInitFirstResponseToJson(
+        GetInitFirstResponse instance) =>
+    <String, dynamic>{
+      'result': instance.result,
+      'resultstr': instance.resultstr,
+      'uin': instance.uin,
+      'prop506': instance.timeCommonFerti,
+      'prop507': instance.timeQuickFerti,
+      'prop508': instance.timeMoreFerti,
+      'moreferti': instance.moreferti,
+      'prop31004': instance.superQuickFerti,
+      'commonferti': instance.commonferti,
+      'quickferti': instance.quickferti,
+    };
+
+PlantResponse _$PlantResponseFromJson(Map<String, dynamic> json) {
+  return PlantResponse(
+    result: json['result'],
+    resultstr: json['resultstr'],
+    uin: json['uin'],
+    soilno: json['soilno'] as int,
+    soilsate: json['soilsate'] as int,
+    rosestate: json['rosestate'] as int,
+    addexperice: json['addexperice'] as int,
+    rosebegintime: json['rosebegintime'] as String,
+    fruitgift: (json['fruitgift'] as List)
+        ?.map((e) =>
+            e == null ? null : FruitGift.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    gift: (json['gift'] as List)
+        ?.map(
+            (e) => e == null ? null : Gift.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$PlantResponseToJson(PlantResponse instance) =>
+    <String, dynamic>{
+      'result': instance.result,
+      'resultstr': instance.resultstr,
+      'uin': instance.uin,
+      'soilno': instance.soilno,
+      'soilsate': instance.soilsate,
+      'rosestate': instance.rosestate,
+      'addexperice': instance.addexperice,
+      'rosebegintime': instance.rosebegintime,
+      'fruitgift': instance.fruitgift,
+      'gift': instance.gift,
+    };
+
+GainResponse _$GainResponseFromJson(Map<String, dynamic> json) {
+  return GainResponse(
+    result: json['result'],
+    resultstr: json['resultstr'],
+    uin: json['uin'],
+    soilno: json['soilno'] as int,
+    igainrosetype: json['igainrosetype'] as int,
+    igainrosecount: json['igainrosecount'] as int,
+    addcharm: json['addcharm'] as int,
+    addexperice: json['addexperice'] as int,
+    fruitgift: (json['fruitgift'] as List)
+        ?.map((e) =>
+            e == null ? null : FruitGift.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    gift: (json['gift'] as List)
+        ?.map(
+            (e) => e == null ? null : Gift.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$GainResponseToJson(GainResponse instance) =>
+    <String, dynamic>{
+      'result': instance.result,
+      'resultstr': instance.resultstr,
+      'uin': instance.uin,
+      'soilno': instance.soilno,
+      'igainrosetype': instance.igainrosetype,
+      'igainrosecount': instance.igainrosecount,
+      'addcharm': instance.addcharm,
+      'addexperice': instance.addexperice,
+      'fruitgift': instance.fruitgift,
+      'gift': instance.gift,
+    };
+
+HoeResponse _$HoeResponseFromJson(Map<String, dynamic> json) {
+  return HoeResponse(
+    result: json['result'],
+    resultstr: json['resultstr'],
+    uin: json['uin'],
+    soilno: json['soilno'] as int,
+    fruitgift: (json['fruitgift'] as List)
+        ?.map((e) =>
+            e == null ? null : FruitGift.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    gift: (json['gift'] as List)
+        ?.map(
+            (e) => e == null ? null : Gift.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$HoeResponseToJson(HoeResponse instance) =>
+    <String, dynamic>{
+      'result': instance.result,
+      'resultstr': instance.resultstr,
+      'uin': instance.uin,
+      'soilno': instance.soilno,
+      'fruitgift': instance.fruitgift,
+      'gift': instance.gift,
+    };
+
 GetUserInfoResponse _$GetUserInfoResponseFromJson(Map<String, dynamic> json) {
   return GetUserInfoResponse(
     result: json['result'],

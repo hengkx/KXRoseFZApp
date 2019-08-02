@@ -4,7 +4,7 @@ part 'user_config.g.dart';
 
 @JsonSerializable()
 class UserConfig {
-  final List<Speed> speeds;
+  final List<SpeedFertilizer> speeds;
 
   UserConfig({this.speeds});
 
@@ -15,14 +15,15 @@ class UserConfig {
 }
 
 @JsonSerializable()
-class Speed {
+class SpeedFertilizer {
   final int id;
   final String name;
   final bool use;
   final int time;
-  Speed({this.id, this.name, this.use, this.time});
+  SpeedFertilizer({this.id, this.name, this.use, this.time});
 
-  factory Speed.fromJson(Map<String, dynamic> json) => _$SpeedFromJson(json);
+  factory SpeedFertilizer.fromJson(Map<String, dynamic> json) =>
+      _$SpeedFertilizerFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SpeedToJson(this);
+  Map<String, dynamic> toJson() => _$SpeedFertilizerToJson(this);
 }
