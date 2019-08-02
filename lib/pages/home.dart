@@ -11,27 +11,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   void login() {
-    Navigator.of(context).pushNamed("/login");
+    Navigator.of(context).pushNamed("/login").then((_) {
+      getUserInfo();
+    });
   }
 
   int choiceIndex = 0;
   String usernic = '';
 
+  void getUserInfo() async {
+    var getUserInfoResponse = await MGUtil.getUserInfo();
+    print(getUserInfoResponse.toJson());
+    if (getUserInfoResponse.result == 1000005) {
+      login();
+    } else {
+      this.setState(() {
+        usernic = getUserInfoResponse.usernic;
+      });
+    }
+    print(getUserInfoResponse.usernic);
+  }
+
   @override
   void initState() {
     super.initState();
-    (() async {
-      var getUserInfoResponse = await MGUtil.getUserInfo();
-      print(getUserInfoResponse.toJson());
-      if (getUserInfoResponse.result == 1000005) {
-        login();
-      } else {
-        this.setState(() {
-          usernic = getUserInfoResponse.usernic;
-        });
-      }
-      print(getUserInfoResponse.usernic);
-    })();
+    getUserInfo();
   }
 
   void showMyMaterialDialog(BuildContext context) {
@@ -65,7 +69,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("开心玫瑰辅助"),
       ),
-      body: choiceIndex == 0 ? Plant() : SettingWidget(),
+      body: usernic != ''
+          ? (choiceIndex == 0 ? Plant() : SettingWidget())
+          : Text("请先登录"),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: login,
       //   tooltip: '换号',
