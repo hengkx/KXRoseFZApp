@@ -146,6 +146,16 @@ class _PlantState extends State<Plant> {
                         ],
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: Row(children: <Widget>[
+                        Text(soil.decorpotName,
+                            style: new TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            ))
+                      ]),
+                    ),
                     Row(
                       children: <Widget>[
                         Expanded(
@@ -156,12 +166,6 @@ class _PlantState extends State<Plant> {
                                   color: Colors.grey[500],
                                   fontSize: 12,
                                 ))),
-                        Text(soil.decorpotName,
-                            style: new TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
-                            )),
-
                         // Text("加速:"),
                         // Text("${soil.speed}%"),
                         // Text("增产:"),
