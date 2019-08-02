@@ -191,7 +191,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
                         ]),
                       ),
                       onTap: () {
-                        // Navigator.of(context).pop(flower);
+                        Navigator.of(context).pop(flower);
                       },
                     );
                   },

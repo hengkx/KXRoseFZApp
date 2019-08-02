@@ -1,3 +1,4 @@
+import 'package:KXRoseFZApp/widgets/round_rect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -106,28 +107,9 @@ class _PlantState extends State<Plant> {
                       margin: EdgeInsets.only(bottom: 5),
                       child: Row(
                         children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(right: 10),
-                            alignment: Alignment(0, 0),
-                            height: 18,
-                            width: 36,
-                            decoration: new BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(4.0),
-                              ),
-                              border: new Border.all(
-                                width: 1,
-                                color: getSoilTypeColor(soil.type),
-                              ),
-                            ),
-                            child: Text(
-                              soil.typeName,
-                              style: new TextStyle(
-                                color: getSoilTypeColor(soil.type),
-                                fontSize: 10,
-                              ),
-                            ),
+                          RoundRect(
+                            text: soil.typeName,
+                            color: getSoilTypeColor(soil.type),
                           ),
                           Expanded(
                             child: Row(
