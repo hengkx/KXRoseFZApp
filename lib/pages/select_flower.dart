@@ -1,10 +1,11 @@
-import 'package:KXRoseFZApp/config.dart';
-import 'package:KXRoseFZApp/utils/mg.dart';
-import 'package:KXRoseFZApp/widgets/round_rect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lpinyin/lpinyin.dart';
 
+import '../config.dart';
+import '../utils/mg.dart';
+import '../widgets/round_rect.dart';
+import '../widgets/slide_filter.dart';
 import '../soil.dart';
 
 // import '../utils/mg.dart';
@@ -73,6 +74,8 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     init();
   }
 
+  final List<String> filters = [];
+
   init() async {
     await Config.init();
     dynamic initFirstRes = await MGUtil.getInitFirst();
@@ -134,8 +137,14 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
         }
       });
     }
-
     flowers.sort((a, b) => a.pyName.compareTo(b.pyName));
+    flowers.forEach((item) {
+      var str = item.pyName[0].toUpperCase();
+      if (filters.indexOf(str) == -1) {
+        filters.add(str);
+      }
+    });
+    print(filters);
     this.setState(() {
       flowers = flowers;
     });
@@ -252,117 +261,182 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final List<Widget> filterWidgets = [];
+
+    filters.forEach((item) {
+      filterWidgets.add(Text(item));
+    });
+
     return Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text("选择种子"),
-        ),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              // new Container(
-              //   // color: Theme.of(context).primaryColor,
-              //   child: new Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: new Card(
-              //       child: new ListTile(
-              //         leading: new Icon(Icons.search),
-              //         title: new TextField(
-              //           controller: controller,
-              //           // decoration: new InputDecoration(
-              //           //     hintText: 'Search', border: InputBorder.none),
-              //           // onChanged: onSearchTextChanged,
-              //         ),
-              //         trailing: new IconButton(
-              //           icon: new Icon(Icons.cancel),
-              //           onPressed: () {
-              //             controller.clear();
-              //             // onSearchTextChanged('');
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              Expanded(
-                child: ListView.separated(
-                  itemBuilder: (BuildContext context, int index) {
-                    var flower = flowers[index];
-                    final List<Widget> actions = [];
-                    if (flower.seedPrice != 0) {
-                      actions.add(OutlineButton(
-                        // color: Colors.redAccent.shade200,
-                        textColor: Theme.of(context).primaryColor,
-                        // color: Theme.of(context).primaryColor,
-                        child: new Text('购买'),
-                        onPressed: () => showBuyDialog(context, flower),
-                      ));
-                    }
-                    return GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: Text("选择种子"),
+      ),
+      body: Container(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  // new Container(
+                  //   // color: Theme.of(context).primaryColor,
+                  //   child: new Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: new Card(
+                  //       child: new ListTile(
+                  //         leading: new Icon(Icons.search),
+                  //         title: new TextField(
+                  //           controller: controller,
+                  //           // decoration: new InputDecoration(
+                  //           //     hintText: 'Search', border: InputBorder.none),
+                  //           // onChanged: onSearchTextChanged,
+                  //         ),
+                  //         trailing: new IconButton(
+                  //           icon: new Icon(Icons.cancel),
+                  //           onPressed: () {
+                  //             controller.clear();
+                  //             // onSearchTextChanged('');
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (BuildContext context, int index) {
+                        var flower = flowers[index];
+                        final List<Widget> actions = [];
+                        if (flower.seedPrice != 0) {
+                          actions.add(OutlineButton(
+                            // color: Colors.redAccent.shade200,
+                            textColor: Theme.of(context).primaryColor,
+                            // color: Theme.of(context).primaryColor,
+                            child: new Text('购买'),
+                            onPressed: () => showBuyDialog(context, flower),
+                          ));
+                        }
+                        return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Column(
                                     children: <Widget>[
-                                      RoundRect(
-                                        text: flower.getTypeName(),
-                                        color: getTypeColor(flower.type),
+                                      Row(
+                                        children: <Widget>[
+                                          RoundRect(
+                                            text: flower.getTypeName(),
+                                            color: getTypeColor(flower.type),
+                                          ),
+                                          Expanded(
+                                            child: Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  flower.name,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Expanded(
+                                      Container(
+                                        margin: EdgeInsets.only(top: 5),
                                         child: Row(
                                           children: <Widget>[
-                                            Text(
-                                              flower.name,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                            Expanded(
+                                              child: Text(
+                                                "数量：${flower.count} 种子价格：${flower.seedPrice}",
+                                                style: TextStyle(
+                                                    color: Colors.grey),
                                               ),
                                             ),
                                           ],
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Text(
-                                            "数量：${flower.count} 种子价格：${flower.seedPrice}",
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
+                                ),
+                                Row(
+                                  children: actions,
+                                )
+                              ],
                             ),
-                            Row(
-                              children: actions,
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).pop(flower);
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pop(flower);
+                          },
+                        );
                       },
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return new Container(height: 1.0, color: Colors.grey[300]);
-                  },
-                  itemCount: flowers.length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return new Container(
+                            height: 1.0, color: Colors.grey[300]);
+                      },
+                      itemCount: flowers.length,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Center(
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.grey[400],
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Center(
+                  child: Text(
+                    "A",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-            ],
-          ),
-        ));
+            ),
+            IndexBar(
+              onTouch: (IndexBarDetails details) {
+                print(details.tag);
+              },
+            ),
+            // GestureDetector(
+            //   onVerticalDragDown: (DragDownDetails details) {
+            //     print(details.localPosition.dy);
+            //   },
+            //   onVerticalDragUpdate: (DragUpdateDetails details) {
+            //     print(details.localPosition.dy);
+            //   },
+            //   child: Container(
+            //     padding: EdgeInsets.symmetric(horizontal: 5),
+            //     alignment: Alignment.center,
+            //     color: Colors.red,
+            //     child: Column(
+            //       children: <Widget>[
+            //         Expanded(
+            //           child: Container(),
+            //         ),
+            //         Column(
+            //           children: filterWidgets,
+            //         ),
+            //         Expanded(
+            //           child: Container(),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // )
+          ],
+        ),
+      ),
+    );
   }
 }
