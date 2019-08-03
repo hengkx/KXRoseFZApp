@@ -332,12 +332,11 @@ class _PlantState extends State<Plant> {
                   ),
                 ),
                 onTap: () {
-                  print(soil);
-                  // showMySimpleDialog(context, soil);
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantOperPage(soil: soil),
-                  ));
-                  // showMyMaterialDialog(context);
+                  if (soil.type != 2) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PlantOperPage(soil: soil),
+                    ));
+                  }
                 },
               ),
             );
