@@ -27,7 +27,6 @@ class _PlantOperPageState extends State<PlantOperPage> {
   Flower flower;
   List<String> logs = new List<String>();
   GetInitFirstResponse initFirstRes = new GetInitFirstResponse();
-  dynamic initFirst;
 
   @override
   void initState() {
@@ -36,7 +35,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
   }
 
   init() async {
-    initFirst = await MGUtil.getInitFirst();
+    dynamic initFirst = await MGUtil.getInitFirst();
     this.setState(() {
       this.initFirstRes = GetInitFirstResponse.fromJson(initFirst);
     });
@@ -207,9 +206,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
                 onPressed: () {
                   Navigator.of(context)
                       .push<Flower>(MaterialPageRoute(
-                    builder: (context) => SelectFlowerPage(
-                      initFirstRes: initFirst,
-                    ),
+                    builder: (context) => SelectFlowerPage(soil: this.soil),
                   ))
                       .then((Flower flower) {
                     this.setState(() {

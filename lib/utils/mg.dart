@@ -1,4 +1,7 @@
 import 'package:KXRoseFZApp/utils/http.dart';
+import 'package:KXRoseFZApp/widgets/plant.dart';
+import 'package:intl/intl.dart';
+
 import '../response.dart';
 import '../soil.dart';
 
@@ -33,6 +36,25 @@ class MGUtil {
     };
     var res = await HttpUtil.getInstance()
         .post("rosary0904_plant_action", data: params);
+    return BaseResponse.fromJson(res);
+  }
+
+  static final dateFomarDate = DateFormat("yyyy-MM-dd");
+
+  static Future<BaseResponse> buySeed(int type, int count) async {
+    var params = {
+      "type": type,
+      "count": count,
+      "etime": DateTime.parse(dateFomarDate.format(DateTime.now()))
+              .add(Duration(days: 1, seconds: -1))
+              .millisecondsSinceEpoch ~/
+          1000,
+      "ossType": 6,
+      "benew0908": 1,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance()
+        .post("rosary0908_rosemoney_buy_seed", data: params);
     return BaseResponse.fromJson(res);
   }
 

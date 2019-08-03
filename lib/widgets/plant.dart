@@ -63,11 +63,11 @@ class _PlantState extends State<Plant> {
       if (res.isDouble != 1 && repeat) {
         return useMoreFertilizer(no, type, repeat);
       }
-      Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(tip)));
+      showSnackBar(tip);
       await loadPlant();
     } else {
       tip = res.resultstr;
-      Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(tip)));
+      showSnackBar(tip);
     }
   }
 
@@ -356,9 +356,9 @@ class _PlantState extends State<Plant> {
               ),
               onTap: () {
                 if (soil.type != 2) {
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => PlantOperPage(soil: soil),
-                  // ));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => PlantOperPage(soil: soil),
+                  ));
                 }
               },
             ),
