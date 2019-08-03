@@ -30,7 +30,8 @@ class _PlantState extends State<Plant> {
     await loadPlant();
   }
 
-  List<Soil> soils = new List<Soil>();
+  List<Soil> soils = [];
+  final SlidableController slidableController = SlidableController();
 
   Future<void> loadPlant() async {
     var data = await MGUtil.getPlantInfo();
@@ -113,32 +114,32 @@ class _PlantState extends State<Plant> {
       child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             var soil = soils[index];
-
+            final List<Widget> slideActions = [];
+            slideActions.add(SlideAction(
+              child: Text(
+                "连续增产",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.lightBlue,
+              onTap: () => useMoreFertilizer(soil.no, 3, true),
+            ));
+            slideActions.add(SlideAction(
+              child: Text(
+                "增产",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.green,
+              onTap: () => useMoreFertilizer(soil.no, 3, false),
+            ));
             return Slidable(
-              key: ValueKey(index),
+              key: ValueKey(soil.no),
+              controller: slidableController,
               actionPane: SlidableDrawerActionPane(),
-              actions: <Widget>[
-                SlideAction(
-                  child: Text(
-                    "连续增产",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.lightBlue,
-                  onTap: () => useMoreFertilizer(soil.no, 3, true),
-                ),
-                SlideAction(
-                  child: Text(
-                    "增产",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.green,
-                  onTap: () => useMoreFertilizer(soil.no, 3, false),
-                ),
-              ],
+              actions: slideActions,
               secondaryActions: <Widget>[
                 SlideAction(
                   child: Text(
-                    "增产",
+                    "时效增产",
                     style: TextStyle(color: Colors.white),
                   ),
                   color: Colors.green,
