@@ -22,6 +22,20 @@ class MGUtil {
     return res;
   }
 
+  /// type 1 杀虫 2 晒阳光 3 除草
+  static Future<BaseResponse> plantAction(int no, int type) async {
+    var params = {
+      "soilno": no,
+      "actiontype": type,
+      "ossType": 6,
+      "benew0908": 2,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance()
+        .post("rosary0904_plant_action", data: params);
+    return BaseResponse.fromJson(res);
+  }
+
   static Future<UseFertilizerResponse> useFertilizer(int no, int type) async {
     var params = {
       "usetype": type,

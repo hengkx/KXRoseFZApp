@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
         usernic = getUserInfoResponse.usernic;
       });
     }
-    print(getUserInfoResponse.usernic);
   }
 
   @override
@@ -67,18 +66,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("开心玫瑰辅助"),
+        title: Text("开心玫瑰辅助 - by hengkx"),
       ),
       body: usernic != ''
           ? (choiceIndex == 0 ? Plant() : SettingWidget())
           : Text("请先登录"),
-      floatingActionButton: FloatingActionButton(
-        onPressed: login,
-        tooltip: '换号',
-        child: Text(
-          '换号',
-        ),
-      ),
       bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
@@ -88,9 +80,8 @@ class _HomePageState extends State<HomePage> {
               ),
               activeIcon: Icon(
                 Icons.home,
-                color: Color(0xffDE331F),
+                color: Theme.of(context).primaryColor,
               ),
-              backgroundColor: Color(0xffff0000),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
@@ -99,13 +90,12 @@ class _HomePageState extends State<HomePage> {
               ),
               activeIcon: Icon(
                 Icons.settings,
-                color: Color(0xffDE331F),
+                color: Theme.of(context).primaryColor,
               ),
-              backgroundColor: Color(0xffff0000),
             ),
           ],
           currentIndex: choiceIndex,
-          fixedColor: Color(0xffDE331F),
+          fixedColor: Theme.of(context).primaryColor,
           onTap: (index) {
             if (index == 0) {
               setState(() {

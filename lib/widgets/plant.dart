@@ -107,16 +107,20 @@ class _PlantState extends State<Plant> {
     }
   }
 
+  showSnackBar(String tip) {
+    Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(tip)));
+  }
+
   List<Widget> getSlideActions(Soil soil) {
     final List<Widget> slideActions = [];
-    if (soil.soilsate != 50 && soil.soilsate != 51) {
+    if (soil.soilsate != 50 && soil.soilsate != 51 && soil.rosestate != 5) {
       slideActions.add(SlideAction(
         child: Text(
-          "松土",
+          "铲花",
           style: TextStyle(color: Colors.white),
         ),
         color: Colors.orange,
-        // onTap: () => useMoreFertilizer(soil.no, 508, false),
+        onTap: () => hoe(soil),
       ));
       if (!soil.isDouble) {
         slideActions.add(SlideAction(
@@ -140,6 +144,64 @@ class _PlantState extends State<Plant> {
     return slideActions;
   }
 
+  hoe(Soil soil) async {
+    var res = await MGUtil.hoe(soil.no);
+    if (res.result == 0) {
+      showSnackBar("松土成功");
+      loadPlant();
+    } else {
+      showSnackBar(res.resultstr);
+    }
+  }
+
+  gain(Soil soil) async {
+    var res = await MGUtil.gain(soil.no);
+    if (res.result == 0) {
+      showSnackBar("收获成功");
+      loadPlant();
+    } else {
+      showSnackBar(res.resultstr);
+    }
+  }
+
+  plant(Soil soil) async {
+    showSnackBar("功能待开发");
+  }
+
+  plantAction(Soil soil) async {
+    bool isExecuteSucc = false;
+    if (soil.isNoFood) {
+      var res = await MGUtil.plantAction(soil.no, 1);
+      if (res.result == 0) {
+        isExecuteSucc = true;
+        showSnackBar("杀虫成功");
+      } else {
+        showSnackBar(res.resultstr);
+      }
+    }
+    if (soil.isNoShine) {
+      var res = await MGUtil.plantAction(soil.no, 2);
+      if (res.result == 0) {
+        isExecuteSucc = true;
+        showSnackBar("晒阳光成功");
+      } else {
+        showSnackBar(res.resultstr);
+      }
+    }
+    if (soil.isClutter) {
+      var res = await MGUtil.plantAction(soil.no, 3);
+      if (res.result == 0) {
+        isExecuteSucc = true;
+        showSnackBar("除草成功");
+      } else {
+        showSnackBar(res.resultstr);
+      }
+    }
+    if (isExecuteSucc) {
+      loadPlant();
+    }
+  }
+
   List<Widget> getSlideSecondaryActions(Soil soil) {
     final List<Widget> slideActions = [];
     if (soil.soilsate == 50) {
@@ -149,7 +211,7 @@ class _PlantState extends State<Plant> {
           style: TextStyle(color: Colors.white),
         ),
         color: Colors.orange,
-        // onTap: () => useMoreFertilizer(soil.no, 508, false),
+        onTap: () => hoe(soil),
       ));
     } else if (soil.soilsate == 51) {
       slideActions.add(SlideAction(
@@ -158,36 +220,47 @@ class _PlantState extends State<Plant> {
           style: TextStyle(color: Colors.white),
         ),
         color: Colors.green.shade700,
-        // onTap: () => useMoreFertilizer(soil.no, 508, false),
+        onTap: () => plant(soil),
       ));
     } else {
-      if (soil.isClutter || soil.isNoFood || soil.isNoShine) {
+      if (soil.rosestate == 5) {
         slideActions.add(SlideAction(
           child: Text(
-            "一键操作",
+            "收获",
             style: TextStyle(color: Colors.white),
           ),
           color: Colors.orange,
-          // onTap: () => useMoreFertilizer(soil.no, 508, false),
+          onTap: () => gain(soil),
         ));
-      }
-      if (!soil.isDouble) {
-        slideActions.add(SlideAction(
-          child: Text(
-            "时效增产",
-            style: TextStyle(color: Colors.white),
-          ),
-          color: Colors.green,
-          onTap: () => useMoreFertilizer(soil.no, 508, false),
-        ));
-        slideActions.add(SlideAction(
-          child: Text(
-            "连续增产",
-            style: TextStyle(color: Colors.white),
-          ),
-          color: Colors.lightBlue,
-          onTap: () => useMoreFertilizer(soil.no, 508, true),
-        ));
+      } else {
+        if (soil.isClutter || soil.isNoFood || soil.isNoShine) {
+          slideActions.add(SlideAction(
+            child: Text(
+              "一键操作",
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.orange,
+            onTap: () => plantAction(soil),
+          ));
+        }
+        if (!soil.isDouble) {
+          slideActions.add(SlideAction(
+            child: Text(
+              "时效增产",
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.green,
+            onTap: () => useMoreFertilizer(soil.no, 508, false),
+          ));
+          slideActions.add(SlideAction(
+            child: Text(
+              "连续增产",
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.lightBlue,
+            onTap: () => useMoreFertilizer(soil.no, 508, true),
+          ));
+        }
       }
     }
     return slideActions;
@@ -198,153 +271,140 @@ class _PlantState extends State<Plant> {
     return RefreshIndicator(
       onRefresh: loadPlant,
       child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            var soil = soils[index];
-            final List<Widget> slideActions = getSlideActions(soil);
-            final List<Widget> slideSecondaryActions =
-                getSlideSecondaryActions(soil);
-            return Slidable(
-              key: ValueKey(soil.no),
-              controller: slidableController,
-              actionPane: SlidableDrawerActionPane(),
-              actions: slideActions,
-              secondaryActions: slideSecondaryActions,
-              enabled: soil.type != 2,
-              // dismissal: SlidableDismissal(
-              //   child: SlidableDrawerDismissal(),
-              // ),
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(bottom: 5),
-                        child: Row(
+        itemBuilder: (BuildContext context, int index) {
+          var soil = soils[index];
+          final List<Widget> slideActions = getSlideActions(soil);
+          final List<Widget> slideSecondaryActions =
+              getSlideSecondaryActions(soil);
+          return Slidable(
+            key: ValueKey(soil.no),
+            controller: slidableController,
+            actionPane: SlidableDrawerActionPane(),
+            actions: slideActions,
+            secondaryActions: slideSecondaryActions,
+            enabled: soil.type != 2,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        children: <Widget>[
+                          RoundRect(
+                            text: soil.typeName,
+                            color: getSoilTypeColor(soil.type),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  soil.plantShowName,
+                                  style: TextStyle(
+                                    color: soil.type != 2
+                                        ? Colors.black
+                                        : Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  soil.status,
+                                  style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            soil.gainTime != null
+                                ? dateFormat.format(soil.gainTime)
+                                : "",
+                            style: new TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: Row(children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            soil.decorpotName,
+                            style: new TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        Row(
                           children: <Widget>[
                             RoundRect(
-                              text: soil.typeName,
-                              color: getSoilTypeColor(soil.type),
+                              text: "晒阳光",
+                              color: Colors.yellow,
+                              margin: EdgeInsets.only(left: 10),
+                              visible: soil.isNoShine,
                             ),
-                            Expanded(
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    soil.plantShowName,
-                                    style: TextStyle(
-                                      color: soil.type != 2
-                                          ? Colors.black
-                                          : Colors.grey,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    soil.status,
-                                    style: new TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            RoundRect(
+                              text: "杀虫",
+                              color: Colors.green,
+                              margin: EdgeInsets.only(left: 10),
+                              visible: soil.isNoFood,
                             ),
-                            Text(
-                              soil.gainTime != null
-                                  ? dateFormat.format(soil.gainTime)
-                                  : "",
-                              style: new TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
-                              ),
+                            RoundRect(
+                              text: "除草",
+                              color: Colors.orange,
+                              margin: EdgeInsets.only(left: 10),
+                              visible: soil.isClutter,
                             ),
                           ],
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 5),
-                        child: Row(children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              soil.decorpotName,
-                              style: new TextStyle(
-                                color: Colors.grey[500],
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              RoundRect(
-                                text: "晒阳光",
-                                color: Colors.yellow,
-                                margin: EdgeInsets.only(left: 10),
-                                visible: soil.isNoShine,
-                              ),
-                              RoundRect(
-                                text: "杀虫",
-                                color: Colors.green,
-                                margin: EdgeInsets.only(left: 10),
-                                visible: soil.isNoFood,
-                              ),
-                              RoundRect(
-                                text: "除草",
-                                color: Colors.orange,
-                                margin: EdgeInsets.only(left: 10),
-                                visible: soil.isClutter,
-                              ),
-                            ],
-                          ),
-                        ]),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              // "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸���值: ${soil.lucky}",
-                              soil.getAttrString(),
-                              style: new TextStyle(
-                                color: Colors.grey[500],
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          // Text("加速:"),
-                          // Text("${soil.speed}%"),
-                          // Text("增产:"),
-                          // Text("${soil.increase}%"),
-                          // Text("魅力:"),
-                          // Text("${soil.charm}%"),
-                          // Text("经验:"),
-                          // Text("${soil.exp}%"),
-                          // Text("幸运值:"),
-                          // Text("${soil.lucky}"),
-                          Text(
-                            soil.isDouble ? "已增产" : "",
+                      ]),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            soil.getAttrString(),
                             style: new TextStyle(
-                              color: Colors.green,
+                              color: Colors.grey[500],
                               fontSize: 12,
                             ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                          ),
+                        ),
+                        Text(
+                          soil.isDouble ? "已增产" : "",
+                          style: new TextStyle(
+                            color: Colors.green,
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
-                onTap: () {
-                  if (soil.type != 2) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => PlantOperPage(soil: soil),
-                    ));
-                  }
-                },
               ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return new Container(height: 1.0, color: Colors.grey[300]);
-          },
-          itemCount: soils.length),
+              onTap: () {
+                if (soil.type != 2) {
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => PlantOperPage(soil: soil),
+                  // ));
+                }
+              },
+            ),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return new Container(height: 1.0, color: Colors.grey[300]);
+        },
+        itemCount: soils.length,
+      ),
     );
   }
 }

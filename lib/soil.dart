@@ -19,8 +19,13 @@ class Soil {
   int soilsate;
   String typeName;
   String decorpotName = "";
-  String status;
+
+  /// 1 种子 2 发芽 3 嫩叶 4 花蕾 5 开花
   int rosestate;
+
+  /// 花当前状态
+  String status;
+
   bool isDouble = false;
 
   /// 阳光
