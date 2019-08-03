@@ -90,6 +90,22 @@ class _PlantState extends State<Plant> {
     return Colors.red;
   }
 
+  Future<void> useMoreFertilizer(int no, int type, bool repeat) async {
+    var res = await MGUtil.useFertilizer(no, type);
+    String tip = "";
+    if (res.result == 0) {
+      tip = "增产使用成功 ${res.isDouble == 1 ? '增产成功' : '增产失败'}";
+      if (res.isDouble != 1 && repeat) {
+        return useMoreFertilizer(no, type, repeat);
+      }
+      Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(tip)));
+      await loadPlant();
+    } else {
+      tip = res.resultstr;
+      Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(tip)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -97,47 +113,44 @@ class _PlantState extends State<Plant> {
       child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             var soil = soils[index];
-            // Scaffold.of(context).showSnackBar(
-            //           new SnackBar(content: new Text("${soil.no} dismissed")));
+
             return Slidable(
               key: ValueKey(index),
               actionPane: SlidableDrawerActionPane(),
               actions: <Widget>[
-                IconSlideAction(
-                  caption: 'Archive',
-                  color: Colors.blue,
-                  icon: Icons.archive,
-                ),
-                IconSlideAction(
-                  caption: 'Share',
-                  color: Colors.indigo,
-                  icon: Icons.share,
-                ),
-              ],
-              secondaryActions: <Widget>[
-                Container(
-                  color: Colors.blue,
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            "增产",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      ],
-                    ),
+                SlideAction(
+                  child: Text(
+                    "连续增产",
+                    style: TextStyle(color: Colors.white),
                   ),
+                  color: Colors.lightBlue,
+                  onTap: () => useMoreFertilizer(soil.no, 3, true),
                 ),
                 SlideAction(
                   child: Text(
                     "增产",
                     style: TextStyle(color: Colors.white),
                   ),
-                  color: Colors.red,
+                  color: Colors.green,
+                  onTap: () => useMoreFertilizer(soil.no, 3, false),
+                ),
+              ],
+              secondaryActions: <Widget>[
+                SlideAction(
+                  child: Text(
+                    "增产",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.green,
+                  onTap: () => useMoreFertilizer(soil.no, 508, false),
+                ),
+                SlideAction(
+                  child: Text(
+                    "连续增产",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.lightBlue,
+                  onTap: () => useMoreFertilizer(soil.no, 508, true),
                 ),
               ],
               // dismissal: SlidableDismissal(
@@ -223,7 +236,7 @@ class _PlantState extends State<Plant> {
                         children: <Widget>[
                           Expanded(
                             child: Text(
-                              // "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸运值: ${soil.lucky}",
+                              // "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸���值: ${soil.lucky}",
                               soil.getAttrString(),
                               style: new TextStyle(
                                 color: Colors.grey[500],

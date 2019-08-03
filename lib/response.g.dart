@@ -220,6 +220,7 @@ UseFertilizerResponse _$UseFertilizerResponseFromJson(
     soilno: json['soilno'] as int,
     stealcount: json['stealcount'] as int,
     usetype: json['usetype'] as int,
+    isDouble: json['isDouble'] as int,
   );
 }
 
@@ -237,4 +238,5 @@ Map<String, dynamic> _$UseFertilizerResponseToJson(
       'soilno': instance.soilno,
       'stealcount': instance.stealcount,
       'usetype': instance.usetype,
+      'isDouble': instance.isDouble,
     };

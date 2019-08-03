@@ -263,20 +263,22 @@ class UseFertilizerResponse extends BaseResponse {
   final int soilno;
   final int stealcount;
   final int usetype;
+  final int isDouble;
 
-  UseFertilizerResponse(
-      {result,
-      resultstr,
-      uin,
-      this.rosebegintime,
-      this.ferticount,
-      this.gaincount,
-      this.leftcount,
-      this.rosestate,
-      this.soilno,
-      this.stealcount,
-      this.usetype})
-      : super(result: result, resultstr: resultstr, uin: uin);
+  UseFertilizerResponse({
+    result,
+    resultstr,
+    uin,
+    this.rosebegintime,
+    this.ferticount,
+    this.gaincount,
+    this.leftcount,
+    this.rosestate,
+    this.soilno,
+    this.stealcount,
+    this.usetype,
+    this.isDouble,
+  }) : super(result: result, resultstr: resultstr, uin: uin);
 
   factory UseFertilizerResponse.fromJson(Map<String, dynamic> json) =>
       _$UseFertilizerResponseFromJson(json);
