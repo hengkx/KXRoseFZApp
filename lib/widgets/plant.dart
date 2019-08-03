@@ -205,6 +205,7 @@ class _PlantState extends State<Plant> {
               actionPane: SlidableDrawerActionPane(),
               actions: slideActions,
               secondaryActions: slideSecondaryActions,
+              enabled: soil.type != 2,
               // dismissal: SlidableDismissal(
               //   child: SlidableDrawerDismissal(),
               // ),
@@ -225,7 +226,15 @@ class _PlantState extends State<Plant> {
                             Expanded(
                               child: Row(
                                 children: <Widget>[
-                                  Text(soil.plantShowName),
+                                  Text(
+                                    soil.plantShowName,
+                                    style: TextStyle(
+                                      color: soil.type != 2
+                                          ? Colors.black
+                                          : Colors.grey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   Text(
                                     soil.status,
                                     style: new TextStyle(

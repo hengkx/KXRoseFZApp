@@ -11,6 +11,8 @@ class Soil {
   /// 收获时间
   DateTime gainTime;
   String plantShowName;
+
+  /// 0 土盆 1水盆 2 仙盆花架 3 仙盆
   int type;
 
   /// 50 枯萎 51 空盆 其余为花id
