@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("开心玫瑰辅助 - by hengkx"),
+        title: Text("开心小镇 - by hengkx"),
       ),
       body: usernic != ''
           ? (choiceIndex == 0 ? Plant() : SettingWidget())
