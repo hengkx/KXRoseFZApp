@@ -16,6 +16,12 @@ class Soil {
   String status;
   int rosestate;
   bool isDouble = false;
+  // 阳光
+  bool isNoShine = false;
+  // 除草
+  bool isClutter = false;
+  // 杀虫
+  bool isNoFood = false;
 
   int charm;
   int exp;
@@ -55,6 +61,9 @@ class Soil {
         }
       }
       isDouble = soil["isDouble"] == 1;
+      isNoShine = soil["isnoshine"] == 1;
+      isNoFood = soil["isnofood"] == 1;
+      isClutter = soil["isclutter"] == 1;
       var strTimes = soil["rosebegintime"].toString().split("-");
       plantTime = DateTime.parse(
           "${strTimes[0]}-${strTimes[1]}-${strTimes[2]} ${strTimes[3]}:${strTimes[4]}:${strTimes[5]}");

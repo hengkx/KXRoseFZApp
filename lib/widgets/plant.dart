@@ -149,25 +149,42 @@ class _PlantState extends State<Plant> {
                             ),
                           ),
                         ),
-                        Text(
-                          soil.isDouble ? "已增产" : "",
-                          style: new TextStyle(
-                            color: Colors.green,
-                            fontSize: 12,
-                          ),
+                        Row(
+                          children: <Widget>[
+                            RoundRect(
+                              text: "晒阳光",
+                              color: Colors.yellow,
+                              margin: EdgeInsets.only(left: 10),
+                              visible: soil.isNoShine,
+                            ),
+                            RoundRect(
+                              text: "杀虫",
+                              color: Colors.green,
+                              margin: EdgeInsets.only(left: 10),
+                              visible: soil.isNoFood,
+                            ),
+                            RoundRect(
+                              text: "除草",
+                              color: Colors.orange,
+                              margin: EdgeInsets.only(left: 10),
+                              visible: soil.isClutter,
+                            ),
+                          ],
                         ),
                       ]),
                     ),
                     Row(
                       children: <Widget>[
                         Expanded(
-                            child: Text(
-                                // "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸运值: ${soil.lucky}",
-                                soil.getAttrString(),
-                                style: new TextStyle(
-                                  color: Colors.grey[500],
-                                  fontSize: 12,
-                                ))),
+                          child: Text(
+                            // "加速: ${soil.speed}% 增产: ${soil.increase}% 魅力: ${soil.charm}% 经验: ${soil.exp}% 幸运值: ${soil.lucky}",
+                            soil.getAttrString(),
+                            style: new TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
                         // Text("加速:"),
                         // Text("${soil.speed}%"),
                         // Text("增产:"),
@@ -178,6 +195,13 @@ class _PlantState extends State<Plant> {
                         // Text("${soil.exp}%"),
                         // Text("幸运值:"),
                         // Text("${soil.lucky}"),
+                        Text(
+                          soil.isDouble ? "已增产" : "",
+                          style: new TextStyle(
+                            color: Colors.green,
+                            fontSize: 12,
+                          ),
+                        )
                       ],
                     ),
                   ],
