@@ -41,42 +41,6 @@ class _PlantState extends State<Plant> {
     });
   }
 
-  List<Widget> getChildrens(BuildContext context, Soil soil) {
-    List fertilizers = new List();
-    fertilizers.add({"id": 506, "name": "普通时效化肥"});
-    fertilizers.add({"id": 507, "name": "急速时效化肥"});
-    fertilizers.add({"id": 508, "name": "增产时效化肥"});
-    fertilizers.add({"id": 1, "name": "普通化肥"});
-    fertilizers.add({"id": 2, "name": "急速化肥"});
-    fertilizers.add({"id": 3, "name": "增产化肥"});
-    fertilizers.add({"id": 31004, "name": "超级急速化肥"});
-
-    List<Widget> childrens = new List<Widget>();
-
-    fertilizers.forEach((item) {
-      childrens.add(new SimpleDialogOption(
-        child: new Text(item["name"]),
-        onPressed: () async {
-          var data = await MGUtil.useFertilizer(soil.no, item["id"]);
-          print(data.toJson());
-          Navigator.of(context).pop(item["name"]);
-        },
-      ));
-    });
-    return childrens;
-  }
-
-  void showMySimpleDialog(BuildContext context, Soil soil) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return new SimpleDialog(
-            title: new Text("使用化肥"),
-            children: getChildrens(context, soil),
-          );
-        });
-  }
-
   Color getSoilTypeColor(int type) {
     switch (type) {
       case 0:
