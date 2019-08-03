@@ -17,6 +17,13 @@ class Soil {
 
   /// 50 枯萎 51 空盆 其余为花id
   int soilsate;
+
+  /// 仙盆等级
+  int hanglevel;
+
+  /// 花盆等级
+  int potLevel;
+
   String typeName;
   String decorpotName = "";
 
@@ -45,7 +52,8 @@ class Soil {
 
   Soil(dynamic soil) {
     type = soil["SoilType"];
-
+    hanglevel = soil["hanglevel"];
+    potLevel = soil["potlevel"];
     if (type == 3) {
       charm = soil["hpattribute"]["charm"];
       exp = soil["hpattribute"]["exp"];

@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lpinyin/lpinyin.dart';
 
+import '../soil.dart';
+
 // import '../utils/mg.dart';
 
 class SelectFlowerPage extends StatefulWidget {
-  final dynamic soil;
+  final Soil soil;
   SelectFlowerPage({Key key, @required this.soil}) : super(key: key);
   @override
   _SelectFlowerPageState createState() => _SelectFlowerPageState(this.soil);
@@ -61,7 +63,7 @@ class Flower {
 class _SelectFlowerPageState extends State<SelectFlowerPage> {
   _SelectFlowerPageState(this.soil);
 
-  final dynamic soil;
+  final Soil soil;
 
   List<Flower> flowers = new List<Flower>();
 
@@ -77,40 +79,61 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     Config.flowerConfig.findAllElements("item").forEach((item) {
       var plantId = int.parse(item.getAttribute("id"));
       if (item.getAttribute("combineid") == null && plantId != 0) {
-        var name = item.getAttribute("name");
+        int type = int.parse(item.getAttribute("type") ?? "99");
+        int potLevel = int.parse(item.getAttribute("potLevel") ?? "0");
+        int season = int.parse(item.getAttribute("season") ?? "0");
         var seedId = int.parse(item.getAttribute("seedID"));
-        flowers.add(new Flower(
-          plantId: plantId,
-          seedId: seedId,
-          type: item.getAttribute("type") != null
-              ? int.parse(item.getAttribute("type"))
-              : 99,
-          seedPrice: int.parse(item.getAttribute("seedPrice")),
-          seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
-          pyName: PinyinHelper.getShortPinyin(name),
-          name: name,
-          count: initFirstRes['vegetableseed$seedId'] ?? 0,
-        ));
+        int count = initFirstRes['vegetableseed$seedId'] ?? 0;
+        int seedPrice = int.parse(item.getAttribute("seedPrice"));
+        if ((count > 0 || seedPrice > 0) &&
+            ((soil.type == 1 && type == 1 && soil.potLevel >= potLevel) ||
+                (soil.type == 3 &&
+                    soil.hanglevel < 4 &&
+                    type == 3 &&
+                    potLevel <= soil.hanglevel) ||
+                (soil.type == 3 &&
+                    soil.hanglevel == 4 &&
+                    (type == 2 || type == 3 || (type == 99 && season < 4))) ||
+                (soil.type == 0 &&
+                    (type == 2 ||
+                        type == 100 ||
+                        (type == 99 && soil.potLevel >= potLevel))))) {
+          var name = item.getAttribute("name");
+          flowers.add(new Flower(
+            plantId: plantId,
+            seedId: seedId,
+            type: type,
+            seedPrice: seedPrice,
+            seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
+            pyName: PinyinHelper.getShortPinyin(name),
+            name: name,
+            count: count,
+          ));
+        }
       }
     });
-
-    Config.roseConfig.findAllElements("item").forEach((item) {
-      var plantId = int.parse(item.getAttribute("id"));
-      if (item.getAttribute("combineid") == null && plantId != 0) {
-        var name = item.getAttribute("name");
+    if (soil.type == 0 || soil.hanglevel == 4) {
+      Config.roseConfig.findAllElements("item").forEach((item) {
+        var plantId = int.parse(item.getAttribute("id"));
         var seedId = int.parse(item.getAttribute("materials").split(",")[0]);
-        flowers.add(new Flower(
-          plantId: plantId,
-          seedId: seedId,
-          type: 100,
-          seedPrice: int.parse(item.getAttribute("seedPrice")),
-          seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
-          pyName: PinyinHelper.getShortPinyin(name),
-          name: name,
-          count: initFirstRes['roseseed$seedId'] ?? 0,
-        ));
-      }
-    });
+        int count = initFirstRes['roseseed$seedId'] ?? 0;
+        if (count > 0 &&
+            item.getAttribute("combineid") == null &&
+            plantId != 0) {
+          var name = item.getAttribute("name");
+          flowers.add(new Flower(
+            plantId: plantId,
+            seedId: seedId,
+            type: 100,
+            seedPrice: int.parse(item.getAttribute("seedPrice")),
+            seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
+            pyName: PinyinHelper.getShortPinyin(name),
+            name: name,
+            count: initFirstRes['roseseed$seedId'] ?? 0,
+          ));
+        }
+      });
+    }
 
     flowers.sort((a, b) => a.pyName.compareTo(b.pyName));
     this.setState(() {
@@ -232,7 +255,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("选择花"),
+          title: Text("选择种子"),
         ),
         body: Container(
           child: Column(
@@ -276,6 +299,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
                       ));
                     }
                     return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       child: Container(
                         padding: EdgeInsets.all(10),
                         child: Row(
