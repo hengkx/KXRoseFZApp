@@ -118,22 +118,24 @@ class _PlantState extends State<Plant> {
         color: Colors.orange,
         // onTap: () => useMoreFertilizer(soil.no, 508, false),
       ));
-      slideActions.add(SlideAction(
-        child: Text(
-          "连续增产",
-          style: TextStyle(color: Colors.white),
-        ),
-        color: Colors.lightBlue,
-        onTap: () => useMoreFertilizer(soil.no, 3, true),
-      ));
-      slideActions.add(SlideAction(
-        child: Text(
-          "增产",
-          style: TextStyle(color: Colors.white),
-        ),
-        color: Colors.green,
-        onTap: () => useMoreFertilizer(soil.no, 3, false),
-      ));
+      if (!soil.isDouble) {
+        slideActions.add(SlideAction(
+          child: Text(
+            "连续增产",
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.lightBlue,
+          onTap: () => useMoreFertilizer(soil.no, 3, true),
+        ));
+        slideActions.add(SlideAction(
+          child: Text(
+            "增产",
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.green,
+          onTap: () => useMoreFertilizer(soil.no, 3, false),
+        ));
+      }
     }
     return slideActions;
   }
@@ -169,22 +171,24 @@ class _PlantState extends State<Plant> {
           // onTap: () => useMoreFertilizer(soil.no, 508, false),
         ));
       }
-      slideActions.add(SlideAction(
-        child: Text(
-          "时效增产",
-          style: TextStyle(color: Colors.white),
-        ),
-        color: Colors.green,
-        onTap: () => useMoreFertilizer(soil.no, 508, false),
-      ));
-      slideActions.add(SlideAction(
-        child: Text(
-          "连续增产",
-          style: TextStyle(color: Colors.white),
-        ),
-        color: Colors.lightBlue,
-        onTap: () => useMoreFertilizer(soil.no, 508, true),
-      ));
+      if (!soil.isDouble) {
+        slideActions.add(SlideAction(
+          child: Text(
+            "时效增产",
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.green,
+          onTap: () => useMoreFertilizer(soil.no, 508, false),
+        ));
+        slideActions.add(SlideAction(
+          child: Text(
+            "连续增产",
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.lightBlue,
+          onTap: () => useMoreFertilizer(soil.no, 508, true),
+        ));
+      }
     }
     return slideActions;
   }
