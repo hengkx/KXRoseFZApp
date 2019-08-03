@@ -107,6 +107,88 @@ class _PlantState extends State<Plant> {
     }
   }
 
+  List<Widget> getSlideActions(Soil soil) {
+    final List<Widget> slideActions = [];
+    if (soil.soilsate != 50 && soil.soilsate != 51) {
+      slideActions.add(SlideAction(
+        child: Text(
+          "松土",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.orange,
+        // onTap: () => useMoreFertilizer(soil.no, 508, false),
+      ));
+      slideActions.add(SlideAction(
+        child: Text(
+          "连续增产",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.lightBlue,
+        onTap: () => useMoreFertilizer(soil.no, 3, true),
+      ));
+      slideActions.add(SlideAction(
+        child: Text(
+          "增产",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.green,
+        onTap: () => useMoreFertilizer(soil.no, 3, false),
+      ));
+    }
+    return slideActions;
+  }
+
+  List<Widget> getSlideSecondaryActions(Soil soil) {
+    final List<Widget> slideActions = [];
+    if (soil.soilsate == 50) {
+      slideActions.add(SlideAction(
+        child: Text(
+          "松土",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.orange,
+        // onTap: () => useMoreFertilizer(soil.no, 508, false),
+      ));
+    } else if (soil.soilsate == 51) {
+      slideActions.add(SlideAction(
+        child: Text(
+          "种植",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.green.shade700,
+        // onTap: () => useMoreFertilizer(soil.no, 508, false),
+      ));
+    } else {
+      if (soil.isClutter || soil.isNoFood || soil.isNoShine) {
+        slideActions.add(SlideAction(
+          child: Text(
+            "一键操作",
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.orange,
+          // onTap: () => useMoreFertilizer(soil.no, 508, false),
+        ));
+      }
+      slideActions.add(SlideAction(
+        child: Text(
+          "时效增产",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.green,
+        onTap: () => useMoreFertilizer(soil.no, 508, false),
+      ));
+      slideActions.add(SlideAction(
+        child: Text(
+          "连续增产",
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.lightBlue,
+        onTap: () => useMoreFertilizer(soil.no, 508, true),
+      ));
+    }
+    return slideActions;
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -114,46 +196,15 @@ class _PlantState extends State<Plant> {
       child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             var soil = soils[index];
-            final List<Widget> slideActions = [];
-            slideActions.add(SlideAction(
-              child: Text(
-                "连续增产",
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Colors.lightBlue,
-              onTap: () => useMoreFertilizer(soil.no, 3, true),
-            ));
-            slideActions.add(SlideAction(
-              child: Text(
-                "增产",
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Colors.green,
-              onTap: () => useMoreFertilizer(soil.no, 3, false),
-            ));
+            final List<Widget> slideActions = getSlideActions(soil);
+            final List<Widget> slideSecondaryActions =
+                getSlideSecondaryActions(soil);
             return Slidable(
               key: ValueKey(soil.no),
               controller: slidableController,
               actionPane: SlidableDrawerActionPane(),
               actions: slideActions,
-              secondaryActions: <Widget>[
-                SlideAction(
-                  child: Text(
-                    "时效增产",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.green,
-                  onTap: () => useMoreFertilizer(soil.no, 508, false),
-                ),
-                SlideAction(
-                  child: Text(
-                    "连续增产",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.lightBlue,
-                  onTap: () => useMoreFertilizer(soil.no, 508, true),
-                ),
-              ],
+              secondaryActions: slideSecondaryActions,
               // dismissal: SlidableDismissal(
               //   child: SlidableDrawerDismissal(),
               // ),

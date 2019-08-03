@@ -4,23 +4,30 @@ import 'config.dart';
 
 class Soil {
   int no;
-  // 种植时间
+
+  /// 种植时间
   DateTime plantTime;
-  // 收获时间
+
+  /// 收获时间
   DateTime gainTime;
   String plantShowName;
   int type;
+
+  /// 50 枯萎 51 空盆 其余为花id
   int soilsate;
   String typeName;
   String decorpotName = "";
   String status;
   int rosestate;
   bool isDouble = false;
-  // 阳光
+
+  /// 阳光
   bool isNoShine = false;
-  // 除草
+
+  /// 除草
   bool isClutter = false;
-  // 杀虫
+
+  /// 杀虫
   bool isNoFood = false;
 
   int charm;
