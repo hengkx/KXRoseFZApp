@@ -1,4 +1,4 @@
-package com.example.test_flutter;
+package com.hengkx.rose;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
