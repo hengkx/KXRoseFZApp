@@ -140,11 +140,22 @@ class _PlantState extends State<Plant> {
                     Container(
                       margin: EdgeInsets.only(bottom: 5),
                       child: Row(children: <Widget>[
-                        Text(soil.decorpotName,
+                        Expanded(
+                          child: Text(
+                            soil.decorpotName,
                             style: new TextStyle(
                               color: Colors.grey[500],
                               fontSize: 12,
-                            ))
+                            ),
+                          ),
+                        ),
+                        Text(
+                          soil.isDouble ? "已增产" : "",
+                          style: new TextStyle(
+                            color: Colors.green,
+                            fontSize: 12,
+                          ),
+                        ),
                       ]),
                     ),
                     Row(

@@ -15,6 +15,7 @@ class Soil {
   String decorpotName = "";
   String status;
   int rosestate;
+  bool isDouble = false;
 
   int charm;
   int exp;
@@ -53,7 +54,7 @@ class Soil {
           plantShowName += " 第${soil["season"]}季";
         }
       }
-
+      isDouble = soil["isDouble"] == 1;
       var strTimes = soil["rosebegintime"].toString().split("-");
       plantTime = DateTime.parse(
           "${strTimes[0]}-${strTimes[1]}-${strTimes[2]} ${strTimes[3]}:${strTimes[4]}:${strTimes[5]}");
