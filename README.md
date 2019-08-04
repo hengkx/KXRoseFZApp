@@ -3,4 +3,6 @@
 flutter packages pub run build_runner build
 # 运行一次在后台持续监听
 flutter packages pub run build_runner watch
+# (flutter build 默认会包含 --release选项)
+flutter build apk
 ```
