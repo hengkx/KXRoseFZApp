@@ -201,26 +201,44 @@ class _PlantOperPageState extends State<PlantOperPage> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              FlatButton(
-                child: Text(flower != null ? flower.name : "请选择"),
-                onPressed: () {
-                  Navigator.of(context)
-                      .push<Flower>(MaterialPageRoute(
-                    builder: (context) => SelectFlowerPage(soil: this.soil),
-                  ))
-                      .then((Flower flower) {
-                    this.setState(() {
-                      this.flower = flower;
-                    });
-                  });
-                },
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: FlatButton(
+                    child: Text(
+                      flower != null ? flower.name : "选择种子",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.green,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push<Flower>(MaterialPageRoute(
+                        builder: (context) => SelectFlowerPage(soil: this.soil),
+                      ))
+                          .then((Flower flower) {
+                        this.setState(() {
+                          this.flower = flower;
+                        });
+                      });
+                    },
+                  ),
+                ),
               ),
-              FlatButton(
-                child: Text("开始工作"),
-                onPressed: () {
-                  execute();
-                },
-              )
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: FlatButton(
+                    child: Text(
+                      "开始工作",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.blue,
+                    onPressed: () {
+                      execute();
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
           Column(

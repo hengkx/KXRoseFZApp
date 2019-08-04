@@ -400,9 +400,9 @@ class _PlantState extends State<Plant> {
               ),
               onTap: () {
                 if (soil.type != 2) {
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => PlantOperPage(soil: soil),
-                  // ));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => PlantOperPage(soil: soil),
+                  ));
                 }
               },
             ),
