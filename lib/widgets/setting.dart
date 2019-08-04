@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:package_info/package_info.dart';
 
 class SettingWidget extends StatefulWidget {
   @override
@@ -10,6 +11,20 @@ class SettingWidget extends StatefulWidget {
 
 class _SettingWidgetState extends State<SettingWidget> {
   @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  PackageInfo packageInfo;
+  String version;
+  init() async {
+    packageInfo = await PackageInfo.fromPlatform();
+
+    version = packageInfo.version;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment(0, 0),
@@ -17,7 +32,7 @@ class _SettingWidgetState extends State<SettingWidget> {
         children: <Widget>[
           Text("QQ交流群：276801258"),
           Text("交花友：519872449"),
-          Text("版本：V 0.1.0"),
+          Text("版本：$version"),
           MaterialButton(
             color: Colors.blue,
             textColor: Colors.white,
