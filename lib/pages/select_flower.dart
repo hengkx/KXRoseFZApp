@@ -66,7 +66,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
 
   final Soil soil;
 
-  List<Flower> flowers = new List<Flower>();
+  List<Flower> flowers = [];
   List<Flower> showFlowers = [];
 
   @override
@@ -80,7 +80,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
   init() async {
     await Config.init();
     dynamic initFirstRes = await MGUtil.getInitFirst();
-    Config.flowerConfig.findAllElements("item").forEach((item) {
+    for (var item in Config.flowerConfig.findAllElements("item")) {
       var plantId = int.parse(item.getAttribute("id"));
       if (item.getAttribute("combineid") == null && plantId != 0) {
         int type = int.parse(item.getAttribute("type") ?? "99");
@@ -115,9 +115,9 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
           ));
         }
       }
-    });
+    }
     if (soil.type == 0 || soil.hanglevel == 4) {
-      Config.roseConfig.findAllElements("item").forEach((item) {
+      for (var item in Config.roseConfig.findAllElements("item")) {
         var plantId = int.parse(item.getAttribute("id"));
         var seedId = int.parse(item.getAttribute("materials").split(",")[0]);
         int count = initFirstRes['roseseed$seedId'] ?? 0;
@@ -136,15 +136,15 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
             count: initFirstRes['roseseed$seedId'] ?? 0,
           ));
         }
-      });
+      }
     }
     flowers.sort((a, b) => a.pyName.compareTo(b.pyName));
-    flowers.forEach((item) {
+    for (var item in flowers) {
       var str = item.pyName[0].toUpperCase();
       if (filters.indexOf(str) == -1) {
         filters.add(str);
       }
-    });
+    }
     print(filters);
     this.setState(() {
       flowers = flowers;
@@ -276,10 +276,9 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> filterWidgets = [];
-
-    filters.forEach((item) {
+    for (var item in filters) {
       filterWidgets.add(Text(item));
-    });
+    }
 
     return Scaffold(
       key: _scaffoldKey,

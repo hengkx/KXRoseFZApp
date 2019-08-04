@@ -151,7 +151,7 @@ class _IndexBar extends StatefulWidget {
 }
 
 class _IndexBarState extends State<_IndexBar> {
-  List<int> _indexSectionList = new List();
+  List<int> _indexSectionList = [];
   int _widgetTop = -1;
   int _lastIndex = 0;
   bool _widgetTopChange = false;
@@ -195,7 +195,7 @@ class _IndexBarState extends State<_IndexBar> {
     }
     _init();
 
-    List<Widget> children = new List();
+    List<Widget> children = [];
     widget.data.forEach((v) {
       children.add(new SizedBox(
         width: widget.width.toDouble(),

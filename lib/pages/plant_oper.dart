@@ -25,7 +25,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
   int choiceIndex = 0;
   String usernic = '';
   Flower flower;
-  List<String> logs = new List<String>();
+  List<String> logs = [];
   GetInitFirstResponse initFirstRes = new GetInitFirstResponse();
 
   @override

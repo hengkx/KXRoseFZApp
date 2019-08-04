@@ -129,7 +129,7 @@ class MGUtil {
     };
     var res = await HttpUtil.getInstance()
         .post("rosary0908_get_plant_info_self", data: params);
-    List<Soil> soils = new List<Soil>();
+    List<Soil> soils = [];
     if (res['result'] == 0) {
       for (var i = 1; i <= res["soilcount"]; i++) {
         Soil soil = new Soil(res["soil$i"][0]);
