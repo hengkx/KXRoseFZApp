@@ -44,4 +44,13 @@ class Config {
       userConfig = UserConfig.fromJson(json.decode(userConfigJson));
     }
   }
+
+  static saveUserConfig() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final userConfigPath = "${directory.path}/userConfig.json";
+
+    File file = new File(userConfigPath);
+    print(json.encode(Config.userConfig));
+    file.writeAsStringSync(json.encode(Config.userConfig));
+  }
 }

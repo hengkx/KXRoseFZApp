@@ -18,8 +18,8 @@ class UserConfig {
 class SpeedFertilizer {
   final int id;
   final String name;
-  final bool use;
-  final int time;
+  bool use;
+  int time;
   SpeedFertilizer({this.id, this.name, this.use, this.time});
 
   factory SpeedFertilizer.fromJson(Map<String, dynamic> json) =>
