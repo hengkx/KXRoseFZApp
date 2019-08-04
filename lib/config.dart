@@ -5,11 +5,31 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart' as xml;
 import 'package:path_provider/path_provider.dart';
 
+class ExchangeItem {
+  final int id;
+  final String name;
+  ExchangeItem({this.id, this.name});
+}
+
 class Config {
   static xml.XmlDocument flowerConfig;
   static xml.XmlDocument roseConfig;
   static xml.XmlDocument propConfig;
   static UserConfig userConfig;
+
+  static List<ExchangeItem> exhanges = [
+    ExchangeItem(id: 1, name: "红玫瑰种子"),
+    ExchangeItem(id: 2, name: "白玫瑰种子"),
+    ExchangeItem(id: 3, name: "黄玫瑰种子"),
+    ExchangeItem(id: 4, name: "粉玫瑰种子"),
+    ExchangeItem(id: 5, name: "蓝玫瑰种子"),
+    ExchangeItem(id: 6, name: "橙玫瑰种子"),
+    ExchangeItem(id: 7, name: "紫玫瑰种子"),
+    ExchangeItem(id: 8, name: "绿玫瑰种子"),
+    ExchangeItem(id: 9, name: "黑玫瑰种子"),
+    ExchangeItem(id: 22001, name: "青玫瑰种子"),
+    ExchangeItem(id: 22002, name: "香槟玫瑰种子"),
+  ];
 
   static init() async {
     if (flowerConfig == null) {

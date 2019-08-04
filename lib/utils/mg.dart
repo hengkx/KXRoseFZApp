@@ -70,6 +70,17 @@ class MGUtil {
     return UseFertilizerResponse.fromJson(res);
   }
 
+  static Future<BaseResponse> exchange(int type) async {
+    var params = {
+      "materialtype": type,
+      "benew0908": 1,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance()
+        .post("rosary0903_exchange_crowry", data: params);
+    return BaseResponse.fromJson(res);
+  }
+
   static Future<PlantResponse> plant(int no, int id) async {
     var params = {
       "soilno": no,

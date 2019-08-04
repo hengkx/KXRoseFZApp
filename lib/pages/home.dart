@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
 import '../widgets/setting.dart';
+import './exchange.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  int choiceIndex = 0;
+  int tabIndex = 0;
   String usernic = '';
 
   void getUserInfo() async {
@@ -30,6 +31,12 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
+  var _pageList = [
+    new Plant(),
+    new ExchangeWidget(),
+    new SettingWidget(),
+  ];
 
   @override
   void initState() {
@@ -62,51 +69,38 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  getBottomNavigationBarItem(String title, IconData icon) {
+    return new BottomNavigationBarItem(
+      title: Text(title),
+      icon: Icon(icon),
+      activeIcon: Icon(
+        icon,
+        color: Theme.of(context).primaryColor,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("开心小镇 - by hengkx"),
       ),
-      body: usernic != ''
-          ? (choiceIndex == 0 ? Plant() : SettingWidget())
-          : Text("请先登录"),
+      body: _pageList[tabIndex],
       bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text(
-                "首页",
-              ),
-              activeIcon: Icon(
-                Icons.home,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text(
-                "设置",
-              ),
-              activeIcon: Icon(
-                Icons.settings,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ],
-          currentIndex: choiceIndex,
-          fixedColor: Theme.of(context).primaryColor,
-          onTap: (index) {
-            if (index == 0) {
-              setState(() {
-                choiceIndex = 0;
-              });
-            } else {
-              setState(() {
-                choiceIndex = 1;
-              });
-            }
-          }),
+        items: [
+          getBottomNavigationBarItem("首页", Icons.home),
+          getBottomNavigationBarItem("兑换", Icons.compare_arrows),
+          getBottomNavigationBarItem("设置", Icons.settings),
+        ],
+        currentIndex: tabIndex,
+        fixedColor: Theme.of(context).primaryColor,
+        onTap: (index) {
+          setState(() {
+            tabIndex = index;
+          });
+        },
+      ),
     );
   }
 }
