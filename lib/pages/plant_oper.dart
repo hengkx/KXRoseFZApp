@@ -19,7 +19,7 @@ class PlantOperPage extends StatefulWidget {
 
 class _PlantOperPageState extends State<PlantOperPage> {
   _PlantOperPageState(this.soil);
-  final Soil soil;
+  Soil soil;
   ScrollController _controller = ScrollController();
 
   int choiceIndex = 0;
@@ -79,7 +79,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
         soil.gainTime = Soil.getGainTime(res.soilsate, res.rosebegintime);
         logs.add(res.toString());
       } else {
-        logs.add(res.resultstr);
+        logs.add("种植 ${res.resultstr}");
       }
       this.setState(() {
         this.logs = logs;
@@ -100,7 +100,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
       soil.soilsate = 51;
       logs.add(res.toString());
     } else {
-      logs.add(res.resultstr);
+      logs.add("松土 ${res.resultstr}");
     }
     this.setState(() {
       this.logs = logs;
@@ -109,17 +109,18 @@ class _PlantOperPageState extends State<PlantOperPage> {
   }
 
   Future<bool> gain() async {
-    var gainRes = await MGUtil.gain(soil.no);
-    if (gainRes.result == 0) {
+    var res = await MGUtil.gain(soil.no);
+    if (res.result == 0) {
+      soil.rosestate = 0;
       soil.soilsate = 50;
-      logs.add(gainRes.toString());
+      logs.add(res.toString());
     } else {
-      logs.add(gainRes.resultstr);
+      logs.add("收获 ${res.resultstr}");
     }
     this.setState(() {
       this.logs = logs;
     });
-    return gainRes.result == 0;
+    return res.result == 0;
   }
 
   void execute() async {
@@ -188,6 +189,12 @@ class _PlantOperPageState extends State<PlantOperPage> {
     });
   }
 
+  handleBeginWork() async {
+    var soils = await MGUtil.getPlantInfo();
+    soil = soils.firstWhere((item) => item.no == soil.no);
+    execute();
+  }
+
   @override
   Widget build(BuildContext context) {
     var labelStyle = new TextStyle(color: Colors.grey);
@@ -234,7 +241,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
                     ),
                     color: Colors.blue,
                     onPressed: () {
-                      execute();
+                      handleBeginWork();
                     },
                   ),
                 ),
