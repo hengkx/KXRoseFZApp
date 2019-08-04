@@ -1,10 +1,11 @@
-import 'package:KXRoseFZApp/widgets/round_rect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../pages/plant_oper.dart';
+import '../pages/select_flower.dart';
+import '../widgets/round_rect.dart';
 import '../utils/mg.dart';
 import '../soil.dart';
 import '../config.dart';
@@ -72,7 +73,10 @@ class _PlantState extends State<Plant> {
   }
 
   showSnackBar(String tip) {
-    Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(tip)));
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text(tip),
+      duration: Duration(seconds: 1),
+    ));
   }
 
   List<Widget> getSlideActions(Soil soil) {
@@ -128,8 +132,40 @@ class _PlantState extends State<Plant> {
     }
   }
 
-  plant(Soil soil) async {
-    showSnackBar("功能待开发");
+  showSelctFlower(Soil soil) async {
+    Navigator.of(context)
+        .push<Flower>(MaterialPageRoute(
+      builder: (context) => SelectFlowerPage(soil: soil),
+    ))
+        .then((Flower flower) {
+      plant(soil, flower);
+    });
+  }
+
+  Future<bool> buySeed(Flower flower) async {
+    var res = await MGUtil.buySeed(flower.seedId, 1);
+    if (res.result == 0) {
+      showSnackBar("购买 ${flower.name} 种子成功");
+    } else {
+      showSnackBar(res.resultstr);
+    }
+    return res.result == 0;
+  }
+
+  plant(Soil soil, Flower flower) async {
+    if (flower.count <= 0) {
+      var isBuySeedSucc = await buySeed(flower);
+      if (!isBuySeedSucc) {
+        return;
+      }
+    }
+    var res = await MGUtil.plant(soil.no, flower.plantId);
+    if (res.result == 0) {
+      showSnackBar("${soil.no} 号盆 种植 ${flower.name} 成功");
+    } else {
+      showSnackBar(res.resultstr);
+    }
+    loadPlant();
   }
 
   plantAction(Soil soil) async {
@@ -184,7 +220,7 @@ class _PlantState extends State<Plant> {
           style: TextStyle(color: Colors.white),
         ),
         color: Colors.green.shade700,
-        onTap: () => plant(soil),
+        onTap: () => showSelctFlower(soil),
       ));
     } else {
       if (soil.rosestate == 5) {
@@ -230,6 +266,16 @@ class _PlantState extends State<Plant> {
     return slideActions;
   }
 
+  Color getPlantNameColor(Soil soil) {
+    Color color = Colors.black;
+    if (soil.type == 2) {
+      color = Colors.grey;
+    } else if (soil.soilsate == 50 || soil.soilsate == 51) {
+      color = Colors.green;
+    }
+    return color;
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -267,9 +313,7 @@ class _PlantState extends State<Plant> {
                                 Text(
                                   soil.plantShowName,
                                   style: TextStyle(
-                                    color: soil.type != 2
-                                        ? Colors.black
-                                        : Colors.grey,
+                                    color: getPlantNameColor(soil),
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -356,9 +400,9 @@ class _PlantState extends State<Plant> {
               ),
               onTap: () {
                 if (soil.type != 2) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PlantOperPage(soil: soil),
-                  ));
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => PlantOperPage(soil: soil),
+                  // ));
                 }
               },
             ),

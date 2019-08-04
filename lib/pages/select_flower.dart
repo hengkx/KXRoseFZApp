@@ -67,6 +67,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
   final Soil soil;
 
   List<Flower> flowers = new List<Flower>();
+  List<Flower> showFlowers = [];
 
   @override
   void initState() {
@@ -147,6 +148,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     print(filters);
     this.setState(() {
       flowers = flowers;
+      showFlowers = flowers;
     });
   }
 
@@ -258,6 +260,18 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     //     });
   }
 
+  handleSearchTextChanged(val) {
+    if (val == '') {
+      showFlowers = flowers;
+    } else {
+      showFlowers = flowers
+          .where((item) =>
+              (item.name.indexOf(val) != -1 || item.pyName.indexOf(val) != -1))
+          .toList();
+    }
+    setState(() {});
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -278,38 +292,38 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
             Expanded(
               child: Column(
                 children: <Widget>[
-                  // new Container(
-                  //   // color: Theme.of(context).primaryColor,
-                  //   child: new Padding(
-                  //     padding: const EdgeInsets.all(8.0),
-                  //     child: new Card(
-                  //       child: new ListTile(
-                  //         leading: new Icon(Icons.search),
-                  //         title: new TextField(
-                  //           controller: controller,
-                  //           // decoration: new InputDecoration(
-                  //           //     hintText: 'Search', border: InputBorder.none),
-                  //           // onChanged: onSearchTextChanged,
-                  //         ),
-                  //         trailing: new IconButton(
-                  //           icon: new Icon(Icons.cancel),
-                  //           onPressed: () {
-                  //             controller.clear();
-                  //             // onSearchTextChanged('');
-                  //           },
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  new Container(
+                    // color: Theme.of(context).primaryColor,
+                    child: new Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: new Card(
+                        child: new ListTile(
+                          leading: new Icon(Icons.search),
+                          title: new TextField(
+                            controller: controller,
+                            decoration: new InputDecoration(
+                                hintText: '请输入名称或拼音简写',
+                                border: InputBorder.none),
+                            onChanged: handleSearchTextChanged,
+                          ),
+                          trailing: new IconButton(
+                            icon: new Icon(Icons.cancel),
+                            onPressed: () {
+                              controller.clear();
+                              handleSearchTextChanged('');
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (BuildContext context, int index) {
-                        var flower = flowers[index];
+                        var flower = showFlowers[index];
                         final List<Widget> actions = [];
                         if (flower.seedPrice != 0) {
                           actions.add(OutlineButton(
-                            // color: Colors.redAccent.shade200,
                             textColor: Theme.of(context).primaryColor,
                             // color: Theme.of(context).primaryColor,
                             child: new Text('购买'),
@@ -377,37 +391,37 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
                         return new Container(
                             height: 1.0, color: Colors.grey[300]);
                       },
-                      itemCount: flowers.length,
+                      itemCount: showFlowers.length,
                     ),
                   ),
                 ],
               ),
             ),
-            Center(
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.grey[400],
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Center(
-                  child: Text(
-                    "A",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            IndexBar(
-              onTouch: (IndexBarDetails details) {
-                print(details.tag);
-              },
-            ),
+            // Center(
+            //   child: Container(
+            //     width: 50,
+            //     height: 50,
+            //     decoration: BoxDecoration(
+            //       color: Colors.grey[400],
+            //       borderRadius: BorderRadius.all(Radius.circular(10)),
+            //     ),
+            //     child: Center(
+            //       child: Text(
+            //         "A",
+            //         style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // IndexBar(
+            //   onTouch: (IndexBarDetails details) {
+            //     print(details.tag);
+            //   },
+            // ),
             // GestureDetector(
             //   onVerticalDragDown: (DragDownDetails details) {
             //     print(details.localPosition.dy);
