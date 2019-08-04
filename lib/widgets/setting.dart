@@ -21,7 +21,9 @@ class _SettingWidgetState extends State<SettingWidget> {
   init() async {
     packageInfo = await PackageInfo.fromPlatform();
 
-    version = packageInfo.version;
+    setState(() {
+      version = packageInfo.version;
+    });
   }
 
   @override
