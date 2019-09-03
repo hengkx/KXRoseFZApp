@@ -140,4 +140,15 @@ class MGUtil {
 
     return soils;
   }
+
+  static Future<TaskResponse> getTasks() async {
+    var params = {
+      "index": -1,
+      "tasktype": 0,
+      "benew0908": 1,
+      "cgiVersion": 43,
+    };
+    var res = await HttpUtil.getInstance().post("rosary_task", data: params);
+    return TaskResponse.fromJson(res);
+  }
 }
