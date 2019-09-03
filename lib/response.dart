@@ -285,3 +285,54 @@ class UseFertilizerResponse extends BaseResponse {
 
   Map<String, dynamic> toJson() => _$UseFertilizerResponseToJson(this);
 }
+
+@JsonSerializable()
+class UserTask {
+  final int continueNum;
+  final int data1;
+  final int data2;
+  final int data3;
+  final int data4;
+  final int data5;
+  final int endTime;
+  final int finishNum;
+  final int finishTime;
+  final int state;
+  final int taskID;
+
+  UserTask(
+      {this.continueNum,
+      this.data1,
+      this.data2,
+      this.data3,
+      this.data4,
+      this.data5,
+      this.endTime,
+      this.finishNum,
+      this.finishTime,
+      this.state,
+      this.taskID});
+
+  factory UserTask.fromJson(Map<String, dynamic> json) =>
+      _$UserTaskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserTaskToJson(this);
+}
+
+@JsonSerializable()
+class TaskResponse extends BaseResponse {
+  @JsonKey(name: 'user_task', defaultValue: 0)
+  final List<UserTask> userTasks;
+
+  TaskResponse({
+    result,
+    resultstr,
+    uin,
+    this.userTasks,
+  }) : super(result: result, resultstr: resultstr, uin: uin);
+
+  factory TaskResponse.fromJson(Map<String, dynamic> json) =>
+      _$TaskResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskResponseToJson(this);
+}

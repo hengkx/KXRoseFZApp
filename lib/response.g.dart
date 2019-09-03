@@ -240,3 +240,54 @@ Map<String, dynamic> _$UseFertilizerResponseToJson(
       'usetype': instance.usetype,
       'isDouble': instance.isDouble,
     };
+
+UserTask _$UserTaskFromJson(Map<String, dynamic> json) {
+  return UserTask(
+    continueNum: json['continueNum'] as int,
+    data1: json['data1'] as int,
+    data2: json['data2'] as int,
+    data3: json['data3'] as int,
+    data4: json['data4'] as int,
+    data5: json['data5'] as int,
+    endTime: json['endTime'] as int,
+    finishNum: json['finishNum'] as int,
+    finishTime: json['finishTime'] as int,
+    state: json['state'] as int,
+    taskID: json['taskID'] as int,
+  );
+}
+
+Map<String, dynamic> _$UserTaskToJson(UserTask instance) => <String, dynamic>{
+      'continueNum': instance.continueNum,
+      'data1': instance.data1,
+      'data2': instance.data2,
+      'data3': instance.data3,
+      'data4': instance.data4,
+      'data5': instance.data5,
+      'endTime': instance.endTime,
+      'finishNum': instance.finishNum,
+      'finishTime': instance.finishTime,
+      'state': instance.state,
+      'taskID': instance.taskID,
+    };
+
+TaskResponse _$TaskResponseFromJson(Map<String, dynamic> json) {
+  return TaskResponse(
+    result: json['result'],
+    resultstr: json['resultstr'],
+    uin: json['uin'],
+    userTasks: (json['user_task'] as List)
+            ?.map((e) =>
+                e == null ? null : UserTask.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        0,
+  );
+}
+
+Map<String, dynamic> _$TaskResponseToJson(TaskResponse instance) =>
+    <String, dynamic>{
+      'result': instance.result,
+      'resultstr': instance.resultstr,
+      'uin': instance.uin,
+      'user_task': instance.userTasks,
+    };
