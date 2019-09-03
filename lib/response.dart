@@ -297,6 +297,8 @@ class UserTask {
   final int endTime;
   final int finishNum;
   final int finishTime;
+
+  /// 1 任务已完成
   final int state;
   final int taskID;
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
+import '../widgets/task.dart';
 import '../widgets/setting.dart';
 import './exchange.dart';
 
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   var _pageList = [
     new Plant(),
     new ExchangeWidget(),
+    new Task(),
     new SettingWidget(),
   ];
 
@@ -88,9 +90,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _pageList[tabIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, // 不设置超过3个后未选中不显示出来
         items: [
           getBottomNavigationBarItem("首页", Icons.home),
           getBottomNavigationBarItem("兑换", Icons.compare_arrows),
+          getBottomNavigationBarItem("任务", Icons.assignment),
           getBottomNavigationBarItem("设置", Icons.settings),
         ],
         currentIndex: tabIndex,

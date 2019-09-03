@@ -15,6 +15,7 @@ class Config {
   static xml.XmlDocument flowerConfig;
   static xml.XmlDocument roseConfig;
   static xml.XmlDocument propConfig;
+  static xml.XmlDocument taskConfig;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -48,6 +49,12 @@ class Config {
       String propConfigXml =
           await rootBundle.loadString('assets/propConfig.xml');
       propConfig = xml.parse(propConfigXml);
+    }
+
+    if (taskConfig == null) {
+      String taskConfigXml =
+          await rootBundle.loadString('assets/taskConfig.xml');
+      taskConfig = xml.parse(taskConfigXml);
     }
 
     if (userConfig == null) {
