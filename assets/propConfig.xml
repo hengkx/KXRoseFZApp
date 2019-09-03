@@ -37,6 +37,7 @@
 			<item id="24021" svrID="22021" seedID="22021" name="太极玫瑰种子" unit="颗" pictureClassSmall="RoseSeed22021" pictureClassLarge="RoseSeedLarge22021" />
 			<item id="24022" svrID="22022" seedID="22022" name="金玫瑰种子" unit="颗" pictureClassSmall="RoseSeed22022" pictureClassLarge="RoseSeedLarge22022" />
 			<item id="24023" svrID="22023" seedID="22023" name="山地玫瑰种子" unit="颗" pictureClassSmall="RoseSeed22023" pictureClassLarge="RoseSeedLarge22023" />
+			<item id="24024" svrID="22024" seedID="22024" name="玛丽玫瑰种子" unit="颗" pictureClassSmall="RoseSeed22024" pictureClassLarge="RoseSeedLarge22024" />
 		</seeds>
 		<others type="1">
 			<item id="10" svrID="110" name="雨露" price="0" priceQPoint="10" unit="滴" info="合成或培育玫瑰的必要材料" pictureClassSmall="Meterial10" pictureClassLarge="Meterial10" />
@@ -54,17 +55,18 @@
 
 	<propConfig name="特殊道具">
 		
+		<item id="161257017" name="黄鹂羽毛" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161257017" pictureClassLarge="" unit="根" info="" />
+		<item id="161257016" name="麻雀羽毛" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161257016" pictureClassLarge="" unit="根" info="" />
+		
+		<item id="161254016" name="爱神之箭" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161254016" pictureClassLarge="" unit="支" info="" />
+		
 		<item id="161248014" name="礼券" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161248014" pictureClassLarge="" unit="张" info="" />
 		<item id="161248015" name="礼券" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161248014" pictureClassLarge="" unit="张" info="" />
-		
-		
 		<item id="161248016" name="红猪" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"		pictureClassSmall="Prop161248016" pictureClassLarge="PropLarge161248016" unit="个" info="金猪祈福QQ公仔" />
 		<item id="161248017" name="魔法电源" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161248017" pictureClassLarge="PropLarge161248017" unit="个" info="魔法花园定制充电宝" />
 		<item id="161248018" name="斗场电源" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161248018" pictureClassLarge="PropLarge161248018" unit="个" info="宝宝斗场定制充电宝" />
 		<item id="161248019" name="玫瑰色U盘" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161248019" pictureClassLarge="PropLarge161248019" unit="个" info="玫瑰小镇定制U盘（玫瑰金）" />
-		
 		<item id="161246015" name="开锁卡" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161246015" pictureClassLarge="PropLarge161246015" unit="张" info="用于开锁赢取大奖，领取开锁卡道具奖励隔日不清空。" />
-		
 		<item id="900001009" name="启" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop900001009" pictureClassLarge="PropLarge900001009" unit="个" info="集齐对应的文字可以启动八卦图阵，获得额外奖励~ " />
 		<item id="900001008" name="兑" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop900001008" pictureClassLarge="PropLarge900001008" unit="个" info="集齐对应的文字可以启动八卦图阵，获得额外奖励~ " />
 		<item id="900001007" name="离" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop900001007" pictureClassLarge="PropLarge900001007" unit="个" info="集齐对应的文字可以启动八卦图阵，获得额外奖励~ " />
@@ -74,7 +76,6 @@
 		<item id="900001003" name="坎" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop900001003" pictureClassLarge="PropLarge900001003" unit="个" info="集齐对应的文字可以启动八卦图阵，获得额外奖励~ " />
 		<item id="900001002" name="巽" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop900001002" pictureClassLarge="PropLarge900001002" unit="个" info="集齐对应的文字可以启动八卦图阵，获得额外奖励~ " />
 		<item id="900001001" name="乾" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop900001001" pictureClassLarge="PropLarge900001001" unit="个" info="集齐对应的文字可以启动八卦图阵，获得额外奖励~ " />
-		
 		<item id="161242026" name="兔兔卡片" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"	pictureClassSmall="Prop161242026" pictureClassLarge="PropLarge161242026" unit="张" info="" />
 		
 		<item id="161231014" name="闯塔令" noshow="1" combine="" sellPrice="" price="0" priceQPoint="0"		pictureClassSmall="Prop161231014" pictureClassLarge="PropLarge161231014" unit="块" info="" />
@@ -158,6 +159,7 @@
 		<item id="161190007" name="折翼天使" probability ="100" combine="halfWingAngel" file="MagicTree/161190007.swf" sellPrice="" price="0" priceQPoint="0" pictureClassSmall="Prop161190007" pictureClassLarge="PropLarge161190007" unit="" info="纷飞的羽翼，无声的低鸣，天使坠入了凡尘，伊甸园的梦由此封存于回忆" action="equipWing,removeWing" actionText="装饰,卸下"/>
 		<item id="161190011" name="金色羽翼" combine="" file="MagicTree/161190011.swf" sellPrice="" price="0" priceQPoint="0" pictureClassSmall="Prop161190011" pictureClassLarge="PropLarge161190011" unit="" info="任光阴流转，漫漫瑰丽人生，我只心醉神迷于妳。所有土盆，水盆，仙藤花盆魅力属性加2%" action="equipWing,removeWing" actionText="装饰,卸下"/>
 		<item id="161190014" name="精灵羽翼" combine="" file="MagicTree/161190014.swf" sellPrice="" price="0" priceQPoint="0" pictureClassSmall="Prop161190014" pictureClassLarge="PropLarge161190014" unit="" info="所有土盆，水盆，仙藤花盆经验属性加1%" action="equipWing,removeWing" actionText="装饰,卸下"/>
+		<item id="161190017" name="绿野之光羽翼" combine="" file="MagicTree/161190017.swf" sellPrice="" price="0" priceQPoint="0" pictureClassSmall="Prop161190017" pictureClassLarge="PropLarge161190017" unit="" info="装饰增加所有花盆1%经验值。漫步林间，薄雾缭绕，陶醉在青草、绿树、花朵的芬芳中" action="equipWing,removeWing" actionText="装饰,卸下"/>
 
 		<item id="161181003" name="爱的小屋背景" combine="" sellPrice="100000" price="0" priceQPoint="0" file="PetHouseBackground/161181003.swf" pictureClassSmall="Prop161181003" pictureClassLarge="PropLarge161181003" unit="" info="" action="changePetHouseBG,SellProp" actionText="装饰,出售"/>
 		<item id="161181002" name="宝宝屋默认背景" combine="" sellPrice="0" price="0" priceQPoint="0" file="PetHouseBackground/161181002.swf" pictureClassSmall="Prop161181002" pictureClassLarge="PropLarge161181002" unit="" info="" action="changePetHouseBG" actionText="装饰"/>
@@ -215,19 +217,20 @@
 		<item id="161215031" name="土豪金玫瑰小镇定制U盘"	noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop161215031" pictureClassLarge="PropLarge161215031" unit="个" info="" />
 		
 		<item id="161209009" name="蓝钻月卡" 		noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="OutGameProp26" pictureClassLarge="OutGameProp26" unit="张" info="" />
-		<item id="161215020" name="豪华版绿钻月卡"  noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop161215020" pictureClassLarge="PropLarge161215020" unit="张" info="" />
+		
 		<item id="121127046" name="腾讯视频VIP季卡" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop121127046" pictureClassLarge="PropLarge121127046" unit="张" info="" />
 		<item id="121127045" name="腾讯视频VIP月卡" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop121127045" pictureClassLarge="PropLarge121127045" unit="张" info="" />
 		<item id="161223016" name="腾讯视频VIP月卡" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop121127045" pictureClassLarge="PropLarge121127045" unit="张" info="" />
 
-		<item id="161157010" name="瑰丽人生VIP特权头像框" combine="" sellPrice="0" price="0" priceQPoint="0"	path="UserInfoWindow/161157010_v6276.swf" pictureClassSmall="Prop161157010" pictureClassLarge="PropLarge161157010" unit="" info="" action="changeInfoWindow" actionText="装饰"/>
-		<item id="161157009" name="中秋装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0" 			path="UserInfoWindow/161157009_v6276.swf" pictureClassSmall="Prop161157009" pictureClassLarge="PropLarge161157009" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
-		<item id="161157008" name="织女装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0" 			path="UserInfoWindow/161157008_v6276.swf" pictureClassSmall="Prop161157008" pictureClassLarge="PropLarge161157008" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
-		<item id="161157007" name="牛郎装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0" 			path="UserInfoWindow/161157007_v6276.swf" pictureClassSmall="Prop161157007" pictureClassLarge="PropLarge161157007" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
-		<item id="161157006" name="一见粽情装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157006_v6276.swf" pictureClassSmall="Prop161157006" pictureClassLarge="PropLarge161157006" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
-		<item id="161157005" name="甜蜜情人节装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157005_v6276.swf" pictureClassSmall="Prop161157005" pictureClassLarge="PropLarge161157005" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
-		<item id="161157004" name="欢度圣诞装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157004_v6276.swf" pictureClassSmall="Prop161157004" pictureClassLarge="PropLarge161157004" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
-		<item id="161157003" name="万圣节装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"			path="UserInfoWindow/161157003_v6276.swf" pictureClassSmall="Prop161157003" pictureClassLarge="PropLarge161157003" unit="" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157011" name="比翼双飞头像框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157011_v6415.swf" 	  pictureClassSmall="Prop161157011" pictureClassLarge="PropLarge161157011" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157010" name="瑰丽人生VIP特权头像框" combine="" sellPrice="0" price="0" priceQPoint="0"	path="UserInfoWindow/161157010_v6276.swf" pictureClassSmall="Prop161157010" pictureClassLarge="PropLarge161157010" unit="个" info="" action="changeInfoWindow" actionText="装饰"/>
+		<item id="161157009" name="中秋装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0" 			path="UserInfoWindow/161157009_v6276.swf" pictureClassSmall="Prop161157009" pictureClassLarge="PropLarge161157009" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157008" name="织女装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0" 			path="UserInfoWindow/161157008_v6276.swf" pictureClassSmall="Prop161157008" pictureClassLarge="PropLarge161157008" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157007" name="牛郎装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0" 			path="UserInfoWindow/161157007_v6276.swf" pictureClassSmall="Prop161157007" pictureClassLarge="PropLarge161157007" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157006" name="一见粽情装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157006_v6276.swf" pictureClassSmall="Prop161157006" pictureClassLarge="PropLarge161157006" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157005" name="甜蜜情人节装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157005_v6276.swf" pictureClassSmall="Prop161157005" pictureClassLarge="PropLarge161157005" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157004" name="欢度圣诞装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"		path="UserInfoWindow/161157004_v6276.swf" pictureClassSmall="Prop161157004" pictureClassLarge="PropLarge161157004" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
+		<item id="161157003" name="万圣节装饰框" combine="" sellPrice="80000" price="0" priceQPoint="0"			path="UserInfoWindow/161157003_v6276.swf" pictureClassSmall="Prop161157003" pictureClassLarge="PropLarge161157003" unit="个" info="" action="changeInfoWindow,SellProp" actionText="装饰,出售"/>
 		<item id="161157002" name="默认装饰框" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop161157002" pictureClassLarge="PropLarge161157002" unit="" info="" action="changeInfoWindow" actionText="装饰"/>
 		<item id="161157001" name="个人信息框装饰ID" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="" pictureClassLarge="" unit="" info="" />
 
@@ -294,6 +297,7 @@
 		<item id="900000002" name="【力】字卡牌" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop900000002" pictureClassLarge="PropLarge900000002" unit="张" info="" />
 		<item id="900000001" name="【大】字卡牌" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="Prop900000001" pictureClassLarge="PropLarge900000001" unit="张" info="" />
 
+		<item id="161141008" name="比翼双飞地板" combine="" sellPrice="200000" price="0" priceQPoint="0" path="BrickDecoration/161141008.png" pictureClassSmall="Prop161141008" pictureClassLarge="PropLarge161141008" unit="个" info="装饰后种植园地板会发生变化，同时对园内土盆水盆增加2%经验，1%魅力加成效果~" action="changeBrick,SellProp" actionText="装饰,出售" />
 		<item id="161141007" name="锦鲤戏水地板" combine="" sellPrice="500000" price="0" priceQPoint="0" path="BrickDecoration/161141007.png" pictureClassSmall="Prop161141007" pictureClassLarge="PropLarge161141007" unit="个" info="装饰后种植园地板会发生变化，同时对园内土盆水盆增加3%经验，3%魅力加成效果~" action="changeBrick,SellProp" actionText="装饰,出售" />
 		<item id="161141006" name="冰雪奇缘地板" combine="" sellPrice="200000" price="0" priceQPoint="0" path="BrickDecoration/161141006_1.jpg" pictureClassSmall="Prop161141006" pictureClassLarge="PropLarge161141006" unit="个" info="装饰后种植园地板会发生变化，同时为园内花盆增加3%魅力加成效果~" action="changeBrick,SellProp" actionText="装饰,出售" />
 		<item id="161141005" name="云过天青地板" combine="" sellPrice="200000" price="0" priceQPoint="0" path="BrickDecoration/161141005.jpg" pictureClassSmall="Prop161141005" pictureClassLarge="PropLarge161141005" unit="个" info="雨后的空气格外清新，装饰后种植园地板会发生变化，同时为园内花盆增加2%经验，2%魅力加成效果~" action="changeBrick,SellProp" actionText="装饰,出售" />
@@ -314,7 +318,7 @@
 		<item id="161134032" name="夏日香气花架碎片" combine="" fragCombine="99" sellPrice="1000" price="0" priceQPoint="0" pictureClassSmall="Prop161134032" pictureClassLarge="PropLarge161134032" unit="个" info="消耗99个夏日香气花架碎片可合成一个夏日香气花架。同时，该花架上的两个水生花盆可获得[1%魅力，1%经验，2%增产] 的加成效果。" action="combineWaterPergola,SellProp" actionText="合成,出售" />
 
 		<item id="161134005" name="水生花架4" combine="" sellPrice="0" price="0" priceQPoint="0" outputAdd="0" charmAdd="0" expAdd="0" path="WaterPergola/161134005.png" pictureClassSmall="Prop161134005" pictureClassLarge="PropLarge161134006" unit="个" info="这花架不加速的，歇了吧" action="addWaterPergola,removePergola,SellProp" actionText="装饰,卸下,出售" />
-		<item id="161134004" name="水生花架3" combine="" sellPrice="0" price="0" priceQPoint="0" outputAdd="0" charmAdd="0" expAdd="0" path="WaterPergola/161134004.png" pictureClassSmall="Prop161134004" pictureClassLarge="PropLarge161134005" unit="个" info="这花架不加速的，歇了吧" action="addWaterPergola,removePergola,SellProp" actionText="装饰,卸下,出售" />
+		<item id="161134004" name="中式花架" combine="" sellPrice="100000" price="0" priceQPoint="0" outputAdd="0" charmAdd="0" expAdd="0" path="WaterPergola/161134004.png" pictureClassSmall="Prop161134004" pictureClassLarge="PropLarge161134005" unit="个" info="这花架不加速的，歇了吧" action="addWaterPergola,removePergola,SellProp" actionText="装饰,卸下,出售" />
 		<item id="161134003" name="水云花架" combine="" sellPrice="100000" price="0" priceQPoint="0" outputAdd="3" charmAdd="3" expAdd="3" path="WaterPergola/161134003.png" path2="WaterPergola/161134003_2.png" pictureClassSmall="Prop161134003" pictureClassLarge="PropLarge161134004" unit="个" info="装饰后可改变水盆花架外观，同时，该花架上的水生花盆可获得[3%魅力，3%经验，3%增产]的加成效果。" action="addWaterPergola,removePergola,SellProp" actionText="装饰,卸下,出售" />
 		<item id="161134002" name="夏日香气花架" combine="" sellPrice="100000" price="0" priceQPoint="0" outputAdd="2" charmAdd="1" expAdd="1" path="WaterPergola/161134002.png" pictureClassSmall="Prop161134002" pictureClassLarge="PropLarge161134002" unit="个" info="该花架为水生花盆花架。装饰后该花架上的两个水生花盆可获得[1%魅力，1%经验，2%增产]的加成效果。" action="addWaterPergola,removePergola,SellProp" actionText="装饰,卸下,出售" />
 		<item id="161134001" name="水盆花架装饰ID" noshow="1" combine="" sellPrice="0" price="0" priceQPoint="0" pictureClassSmall="" pictureClassLarge="" unit="" info="" />
@@ -664,6 +668,9 @@
 		<!--注意，配置花盆碎片时候，要配置combineNum-合成需要碎片数量，exchange-传给后台的信息 -->
 		<!-- 花盆碎片 -->
 
+		<item id="120707055" name="荷叶水盆碎片" combineNum="99" exchange="45" combine="" sellPrice="20000" price="0" priceQPoint="0" pictureClassSmall="Prop120707055" pictureClassLarge="PropLarge120707055" unit="个" info="凑齐99个碎片，可合成一个荷叶水盆。装饰后可提升水生花盆属性：增产+9%，加速+8%，魅力+9%，经验+9%。" action="combinePot,SellProp" actionText="使用,出售" />
+		<item id="120707054" name="荷叶土盆碎片" combineNum="99" exchange="44" combine="" sellPrice="20000" price="0" priceQPoint="0" pictureClassSmall="Prop120707054" pictureClassLarge="PropLarge120707054" unit="个" info="凑齐99个碎片，可合成一个荷叶土盆。装饰后可提升土生花盆属性：增产+9%，加速+8%，魅力+9%，经验+9%。" action="combinePot,SellProp" actionText="使用,出售" />
+		
 		<item id="120707053" name="金猪祈福水盆碎片" combineNum="99" exchange="43" combine="" sellPrice="20000" price="0" priceQPoint="0" pictureClassSmall="Prop120707053" pictureClassLarge="PropLarge120707053" unit="个" info="凑齐99个碎片，可合成一个金猪祈福水盆。装饰后可提升水生花盆属性：增产+8%，加速+8%，魅力+6%，经验+6%。" action="combinePot,SellProp" actionText="使用,出售" />
 		<item id="120707052" name="金猪祈福土盆碎片" combineNum="99" exchange="42" combine="" sellPrice="20000" price="0" priceQPoint="0" pictureClassSmall="Prop120707052" pictureClassLarge="PropLarge120707052" unit="个" info="凑齐99个碎片，可合成一个金猪祈福土盆。装饰后可提升土生花盆属性：增产+8%，加速+8%，魅力+6%，经验+6%。" action="combinePot,SellProp" actionText="使用,出售" />
 		
@@ -1245,6 +1252,9 @@
 		<group type="1">
 			<!-- 花园背景大图装饰 -->
 			<!-- gourdHidden：葫芦是否隐藏（gourdHidden="1" 隐藏葫芦、gourdHidden="0" 不隐藏葫芦） -->
+			
+			<item id="1037" name="天空之城场景" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration1037" pictureClassLarge="DecorationLarge1037" info="" gourdHidden="1" />
+			<item id="1036" name="梦幻仙境背景" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration1036" pictureClassLarge="DecorationLarge1036" info="" gourdHidden="1" />
 			<item id="1035" name="爱琴海背景" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration1035" pictureClassLarge="DecorationLarge1035" info="" gourdHidden="1" />
 			<item id="1034" name="新年灯会贺新年" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration1034" pictureClassLarge="DecorationLarge1034" info="" gourdHidden="1" />
 			<item id="1033" name="冰雪奇缘场景" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration1033" pictureClassLarge="DecorationLarge1033" info="" gourdHidden="1" />
@@ -1293,6 +1303,8 @@
 		</group>
 		<!-- 小屋装饰 -->
 		<group type="2">
+			<item id="2037" name="天空小屋" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration2037" pictureClassLarge="DecorationLarge2037" info="" />
+			<item id="2036" name="梦幻仙境仙藤堡" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration2036" pictureClassLarge="DecorationLarge2036" info="" />
 			<item id="2035" name="爱琴海小屋" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration2035" pictureClassLarge="DecorationLarge2035" info="" />
 			<item id="2034" name="迎春花灯" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration2034" pictureClassLarge="DecorationLarge2034" info="" />
 			<item id="2033" name="冰雪城堡" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration2033" pictureClassLarge="DecorationLarge2033" info="" />
@@ -1338,6 +1350,8 @@
 		</group>
 		<!-- 栅栏装饰 -->
 		<group type="3">
+			<item id="3037" name="彩虹" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration3037" pictureClassLarge="DecorationLarge3037" info="" />
+			<item id="3036" name="梦幻仙境奇异花" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration3036" pictureClassLarge="DecorationLarge3036" info="" />
 			<item id="3035" name="花坛" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration3035" pictureClassLarge="DecorationLarge3035" info="" />
 			<item id="3034" name="烟花" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration3034" pictureClassLarge="DecorationLarge3034" info="" />
 			<item id="3033" name="雪人" price="" priceQPoint="0" period="60" pictureClassSmall="Decoration3033" pictureClassLarge="DecorationLarge3033" info="" />
@@ -1383,7 +1397,11 @@
 		</group>
 		<!-- 花盆装饰 -->
 		<!-- 有6级装饰的，加上hasSix="1"，其实基本上******11及之后的都是新的 -->
+		<!-- isPresent: 0-可赠送，1-不可赠送，并且提示道具是获赠的，2-道具本身不存在赠送，不提示道具是获赠的 -->
 		<group type="4">
+			
+			<item id="120705073" name="荷叶水盆" isPresent="2" price="0" priceQPoint="0" period="0" flowerPotType="4" speedAdd="8" outputAdd="9" charmAdd="9" expAdd="9" potMc="pot_mc_120705073" pictureClassSmall="Decoration120705073" pictureClassLarge="DecorationLarge120705073" info="不可赠送，装饰后可提升水生花盆属性：增产+9%、加速+8%、魅力+9%、经验+9%"/>
+			<item id="120705072" name="荷叶土盆" isPresent="2" price="0" priceQPoint="0" period="0" flowerPotType="3" speedAdd="8" outputAdd="9" charmAdd="9" expAdd="9" potMc="pot_mc_120705072" pictureClassSmall="Decoration120705072" pictureClassLarge="DecorationLarge120705072" info="不可赠送，装饰后可提升土生花盆属性：增产+9%、加速+8%、魅力+9%、经验+9%"/>
 			
 			<item id="120705071" name="兰藤仙盆" isPresent="0" price="0" priceQPoint="0" period="0" flowerPotType="5" speedAdd="5" outputAdd="5" charmAdd="6" expAdd="6" path="plant/Deco120705071.swf" pictureClassSmall="Decoration120705071" pictureClassLarge="DecorationLarge120705071" info="装饰后可提升仙藤花盆属性：增产+5%、加速+5%、魅力+6%、经验+6%"/>
 			
@@ -1524,7 +1542,8 @@
 			<item id="132002016" name="圣诞墙纸" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="2" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002016" pictureClassLarge="DecorationLarge132002016" info="圣诞窗台墙纸装饰，装饰后可以改变种植园墙纸变为圣诞窗台外观，同时可以为所有仙藤花盆增加2%增产，3%经验，3%魅力的加成效果" />
 			<item id="132002017" name="冰雪奇缘墙纸" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="1" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002017" pictureClassLarge="DecorationLarge132002017" info="冰雪奇缘墙纸装饰，装饰后可以改变种植园墙纸变为冰雪奇缘外观，同时可以为所有仙藤花盆增加1%增产，3%经验，3%魅力的加成效果" />
 			<item id="132002018" name="瑰丽人生墙纸" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="2" outputAdd="5" charmAdd="5" expAdd="5" pictureClassSmall="Decoration132002018" pictureClassLarge="DecorationLarge132002018" info="瑰丽人生墙纸装饰，装饰后可以改变种植园墙纸变为瑰丽人生窗台外观，同时可以为所有仙藤花盆增加2%加速，5%增产，5%经验，5%魅力的加成效果" />
-			<item id="132002019" name="爱琴海墙纸" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="2" outputAdd="5" charmAdd="5" expAdd="5" pictureClassSmall="Decoration132002019" pictureClassLarge="DecorationLarge132002019" info="爱琴海墙纸装饰，装饰后可以改变种植园墙纸变为爱琴海窗台外观，同时可以为所有仙藤花盆增加3%增产，3%经验，3%魅力的加成效果" />
+			<item id="132002019" name="爱琴海墙纸" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="3" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002019" pictureClassLarge="DecorationLarge132002019" info="爱琴海墙纸装饰，装饰后可以改变种植园墙纸变为爱琴海窗台外观，同时可以为所有仙藤花盆增加3%增产，3%经验，3%魅力的加成效果" />
+			<item id="132002020" name="比翼双飞墙纸" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="3" outputAdd="3" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002020" pictureClassLarge="DecorationLarge132002020" info="比翼双飞墙纸装饰，装饰后可以改变种植园墙纸变为比翼双飞窗台外观，同时可以为所有仙藤花盆增加3%增产，3%经验，3%魅力的加成效果" />
 		</group>
 		<!-- 种植园仙藤花盆场景窗外景色装饰 -->
 		<group type="6">
@@ -1542,7 +1561,8 @@
 			<item id="132002516" name="平安夜景景色" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="2" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002516" pictureClassLarge="DecorationLarge132002516" info="平安夜景窗外景色装饰，装饰后可以使种植园窗外景色变为平安夜景外观，同时可以为所有仙藤花盆增加2%增产，3%经验，3%魅力的加成效果" />
 			<item id="132002517" name="冰雪奇缘景色" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="1" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002517" pictureClassLarge="DecorationLarge132002517" info="冰雪奇缘窗外景色装饰，装饰后可以使种植园窗外景色变为冰雪奇缘外观，同时可以为所有仙藤花盆增加1%增产，3%经验，3%魅力的加成效果" />
 			<item id="132002518" name="浪漫玫瑰园景色" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="2" outputAdd="5" charmAdd="5" expAdd="5" pictureClassSmall="Decoration132002518" pictureClassLarge="DecorationLarge132002518" info="浪漫玫瑰园窗外景色装饰，装饰后可以使种植园窗外景色变为浪漫玫瑰园外观，同时可以为所有仙藤花盆增加2%加速，5%增产，5%经验，5%魅力的加成效果" />
-			<item id="132002519" name="爱琴海景色" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="2" outputAdd="5" charmAdd="5" expAdd="5" pictureClassSmall="Decoration132002519" pictureClassLarge="DecorationLarge132002519" info="爱琴海窗外景色装饰，装饰后可以使种植园窗外景色变为爱琴海外观，同时可以为所有仙藤花盆增加3%增产，3%经验，3%魅力的加成效果" />
+			<item id="132002519" name="爱琴海景色" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="3" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002519" pictureClassLarge="DecorationLarge132002519" info="爱琴海窗外景色装饰，装饰后可以使种植园窗外景色变为爱琴海外观，同时可以为所有仙藤花盆增加3%增产，3%经验，3%魅力的加成效果" />
+			<item id="132002520" name="比翼双飞景色" sellPrice="0" price="" priceQPoint="0" period="0" speedAdd="0" outputAdd="3" charmAdd="3" expAdd="3" pictureClassSmall="Decoration132002520" pictureClassLarge="DecorationLarge132002520" info="比翼双飞窗外景色装饰，装饰后可以使种植园窗外景色变为比翼双飞外观，同时可以为所有仙藤花盆增加3%增产，3%经验，3%魅力的加成效果" />
 		</group>
 	</decrateConfig>
 </root>

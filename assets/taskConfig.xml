@@ -1,0 +1,2333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<task>
+	<group id="1" name="收获鲜花" info="鲜花开花后，要及时收获，点击收获按钮（屏幕下方工具栏中倒数第4个），去收获已经开花的牵牛花吧">
+		<item name="收获鲜花" pictureClassSmall="TaskItem1" pictureClassLarge="TaskItemLarge1"  />
+	</group>
+	<group id="2" name="卖出鲜花" info="收获后的鲜花都放在仓库里，卖出鲜花就可以获得金币，去尝试卖掉几朵牵牛花换成金币吧！（仓库按钮在页面上方）">
+		<item name="卖出鲜花" pictureClassSmall="TaskItem2" pictureClassLarge="TaskItemLarge2"  />
+	</group>
+	<group id="3" name="铲铲土，准备种植" info="鲜花收获后就会枯萎，用铲子铲铲土，才可以继续种植，（铲子在屏幕下方工具栏中第一个）">
+		<item name="枯萎的花" pictureClassSmall="TaskItem9" pictureClassLarge="TaskItemLarge9"  />
+		<item name="铲土" pictureClassSmall="TaskItem3" pictureClassLarge="TaskItemLarge3"  />
+	</group>
+	<group id="4" name="播种鲜花" info="鲜花种子都放在您的材料包里（操作工具栏第2个），点开材料包，找到鲜花种子，尝试播种在花盆里">
+		<item name="播种鲜花" pictureClassSmall="TaskItem4" pictureClassLarge="TaskItem1Large4"  />
+	</group>
+	<group id="5" name="除病害" info="种植的鲜花会生病，要及时给它们晒阳光，杀虫，修剪，否则会影响花儿的健康度和产量的哦！">
+		<item name="晒阳光" pictureClassSmall="TaskItem8" pictureClassLarge="TaskItemLarge8"  />
+		<item name="杀虫" pictureClassSmall="TaskItem5" pictureClassLarge="TaskItemLarge5"  />
+		<item name="修剪" pictureClassSmall="TaskItem7" pictureClassLarge="TaskItemLarge7"  />
+	</group>
+	<group id="6" name="帮好友除病害" info="好友的鲜花遇到病害，您可以去帮忙，不仅好友会感激您，您还会得到经验值的提升哦，好友越多成长越快">
+		<item  name="帮好友除病害" pictureClassSmall="TaskItem6" pictureClassLarge="TaskItemLarge6"  />
+	</group>
+
+	<group id="101" name="葫芦精灵任务" tabName="MagicGardenTaskTab" index="1">
+		<item id="10018" name="天天种葫芦" order="0" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10018">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魔法符文1个，葫芦精华1个，二级铁木令牌1个。打开葫芦种植包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[收获365朵七彩葫芦，获得与葫芦有关的的丰厚奖励！<br><br><br>]]>
+			</info>
+			<rule id="1134" comment="收获365朵七彩葫芦" bonus="魔法符文1个，葫芦精华1个，二级铁木令牌1个，葫芦种植包" level="0">
+				<prop id="28002" count="365" type="flower" temp="1"/>
+				<award picClass="Prop120209003" name="魔法符文" count="1" />
+				<award picClass="Prop120209002" name="葫芦精华" count="1" />
+				<award picClass="Prop120209202" name="二级铁木令牌" count="1" />
+				<award picClass="HuluPlantBagIcon" name="葫芦种植包" count="1" />
+				<add id="120209003" type="prop" count="1" />
+				<add id="120209002" type="prop" count="1" />
+				<add id="120209202" type="prop" count="1" />
+				<add id="0000" type="random" count="0">
+					<additem id="26002" name="七彩葫芦种子$num个" type="0" tip=" " />
+					<additem id="113" name="幸运药水$num个" type="0" tip=" " />
+					<additem id="0" name="$num金币" type="6" tip=" " />
+					<additem id="143" name="水生美人蕉种子$num颗" type="0" tip=" " />
+				</add>
+			</rule>
+		</item>
+		<item id="10019" name="使用符文"   order="1" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10019">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得]]>
+			</completetip>
+			<info>
+				<![CDATA[使用魔法符文，迎击更多讹多军团！<br><br><br>]]>
+			</info>
+			<rule id="1135" comment="使用5次魔法符文" bonus="奖励58~128点魅力值" level="0">
+				<tip>
+					<![CDATA[已经使用魔法符文$prop7000$个~]]>
+				</tip>
+				<prop id="7000" count="1" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="" />
+				<add id="0000" type="random" count="0">
+					<additem id="0" name="$num点魅力" type="5" tip=" " />
+				</add>
+			</rule>
+		</item>
+		<item id="10012" name="升级令牌"   order="2" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10012">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得30点魅力值。]]>
+			</completetip>
+			<info>
+				<![CDATA[尝试通过令牌升级获得1个三级令牌吧！<br><br><br>]]>
+			</info>
+			<rule id="1136" comment="通过升级令牌获得1个三级铁木令牌" bonus="30点魅力值" level="0">
+				<tip>
+					<![CDATA[已经通过升级获得三级铁木令牌$prop7001$个~]]>
+				</tip>
+				<prop id="7001" count="1" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="30" />
+				<add id="1000" type="charm" count="30" />
+			</rule>
+		</item>
+		<item id="10011" name="击败领主"   order="3" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10011">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得50点魅力值。]]>
+			</completetip>
+			<info>
+				<![CDATA[每天击败1个怪物领主，可以极大地打击讹多军团的士气<br><br><br>]]>
+			</info>
+			<rule id="1137" comment="击败任意1个怪物领主" bonus="50点魅力值" level="0">
+				<tip>
+					<![CDATA[已经击败怪物领主$prop7002$个~]]>
+				</tip>
+				<prop id="7002" count="1" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="50" />
+				<add id="1000" type="charm" count="50" />
+			</rule>
+		</item>
+		<item id="10013" name="天天铲土"   order="4" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10013">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得800点土葫芦精灵历练值，200点魅力值。]]>
+			</completetip>
+			<info>
+				<![CDATA[继续铲土来赢得土葫芦精灵的好感吧！<br><br><br>]]>
+			</info>
+			<rule id="1138" comment="铲土500次 " bonus="800点土葫芦精灵历练值，200点魅力值" level="0">
+				<tip>
+					<![CDATA[已经铲土$prop7003$次~]]>
+				</tip>
+				<prop id="7003" count="500" type="otherProps" name="铲土" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="200" />
+				<add id="1000" type="charm" count="200" />
+				<add id="5" type="huluproperty" count="800" />
+			</rule>
+		</item>
+		<item id="10014" name="酒醉芬芳"   order="5" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10014">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1个大体力药水，800点火葫芦精灵历练值。]]>
+			</completetip>
+			<info>
+				<![CDATA[为火葫芦精灵提供更多的香槟玫瑰<br><br><br>]]>
+			</info>
+			<rule id="1139" comment="收获175朵香槟玫瑰" bonus="1个大体力药水，800点火葫芦精灵历练值" level="0">
+				<prop id="24002" count="175" type="rose" temp="1"/>
+				<award picClass="Prop120209103" name="大体力药水" count="1" />
+				<add id="120209103" type="prop" count="1" />
+				<add id="4" type="huluproperty" count="800" />
+			</rule>
+		</item>
+		<item id="10016" name="骗过守卫"   order="7" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10016">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得2000点木葫芦精灵历练值，1000点魅力值。]]>
+			</completetip>
+			<info>
+				<![CDATA[继续合成五级铁木令牌，增加木葫芦精灵的好感！<br><br><br>]]>
+			</info>
+			<rule id="1140" comment="消耗1个五级铁木令牌" bonus="2000点木葫芦精灵历练值，1000点魅力值" level="0">
+				<prop id="120209205" count="1" type="prop" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1000" />
+				<add id="1000" type="charm" count="1000" />
+				<add id="2" type="huluproperty" count="2000" />
+			</rule>
+		</item>
+		<item id="10015" name="水之精华"   order="6" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10015">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1个魔法符文，5000点水葫芦精灵历练值。]]>
+			</completetip>
+			<info>
+				<![CDATA[获得更多水之精华来增进水葫芦精灵的好感。<bt>提示：种植一些珍贵的水生花将有机会获得水之精华，如千屈菜，萍逢草，梭鱼草，荷花，水生美人蕉，水仙等 <br>有了水葫芦精灵的帮助，获得水之精华的概率会大大提高！<br>]]>
+			</info>
+			<rule id="1141" comment="获得99个水之精华" bonus="1个魔法符文，5000点水葫芦精灵历练值" level="0">
+				<tip>
+					<![CDATA[已经获得水之精华$prop120209005$个~]]>
+				</tip>
+				<prop id="120209005" count="99" type="otherProps" temp="1" hide="1"/>
+				<award picClass="Prop120209003" name="魔法符文" count="1" />
+				<add id="120209003" type="prop" count="1" />
+				<add id="3" type="huluproperty" count="5000" />
+			</rule>
+		</item>
+		<item id="10017" name="抵御心魔"   order="8" lead="" state ="0" open="1" type="6" icon="MagicTaskIcon10017">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得2888点金葫芦精灵历练值，1388点魅力值]]>
+			</completetip>
+			<info>
+				<![CDATA[继续使用金丹帮助金葫芦精灵抵御心魔。魔法葫芦藤到四级以后，被心魔侵蚀的金葫芦精灵就可能会出现在最后一波怪物中。击败它就可能获得“金丹”。<br>]]>
+			</info>
+			<rule id="1142" comment="消耗1个金丹" bonus="2888点金葫芦精灵历练值，1388点魅力值" level="0">
+				<prop id="120209001" count="1" type="prop" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1388" />
+				<add id="1000" type="charm" count="1388" />
+				<add id="1" type="huluproperty" count="2888" />
+			</rule>
+		</item>
+
+		<item id="10001" name="魔法葫芦藤" order="9" lead="18" state ="0" open="1" type="5" icon="MagicTaskIcon10001">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1650点魅力值。葫芦精灵中出现了一棵魔法葫芦藤。]]>
+			</completetip>
+			<info>
+				<![CDATA[魔法葫芦藤充满神奇的魔力，可以帮助你连通葫芦精灵。同时它还可以为葫芦精灵们恢复体力值。更吸引人的是：每天对它进行一次魔法灌溉（免费），就能结出一个魔法果实奖励,可以开出稀有玫瑰种子，绝版鲜花种子，蓝钻，万能种子！！<br>种一些七彩葫芦来迎接魔法葫芦藤吧！<br>]]>
+			</info>
+			<rule id="1143" comment="收获1650朵七彩葫芦" bonus="获得魔法葫芦藤，1650点魅力值" level="0">
+				<prop id="28002" count="1650" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1650" />
+				<add id="1000" type="charm" count="1650" />
+			</rule>
+		</item>
+		<item id="10002" name="土葫芦精灵" order="10" lead="10001" state ="0" open="1" type="5" icon="MagicTaskIcon10002">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得土葫芦精灵，1个魔法符文，2个大体力药水，点亮魔法葫芦藤上的土葫芦。请刷新页面更新葫芦精灵状态。]]>
+			</completetip>
+			<info>
+				<![CDATA[爱种花的人，都会得到忠厚的土葫芦精灵的好感。做一些与土有关的活动来赢得土葫芦精灵的加盟吧！<br>提示：获得葫芦精灵的加盟以后，葫芦精灵会出现，你可以指挥其中一个葫芦精灵对怪物发起攻击。<br>]]>
+			</info>
+			<rule id="1144" comment="铲土100次" bonus="获得土葫芦精灵，1个魔法符文，2个大体力药水。点亮魔法葫芦藤上的土葫芦。" level="0">
+				<tip>
+					<![CDATA[已经铲土$prop7003$次~]]>
+				</tip>
+				<prop id="7003" count="100" type="otherProps" name="铲土" temp="1" hide="1"/>
+				<award picClass="Prop120209003" name="魔法符文" count="1" />
+				<award picClass="Prop120209103" name="大体力药水" count="2" />
+				<add id="120209003" type="prop" count="1" />
+				<add id="120209103" type="prop" count="2" />
+			</rule>
+		</item>
+		<item id="10003" name="火葫芦精灵" order="11" lead="10001" state ="0" open="1" type="5" icon="MagicTaskIcon10003">
+			<completetip>
+				<![CDATA[获得火葫芦精灵， 1个魔法符文，2个大体力药水，588点魅力值。点亮魔法葫芦藤上的火葫芦。请刷新页面更新葫芦精灵状态。]]>
+			</completetip>
+			<info>
+				<![CDATA[火葫芦精灵性格暴烈，听说具有美酒芬芳的香槟玫瑰是它的最爱！<br><br><br>]]>
+			</info>
+			<rule id="1145" comment="收获175朵香槟玫瑰" bonus="获得火葫芦精灵，1个魔法符文，2个大体力药水，588点魅力值。点亮魔法葫芦藤上的火葫芦。" level="0">
+				<prop id="24002" count="175" type="rose" temp="1"/>
+				<award picClass="Prop120209003" name="魔法符文" count="1" />
+				<award picClass="Prop120209103" name="大体力药水" count="2" />
+				<award picClass="CharmIcon" name="魅力" count="588" />
+				<add id="120209003" type="prop" count="1" />
+				<add id="120209103" type="prop" count="2" />
+				<add id="1000" type="charm" count="588" />
+			</rule>
+		</item>
+		<item id="10004" name="水葫芦精灵" order="12" lead="10001" state ="0" open="1" type="5" icon="MagicTaskIcon10004">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得水葫芦精灵，3000点魅力值，点亮魔法葫芦藤上的水葫芦。请刷新页面更新葫芦精灵状态。]]>
+			</completetip>
+			<info>
+				<![CDATA[种植一些珍贵的水生花（如千屈菜，萍逢草，梭鱼草，荷花，水生美人蕉，水仙等）将有机会获得水之精华，获得足够的水之精华即可召唤水葫芦精灵加盟。<br>]]>
+			</info>
+			<rule id="1146" comment="获得99个水之精华" bonus="获得水葫芦精灵，3000点魅力值。点亮魔法葫芦藤上的水葫芦。" level="0">
+				<prop id="120209005" count="99" type="tempprop" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="3000" />
+				<add id="1000" type="charm" count="3000" />
+			</rule>
+		</item>
+		<item id="10005" name="木葫芦精灵" order="13" lead="10001" state ="0" open="1" type="5" icon="MagicTaskIcon10005">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得木葫芦精灵，1500点魅力值，2个大体力药水。点亮了魔法葫芦藤上的木葫芦。请刷新页面更新葫芦精灵状态。]]>
+			</completetip>
+			<info>
+				<![CDATA[木葫芦精灵被讹多囚禁在幽深的树林中，只有使用最高级的铁木令牌，才能骗过讹多守卫救出它。<br>提示：击败怪物以后有可能获得铁木令牌。每5个低级令牌可以通过升级变成1个高级令牌。<br>]]>
+			</info>
+			<rule id="1147" comment="消耗1个五级铁木令牌" bonus="获得木葫芦精灵，奖励1500点魅力值，2个大体力药水。点亮魔法葫芦藤上的木葫芦。" level="0">
+				<prop id="120209205" count="1" type="prop" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1500" />
+				<award picClass="Prop120209103" name="大体力药水" count="2" />
+				<add id="1000" type="charm" count="1500" />
+				<add id="120209103" type="prop" count="2" />
+			</rule>
+		</item>
+		<item id="10006" name="金葫芦精灵" order="14" lead="10001" state ="0" open="1" type="5" icon="MagicTaskIcon10006">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得金葫芦精灵，3000点魅力值，点亮魔法葫芦藤上的金葫芦。请刷新页面更新葫芦精灵状态。]]>
+			</completetip>
+			<info>
+				<![CDATA[金葫芦精灵曾经是最受尊敬的勇士，但是在长久的征战生涯中，金葫芦精灵迷失了自我，被讹多的心魔侵蚀了。现在的它成为了讹多的爪牙，需要你的拯救！<br>提示：魔法葫芦藤到四级以后，被心魔侵蚀的金葫芦精灵就可能会出现在最后一波怪物中。击败它就可能获得“金丹”，使用金丹，将会重新唤醒善良的金葫芦精灵，获得金葫芦精灵的加盟，同时还有丰厚的奖励<br>]]>
+			</info>
+			<rule id="1148" comment="消耗1个金丹" bonus="获得金葫芦精灵，3000点魅力值。点亮魔法葫芦藤上的金葫芦。" level="0">
+				<prop id="120209001" count="1" type="prop" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="3000" />
+				<add id="1000" type="charm" count="3000" />
+			</rule>
+		</item>
+		<item id="10007" name="第一次战斗" order="15" lead="10002" state ="0" open="1" type="5" icon="MagicTaskIcon10007">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1个小体力药水。]]>
+			</completetip>
+			<info>
+				<![CDATA[指挥葫芦精灵，击败一个怪物吧！选中葫芦精灵，再点击怪物即可进行攻击。<br>如果葫芦精灵处于休眠时的葫芦形态，则点击参战按钮即可唤醒它。<br>]]>
+			</info>
+			<rule id="1149" comment="击败任意1个怪物" bonus="获得1个小体力药水。" level="0">
+				<tip>
+					<![CDATA[已经击败怪物$prop7007$个~]]>
+				</tip>
+				<prop id="7007" count="1" type="otherProps" temp="1" hide="1"/>
+				<award picClass="Prop120209101" name="小体力药水" count="1" />
+				<add id="120209101" type="prop" count="1" />
+			</rule>
+		</item>
+	</group>
+
+	<group id="101" name="主线任务" tabName="MainLineTaskTab" index = "2">
+		<item id="7" flag="" name="常回家看看" open="1" state ="0" module="select" originalState ="1" type="1" icon="PetTaskIcon8">
+			<completetip>
+				<![CDATA[您太聪明了,记得常回家看看哦！您获得200个金币、5点魅力值！]]>
+			</completetip>
+			<info>
+				<![CDATA[娇嫩的花儿需要主人的照顾，希望您常回家看看，您猜猜，输入以下哪个网址，可以立即登陆《玫瑰小镇》呢？<br><br><br>]]>
+			</info>
+			<rule id="1108" comment="选取正确的答案" bonus="200个金币，5点魅力值" level="0" >
+				<tip>
+					<![CDATA[提交正确的答案即可获得奖励。]]>
+				</tip>
+				<add id="1001" type="coin" count= "200" />
+				<add id="1000" type="charm" count= "5" />
+			</rule>
+			<item id="1" info="www.meigui.com" type ="0"/>
+			<item id="2" info="1314.qq.com" type ="1"/>
+			<item id="3" info = "qq.meigui.com" type="0"/>
+		</item>
+		<item id="0"  name="女神的故事" 	open="1" 	state ="0" flag="" type="1" icon="PetTaskIcon1">
+			<completetip>
+				<![CDATA[太好了，好心的人!解救玫瑰女神，需要先召唤出天赋宝宝，根据主线任务的线索进行吧！为了表达我的感激之情，这1000金币请收下，以尽我绵薄之力，祝您好运！]]>
+			</completetip>
+			<info>
+				<![CDATA[  亲爱的$nickname$，您是一位勇敢的人，我不得不向您讲述这个故事：<br>  玫瑰小镇现在的宁静与欢乐，都是受到了玫瑰女神的庇护，她曾经饲养了6只特殊技能的宝宝。黑暗城堡的魔法师讹多一直想将女神饲养的宝宝占为己有。<br>  为了藏匿这些可爱的小伙伴，女神封印了“金木水火土忠”六扇门，讹多阴谋无法得逞，便对女神施了法术，将女神变身为一只蝴蝶，直至六扇门重新开启，女神身上的魔咒才能解除。您愿意帮忙解救玫瑰女神吗？<br>]]>
+			</info>
+			<rule id="1101" comment="" bonus="1000金币" level="5" >
+				<tip>
+					<![CDATA[接受任务即可获得奖励！]]>
+				</tip>
+				<add id="1001" type="coin" count= "1000" />
+			</rule>
+		</item>
+		<item id="12"  name="神秘的魔杖" 	open="1" 	state ="0" flag="" type="1" icon="PetTaskIcon10">
+			<completetip>
+				<![CDATA[恭喜您完成任务-神秘的魔杖，获取魅力值60点]]>
+			</completetip>
+			<info>
+				<![CDATA[去好友家寻找出消失已久的神秘魔杖吧，传说只要镶嵌上世界上最珍贵的6款魔法花，就能利用它打败魔法师讹多，开启葫芦精灵,种植更多新奇好玩的魔法花。]]>
+			</info>
+			<rule id="1116" comment="" bonus="神秘的魔杖、获取魅力值60点" level="5" >
+				<tip>
+					<![CDATA[暗香魔杖隐藏在好友家的花园中。]]>
+				</tip>
+				<award picClass="CharmIcon" name="魅力" count="60" />
+				<add id="1000" type="charm" count="60" />
+			</rule>
+		</item>
+		<item id="1"  name="解救土布鸟" 	lead="0" 	state ="0" flag="" open="1" type="2" icon="PetTaskIcon2">
+			<completetip>
+				<![CDATA[恭喜您获得天赋宝宝--土布鸟，土布鸟能帮您除去任何病害，请好好待它哟！赶紧去宝宝屋陪伴它吧！]]>
+			</completetip>
+			<info>
+				<![CDATA[  您就是来解救玫瑰女神的勇士吧，“土门”位置在小镇东北角。只要寻找出土系密钥和10个记忆水晶，就能召唤出天赋宝宝土布鸟。<br>  土布鸟是最贴心的神兽宝宝，它能帮您除去病害，让作物健康生长。]]>
+			</info>
+			<rule id="1102" addAvatar="300006526" comment="（记忆水晶和密钥不进行消耗）" bonus="天赋宝宝-土布鸟(天赋技能：能帮您除去包含大虫在内的所有病害，触发概率随进化度等级提升而提高)。如果完成任务前已经获得了土布鸟，则为土布鸟增加有效期30天" level="5" >
+				<tip>
+					<![CDATA[记忆水晶---播种<a href='event:gotoPlant'><font color='#0033FF'><u>水生花</u></font></a>有一定几率获取<br>密钥---在<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取<br>密炼丹---合成密钥的材料，在<a href='event:gotoPlant'><font color='#0033FF'><u>收获</u></font></a>时有一定几率获取。]]>
+				</tip>
+				<prop id="322" count="1" />
+				<prop id="328" count="10" />
+			</rule>
+		</item>
+		<item id="13"  name="绿野精灵"	lead="12" 	state ="0" flag="wand" open="1" type="2" icon="PetTaskIcon11">
+			<completetip>
+				<![CDATA[恭喜您获取魅力值1000点，同时花园池塘边的精灵已经点亮，它让你的花园变的更加迷人！]]>
+			</completetip>
+			<info>
+				<![CDATA[这…果然是消失已久的魔杖，可惜岁月已经让它光芒尽失，看来只能培育出珍贵的魔法花，才能唤醒暗香魔仗的魔力。您知道“绿野精灵”吗？我们需要99朵镶嵌在魔杖上]]>
+			</info>
+			<rule id="1117" comment="获取99朵绿野精灵至仓库" bonus="获取魅力值1000点.点亮池塘边的绿野精灵" level="5" >
+				<tip>
+					<![CDATA[绿野精灵:通过培育绿色魔法种子获取<br>绿色魔法种子--去<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>中通过合成获取.<br>断枝:合成魔法种子的材料，通过嫁接鲜花/玫瑰，消灭大虫时80%几率获取！]]>
+				</tip>
+				<prop id="341" count="99" type="flower"/>
+				<award picClass="CharmIcon" name="魅力" count="1000" />
+				<add id="1000" type="charm" count= "1000" />
+			</rule>
+		</item>
+		<item id="2"  name="解救小火猴" 	lead="1" 	state ="0" flag="" open="1" type="2" icon="PetTaskIcon3">
+			<completetip>
+				<![CDATA[恭喜您获得天赋宝宝--小火猴，小火猴外表看起来很腼腆，其实它是个急性子，什么事都想快快完成，它拥有神奇的加速技能，能使您的鲜花快快成熟。]]>
+			</completetip>
+			<info>
+				<![CDATA[  您的成长速度真是惊人，小镇西南角正是“火门”的所在位置，您可以尝试将小火猴召唤出，小火猴有着神奇的加速能力，它可以帮您减少种植作物的生长周期。<br>  只有获取到火系密钥，才能开启这扇门，同时，还需要20个记忆水晶，唤醒小火猴的记忆。]]>
+			</info>
+			<rule id="1103" addAvatar="300006460" comment="（记忆水晶和密钥不进行消耗）" bonus="天赋宝宝-小火猴(天赋技能:100%帮你减少作物生长周期，减少比例随进化度等级提升而提高)。如果完成任务前已经获得了小火猴，则为小火猴增加有效期30天" level="20" >
+				<tip>
+					<![CDATA[记忆水晶---播种<a href='event:gotoPlant'><font color='#0033FF'><u>水生花</u></font></a>有一定几率获取<br>密钥---在<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取<br>密炼丹---合成密钥的材料，在<a href='event:gotoPlant'><font color='#0033FF'><u>收获</u></font></a>时有一定几率获取。]]>
+				</tip>
+				<prop id="323" count="1" />
+				<prop id="328" count="20" />
+			</rule>
+		</item>
+		<item id="14" name="海洋之心" lead="13" 	state ="0" flag="wand" open="1" type="2" icon="PetTaskIcon12">
+			<completetip>
+				<![CDATA[恭喜您获取魅力值1200点、蓝玫瑰种子1个，同时花园池塘边的海洋之心已经点亮！]]>
+			</completetip>
+			<info>
+				<![CDATA[现在赶紧前往魔法屋，培育蓝色魔法种子，获取第二款珍奇魔法花--海洋之心，同样需要99朵哦！]]>
+			</info>
+			<rule id="1118" comment="获取99朵海洋之心至仓库" bonus="获取魅力值1200点、蓝玫瑰种子1颗。点亮池塘边的海洋之心" level="10">
+				<tip>
+					<![CDATA[海洋之心:通过培育蓝色魔法种子获取<br>蓝色魔法种子--去<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>中通过合成获取.<br>断枝:合成魔法种子的材料，通过嫁接鲜花/玫瑰，消灭大虫时80%几率获取！]]>
+				</tip>
+				<prop id="342" count="99" type="flower"/>
+				<award picClass="CharmIcon" name="魅力" count="1200" />
+				<award picClass="Rose25" name="蓝玫瑰种子" count="1" />
+				<add id="1000" type="charm" count="1200" />
+				<add id="105"  type="meterial" count= "1" />
+			</rule>
+		</item>
+		<item id="3"  name="解救水水兔" 	lead="2" 	state ="0" flag="" open="1" type="2" icon="PetTaskIcon4">
+			<completetip>
+				<![CDATA[恭喜您获得天赋宝宝--水水兔，它可是非常招人喜欢的呢，在您收获时，它可以为您带来额外的魅力加成哦！]]>
+			</completetip>
+			<info>
+				<![CDATA[  我果然没有看错人，小镇东边有个“水门”。<br>  如果您拥有水系密钥和30个记忆水晶，就能将天赋宝宝水水兔召唤出，它拥有神奇的魅力加成技能，赶紧去试试吧！]]>
+			</info>
+			<rule id="1104" addAvatar="300006426" comment="（记忆水晶和密钥不进行消耗）" bonus="天赋宝宝-水水兔(天赋技能:收获时，获取额外的魅力值加成，加成比例随进化度等级提升而提高)。如果完成任务前已经获得了水水兔，则为水水兔增加有效期30天" level="25" >
+				<tip>
+					<![CDATA[记忆水晶---播种<a href='event:gotoPlant'><font color='#0033FF'><u>水生花</u></font></a>有一定几率获取<br>密钥---在<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取<br>密炼丹---合成密钥的材料，在<a href='event:gotoPlant'><font color='#0033FF'><u>收获</u></font></a>时有一定几率获取。]]>
+				</tip>
+				<prop id="324" count="1" />
+				<prop id="328" count="30" />
+			</rule>
+		</item>
+		<item id="15" name="宝石玫瑰"  	lead="14" 	state ="0" flag="wand" open="1" type="2" icon="PetTaskIcon13">
+			<completetip>
+				<![CDATA[恭喜您获取魅力值1500点、橙玫瑰种子1个，同时花园池塘边的“宝石玫瑰”已经点亮！]]>
+			</completetip>
+			<info>
+				<![CDATA[宝石玫瑰如同血色一般耀眼惊艳，它能让人感觉充满力量，魔杖的第三个孔需要镶嵌99朵宝石玫瑰！]]>
+			</info>
+			<rule id="1119" comment="获取99朵宝石玫瑰至仓库" bonus="获取魅力值1500点、橙玫瑰种子1颗。点亮池塘边的宝石玫瑰" level="25">
+				<tip>
+					<![CDATA[宝石玫瑰:通过培育红色魔法种子获取<br>红色魔法种子--去<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>中通过合成获取.<br>断枝:合成魔法种子的材料，通过嫁接鲜花/玫瑰，消灭大虫时80%几率获取！]]>
+				</tip>
+				<prop id="343" count="99" type="flower"/>
+				<award picClass="CharmIcon" name="魅力" count="1500" />
+				<award picClass="Rose26" name="橙玫瑰种子" count="1" />
+				<add id="1000" type="charm" count="1500" />
+				<add id="106"  type="meterial" count= "1" />
+			</rule>
+		</item>
+		<item id="4"  name="解救木木熊" 	lead="3" 	state ="0" flag="" open="1" type="2" icon="PetTaskIcon5">
+			<completetip>
+				<![CDATA[恭喜您获得天赋宝宝--木木熊，别看它看起来挺笨拙，在您收获时，它可以为您带来额外的经验加成！]]>
+			</completetip>
+			<info>
+				<![CDATA[  “木门”在小镇的西北角，如果您拥有木系密钥和50个记忆水晶，就能将天赋宝宝木木熊召唤出，它拥有强大的经验加成技能！<br>  解救女神胜利在望了，加油吧，勇士！]]>
+			</info>
+			<rule id="1105" addAvatar="300006559" comment="（记忆水晶和密钥不进行消耗）" bonus="天赋宝宝-木木熊(天赋技能:收获时，获取额外的经验值加成，加成比例随进化度等级提升而提高)。如果完成任务前已经获得了木木熊，则为木木熊增加有效期30天" level="30" >
+				<tip>
+					<![CDATA[记忆水晶---播种<a href='event:gotoPlant'><font color='#0033FF'><u>水生花</u></font></a>有一定几率获取<br>密钥---在<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取<br>密炼丹---合成密钥的材料，在<a href='event:gotoPlant'><font color='#0033FF'><u>收获</u></font></a>时有一定几率获取。]]>
+				</tip>
+				<prop id="325" count="1" />
+				<prop id="328" count="50" />
+			</rule>
+		</item>
+		<item id="16" name="黄金玫瑰"  	lead="15" 	state ="0" flag="wand" open="1" type="2" icon="PetTaskIcon14">
+			<completetip>
+				<![CDATA[恭喜您获取魅力值1580点、紫玫瑰种子1个，同时花园池塘边的“黄金玫瑰”已经点亮！]]>
+			</completetip>
+			<info>
+				<![CDATA[勇敢的$nickname$，你是一个坚持不懈的人，我非常欣赏你！魔杖的力量即将觉醒，现在我需要99朵黄金玫瑰，请尽快交给我！]]>
+			</info>
+			<rule id="1120" comment="获取99朵黄金玫瑰至仓库" bonus="获取魅力值1580点、紫玫瑰种子1个.点亮池塘边的黄金玫瑰" level="25">
+				<tip>
+					<![CDATA[黄金玫瑰:通过培育黄色魔法种子获取<br>黄色魔法种子--去<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>中通过合成获取.<br>断枝:合成魔法种子的材料，通过嫁接鲜花/玫瑰，消灭大虫时80%几率获取！]]>
+				</tip>
+				<prop id="344" count="99" type="flower"/>
+				<award picClass="CharmIcon" name="魅力" count="1580" />
+				<award picClass="Rose27" name="紫玫瑰种子" count="1" />
+				<add id="1000" type ="charm" count="1580" />
+				<add  id="107"  type="meterial" count= "1" />
+			</rule>
+		</item>
+		<item id="5"  name="解救金多鼠" 	lead="4" 	state ="0" flag="" open="1" type="2" icon="PetTaskIcon6">
+			<completetip>
+				<![CDATA[恭喜您获得天赋宝宝-金多鼠，它非常乖巧懂事，在您收获时，它能为您带来额外的产量加成！]]>
+			</completetip>
+			<info>
+				<![CDATA[  寻找出金系密钥和80个记忆水晶，就能召唤出天赋宝宝金多鼠，它拥有强大的增产加成技能！<br>  这虽然有点困难，但难不倒有心人，现在就去试试？]]>
+			</info>
+			<rule id="1106" addAvatar="300006493" comment="（记忆水晶和密钥不进行消耗）" bonus="天赋宝宝-金多鼠(天赋技能:收获时，获取额外的产量加成，加成比例随进化度等级提升而提高)。如果完成任务前已经获得了金多鼠，则为金多鼠增加有效期30天" level="35" >
+				<tip>
+					<![CDATA[记忆水晶---播种<a href='event:gotoPlant'><font color='#0033FF'><u>水生花</u></font></a>有一定几率获取<br>密钥---在<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取<br>密炼丹---合成密钥的材料，在<a href='event:gotoPlant'><font color='#0033FF'><u>收获</u></font></a>时有一定几率获取。]]>
+				</tip>
+				<prop id="326" count="1" />
+				<prop id="328" count="80" />
+			</rule>
+		</item>
+		<item id="17" name="钻石玫瑰" 	lead="16" 	state ="0" flag="wand" open="1" type="2" icon="PetTaskIcon15">
+			<completetip>
+				<![CDATA[恭喜您获取魅力值1680点、进化草100棵，同时花园池塘边的“钻石玫瑰”已经点亮！]]>
+			</completetip>
+			<info>
+				<![CDATA[真不敢相信，您都一一办到了，瞧，魔杖的光芒已抵挡不住，讹多最近有些警觉，我们的行动要加快了，尽快培育99朵钻石玫瑰交给我！]]>
+			</info>
+			<rule id="1121" comment="获取99朵钻石玫瑰至仓库" bonus="魅力值1680点,进化草100棵.点亮池塘边的钻石玫瑰" level="25">
+				<tip>
+					<![CDATA[钻石玫瑰:通过培育黑色魔法种子获取<br>黑色魔法种子--去<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>中通过合成获取.<br>断枝:合成魔法种子的材料，通过嫁接鲜花/玫瑰，消灭大虫时80%几率获取！]]>
+				</tip>
+				<prop id="345" count="99" type="flower"/>
+				<award picClass="CharmIcon" name="魅力" count="1680" />
+				<award picClass="Prop100" name="进化草" count="100" />
+				<add id="1000" type="charm" count="1680" />
+				<add id="320" type="prop" count= "100" />
+			</rule>
+		</item>
+		<item id="6"  name="解救侦查狗" 	lead="5" 	state ="0" flag="" open="1" type="2" icon="PetTaskIcon7">
+			<completetip>
+				<![CDATA[恭喜您成功解救侦察狗，侦察狗可以派遣至好友花园，根据好友家的产量，您能获取到系统赠送的额外加成，现在，玫瑰女神的魔咒已消除，小镇未来的建设即将拉开帷幕！]]>
+			</completetip>
+			<info>
+				<![CDATA[  您是真正的勇士，玫瑰女神的魔咒即将打开，搜集到忠诚密钥和记忆水晶110个，即能将侦察狗召唤出，同时解除讹多的魔咒！<br>  侦察狗可以潜入到好友花园，获取好友产量的加成！]]>
+			</info>
+			<rule id="1107" addAvatar="300006625" comment="（记忆水晶和密钥不进行消耗）" bonus="天赋宝宝-侦察狗(天赋技能:可以派去好友花园，系统将根据好友当天“收获”的产量给您额外的产量加成)" level="40" >
+				<tip>
+					<![CDATA[记忆水晶---播种<a href='event:gotoPlant'><font color='#0033FF'><u>水生花</u></font></a>有一定几率获取<br>密钥---在<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取<br>密炼丹---合成密钥的材料，在<a href='event:gotoPlant'><font color='#0033FF'><u>收获</u></font></a>时有一定几率获取。]]>
+				</tip>
+				<prop id="327" count="1" />
+				<prop id="328" count="110" />
+			</rule>
+		</item>
+		<item id="18" name="五彩之翼" 	lead="17" 	state ="0" flag="wand" open="1" type="2" icon="PetTaskIcon16">
+			<completetip>
+				<![CDATA[恭喜您获取魅力值1888点，花园池塘边的五彩之翼已经点亮，同时您获得了称号：暗香使者，您可以在个人信息栏中进行称号的更换。]]>
+			</completetip>
+			<info>
+				<![CDATA[五彩之翼如同其名般五彩斑斓，象征着平安与幸福，它是我见过的最美的花朵，现在就缺它，就能打败讹多，加油！]]>
+			</info>
+			<rule id="1122" comment="获取99朵五彩之翼至仓库" bonus="魅力值1888点,获取称号:暗香使者.点亮池塘边的五彩之翼开启葫芦精灵" level="25">
+				<tip>
+					<![CDATA[五彩之翼:通过培育五彩之翼种子获取<br>五彩之翼种子--去<a href='event:gotoCombine'><u><font color='#0033FF'>魔法屋</font></u></a>通过合成获取.<br>断枝:合成魔法种子的材料，通过嫁接鲜花/玫瑰，消灭大虫时80%几率获取！]]>
+				</tip>
+				<prop id="346" count="99" type="flower"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="UserTitle" name="暗香使者" count="1" />
+				<add id="1000" type="charm" count="1888" />
+				<add id="5" type="UserTitle" count="1" />
+			</rule>
+		</item>
+	</group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- TaskAIcon*** 是 55*55的，不带A的是45*45 -->
+
+	<group id="101" name="成就任务" tabName="AcheiveTaskTab" index = "3">
+	<item id="1109"  name="波斯菊" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1109" icon="TaskIcon1109" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[怜取眼前人。<br>]]>
+			</info>
+			<rule comment="收获指定数量的波斯菊399朵。" bonus="经验值666，波斯菊礼包" level="0">
+				<prop id="28165" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1107GiftIcon" name="波斯菊礼包" count="1" />
+				<add id = "1003" type = "exp" count = "666" />
+			</rule>
+	</item>
+	<item id="1108"  name="玛丽玫瑰" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1108" icon="TaskIcon1108" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[神秘的爱。<br>]]>
+			</info>
+			<rule comment="收获指定数量的玛丽玫瑰888朵。" bonus="经验值1888，玛丽玫瑰礼包" level="0">
+				<prop id="24024" count="888" type="rose" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="1888" />
+				<award picClass="Task1108GiftIcon" name="玛丽玫瑰礼包" count="1" />
+				<add id = "1003" type = "exp" count = "1888" />
+			</rule>
+	</item>
+	<item id="1107"  name="爆仗竹" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1107" icon="TaskIcon1107" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[代表吉祥富贵。<br>]]>
+			</info>
+			<rule comment="收获指定数量的爆仗竹499朵。" bonus="经验值666，爆仗竹礼包" level="0">
+				<prop id="28158" count="499" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1107GiftIcon" name="爆仗竹礼包" count="1" />
+				<add id = "1003" type = "exp" count = "666" />
+			</rule>
+	</item>
+	<item id="1106"  name="不死鸟" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1106" icon="TaskIcon1106" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[一心一意。<br>]]>
+			</info>
+			<rule comment="收获指定数量的不死鸟688朵。" bonus="经验值1888，不死鸟礼包" level="0">
+				<prop id="28160" count="688" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="1888" />
+				<award picClass="Task1106GiftIcon" name="不死鸟礼包" count="1" />
+				<add id = "1003" type = "exp" count = "1888" />
+			</rule>
+	</item>
+	<item id="1105"  name="水晶兰" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1105" icon="TaskIcon1105" type="3" >
+		<completetip>
+			<![CDATA[恭喜您完成任务，获得经验值1999，打开礼包获得]]>
+		</completetip>
+		<info>
+			<![CDATA[浪漫物语 有你真精彩。<br>]]>
+		</info>
+		<rule comment="收获指定数量的水晶兰699朵。" bonus="经验值1999，水晶兰礼包" level="0">
+			<prop id="28155" count="699" type="flower" temp="1"/>
+			<award picClass="ExpIcon" name="经验" count="1999" />
+			<award picClass="Task1105GiftIcon" name="水晶兰礼包" count="1" />
+			<add id = "1003" type = "exp" count = "1999" />
+		</rule>
+	</item>
+	<item id="1104"  name="菱叶水龙" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1104" icon="TaskIcon1104" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[希望，坚韧不拔，顽强奋进。<br>]]>
+			</info>
+			<rule comment="收获指定数量的菱叶水龙688朵。" bonus="经验值1888，菱叶水龙礼包" level="0">
+				<prop id="28153" count="688" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="1888" />
+				<award picClass="Task1104GiftIcon" name="菱叶水龙礼包" count="1" />
+				<add id = "1003" type = "exp" count = "1888" />
+			</rule>
+	</item>
+		<item id="1103"  name="小米星" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1103" icon="TaskIcon1103" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[热情 积极 乐观。<br>]]>
+			</info>
+			<rule comment="收获指定数量的小米星399朵。" bonus="经验值666，小米星礼包" level="0">
+				<prop id="28150" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1103GiftIcon" name="小米星礼包" count="1" />
+				<add id="1003" type="exp" count="666" />
+			</rule>
+		</item>
+		<item id="1102"  name="紫铃藤" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1102" icon="TaskIcon1102" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值777，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[互相思念。<br>]]>
+			</info>
+			<rule comment="收获指定数量的紫铃藤399朵。" bonus="经验值777，紫铃藤礼包" level="0">
+				<prop id="28143" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="777" />
+				<award picClass="Task1102GiftIcon" name="紫铃藤礼包" count="1" />
+				<add id="1003" type="exp" count="777" />
+			</rule>
+		</item>
+
+		<item id="1101"  name="虹之玉" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1101" icon="TaskIcon1101" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[红颜知己，心心相通。<br>]]>
+			</info>
+			<rule comment="收获指定数量的虹之玉399朵。" bonus="经验值666，虹之玉礼包" level="0">
+				<prop id="28142" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1101GiftIcon" name="虹之玉礼包" count="1" />
+				<add id="1003" type="exp" count="666" />
+			</rule>
+		</item>
+		<item id="1100"  name="蜀葵花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1100" icon="TaskIcon1100" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值555，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[端午节快乐！<br>]]>
+			</info>
+			<rule comment="收获指定数量的蜀葵花。" bonus="经验值555，蜀葵花礼包" level="0">
+				<prop id="28141" count="155" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="555" />
+				<award picClass="Task1100GiftIcon" name="蜀葵花礼包" count="1" />
+				<add id="1003" type="exp" count="555" />
+			</rule>
+		</item>
+		<item id="1099"  name="风车花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1099" icon="TaskIcon1099" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[快乐的童年记忆里，定有美丽的风车陪伴。<br>]]>
+			</info>
+			<rule comment="收获指定数量的风车花366朵。" bonus="经验值666，风车花礼包" level="0">
+				<prop id="28140" count="366" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1099GiftIcon" name="风车花礼包" count="1" />
+				<add id="1003" type="exp" count="666" />
+			</rule>
+		</item>
+		<item id="1098"  name="龙舌草" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1098" icon="TaskIcon1098" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值366，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[为爱付出一切。<br>]]>
+			</info>
+			<rule comment="收获指定数量的龙舌草119朵。" bonus="经验值366，龙舌草礼包" level="0">
+				<prop id="28138" count="119" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="366" />
+				<award picClass="Task1098GiftIcon" name="龙舌草礼包" count="1" />
+				<add id="1003" type="exp" count="366" />
+			</rule>
+		</item>
+		<item id="1097"  name="四叶草" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1097" icon="TaskIcon1097" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[在西方认为能找到四叶草是幸运的表现。<br>]]>
+			</info>
+			<rule comment="收获指定数量的四叶草399朵。" bonus="经验值666，四叶草礼包" level="0">
+				<prop id="28139" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1097GiftIcon" name="四叶草礼包" count="1" />
+				<add id="1003" type="exp" count="666" />
+			</rule>
+		</item>
+		<item id="1096"  name="报春花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1096" icon="TaskIcon1096" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值999，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[报春花代表了初恋,希望,不悔。<br>]]>
+			</info>
+			<rule comment="收获666朵报春花。" bonus="经验值999，报春花礼包" level="0">
+				<prop id="28137" count="666" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="999" />
+				<award picClass="Task1096GiftIcon" name="报春花礼包" count="1" />
+				<add id="1003" type="exp" count="999" />
+			</rule>
+		</item>
+		<item id="1095"  name="美女樱" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1095" icon="TaskIcon1095" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值366，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[美女樱的花语是相守、和睦家庭。<br>]]>
+			</info>
+			<rule comment="收获366朵美女樱。" bonus="经验值366，美女樱礼包" level="0">
+				<prop id="28136" count="366" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="366" />
+				<award picClass="Task1095GiftIcon" name="美女樱礼包" count="1" />
+				<add id="1003" type="exp" count="366" />
+			</rule>
+		</item>
+		<item id="1094"  name="迷迭香" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1094" icon="TaskIcon1094" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值688，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[象征着长久的爱情、忠贞不渝的友谊和永远的怀念。<br>]]>
+			</info>
+			<rule comment="收获388朵迷迭香。" bonus="经验值688，迷迭香礼包" level="0">
+				<prop id="28135" count="388" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="688" />
+				<award picClass="Task1094GiftIcon" name="迷迭香礼包" count="1" />
+				<add id="1003" type="exp" count="688" />
+			</rule>
+		</item>
+		<item id="1093"  name="腊梅" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1093" icon="TaskIcon1093" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值555，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[忠实、独立、坚毅、忠贞、刚强、坚贞、高洁。<br>]]>
+			</info>
+			<rule comment="收获399朵腊梅。" bonus="经验值555，腊梅礼包" level="0">
+				<prop id="28134" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="555" />
+				<award picClass="Task1093GiftIcon" name="腊梅礼包" count="1" />
+				<add id="1003" type="exp" count="555" />
+			</rule>
+		</item>
+		<item id="1092"  name="圣诞之兰" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1092" icon="TaskIcon1092" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值555，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[花色娇艳多变，花朵芳香馥郁。<br>]]>
+			</info>
+			<rule comment="收获399朵圣诞之兰。" bonus="经验值555，圣诞之兰礼包" level="0">
+				<prop id="28133" count="399" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="555" />
+				<award picClass="Task1092GiftIcon" name="圣诞之兰礼包" count="1" />
+				<add id="1003" type="exp" count="555" />
+			</rule>
+		</item>
+		<item id="1091"  name="鹦鹉花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1091" icon="TaskIcon1091" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[鹦鹉花盛开的形状像一只鹦鹉，花语是别碰我。<br>]]>
+			</info>
+			<rule comment="收获466朵鹦鹉花。" bonus="经验值666，鹦鹉花礼包" level="0">
+				<prop id="28132" count="466" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="666" />
+				<award picClass="Task1091GiftIcon" name="鹦鹉花礼包" count="1" />
+				<add id="1003" type="exp" count="666" />
+			</rule>
+		</item>
+		<item id="1090"  name="小球玫瑰" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1090" icon="TaskIcon1090" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得经验值599，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[叶色鲜红，红彤彤的很讨人喜爱。<br>]]>
+			</info>
+			<rule comment="收获366朵小球玫瑰。" bonus="经验值599，小球玫瑰礼包" level="0">
+				<prop id="28131" count="366" type="flower" temp="1"/>
+				<award picClass="ExpIcon" name="经验" count="599" />
+				<award picClass="Task1090GiftIcon" name="小球玫瑰礼包" count="1" />
+				<add id="1003" type="exp" count="599" />
+			</rule>
+		</item>
+		<item id="1089"  name="眩美玉" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1089" icon="TaskIcon1089" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[仙人掌花中的一种美丽花朵。<br>]]>
+			</info>
+			<rule comment="收获666朵眩美玉。" bonus="魅力值666，眩美玉礼包" level="0">
+				<prop id="28130" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1089GiftIcon" name="眩美玉礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1088"  name="大和锦" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1088" icon="TaskIcon1088" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[一种特别的花。<br>]]>
+			</info>
+			<rule comment="收获666朵大和锦。" bonus="魅力值666，大和锦礼包" level="0">
+				<prop id="28128" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1088GiftIcon" name="大和锦礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1087"  name="白丁香" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1087" icon="TaskIcon1087" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[白丁香象征着青春欢笑。<br>]]>
+			</info>
+			<rule comment="收获555朵白丁香。" bonus="魅力值666，白丁香礼包" level="0">
+				<prop id="28126" count="555" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1087GiftIcon" name="白丁香礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1086"  name="桔子花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1086" icon="TaskIcon1086" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[素雅、纯洁、高尚、清纯如水。<br>]]>
+			</info>
+			<rule comment="收获333朵桔子花。" bonus="魅力值666，桔子花礼包" level="0">
+				<prop id="28125" count="333" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1086GiftIcon" name="桔子花礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1085"  name="仙人掌" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1085" icon="TaskIcon1085" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[仙人掌花语：坚强。<br>]]>
+			</info>
+			<rule comment="收获366朵仙人掌。" bonus="魅力值666，仙人掌礼包" level="0">
+				<prop id="28124" count="366" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1085GiftIcon" name="仙人掌礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1084"  name="绿玉藤" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1084" icon="TaskIcon1084" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[优良的观花藤蔓植物。<br>]]>
+			</info>
+			<rule comment="收获366朵绿玉藤。" bonus="魅力值666，绿玉藤礼包" level="0">
+				<prop id="28120" count="366" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1084GiftIcon" name="绿玉藤礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1083"  name="帝王花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1083" icon="TaskIcon1083" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[胜利、圆满，富贵吉祥。<br>]]>
+			</info>
+			<rule comment="收获555朵帝王花。" bonus="魅力值666，帝王花礼包" level="0">
+				<prop id="28119" count="555" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1083GiftIcon" name="帝王花礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1082"  name="烟色郁金香" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1082" icon="TaskIcon1082" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[特别的郁金香。<br>]]>
+			</info>
+			<rule comment="收获666朵淡烟色郁金香。" bonus="魅力值666，烟色郁金香礼包" level="0">
+				<prop id="28118" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1082GiftIcon" name="烟色郁金香礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1081"  name="巧克力宇宙" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1081" icon="TaskIcon1081" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[巧克力宇宙是世界珍稀花之一。<br>]]>
+			</info>
+			<rule comment="收获666朵巧克力宇宙。" bonus="魅力值666，巧克力宇宙礼包" level="0">
+				<prop id="28117" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1081GiftIcon" name="巧克力宇宙礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1080"  name="紫色郁金香" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1080" icon="TaskIcon1080" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[春天花坛上的美丽公主代表无尽的爱。<br>]]>
+			</info>
+			<rule comment="收获555朵紫色郁金香。" bonus="魅力值888，紫色郁金香礼包" level="0">
+				<prop id="28116" count="555" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="Task1080GiftIcon" name="紫色郁金香礼包" count="1" />
+				<add id="1000" type="charm" count="888" />
+			</rule>
+		</item>
+		<item id="1079"  name="新松花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1079" icon="TaskIcon1079" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值366，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[淡淡的茶花。<br>]]>
+			</info>
+			<rule comment="收获666朵新松花。" bonus="魅力值366，新松花礼包" level="0">
+				<prop id="28115" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="366" />
+				<award picClass="Task1079GiftIcon" name="新松花礼包" count="1" />
+				<add id="1000" type="charm" count="366" />
+			</rule>
+		</item>
+		<item id="1078"  name="三角梅" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1078" icon="TaskIcon1078" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值333，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[热情，坚韧不拔，顽强奋进。<br>]]>
+			</info>
+			<rule comment="收获666朵三角梅。" bonus="魅力值333，三角梅礼包" level="0">
+				<prop id="28114" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="333" />
+				<award picClass="Task1078GiftIcon" name="三角梅礼包" count="1" />
+				<add id="1000" type="charm" count="333" />
+			</rule>
+		</item>
+		<item id="1077"  name="玉米百合" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1077" icon="TaskIcon1077" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[执著的爱、勇敢。<br>]]>
+			</info>
+			<rule comment="收获1314朵玉米百合。" bonus="魅力值666，玉米百合礼包" level="0">
+				<prop id="28113" count="1314" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1077GiftIcon" name="玉米百合礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+		<item id="1076"  name="六角大红" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1076" icon="TaskIcon1076" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值366，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[绵绵情悠悠。<br>]]>
+			</info>
+			<rule comment="收获666朵六角大红。" bonus="魅力值366，六角大红礼包" level="0">
+				<prop id="28112" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="366" />
+				<award picClass="Task1076GiftIcon" name="六角大红礼包" count="1" />
+				<add id="1000" type="charm" count="366" />
+			</rule>
+		</item>
+		<item id="1075"  name="石竹" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1075" icon="TaskIcon1075" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值333，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[大家都喜爱的石竹花。<br>]]>
+			</info>
+			<rule comment="收获555朵石竹。" bonus="魅力值333，石竹礼包" level="0">
+				<prop id="28111" count="555" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="333" />
+				<award picClass="Task1075GiftIcon" name="石竹礼包" count="1" />
+				<add id="1000" type="charm" count="333" />
+			</rule>
+		</item>
+		<item id="1074"  name="雪塔" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1074" icon="TaskIcon1074" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值333，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[雪塔是清雅脱俗的代表。<br>]]>
+			</info>
+			<rule comment="收获555朵雪塔。" bonus="魅力值333，雪塔礼包" level="0">
+				<prop id="28109" count="555" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="333" />
+				<award picClass="Task1074GiftIcon" name="雪塔礼包" count="1" />
+				<add id="1000" type="charm" count="333" />
+			</rule>
+		</item>
+		<item id="1073"  name="丹桂花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1073" icon="TaskIcon1073" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值333，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[丹桂花代表的是吉祥。<br>]]>
+			</info>
+			<rule comment="收获666朵丹桂花。" bonus="魅力值333，丹桂花礼包" level="0">
+				<prop id="28106" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="333" />
+				<award picClass="Task1073GiftIcon" name="丹桂花礼包" count="1" />
+				<add id="1000" type="charm" count="333" />
+			</rule>
+		</item> 
+		<item id="1072"  name="激情欧洲杯" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1072" icon="TaskIcon1072" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值333，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[感受足球的乐趣，一起欧洲杯。<br>]]>
+			</info>
+			<rule comment="收获333朵足球花。" bonus="魅力值333，足球花礼包" level="0">
+				<prop id="28104" count="333" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="333" />
+				<award picClass="Task1072GiftIcon" name="足球花礼包" count="1" />
+				<add id="1000" type="charm" count="333" />
+			</rule>
+		</item> 
+		<item id="1071"  name="糖果花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1071" icon="TaskIcon1071" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值333，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[一起找寻童年的记忆。<br>]]>
+			</info>
+			<rule comment="收获333朵糖果花。" bonus="魅力值333，糖果花礼包" level="0">
+				<prop id="28103" count="333" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="333" />
+				<award picClass="Task1071GiftIcon" name="糖果花礼包" count="1" />
+				<add id="1000" type="charm" count="333" />
+			</rule>
+		</item>
+		<item id="1070"  name="娃娃花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1070" icon="TaskIcon1070" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[快乐，乐观积极的花朵。<br>]]>
+			</info>
+			<rule comment="收获666朵娃娃花。" bonus="魅力值666，娃娃花礼包" level="0">
+				<prop id="28102" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1070GiftIcon" name="娃娃花礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item>
+
+		<item id="1069"  name="QQ大厅" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1069" icon="TaskIcon1069" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值666，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[QQ游戏大厅专属任务。<br>]]>
+			</info>
+			<rule comment="收获666朵睡火莲。" bonus="魅力值666，睡火莲礼包" level="0">
+				<prop id="28101" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="666" />
+				<award picClass="Task1069GiftIcon" name="睡火莲礼包" count="1" />
+				<add id="1000" type="charm" count="666" />
+			</rule>
+		</item> 
+		<item id="1068"  name="玩耍" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1068" icon="TaskIcon1068" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[和小伙伴一起玩耍。<br>]]>
+			</info>
+			<rule comment="收获666朵弹珠花。" bonus="魅力值1888，弹珠花礼包" level="0">
+				<prop id="28100" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task1068GiftIcon" name="弹珠花礼包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item> 
+
+		<item id="1067"  name="蓝雪花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1067" icon="TaskIcon1067" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[冷淡忧郁的蓝雪花。<br>]]>
+			</info>
+			<rule comment="收获666朵蓝雪花。" bonus="魅力值1888，蓝雪花礼包" level="0">
+				<prop id="28099" count="666" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task10194GiftIcon" name="蓝雪花礼包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item> 
+
+		<item id="1066"  name="黑蔷薇" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1066" icon="TaskIcon1066" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值2888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[神秘色彩的黑色蔷薇。<br>]]>
+			</info>
+			<rule comment="收获888颗黑蔷薇。" bonus="魅力值2888，黑蔷薇礼包" level="0">
+				<prop id="28098" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="2888" />
+				<award picClass="Task10193GiftIcon" name="黑蔷薇礼包" count="1" />
+				<add id="1000" type="charm" count="2888" />
+			</rule>
+		</item> 
+
+		<item id="1065"  name="忘忧草" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1065" icon="TaskIcon1065" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[忘忧草，忘了所有的烦恼！<br>]]>
+			</info>
+			<rule comment="收获88颗忘忧草。" bonus="魅力值1888，忘忧草礼包" level="0">
+				<prop id="28097" count="88" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task10192GiftIcon" name="忘忧草礼包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item> 
+
+		<item id="1064"  name="十八学士" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1064" icon="TaskIcon1064" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值3888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[送一束谦逊的十八学士，给最尊敬的老师。<br>]]>
+			</info>
+			<rule comment="收获1888朵十八学士。" bonus="魅力值3888，十八学士礼包（有机会获得高级玫瑰种子和道具）" level="0">
+				<prop id="28096" count="1888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="3888" />
+				<award picClass="Task10191GiftIcon" name="十八学士礼包" count="1" />
+				<add id="1000" type="charm" count="3888" />
+			</rule>
+		</item> 
+		<item id="1063"  name="斗场对对碰" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1063" icon="TaskIcon1063" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[坚强努力的对待每一天<br>]]>
+			</info>
+			<rule comment="收获888朵虎尾兰。" bonus="魅力值1288，斗场对对碰礼包（随机奖励玫瑰种子和道具）" level="0">
+				<prop id="28095" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1039GiftIcon" name="斗场对对碰礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item> 
+
+		<item id="1061"  name="珍惜" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1061" icon="TaskIcon1061" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值3888，卡罗拉玫瑰花种子一颗，连理枝一个（可赠送）]]>
+			</completetip>
+			<info>
+				<![CDATA[珍惜你身边的人和事就是最大的幸福<br>]]>
+			</info>
+			<rule comment="收获520朵木棉花。" bonus="魅力值3888，连理枝（可赠送），卡罗拉玫瑰种子" level="0">
+				<prop id="28094" count="520" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="3888" />
+				<award picClass="RoseSeed22010" name="卡罗拉玫瑰种子" count="1" />
+				<award picClass="Prop151057001" name="连理枝" count="1" />
+				<add id="1000" type="charm" count="3888" />
+				<add id="22010" type="rose" count="1" />
+				<add id="151057001" type="prop" count="1" />
+			</rule>
+		</item>
+		<item id="1062"  name="两情相悦" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1062" icon="TaskIcon1062" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值10888，绝色佳人玫瑰种子一颗，同心结一个（可赠送）]]>
+			</completetip>
+			<info>
+				<![CDATA[世界上最美好的事情莫过于我喜欢你而你也刚好喜欢我。<br>]]>
+			</info>
+			<rule comment="收获1314朵卡罗拉玫瑰花。" bonus="魅力值10888，同心结（可赠送），绝色佳人玫瑰种子" level="0">
+				<prop id="24010" count="1314" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="10888" />
+				<award picClass="RoseSeed22009" name="绝色佳人玫瑰种子" count="1" />
+				<award picClass="Prop151057002" name="同心结" count="1" />
+				<add id="1000" type="charm" count="10888" />
+				<add id="22009" type="rose" count="1" />
+				<add id="151057002" type="prop" count="1" />
+			</rule>
+		</item>
+
+		<item id="1060"  name="夏日阳光" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1060" icon="TaskIcon1060" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值2888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[夏天是一个美丽的季节。<br><br>注：全场2元购活动中可获得扶桑花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获1088朵扶桑花。" bonus="魅力值2888，扶桑花礼包（有机会获得高级玫瑰种子和珍稀道具）" level="0">
+				<prop id="28093" count="1088" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="2888" />
+				<award picClass="Task10189GiftIcon" name="扶桑花礼包" count="1" />
+				<add id="1000" type="charm" count="2888" />
+			</rule>
+		</item> 
+
+		<item id="1059"  name="童年" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1059" icon="TaskIcon1059" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[童年，一个多梦的季节。<br><br>注：2015年儿童节活动期间，可获得梦蝴蝶种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵梦蝴蝶。" bonus="魅力值1088，六一礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28092" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task10188GiftIcon" name="六一礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item> 
+
+		<item id="1058"  name="杜鹃春晓" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1058" icon="TaskIcon1058" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[杜鹃啼血花开早，故人新事桃花红。<br><br>2015年春节期间活动和登录奖励中可能获得杜鹃红种子。任务奖励中可能获得稀有绝版兰陵玉种子。<br>]]>
+			</info>
+			<rule comment="收获1888朵杜鹃红" bonus="魅力值1888，春晓礼包" level="0">
+				<prop id="28090" count="1888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task1024GiftIcon" name="春晓礼包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item>      
+
+
+
+
+
+		<item id="1057"  name="斗地主" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1057" icon="TaskIcon1057" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[年度巨献，斗地主全新升级！完成斗地主3D的每日任务，即可获得木槿种子和各色福袋！<br>]]>
+			</info>
+			<rule comment="收获888朵木槿" bonus="魅力值1288，斗地主礼包" level="0">
+				<prop id="28089" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1022GiftIcon" name="斗地主礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item>     
+
+
+
+
+
+		<item id="1056"  name="花王五色梅" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1056" icon="TaskIcon1056" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[参与花王活动，在排行榜和周任务奖励中，均有机会获得五色梅种子！<br>]]>
+			</info>
+			<rule comment="收获1888朵五色梅" bonus="魅力值1888，五色梅礼包" level="0">
+				<prop id="28086" count="1888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task1056GiftIcon" name="五色梅礼包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item>    
+
+
+
+		<item id="1055"  name="海上红花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1055" icon="TaskIcon1055" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1688，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[望不见边际的的海洋中，佛焰般的红掌，缓缓托出一颗深邃蔚蓝的海洋之心。<br><br>注：2014年10月可获得红掌花种子。在魔法屋可以合成海洋之心所需种子。<br>]]>
+			</info>
+			<rule comment="收获888朵红掌花，888朵海洋之心" bonus="魅力值1688，海上红花礼包" level="0">
+				<prop id="28085" count="888" type="flower" temp="1"/>
+				<prop id="342" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1688" />
+				<award picClass="Task1055GiftIcon" name="海上红花礼包" count="1" />
+				<add id="1000" type="charm" count="1688" />
+			</rule>
+		</item>   
+
+
+
+		<item id="1054"  name="白玉精灵" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1054" icon="TaskIcon1054" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1488，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[收获白玉兰和绿野精灵，相约2014国庆！<br><br>注：2014年国庆节期间可以获得白玉兰种子。在魔法屋可合成绿野精灵所需种子。<br>]]>
+			</info>
+			<rule comment="收获888朵白玉兰，888朵绿野精灵" bonus="魅力值1488，白玉精灵礼包" level="0">
+				<prop id="28084" count="888" type="flower" temp="1"/>
+				<prop id="341" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1488" />
+				<award picClass="Task1039GiftIcon" name="白玉精灵礼包" count="1" />
+				<add id="1000" type="charm" count="1488" />
+			</rule>
+		</item>   
+
+
+
+
+		<item id="1053"  name="金桂满庭" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1053" icon="TaskIcon1053" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1488，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[2014年中秋节纪念！用金桂花和虎刺梅装扮你的庭院吧！<br><br>注：2014中秋节期间，活动和商店可获得金桂花种子和虎刺梅种子！<br>]]>
+			</info>
+			<rule comment="收获888朵金桂花，888朵虎刺梅" bonus="魅力值1488，金桂满庭礼包" level="0">
+				<prop id="28082" count="888" type="flower" temp="1"/>
+				<prop id="28083" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1488" />
+				<award picClass="Task1022GiftIcon" name="金桂满庭礼包" count="1" />
+				<add id="1000" type="charm" count="1488" />
+			</rule>
+		</item>   
+
+
+
+		<item id="1052"  name="晨曦端午" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1052" icon="TaskIcon1052" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值2888，晨曦背景装饰一套（15天有效期），打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[2014端午节纪念活动！<br><br>注：2014年端午节活动中，可能获得桔梗花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵桔梗花，888朵艾草，888朵菖蒲" bonus="魅力值2888，晨曦背景装饰一套，晨曦端午礼包" level="0">
+				<prop id="28079" count="888" type="flower" temp="1"/>
+				<prop id="312" count="888" type="flower" temp="1"/>
+				<prop id="313" count="888" type="flower" temp="1"/>
+
+				<award picClass="CharmIcon" name="魅力" count="2888" />
+				<award picClass="Decoration1020" name="晨曦背景" count="1" />			  
+				<award picClass="Task1038GiftIconn" name="晨曦端午礼包" count="1" />		  
+				<add id="1000" type="charm" count="2888" />
+				<add id="1020" type="decrate" count="15" />
+				<add id="2020" type="decrate" count="15" />
+				<add id="3020" type="decrate" count="15" />			  		  
+			</rule>
+		</item>    
+
+
+
+		<item id="1051"  name="绿意盎然" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1051" icon="TaskIcon1051" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1488，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[铺一室清新，染一片绿意！<br><br>注：在天赋竞技场中，挑战排行榜胜利时，可能获得绿萝种子！<br>]]>
+			</info>
+			<rule comment="收获888朵阳春花，888绿萝" bonus="魅力值1488，绿意盎然礼包" level="0">
+				<prop id="236" count="888" type="flower" temp="1"/>
+				<prop id="28074" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1488" />
+				<award picClass="Task1051GiftIcon" name="绿意盎然礼包" count="1" />
+				<add id="1000" type="charm" count="1488" />
+			</rule>
+		</item>   
+
+
+
+
+		<item id="1050"  name="紫罗兰之眼" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1050" icon="TaskIcon1050" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[纪念逝去的青春！<br>]]>
+			</info>
+			<rule comment="收获888朵紫罗兰" bonus="魅力值1888，紫罗兰之眼礼包（可能开出兰陵玉种子，咖啡玫瑰种子等珍稀种子）" level="0">
+				<prop id="28072" count="888" type="flower" temp="1"/>	  
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task1050GiftIcon" name="紫罗兰之眼礼包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item>   
+
+
+
+
+
+		<item id="1049"  name="美丽新春" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1049" icon="TaskIcon1049" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，雨露1滴。]]>
+			</completetip>
+			<info>
+				<![CDATA[用娇艳美丽的花朵，装扮整个春节！<br><br>注：商店可购买波斯毛茛种子！<br>]]>
+			</info>
+			<rule comment="收获888朵波斯毛茛" bonus="魅力值1288，雨露1滴" level="0">
+				<prop id="28069" count="888" type="flower" temp="1"/>		  
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Meterial10" name="雨露" count="1" />
+				<add id="1000" type="charm" count="1688" />
+				<add id="110" type="meterial" count="1" />			  
+			</rule>
+		</item>    
+
+
+
+		<item id="1048"  name="圣诞雪花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1048" icon="TaskIcon1048" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1688，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[圣诞节，享受大家一起堆雪人的快乐！<br><br>注：2013年圣诞节活动期间，可获得大岩桐种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵大岩桐，888朵马蹄莲。" bonus="魅力值1688，圣诞礼包（随机奖励玫瑰材料或者珍稀种子）" level="0">
+				<prop id="28067" count="888" type="flower" temp="1"/>
+				<prop id="28068" count="888" type="flower" temp="1"/>			  
+				<award picClass="CharmIcon" name="魅力" count="1688" />
+				<award picClass="Task1026GiftIcon" name="圣诞礼包" count="1" />
+				<add id="1000" type="charm" count="1688" />
+			</rule>
+		</item>   
+
+
+
+
+		<item id="1047"  name="红红火火" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1047" icon="TaskIcon1047" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[一串红，红红火火，蒸蒸日上！<br><br>注：2013年感恩节活动期间，可获得一串红种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵一串红。" bonus="魅力值1288，一串红礼包（随机奖励玫瑰材料或者珍稀种子）" level="0">
+				<prop id="28066" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1024GiftIcon" name="红火礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item> 
+
+
+
+
+		<item id="1046"  name="万圣南瓜" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1046" icon="TaskIcon1046" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[万圣节又到了，给花园布满南瓜灯吧！<br><br>注：2013年万圣节活动期间，可获得杰克南瓜种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获杰克南瓜x888。" bonus="魅力值1288，万圣南瓜礼包（随机奖励玫瑰材料或者珍稀种子）" level="0">
+				<prop id="28065" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1023GiftIcon" name="万圣南瓜礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item>
+
+
+
+
+
+		<item id="1045"  name="花团锦簇" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1045" icon="TaskIcon1045" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，蔷薇之恋花园装饰30天，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[花团锦簇，迎接国庆。<br><br>注：2013年国庆活动期间，可获得绣球花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵绣球花。" bonus="魅力值1288，蔷薇之恋背景装饰30天，绣球花礼包（随机奖励玫瑰材料或者珍稀种子）" level="0">
+				<prop id="28063" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Decoration1017" name="蔷薇之恋" count="30" />
+				<award picClass="Task1045GiftIcon" name="绣球花礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+				<add id="1017" type="decrate" count="30" />
+			</rule>
+		</item>
+
+
+
+
+
+		<item id="1044"  name="月下昙花" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1044" icon="TaskIcon1044" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[昙花一现，只为韦陀。<br><br>注：2013年中秋活动期间，可获得昙花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵昙花。" bonus="魅力值1288，昙花礼包（随机奖励玫瑰材料或者珍稀种子）" level="0">
+				<prop id="28062" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1044GiftIcon" name="昙花礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item>
+
+
+
+		<item id="1043"  name="木兰花开" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1043" icon="TaskIcon1043" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[送一束高洁的木兰花，给最尊敬的老师<br><br>注：2013年教师节活动期间，可获得木兰花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵木兰花。" bonus="魅力值1288，木兰花礼包（随机奖励玫瑰材料或者珍稀种子）" level="0">
+				<prop id="28061" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1043GiftIcon" name="木兰花礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item>
+		<item id="1042"  name="南海紫竹" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1042" icon="TaskIcon1042" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1388，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[紫竹，出南海普陀山，其干细而色深紫，段之可为管箫。<br><br>注：天赋宝宝冒险玩法从【静穆之塔】开始，可获得紫竹种子！<br>]]>
+			</info>
+			<rule comment="收获888朵紫竹。" bonus="魅力值1388，紫竹礼包（随机奖励绝版花种子和水生种子）" level="0">
+				<prop id="28060" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1388" />
+				<award picClass="Task1042GiftIcon" name="紫竹礼包" count="1" />
+				<add id="1000" type="charm" count="1388" />
+			</rule>
+		</item>
+		<item id="1041"  name="花相" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1041" icon="TaskIcon1041" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1288，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[古老的中国，芍药一直是爱情的旋律，浪漫的山歌。<br><br>注：天赋宝宝冒险玩法从【冒险者营地】开始，可获得芍药种子！<br>]]>
+			</info>
+			<rule comment="收获888朵芍药。" bonus="魅力值1288，花相礼包（随机奖励绝版花种子和水生种子）" level="0">
+				<prop id="28059" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1041GiftIcon" name="花相礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item>
+		<item id="1040"  name="夏日草坪" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1040" icon="TaskIcon1040" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[种很多很多的紫花地丁，铺出生机勃勃的夏日草坪。<br><br>注：2013年7月份活动期间，可获得紫花地丁种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵紫花地丁。" bonus="魅力值1088，夏季礼包（随机奖励绝版花种子和水生种子）" level="0">
+				<prop id="28057" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1040GiftIcon" name="夏季礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item>
+		<item id="1039"  name="金丝翠" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1039" icon="TaskIcon1039" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[种一片金翠相映的金丝桃，让整个花园亮堂堂！<br><br>注：2013年6月份魔豆藤活动期间，可获得金丝桃种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵金丝桃。" bonus="魅力值888，金丝桃礼包（100%开出高级玫瑰种子）" level="0">
+				<prop id="28055" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="Task1039GiftIcon" name="金丝桃礼包" count="1" />
+				<add id="1000" type="charm" count="888" />
+			</rule>
+		</item>
+
+		<item id="1038"  name="九歌" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1038" icon="TaskIcon1038" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得。]]>
+			</completetip>
+			<info>
+				<![CDATA[花草出泥美，荷芙入世鲜。<br>身伤心未变，香冠顶山巅。<br><br>注：2013年端午节活动期间，可获得大丽花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵大丽花。" bonus="魅力值1088，端午节种子包（随机奖励绝版花种子和水生种子）" level="0">
+				<prop id="28053" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1038GiftIcon" name="端午礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item>
+		<item id="1037"  name="童年" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1037" icon="TaskIcon1037" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[童年，一个多梦的季节。<br><br>注：2013年儿童节活动期间，可获得竹蜻蜓种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵竹蜻蜓。" bonus="魅力值1088，六一礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28052" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task10188GiftIcon" name="六一礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item> 
+		<item id="1036"  name="整蛊" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1036" icon="TaskIcon1036" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值888，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[使用整蛊水可以对鲜花进行整蛊，每次整蛊，可以有意外收获哦。]]>
+			</info>
+			<rule comment="到种植园整蛊20次。" bonus="魅力值888,愚人节礼包（随机奖励稀有种子和道具）" level="0">
+				<tip>
+					<![CDATA[已经整蛊$propdata1$次~]]>
+				</tip>
+				<prop id="data1" count="20" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="Task1036GiftIcon" name="愚人节礼包" count="1" />
+				<add id="1000" type="charm" count="888" />
+			</rule>
+		</item> 
+		<item id="1035"  name="花中君子" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1035" icon="TaskIcon1035" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[梨花如静女，寂寞出春暮。春色惜天真，玉颊洗风露。<br><br>注：丁香钓鱼活动，可获得梨花种子！<br>]]>
+			</info>
+			<rule comment="收获888朵梨花。" bonus="魅力值1088，春游礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28051" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1035GiftIcon" name="春游礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item> 
+		<item id="1034"  name="愚乐无极限" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1034" icon="TaskIcon1034" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[快乐愚人，愚乐无极限。<br><br>注：愚人节活动，可获得小苍兰种子！<br>]]>
+			</info>
+			<rule comment="收获888朵小苍兰。" bonus="魅力值1088，愚人节礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28045" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task10169GiftIcon" name="愚人节礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item> 
+		<item id="1033"  name="恶作剧之吻" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1033" icon="TaskIcon1033" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得魅力值1088，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[被整蛊的鲜花，每次收获时会额外获得愚人节专属花朵哦。]]>
+			</info>
+			<rule comment="收获41朵懒懒花、41朵酷酷花、41朵憨憨花、41朵萌萌花、41朵怪怪花。" bonus="魅力值1088，愚人节礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28049" count="41" type="flower" temp="1"/>
+				<prop id="28048" count="41" type="flower" temp="1"/>
+				<prop id="28046" count="41" type="flower" temp="1"/>
+				<prop id="28047" count="41" type="flower" temp="1"/>
+				<prop id="28050" count="41" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task10168GiftIcon" name="愚人节礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item> 
+		<item id="1032"  name="兰陵美酒" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1032" icon="TaskIcon1032" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得5888魅力值，万能种子x1，5级灵石x100，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[岑夫子，丹丘生，将进酒，杯莫停。与君歌一曲，请君为我倾耳听。<br><br>注：2013年3月份仙藤花活动任务，奖励兰陵玉种子！<br>]]>
+			</info>
+			<rule comment="收获兰陵玉888朵" bonus="兰陵美酒礼包可能开出兰陵琥珀花盆装饰：【20%魅力，5%增产】，梦回朱阁墙纸装饰：【使所有仙藤花盆魅力+3%，经验+3%，增产+3%，可与其它加成效果叠加】" level="0">
+				<prop id="28044" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="5888" />
+				<award picClass="Prop14" name="万能种子" count="1" />
+				<award picClass="Prop31009" name="5级灵石" count="100" />
+				<award picClass="Task1032GiftIcon" name="兰陵美酒礼包" count="1" />
+				<add id="1000" type="charm" count="5888" />
+				<add id="114" type="prop" count="1" />
+				<add id="31009" type="prop" count="100" />
+			</rule>
+		</item>
+		<item id="1031"  name="多彩浪漫" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1031" icon="TaskIcon1031" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得777魅力值，20包急速时效化肥，"多彩浪漫"称号。]]>
+			</completetip>
+			<info>
+				<![CDATA[秾艳尽怜胜彩绘，嘉名谁赠作玫瑰。<br><br>摇花盘中的特级花盘，可能获得彩虹玫瑰种子！<br>]]>
+			</info>
+			<rule comment="收获1000朵彩虹玫瑰" bonus="魅力值777，20包急速时效化肥，多彩浪漫称号。" level="30">
+				<prop id="24004" count="1000" type="rose" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="777" />
+				<award picClass="Prop507" name="急速时效化肥" count="20" />
+				<add id="1000" type="charm" count="777" />
+				<add id="507" type="prop" count="20" />
+				<add id="17" type="UserTitle" count="1" />
+			</rule>
+		</item>
+		<item id="1030"  name="洁白清雅" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1030" icon="TaskIcon1030" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1088魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[微风过处，清香四逸。<br><br>注：2013年情人节活动期间，可获得满天星种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵满天星" bonus="魅力值1088，情人节礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28043" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1030GiftIcon" name="情人节礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item>
+		<item id="1029"  name="恭贺新春" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1029" icon="TaskIcon1029" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1088魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[财旺福旺运气旺，祝您新年快乐，蛇年大吉！<br><br>注：2013年春节活动期间，可获得吉祥如意种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵吉祥如意" bonus="魅力值1088，春节礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28041" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1029GiftIcon" name="春节礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item>
+		<item id="1028"  name="培养摇钱树" magicAchieve="1" achieve="1" open="1" state ="0" achievenicon="TaskAIcon1028" icon="TaskIcon1028" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，花园里出现摇钱树。]]>
+			</completetip>
+			<info>
+				<![CDATA[收集玫瑰小镇四种特殊元素，培养摇钱树。 <br>收获土生花可能获得土元素，收获水生花可能获得水元素，收获仙藤花可能获得仙藤元素，收获玫瑰可能获得玫瑰元素。 <br>开启下方的乾坤袋，可以迅速获得各类元素！ ]]>
+			</info>
+			<rule comment="收集30个土元素，15个水元素，10个玫瑰元素，15个仙藤元素。（提交任务将会扣除这些材料）" bonus="完成对摇钱树的培养，每天收获丰厚奖励！" level="30">
+				<prop id="1310010001" count="30" type="prop" temp="1"/>
+				<prop id="1310010002" count="15" type="prop" temp="1"/>
+				<prop id="1310010003" count="10" type="prop" temp="1"/>
+				<prop id="1310010004" count="15" type="prop" temp="1"/>
+			</rule>
+		</item>
+		<item id="1027"  name="好运薄荷" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1027" icon="TaskIcon1027" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1588魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[在6级花盆上收获植物，有可能获得薄荷种子哦！祝大家好运常伴！]]>
+			</info>
+			<rule comment="收获888朵薄荷" bonus="魅力值1588，好运薄荷礼包（随机开出玫瑰种子或者宝石）" level="0">
+				<prop id="28040" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1588" />
+				<award picClass="Task1027GiftIcon" name="好运薄荷礼包" count="1" />
+				<add id="1000" type="charm" count="1588" />
+			</rule>
+		</item>
+		<item id="1026"  name="圣诞快乐" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1026" icon="TaskIcon1026" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1288魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[平安之夜的使者，向你报一声平安，带着盈盈的相思，带着温馨的祝愿，祝福你圣诞快乐！<br><br>注：2012年圣诞节活动期间，可获得圣诞花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵圣诞花" bonus="魅力值1288，圣诞礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28039" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1288" />
+				<award picClass="Task1026GiftIcon" name="圣诞礼包" count="1" />
+				<add id="1000" type="charm" count="1288" />
+			</rule>
+		</item>
+		<item id="1025"  name="魔豆勇士" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1025" icon="TaskIcon1025" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1888魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[收集魔豆，换取玫瑰种子包！魔豆种子来自于2012年挑战魔豆藤活动（绝版）。]]>
+			</info>
+			<rule comment="收获888株魔豆" bonus="1888魅力，魔豆奖励包（100%开出稀有玫瑰种子）" level="0">
+				<prop id="28037" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1888" />
+				<award picClass="Task1025GiftIcon" name="魔豆奖励包" count="1" />
+				<add id="1000" type="charm" count="1888" />
+			</rule>
+		</item>
+		<item id="1024"  name="感恩之心" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1024" icon="TaskIcon1024" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1088魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[怀着一颗童稚的心去追寻单纯，怀着一颗感恩的心去膜拜光明。<br><br>注：2012年感恩节节活动期间，可获得感恩花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵感恩花" bonus="魅力值1088，感恩礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28036" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1024GiftIcon" name="感恩礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item>
+		<item id="1023"  name="化妆舞会" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1023_v1" icon="TaskIcon1023_v1" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1088魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[万圣之夜，盛妆来袭。<br><br>注：2012年万圣节节活动期间，可获得假面花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵假面花" bonus="魅力值1088，万圣礼包（随机奖励稀有种子和道具）" level="0">
+				<prop id="28035" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1023GiftIcon" name="万圣礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+			</rule>
+		</item>
+		<item id="1022"  name="中秋祈福" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1022" icon="TaskIcon1022" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得1088魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[江天一色无纤尘，皎皎空中孤月轮。<br><br>注：2012年中秋节活动期间，可获得祈福花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵祈福花" bonus="1088魅力值，中秋礼包（随机奖励游戏道具、玫瑰种子）" level="0">
+				<prop id="28030" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="1088" />
+				<award picClass="Task1022GiftIcon" name="中秋礼包" count="1" />
+				<add id="1000" type="charm" count="1088" />
+				<add id="0000" type="random" count="0">
+					<additem id="26026" name="凤凰花种子" type="0"/>
+					<additem id="144" name="再力花种子" type="0"/>
+					<additem id="320" name="进化草" type="0"/>
+					<additem id="113" name="幸运药水" type="0"/>
+					<additem id="328" name="记忆水晶" type="0"/>
+					<additem id="507" name="急速时效化肥" type="0"/>
+					<additem id="105" name="蓝玫瑰种子" type="0"/>
+					<additem id="106" name="橙玫瑰种子" type="0"/>
+				</add>
+			</rule>
+		</item>
+		<item id="1021"  name="点亮图标" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1021" icon="TaskIcon1021" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得800点魅力，“图标达人”称号]]>
+			</completetip>
+			<info>
+				<![CDATA[点亮QQ图标并且通过点击QQ图标进入玫瑰小镇！ <br><br><br>]]>
+			</info>		  
+			<rule comment="点亮QQ图标并且通过点击QQ图标进入玫瑰小镇！" bonus="800点魅力，“图标达人”称号" level="0">
+				<prop id="120731017" count="1" type="prop" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="800" />
+				<add id="1000" type="charm" count="800" />
+				<add id="15" type="UserTitle" count="1" />
+			</rule>
+		</item>
+
+		<item id="1020"  name="奥运花环" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1020" icon="TaskIcon1020" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得888魅力值，打开礼包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[奥运鲜花，为奥运喝彩 <br><br>注：2012年奥运活动期间，可获得奥运花种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获888朵奥运花" bonus="888魅力值，奥运加油礼包（随机奖励金币，化肥，藤类种子，蓝玫瑰种子）" level="0">
+				<prop id="28028" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="Task1020GiftIcon" name="奥运加油礼包" count="1" />
+				<add id="1000" type="charm" count="888" />
+				<add id="0000" type="random" count="0">
+					<additem id="0" name="金币" type="6"/>
+					<additem id="506" name="普通时效化肥" type="0"/>
+					<additem id="151" name="飘香藤种子" type="0"/>
+					<additem id="152" name="青蛙藤种子" type="0"/>
+					<additem id="105" name="蓝玫瑰种子" type="0"/>
+				</add>
+			</rule>
+		</item>
+
+		<item id="1019"  name="丁香姑娘" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1019" icon="TaskIcon1019" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，活泼可爱的丁香姑娘来到了你的种植园。]]>
+			</completetip>
+			<info>
+				<![CDATA[凤凰丁香花满路，迎接丁香姑娘到来！ <br><br><br>]]>
+			</info>
+			<rule comment="收获588朵丁香花，收获1288朵凤凰花" bonus="种植园里出现新的小伙伴：丁香姑娘" level="0">
+				<prop id="237" count="588" type="flower" temp="1"/>
+				<prop id="28026" count="1288" type="flower" temp="1"/>
+				<award picClass="DingxiangNpc" name="丁香姑娘" count="1" />
+				<add id="0" type="AddDingxiangNpc" count="7" />
+			</rule>
+		</item>
+
+		<item id="1018"  name="旋转木马" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskIcon1018" icon="TaskIcon1018" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得888魅力，游乐场装扮之一：]]>
+			</completetip>
+			<info>
+				<![CDATA[各位花友，六一儿童节到了，赶快给自己凑齐一套五彩缤纷的游乐场装扮背景吧！<br><br>注：2012年儿童节活动期间，可获得指甲花/虞美人种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获指甲花888朵，虞美人888朵" bonus="888魅力值，随机奖励游乐场背景装扮之一" level="0">
+				<prop id="20120522" count="888" type="flower" temp="1"/>
+				<prop id="28019" count="888" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="TaskAIcon1018" name="儿童乐园装扮" count="1" />
+				<add id="1000" type="charm" count="888" />
+				<add id="0000" type="random" count="0">
+					<additem id="1012" name="儿童乐园" type="10"/>
+					<additem id="2012" name="儿童小屋" type="10"/>
+					<additem id="3012" name="儿童栅栏" type="10"/>
+				</add>
+			</rule>
+		</item>
+
+		<item id="1017"  name="劳动最光荣" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1017" icon="TaskIcon1017" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得888魅力，打开节日劳动包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[五一劳动节，劳动最光荣。<br><br>注：2012年劳动节活动期间，可获得油菜花/映山红种子（绝版）！<br>]]>
+			</info>
+			<rule comment="收获油菜花800朵，映山红800朵" bonus="888魅力，节日劳动包(随机奖励大量金币，化肥，欢乐五一新背景)" level="0">
+				<prop id="28017" count="800" type="flower" temp="1"/>
+				<prop id="28018" count="800" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="TempLaborDay" name="节日劳动包" count="1" />
+				<add id="1000" type="charm" count="888" />
+				<add id="0000" type="random" count="0">
+					<additem id="0" name="$num金币" type="6"/>
+					<additem id="506" name="普通时效化肥$num袋" type="0"/>
+					<additem id="1011" name="欢乐五一背景" type="10"/>
+					<additem id="2011" name="欢乐五一小屋" type="10"/>
+					<additem id="3011" name="欢乐五一栅栏" type="10"/>
+				</add>
+			</rule>
+		</item>
+
+		<item id="1016"  name="春色满园" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1016" icon="TaskIcon1016" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得新成就：春色满园，奖励999点魅力，随机获得]]>
+			</completetip>
+			<info>
+				<![CDATA[面朝大海，春暖花开！<br><br>注：2012年限时抢购活动期间，可获得樱花/水蝴蝶/优昙花种子（绝版）！<br>]]>
+			</info>
+			<rule id="2801" comment="收获555朵樱花，555朵水蝴蝶，555朵优昙花" bonus="999点魅力、高级玫瑰种子、完成成就：春色满园" level="0">
+				<prop id="28014" count="555" type="flower" temp="1"/>
+				<prop id="28015" count="555" type="flower" temp="1"/>
+				<prop id="28016" count="555" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="999" />
+				<award picClass="RondomRoseSeed" name="高级玫瑰种子" count="1" />
+				<award picClass="TaskAIcon1016" name="春色满园" count="0" />
+				<add id="1000" type="charm" count="999" />
+				<add id="0000" type="random" count="0">
+					<additem id="106" name="橙玫瑰种子$num颗" type="0"/>
+					<additem id="107" name="紫玫瑰种子$num颗" type="0"/>
+					<additem id="22001" name="青玫瑰种子$num颗" type="0"/>
+					<additem id="108" name="绿玫瑰种子$num颗" type="0"/>
+					<additem id="109" name="黑玫瑰种子$num颗" type="0"/>
+					<additem id="22002" name="香槟玫瑰种子$num颗" type="0"/>
+				</add>
+			</rule>
+		</item>
+
+		<item id="1015"  name="搞怪专家" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1015" icon="TaskIcon1015" type="3" >
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得888魅力，打开愚人节搞怪包获得]]>
+			</completetip>
+			<info>
+				<![CDATA[收集足够多的鬼脸花和吓人花，在搞怪与欢乐之间庆祝愚人节！<br><br>注：2012年愚人节活动期间，可获得搞怪精灵种子（绝版）！<br>]]>
+			</info>
+			<rule id="1200" comment="收获275朵鬼脸花，275朵吓人花" bonus="888魅力，愚人节搞怪包（可以随机开出黑玫瑰种子，雨露，断枝等魔法花材料）" level="0">
+				<prop id="28012" count="275" type="flower" temp="1"/>
+				<prop id="28013" count="275" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="888" />
+				<award picClass="TempFullPackage" name="愚人节搞怪包" count="1" />
+				<add id="1000" type="charm" count="888" />
+				<add id="0000" type="random" count="0">
+					<additem id="347" name="断枝$num个" type="0"/>
+					<additem id="225" name="郁金香$num朵" type="0"/>
+					<additem id="229" name="金鱼草$num朵" type="0"/>
+					<additem id="109" name="黑玫瑰种子$num颗" type="0"/>
+					<additem id="110" name="雨露$num个" type="0"/>
+				</add>
+			</rule>
+		</item>
+
+		<item id="1012"  name="冲到五星" magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1012" icon="TaskIcon1012" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得5000点魅力值，完成成就：冲到五星！]]>
+			</completetip>
+			<info>
+				<![CDATA[升级的道路是艰苦的！满级以后的奖励是丰厚的！<br><br><br>]]>
+			</info>
+			<rule id="1131" comment="任意一个葫芦精灵到5星" bonus="5000点魅力值，完成成就“冲到五星”" level="0">
+				<tip>
+					<![CDATA[已经升级到五星的葫芦精灵$propdata1$个~]]>
+				</tip>
+				<prop id="data1" count="1" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="5000" />
+				<award picClass="TaskAIcon1012" name="冲到五星" count="1" />
+				<add id="1000" type="charm" count="5000" />
+			</rule>
+		</item>
+		<item id="1013"  name="五兄弟"   magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1013" icon="TaskIcon1013" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得8000点魅力值，万能种子1个，完成成就：五兄弟！]]>
+			</completetip>
+			<info>
+				<![CDATA[五行循环，面对任何敌人我都能占优势！<bt>提示：五行克制会极大地影响伤害<br><br><br>]]>
+			</info>
+			<rule id="1132" comment="拥有五种不同属性的葫芦精灵" bonus="8000点魅力值，万能种子1个，完成成就“五兄弟”" level="0">
+				<prop id="120229201" count="1" type="otherProps" temp="1"/>
+				<prop id="120229202" count="1" type="otherProps" temp="1"/>
+				<prop id="120229203" count="1" type="otherProps" temp="1"/>
+				<prop id="120229204" count="1" type="otherProps" temp="1"/>
+				<prop id="120229205" count="1" type="otherProps" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="8000" />
+				<award picClass="Prop14" name="万能种子" count="1" />
+				<award picClass="TaskAIcon1013" name="五兄弟" count="1" />
+				<add id="1000" type="charm" count="8000" />
+				<add id="114" type="prop" count="1" />
+			</rule>
+		</item>
+		<item id="1014"  name="大满贯"   magicAchieve="1" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1014" icon="TaskIcon1014" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得18888点魅力值，绝版3+10凤凰宝宝，永久称号：“强大的精灵“，完成成就：大满贯！]]>
+			</completetip>
+			<info>
+				<![CDATA[五行葫芦精灵全部到达五星该有多强大？<br><br><br>]]>
+			</info>
+			<rule id="1133" comment="获得五种不同属性的葫芦精灵，且全部达到五星" bonus="永久称号：“强大的精灵”，18888点魅力值，绝版3+10凤凰宝宝（可赠送），完成成就“大满贯”" level="0">
+				<tip>
+					<![CDATA[已经达到五星的葫芦精灵$propdata6$个~]]>
+				</tip>
+				<prop id="120229201" count="1" type="otherProps" temp="1"/>
+				<prop id="120229202" count="1" type="otherProps" temp="1"/>
+				<prop id="120229203" count="1" type="otherProps" temp="1"/>
+				<prop id="120229204" count="1" type="otherProps" temp="1"/>
+				<prop id="120229205" count="1" type="otherProps" temp="1"/>
+				<prop id="data6" count="5" type="otherProps" temp="1" hide="1"/>
+				<award picClass="UserTitle" name="强大的精灵" count="1" />
+				<award picClass="CharmIcon" name="魅力" count="18888" />
+				<award picClass="TaskAIcon1014" name="大满贯" count="1" />
+				<award picClass="TempIconPhoenix" name="绝版3+10凤凰宝宝" count="1" />
+				<add id="12" type="UserTitle" count="1" />
+				<add id="1000" type="charm" count="18888" />
+			</rule>
+		</item>
+		<item id="1004"  name="转盘之王" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1004" icon="TaskIcon1004" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得250点魅力值，完成成就：转盘之王！]]>
+			</completetip>
+			<info>
+				<![CDATA[摇的不是花盘，是寂寞。<br><br><br>]]>
+			</info>
+			<rule id="1125" comment="摇花盘1000次" bonus="250点魅力，完成成就“转盘之王”" level="0">
+				<tip>
+					<![CDATA[已经摇花盘$propdata1$次~]]>
+				</tip>
+				<prop id="data1" count="1000" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="250" />
+				<award picClass="TaskAIcon1004" name="转盘之王" count="1" />
+				<add id="1000" type="charm" count="250" />
+				<add id="5" type="" count="1" />
+			</rule>
+		</item>
+		<item id="1005"  name="驱狗达人" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1005" icon="TaskIcon1005" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得200点魅力值，小镇购物券x8，完成成就：驱狗达人！]]>
+			</completetip>
+			<info>
+				<![CDATA[狗的克星，所有的狗见到你都要绕着走！<br><br><br>]]>
+			</info>
+			<rule id="1127" comment="驱狗100次" bonus="200点魅力，小镇购物券x8，完成成就“驱狗达人”" level="0">
+				<tip>
+					<![CDATA[已经驱狗$propdata1$次~]]>
+				</tip>
+				<prop id="data1" count="100" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="200" />
+				<award picClass="Prop120328005" name="小镇购物券" count="8" />
+				<award picClass="TaskAIcon1005" name="驱狗达人" count="1" />
+				<add id="1000" type="charm" count="200" />
+				<add id="5" type="Achievement" count="1" />
+				<add id="120328005" type="prop" count="8" />
+			</rule>
+		</item>
+		<item id="1006"  name="芳香使者" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1006" icon="TaskIcon1006" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得100点魅力值，完成成就：芳香使者！]]>
+			</completetip>
+			<info>
+				<![CDATA[没有一种花的盛开能永久地鲜艳绽放，只有一种味道可以留香。<br><br><br>]]>
+			</info>
+			<rule id="1123" comment="收获1000朵郁金香" bonus="100点魅力，完成成就“芳香使者”" level="0">
+				<prop id="225" count="1000" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="100" />
+				<award picClass="TaskAIcon1006" name="芳香使者" count="1" />
+				<add id="1000" type="charm" count="100" />
+				<add id="5" type="Achievement" count="1" />
+			</rule>
+		</item>
+		<item id="1007"  name="在水一方" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1007" icon="TaskIcon1007" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得200点魅力值，5包急速时效化肥，完成成就：在水一方！]]>
+			</completetip>
+			<info>
+				<![CDATA[蒹葭苍苍，白露为霜。所谓伊人，在水一方。<br><br><br>]]>
+			</info>
+			<rule id="1126" comment="收获荷花1000朵" bonus="200点魅力，5包急速时效化肥，完成成就“在水一方”" level="0">
+				<prop id="708" count="1000" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="200" />
+				<award picClass="Prop507" name="急速时效化肥" count="5" />
+				<award picClass="TaskAIcon1007" name="在水一方" count="1" />
+				<add id="1000" type="charm" count="200" />
+				<add id="507" type="Prop" count="5" />
+				<add id="5" type="Achievement" count="1" />
+			</rule>
+		</item>
+		<item id="1008"  name="痴情种子" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1008" icon="TaskIcon1008" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得120点魅力值，3包急速时效化肥，完成成就：痴情种子！]]>
+			</completetip>
+			<info>
+				<![CDATA[你问我爱你有多深，玫瑰代表我的心！<br><br><br>]]>
+			</info>
+			<rule id="1124" comment="收获1000朵红玫瑰" bonus="120点魅力，3包急速时效化肥，完成成就“痴情种子”" level="0">
+				<prop id="201" count="1000" type="rose" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="120" />
+				<award picClass="Prop507" name="急速时效化肥" count="3" />
+				<award picClass="TaskAIcon1008" name="痴情种子" count="1" />
+				<add id="1000" type="charm" count="120" />
+				<add id="507" type="Prop" count="3" />
+				<add id="5" type="Achievement" count="1" />
+			</rule>
+		</item>
+		<item id="1009"  name="极度深蓝" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1009" icon="TaskIcon1009" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得250点魅力值，10包急速时效化肥，完成成就：极度深蓝！]]>
+			</completetip>
+			<info>
+				<![CDATA[像海水一样深邃，像露水一样晶莹，像心一样柔软。<br><br><br>]]>
+			</info>
+			<rule id="1128" comment="收获1000朵蓝玫瑰" bonus="250点魅力，10包急速时效化肥，完成成就“极度深蓝”" level="0">
+				<prop id="205" count="1000" type="rose" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="250" />
+				<award picClass="Prop507" name="急速时效化肥" count="10" />
+				<award picClass="TaskAIcon1009" name="极度深蓝" count="1" />
+				<add id="1000" type="charm" count="250" />
+				<add id="507" type="Prop" count="10" />
+				<add id="5" type="Achievement" count="1" />
+			</rule>
+		</item>
+		<item id="1010"  name="神秘美人" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1010" icon="TaskIcon1010" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得300点魅力值，10包增产时效化肥，完成成就：神秘美人！]]>
+			</completetip>
+			<info>
+				<![CDATA[黑夜给了我黑色的眼睛，我却用它寻找我的黑玫瑰。<br><br><br>]]>
+			</info>
+			<rule id="1129" comment="收获1000朵黑玫瑰" bonus="300点魅力，10包增产时效化肥，完成成就“神秘美人”" level="0">
+				<prop id="209" count="1000" type="rose" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="300" />
+				<award picClass="Prop508" name="增产时效化肥" count="10" />
+				<award picClass="TaskAIcon1010" name="神秘美人" count="1" />
+				<add id="1000" type="charm" count="300" />
+				<add id="508" type="Prop" count="10" />
+				<add id="5" type="Achievement" count="1" />
+			</rule>
+		</item>
+		<item id="1011"  name="花神传说" achieve="1" open="1" state ="1" achievenicon="TaskAIcon1011" icon="TaskIcon1011" type="3">
+			<completetip>
+				<![CDATA[恭喜您完成任务，获得800点魅力值，小镇购物券x20，完成成就：花神传说！]]>
+			</completetip>
+			<info>
+				<![CDATA[不要迷恋这朵花，它只是个传说。<br><br><br>]]>
+			</info>
+			<rule id="1130" comment="收获1000朵五彩之翼" bonus="800点魅力，小镇购物券x20，完成成就“花神传说”" level="0">
+				<prop id="346" count="1000" type="flower" temp="1"/>
+				<award picClass="CharmIcon" name="魅力" count="800" />
+				<award picClass="Prop120328005" name="小镇购物券" count="20" />
+				<award picClass="TaskAIcon1011" name="花神传说" count="1" />
+				<add id="1000" type="charm" count="800" />
+				<add id="5" type="Achievement" count="1" />
+				<add id="120328005" type="prop" count="20" />
+			</rule>
+		</item>
+
+		<item id="1000"  name="浇水小童" open="1" state ="0" icon="PetTaskIcon9"  type="3">
+			<completetip>
+				<![CDATA[太好了]]>
+			</completetip>
+			<info>
+				<![CDATA[花园需要灌溉鲜花才能美丽盛开,就象友情需要真心付出才能产生共鸣,每天记得帮好友浇灌花园哦!<br><br><br>]]>
+			</info>
+			<rule id="1109" comment="帮好友浇水完成100次~" bonus="魅力300点,称号:浇水小童" level="0" >
+				<tip>
+					<![CDATA[已经帮好友浇水完成$prop6000$次~]]>
+				</tip>
+				<prop id="6000" count="100" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="300" />
+				<award picClass="UserTitle" name="浇水小童" count="1" />
+			</rule>
+		</item>
+		<item id="1001"  name="疯狂送花者" open="1" state ="0" icon="PetTaskIcon9" type="3">
+			<completetip>
+				<![CDATA[太好了]]>
+			</completetip>
+			<info>
+				<![CDATA[即使不是特殊的节日,朋友也可以互相问候,记得每天送好友1支免费玫瑰哦!<br><br><br>]]>
+			</info>
+			<rule id="1110" comment="送好友免费玫瑰150次~" bonus="魅力300点,称号:疯狂送花者" level="0" >
+				<tip>
+					<![CDATA[已经送好友免费玫瑰$prop6001$次~]]>
+				</tip>
+				<prop id="6001" count="150" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="300" />
+				<award picClass="UserTitle" name="疯狂送花者" count="1" />
+			</rule>
+		</item>
+		<item id="1002"  name="好心人" 	open="1" state ="0" icon="PetTaskIcon9" type="3">
+			<completetip>
+				<![CDATA[太好了]]>
+			</completetip>
+			<info>
+				<![CDATA[好人不是表现在脸上，嘴巴上,而是需要行动来证明，赶紧帮好友除除病害吧，200次，小case啦！<br><br><br>]]>
+			</info>
+			<rule id="1111"  comment="帮好友除病害200次~" bonus="魅力300点,称号:好心人" level="0" >
+				<tip>
+					<![CDATA[已经帮好友除病害$prop6002$次~]]>
+				</tip>
+				<prop id="6002" count="200" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="300" />
+				<award picClass="UserTitle" name="好心人" count="1" />
+			</rule>
+		</item>
+		<item id="1003"  name="谁比我慷慨" open="1" state ="0" icon="PetTaskIcon9" type="3">
+			<completetip>
+				<![CDATA[太好了]]>
+			</completetip>
+			<info>
+				<![CDATA[礼尚往来是中华民族的传统美德，咱也别忘了给好友送去一份祝福哦！<br><br><br>]]>
+			</info>
+			<rule id="1112" comment="送好友礼物120次~" bonus="魅力350点,称号:谁比我慷慨" level="0" >
+				<tip>
+					<![CDATA[已经送好友礼物$prop6003$次~]]>
+				</tip>
+				<prop id="6003" count="120" type="otherProps" temp="1" hide="1"/>
+				<award picClass="CharmIcon" name="魅力" count="350" />
+				<award picClass="UserTitle" name="谁比我慷慨" count="1" />
+			</rule>
+		</item>
+	</group>
+</task>
