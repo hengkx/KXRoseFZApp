@@ -36,7 +36,7 @@ class _PlantState extends State<Plant> {
 
   Future<void> loadPlant() async {
     var data = await MGUtil.getPlantInfo();
-
+    if (!mounted) return;
     this.setState(() {
       soils = data;
     });

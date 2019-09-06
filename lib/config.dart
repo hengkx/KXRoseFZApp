@@ -103,8 +103,8 @@ class Config {
             break;
           }
         }
-        final actGuideConfigPath = "${directory.path}/$actGuideConfigUrl";
-        File actGuideConfigFile = File(actGuideConfigPath);
+        File actGuideConfigFile = File(
+            "${directory.path}/${actGuideConfigUrl.replaceAll('config/', '')}");
         if (!actGuideConfigFile.existsSync()) {
           res = await dio.get<String>('$folderPathUrl$actGuideConfigUrl');
           actGuideConfigFile.writeAsStringSync(res.data);
