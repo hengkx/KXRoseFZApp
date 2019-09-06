@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:KXRoseFZApp/user_config.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart' as xml;
 import 'package:path_provider/path_provider.dart';
+import 'dart:math' show Random;
 
 class ExchangeItem {
   final int id;
@@ -16,6 +18,7 @@ class Config {
   static xml.XmlDocument roseConfig;
   static xml.XmlDocument propConfig;
   static xml.XmlDocument taskConfig;
+  static xml.XmlDocument actGuideConfig;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -57,11 +60,11 @@ class Config {
       taskConfig = xml.parse(taskConfigXml);
     }
 
+    final directory = await getApplicationDocumentsDirectory();
     if (userConfig == null) {
-      final directory = await getApplicationDocumentsDirectory();
       final userConfigPath = "${directory.path}/userConfig.json";
 
-      File file = new File(userConfigPath);
+      File file = File(userConfigPath);
       String userConfigJson = "";
       if (!await file.exists()) {
         userConfigJson = await rootBundle.loadString('assets/userConfig.json');
@@ -70,13 +73,54 @@ class Config {
       }
       userConfig = UserConfig.fromJson(json.decode(userConfigJson));
     }
+    if (actGuideConfig == null) {
+      Dio dio = new Dio();
+      var res = await dio.get<String>(
+          'https://meigui.qq.com/Strategy.xml?v=${new Random().nextDouble()}');
+
+      final items = xml.parse(res.data).findAllElements('item').toList();
+      if (items.length > 0) {
+        final loadConfigUrl = items[0].getAttribute('url').replaceAll('./', '');
+        final loadConfigPath = "${directory.path}/$loadConfigUrl";
+        File loadConfigFile = File(loadConfigPath);
+        xml.XmlDocument loadConfig;
+        if (!loadConfigFile.existsSync()) {
+          res = await dio.get<String>('https://meigui.qq.com/$loadConfigUrl');
+          loadConfigFile.writeAsStringSync(res.data);
+          loadConfig = xml.parse(res.data);
+        } else {
+          loadConfig = xml.parse(loadConfigFile.readAsStringSync());
+        }
+        var folderPathUrl = '';
+        var actGuideConfigUrl = '';
+        for (var item in loadConfig.findAllElements('folderPath')) {
+          folderPathUrl = item.getAttribute('url');
+          break;
+        }
+        for (var item in loadConfig.findAllElements('item')) {
+          if (item.getAttribute('id') == 'actGuideConfig') {
+            actGuideConfigUrl = item.getAttribute('url');
+            break;
+          }
+        }
+        final actGuideConfigPath = "${directory.path}/$actGuideConfigUrl";
+        File actGuideConfigFile = File(actGuideConfigPath);
+        if (!actGuideConfigFile.existsSync()) {
+          res = await dio.get<String>('$folderPathUrl$actGuideConfigUrl');
+          actGuideConfigFile.writeAsStringSync(res.data);
+          actGuideConfig = xml.parse(res.data);
+        } else {
+          actGuideConfig = xml.parse(actGuideConfigFile.readAsStringSync());
+        }
+      }
+    }
   }
 
   static saveUserConfig() async {
     final directory = await getApplicationDocumentsDirectory();
     final userConfigPath = "${directory.path}/userConfig.json";
 
-    File file = new File(userConfigPath);
+    File file = File(userConfigPath);
     print(json.encode(Config.userConfig));
     file.writeAsStringSync(json.encode(Config.userConfig));
   }
