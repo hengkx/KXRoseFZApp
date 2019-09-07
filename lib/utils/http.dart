@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:KXRoseFZApp/response.dart';
+import '../response.dart';
 import 'package:dio/dio.dart';
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'dart:io';

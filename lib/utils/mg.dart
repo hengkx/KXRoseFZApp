@@ -1,5 +1,5 @@
-import 'package:KXRoseFZApp/utils/http.dart';
-import 'package:KXRoseFZApp/widgets/plant.dart';
+import './http.dart';
+import '../widgets/plant.dart';
 import 'package:intl/intl.dart';
 
 import '../response.dart';

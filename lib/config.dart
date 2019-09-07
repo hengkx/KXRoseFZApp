@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:KXRoseFZApp/user_config.dart';
+import './user_config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart' as xml;

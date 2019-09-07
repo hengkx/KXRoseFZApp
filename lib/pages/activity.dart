@@ -1,11 +1,8 @@
-import 'package:KXRoseFZApp/response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../widgets/round_rect.dart';
-import '../utils/mg.dart';
 import '../config.dart';
 
 final dateFormat = new DateFormat('yyyy-MM-dd HH:mm');

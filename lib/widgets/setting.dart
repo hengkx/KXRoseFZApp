@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:KXRoseFZApp/user_config.dart';
-import 'package:KXRoseFZApp/widgets/text_field_alert.dart';
+import '../user_config.dart';
+import '../widgets/text_field_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:package_info/package_info.dart';

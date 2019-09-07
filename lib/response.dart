@@ -1,4 +1,4 @@
-import 'package:KXRoseFZApp/soil.dart';
+import './soil.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'response.g.dart';

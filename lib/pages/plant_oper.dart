@@ -1,5 +1,5 @@
-import 'package:KXRoseFZApp/config.dart';
-import 'package:KXRoseFZApp/response.dart';
+import '../config.dart';
+import '../response.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
