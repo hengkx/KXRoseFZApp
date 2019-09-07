@@ -21,7 +21,7 @@ public class MainActivity extends FlutterActivity {
       qqLoginUrl = intent.getData().toString();
     }
 
-    new MethodChannel(getFlutterView(), "app.channel.qq.data").setMethodCallHandler(new MethodChannel.MethodCallHandler() {
+    new MethodChannel(getFlutterView(), "rose.hengkx.com/qq").setMethodCallHandler(new MethodChannel.MethodCallHandler() {
       @Override
       public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
         if (methodCall.method.contentEquals("getQQLoginUrl")) {

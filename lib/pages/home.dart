@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const platform = const MethodChannel('app.channel.qq.data');
+  static const platform = const MethodChannel('rose.hengkx.com/qq');
   void login() async {
     var qqLoginUrl = await platform.invokeMethod("getQQLoginUrl");
     Navigator.of(context)
