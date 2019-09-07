@@ -120,7 +120,7 @@ class _SettingWidgetState extends State<SettingWidget> {
           MaterialButton(
             color: Colors.blue,
             textColor: Colors.white,
-            child: new Text('切换登录'),
+            child: new Text('切换帐号'),
             onPressed: () {
               Navigator.of(context).pushNamed("/login");
             },
