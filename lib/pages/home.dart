@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
@@ -6,6 +7,7 @@ import '../widgets/task.dart';
 import '../widgets/setting.dart';
 import './exchange.dart';
 import './activity.dart';
+import './one_key_login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,8 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void login() {
-    Navigator.of(context).pushNamed("/login").then((_) {
+  static const platform = const MethodChannel('app.channel.qq.data');
+  void login() async {
+    var qqLoginUrl = await platform.invokeMethod("getQQLoginUrl");
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+      builder: (context) => LoginPage(url: qqLoginUrl),
+    ))
+        .then((_) {
       getUserInfo();
     });
   }
