@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     if (getUserInfoResponse.result == 1000005) {
       login();
     } else {
-      this.setState(() {
+      setState(() {
         usernic = getUserInfoResponse.usernic;
       });
     }
