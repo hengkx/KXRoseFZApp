@@ -151,4 +151,15 @@ class MGUtil {
     var res = await HttpUtil.getInstance().post("rosary_task", data: params);
     return TaskResponse.fromJson(res);
   }
+
+  static Future<dynamic> activityOper(Map<String, int> otherParmas) async {
+    var params = {
+      "benew0908": 1,
+      "cgiVersion": 43,
+    };
+    params.addAll(otherParmas);
+    var res =
+        await HttpUtil.getInstance().post("rosary_activity_oper", data: params);
+    return res;
+  }
 }

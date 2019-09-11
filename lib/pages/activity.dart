@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
+import '../utils/mg.dart';
 import '../config.dart';
 
 final dateFormat = new DateFormat('yyyy-MM-dd HH:mm');
@@ -64,6 +64,142 @@ class _ActivityState extends State<Activity> {
       content: new Text(tip),
       duration: Duration(seconds: 1),
     ));
+  }
+
+  /// 夏日大作战
+  xiaRiDaZuoZhan(ActConfig actConfig) async {
+    var parmas = {'request': 1, 'cmd': 188};
+    var initRes = await MGUtil.activityOper(parmas);
+    if (initRes['result'] == 0) {
+      var digCount = int.parse(initRes['free'][0]);
+      var catchCount = int.parse(initRes['free'][1]);
+      var globalCatchCount = int.parse(initRes['leftGlobalRewardCnt'][0]);
+      // 挖宝
+      if (digCount > 0) {
+        for (var i = 0; i < digCount; i++) {
+          parmas = {'request': 3, 'cmd': 188, 'auto': 0, 'count': 1};
+          var digRes = await MGUtil.activityOper(parmas);
+          if (digRes['result'] == 0) {
+            showActivityOperAward(actConfig, digRes['award']);
+          } else {
+            showActivityOperSnackBar(actConfig, digRes['resultstr']);
+          }
+        }
+      }
+      // 捕抓小螃蟹
+      if (catchCount > 0) {
+        parmas = {
+          'request': 4,
+          'cmd': 188,
+          'auto': 0,
+          'count': catchCount,
+          'index': 1
+        };
+        var catchRes = await MGUtil.activityOper(parmas);
+        if (catchRes['result'] == 0) {
+          showActivityOperAward(actConfig, catchRes['award']);
+        } else {
+          showActivityOperSnackBar(actConfig, catchRes['resultstr']);
+        }
+      }
+      // 全服抓螃蟹
+      if (globalCatchCount > 0) {
+        parmas = {'request': 11, 'cmd': 188, 'index': 1};
+        var globalCatchRes = await MGUtil.activityOper(parmas);
+        if (globalCatchRes['result'] == 0) {
+          showActivityOperAward(actConfig, globalCatchRes['award']);
+        } else {
+          showActivityOperSnackBar(actConfig, globalCatchRes['resultstr']);
+        }
+      }
+    } else {
+      showActivityOperSnackBar(actConfig, initRes['resultstr']);
+    }
+  }
+
+  /// 拯救计划
+  zhengJiuJiHua(ActConfig actConfig) async {
+    var parmas = {'request': 1, 'cmd': 225};
+    var initRes = await MGUtil.activityOper(parmas);
+    if (initRes['result'] == 0) {
+      var freeCount = initRes['free'];
+      if (freeCount > 0) {
+        var index = initRes['birds'].indexOf('$freeCount') + 1;
+        parmas = {
+          'request': 3,
+          'cmd': 225,
+          'auto': 0,
+          'count': 1,
+          'index': index
+        };
+        var res = await MGUtil.activityOper(parmas);
+        if (res['result'] == 0) {
+          showActivityOperAward(actConfig, res['award']);
+        } else {
+          showActivityOperSnackBar(actConfig, res['resultstr']);
+        }
+      }
+    } else {
+      showActivityOperSnackBar(actConfig, initRes['resultstr']);
+    }
+  }
+
+  /// 捕虫大作战
+  buChongDaZuoZhan(ActConfig actConfig) async {
+    var parmas = {'request': 1, 'cmd': 170};
+    var initRes = await MGUtil.activityOper(parmas);
+    if (initRes['result'] == 0) {
+      var freeCount = initRes['free'];
+      if (freeCount > 0) {
+        // 舞毒蛾  可能需要从insect里面取type 数组的index
+        parmas = {
+          'request': 3,
+          'cmd': 170,
+          'auto': 0,
+          'page': 1,
+          'index': 2,
+          'type': 1,
+          'pageType': 1
+        };
+        var res = await MGUtil.activityOper(parmas);
+        if (res['result'] == 0) {
+          showActivityOperAward(actConfig, res['award']);
+        } else {
+          showActivityOperSnackBar(actConfig, res['resultstr']);
+        }
+      }
+    } else {
+      showActivityOperSnackBar(actConfig, initRes['resultstr']);
+    }
+  }
+
+  void showActivityOperAward(ActConfig actConfig, List<Map> awards) {
+    for (var item in awards) {
+      showActivityOperAward(actConfig, '${item.toString()}');
+    }
+  }
+
+  showActivityOperSnackBar(ActConfig actConfig, String content) {
+    showSnackBar('${actConfig.name} $content');
+  }
+
+  void handleTap(ActConfig actConfig) async {
+    switch (actConfig.name) {
+      case '夏日大作战':
+        await xiaRiDaZuoZhan(actConfig);
+        break;
+      case '拯救计划':
+        await zhengJiuJiHua(actConfig);
+        break;
+      case '捕虫大作战':
+        await buChongDaZuoZhan(actConfig);
+        break;
+      default:
+        showActivityOperSnackBar(
+            actConfig, actConfig.isActive ? '活动未实现' : '活动时间未到');
+        return;
+    }
+    showActivityOperSnackBar(actConfig, '执行完毕');
   }
 
   @override
@@ -138,7 +274,7 @@ class _ActivityState extends State<Activity> {
                 ],
               ),
             ),
-            onTap: () {},
+            onTap: () => handleTap(actConfig),
           ),
         );
       },
