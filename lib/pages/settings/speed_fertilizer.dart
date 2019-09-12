@@ -56,13 +56,6 @@ class _SpeedFertilizerSettingState extends State<SpeedFertilizerSetting> {
         title: Text("加速化肥设置"),
       ),
       body: ReorderableListView(
-        header: Container(
-          height: 50,
-          padding: EdgeInsets.only(left: 15),
-          color: Colors.grey[200],
-          alignment: Alignment(-1, 0),
-          child: Text("加速化肥"),
-        ),
         children: Config.userConfig.speeds
             .map((item) => Row(
                   key: ObjectKey(item),
