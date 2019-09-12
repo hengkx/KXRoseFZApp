@@ -281,7 +281,7 @@ TaskResponse _$TaskResponseFromJson(Map<String, dynamic> json) {
             ?.map((e) =>
                 e == null ? null : UserTask.fromJson(e as Map<String, dynamic>))
             ?.toList() ??
-        0,
+        [],
   );
 }
 

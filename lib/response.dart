@@ -333,8 +333,8 @@ class UserTask {
 
 @JsonSerializable()
 class TaskResponse extends BaseResponse {
-  @JsonKey(name: 'user_task', defaultValue: 0)
-  final List<UserTask> userTasks;
+  @JsonKey(name: 'user_task', defaultValue: [])
+  List<UserTask> userTasks;
 
   TaskResponse({
     result,
