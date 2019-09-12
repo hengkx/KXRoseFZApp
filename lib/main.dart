@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './pages/home.dart';
 import './pages/one_key_login.dart';
+import './pages/settings/speed_fertilizer.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (_) => HomePage(),
         '/login': (_) => LoginPage(),
+        '/settings/speed': (_) => SpeedFertilizerSetting(),
       },
       initialRoute: '/',
     );

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:kx_rose_fz/utils/uin_crypt.dart';
+import 'package:package_info/package_info.dart';
 import '../response.dart';
 import '../user.dart';
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
 import '../widgets/task.dart';
-import '../widgets/setting.dart';
 import './exchange.dart';
 import './activity.dart';
 import './one_key_login.dart';
@@ -29,21 +29,33 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+    init();
+  }
+
   int tabIndex = 0;
-  String usernic = '';
+  PackageInfo packageInfo;
+  String version;
+  init() async {
+    packageInfo = await PackageInfo.fromPlatform();
+
+    setState(() {
+      version = packageInfo.version;
+    });
+  }
 
   void getUserInfo() async {
     var getUserInfoResponse = await MGUtil.getUserInfo();
     dynamic initFirst = await MGUtil.getInitFirst();
     User.initFirstResponse = GetInitFirstResponse.fromJson(initFirst);
-    print(getUserInfoResponse.toJson());
+    User.userInfo = getUserInfoResponse;
     if (getUserInfoResponse.result == 1000005) {
       login();
-    } else {
-      setState(() {
-        usernic = getUserInfoResponse.usernic;
-      });
     }
+    setState(() {});
   }
 
   var _pageList = [
@@ -51,39 +63,7 @@ class _HomePageState extends State<HomePage> {
     new Activity(),
     new ExchangeWidget(),
     new Task(),
-    new SettingWidget(),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    getUserInfo();
-  }
-
-  void showMyMaterialDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return new AlertDialog(
-            title: new Text("title"),
-            content: new Text("内容内容内容内容内容内容内容内容内容内容内容"),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () {
-                  // Navigator.of(context).pop();
-                },
-                child: new Text("确认"),
-              ),
-              new FlatButton(
-                onPressed: () {
-                  // Navigator.of(context).pop();
-                },
-                child: new Text("取消"),
-              ),
-            ],
-          );
-        });
-  }
 
   getBottomNavigationBarItem(String title, IconData icon) {
     return new BottomNavigationBarItem(
@@ -93,6 +73,17 @@ class _HomePageState extends State<HomePage> {
         icon,
         color: Theme.of(context).primaryColor,
       ),
+    );
+  }
+
+  getDrawerItem(String title, String url) {
+    return ListTile(
+      title: Text(title),
+      trailing: Icon(Icons.keyboard_arrow_right),
+      onTap: () {
+        Navigator.of(context).pop();
+        Navigator.of(context).pushNamed(url);
+      },
     );
   }
 
@@ -110,7 +101,6 @@ class _HomePageState extends State<HomePage> {
           getBottomNavigationBarItem("活动", Icons.assistant),
           getBottomNavigationBarItem("兑换", Icons.compare_arrows),
           getBottomNavigationBarItem("任务", Icons.assignment),
-          getBottomNavigationBarItem("设置", Icons.settings),
         ],
         currentIndex: tabIndex,
         fixedColor: Theme.of(context).primaryColor,
@@ -119,6 +109,31 @@ class _HomePageState extends State<HomePage> {
             tabIndex = index;
           });
         },
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text(User.userInfo?.usernic ?? '未登录'),
+              accountEmail:
+                  Text('${UinCrypt.decryptUin('${User.userInfo?.uin}')}'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            getDrawerItem('默认种植设置', '/settings/plant'),
+            getDrawerItem('加速化肥设置', '/settings/speed'),
+            getDrawerItem('切换帐号', '/login'),
+            Text(
+              "版本：$version",
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              "QQ交流群：276801258",
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
