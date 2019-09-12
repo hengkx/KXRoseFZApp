@@ -1,5 +1,4 @@
 import 'package:xml/xml.dart';
-
 import 'config.dart';
 
 class Soil {

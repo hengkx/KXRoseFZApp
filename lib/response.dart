@@ -51,24 +51,34 @@ class Gift {
 
 @JsonSerializable()
 class GetInitFirstResponse extends BaseResponse {
-  // 时效普通化肥数量
+  /// 时效普通化肥数量
   @JsonKey(name: 'prop506', defaultValue: 0)
   int timeCommonFerti;
-  // 时效急速化肥数量
+
+  /// 时效急速化肥数量
   @JsonKey(name: 'prop507', defaultValue: 0)
   int timeQuickFerti;
-  // 时效普通化肥数量
+
+  /// 时效普通化肥数量
   @JsonKey(name: 'prop508', defaultValue: 0)
   int timeMoreFerti;
-  // 增产化肥数量
+
+  /// 增产化肥数量
   int moreferti;
-  // 超级急速化肥（分钟）
+
+  /// 超级急速化肥（分钟）
   @JsonKey(name: 'prop31004', defaultValue: 0)
   int superQuickFerti;
-  // 普通化肥数量
+
+  /// 普通化肥数量
   int commonferti;
-  // 急速化肥数量
+
+  /// 急速化肥数量
   int quickferti;
+
+  /// 花园寻宝
+  @JsonKey(name: 'huayuantreasure2017_npc', defaultValue: 0)
+  int huaYuanTreasure;
 
   GetInitFirstResponse(
       {result,

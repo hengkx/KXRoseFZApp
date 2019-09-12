@@ -5,7 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:math' show Random;
 import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
-import 'package:xml/xml.dart' as xml;
+import 'package:xml/xml.dart';
 import 'package:path_provider/path_provider.dart';
 import './user_config.dart';
 
@@ -16,11 +16,11 @@ class ExchangeItem {
 }
 
 class Config {
-  static xml.XmlDocument flowerConfig;
-  static xml.XmlDocument roseConfig;
-  static xml.XmlDocument propConfig;
-  static xml.XmlDocument taskConfig;
-  static xml.XmlDocument actGuideConfig;
+  static XmlDocument flowerConfig;
+  static XmlDocument roseConfig;
+  static XmlDocument propConfig;
+  static XmlDocument taskConfig;
+  static XmlDocument actGuideConfig;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -63,20 +63,20 @@ class Config {
         taskConfig == null) {
       Dio dio = new Dio();
       var res = await dio.get<String>(
-          'https://meigui.qq.com/Strategy.xml?v=${new Random().nextDouble()}');
+          'https://meigui.qq.com/Strategy.xml?v=${Random().nextDouble()}');
 
-      final items = xml.parse(res.data).findAllElements('item').toList();
+      final items = parse(res.data).findAllElements('item').toList();
       if (items.length > 0) {
         final loadConfigUrl = items[0].getAttribute('url').replaceAll('./', '');
         final loadConfigPath = "${directory.path}/$loadConfigUrl";
         File loadConfigFile = File(loadConfigPath);
-        xml.XmlDocument loadConfig;
+        XmlDocument loadConfig;
         if (!loadConfigFile.existsSync()) {
           res = await dio.get<String>('https://meigui.qq.com/$loadConfigUrl');
           loadConfigFile.writeAsStringSync(res.data);
-          loadConfig = xml.parse(res.data);
+          loadConfig = parse(res.data);
         } else {
-          loadConfig = xml.parse(loadConfigFile.readAsStringSync());
+          loadConfig = parse(loadConfigFile.readAsStringSync());
         }
         var folderPathUrl = '';
         var actGuideConfigUrl = '';
@@ -104,18 +104,18 @@ class Config {
         if (!actGuideConfigFile.existsSync()) {
           res = await dio.get<String>('$folderPathUrl$actGuideConfigUrl');
           actGuideConfigFile.writeAsStringSync(res.data);
-          actGuideConfig = xml.parse(res.data);
+          actGuideConfig = parse(res.data);
         } else {
-          actGuideConfig = xml.parse(actGuideConfigFile.readAsStringSync());
+          actGuideConfig = parse(actGuideConfigFile.readAsStringSync());
         }
 
         File flowerConfigFile = File("${directory.path}/$flowerConfigUrl");
         if (!flowerConfigFile.existsSync()) {
           res = await dio.get<String>('$folderPathUrl$flowerConfigUrl');
           flowerConfigFile.writeAsStringSync(res.data);
-          flowerConfig = xml.parse(res.data);
+          flowerConfig = parse(res.data);
         } else {
-          flowerConfig = xml.parse(flowerConfigFile.readAsStringSync());
+          flowerConfig = parse(flowerConfigFile.readAsStringSync());
         }
 
         File configZipFile = File("${directory.path}/$configZipUrl");
@@ -141,11 +141,11 @@ class Config {
           }
         }
 
-        roseConfig = xml.parse(
+        roseConfig = parse(
             File('${configFileDir.path}/roseConfig.xml').readAsStringSync());
-        taskConfig = xml.parse(
+        taskConfig = parse(
             File('${configFileDir.path}/taskConfig.xml').readAsStringSync());
-        propConfig = xml.parse(
+        propConfig = parse(
             File('${configFileDir.path}/propConfig.xml').readAsStringSync());
       }
     }
@@ -158,5 +158,28 @@ class Config {
     File file = File(userConfigPath);
     print(json.encode(Config.userConfig));
     file.writeAsStringSync(json.encode(Config.userConfig));
+  }
+
+  /// 通过种子id查询鲜花信息
+  static XmlElement getFlowerInfoBySeedId(int id) {
+    var res = Config.flowerConfig
+        .findAllElements("item")
+        .where((xe) => xe.getAttribute("seedID") == "$id")
+        .toList();
+    if (res.length > 0) {
+      return res[0];
+    }
+    return null;
+  }
+
+  static XmlElement getPropById(int id) {
+    var res = Config.propConfig
+        .findAllElements("item")
+        .where((xe) => xe.getAttribute("id") == "$id")
+        .toList();
+    if (res.length > 0) {
+      return res[0];
+    }
+    return null;
   }
 }

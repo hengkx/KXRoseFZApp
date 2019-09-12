@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../response.dart';
+import '../user.dart';
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
 import '../widgets/task.dart';
@@ -32,6 +34,8 @@ class _HomePageState extends State<HomePage> {
 
   void getUserInfo() async {
     var getUserInfoResponse = await MGUtil.getUserInfo();
+    dynamic initFirst = await MGUtil.getInitFirst();
+    User.initFirstResponse = GetInitFirstResponse.fromJson(initFirst);
     print(getUserInfoResponse.toJson());
     if (getUserInfoResponse.result == 1000005) {
       login();

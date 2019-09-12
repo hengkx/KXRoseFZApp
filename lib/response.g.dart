@@ -61,7 +61,7 @@ GetInitFirstResponse _$GetInitFirstResponseFromJson(Map<String, dynamic> json) {
     superQuickFerti: json['prop31004'] as int ?? 0,
     commonferti: json['commonferti'] as int,
     quickferti: json['quickferti'] as int,
-  );
+  )..huaYuanTreasure = json['huayuantreasure2017_npc'] as int ?? 0;
 }
 
 Map<String, dynamic> _$GetInitFirstResponseToJson(
@@ -77,6 +77,7 @@ Map<String, dynamic> _$GetInitFirstResponseToJson(
       'prop31004': instance.superQuickFerti,
       'commonferti': instance.commonferti,
       'quickferti': instance.quickferti,
+      'huayuantreasure2017_npc': instance.huaYuanTreasure,
     };
 
 PlantResponse _$PlantResponseFromJson(Map<String, dynamic> json) {
