@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-import './user_config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'dart:math' show Random;
+import 'package:archive/archive.dart';
+import 'package:archive/archive_io.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:path_provider/path_provider.dart';
-import 'dart:math' show Random;
+import './user_config.dart';
 
 class ExchangeItem {
   final int id;
@@ -36,31 +38,12 @@ class Config {
   ];
 
   static init() async {
-    if (flowerConfig == null) {
-      String flowerConfigXml =
-          await rootBundle.loadString('assets/flowerConfig.xml');
-      flowerConfig = xml.parse(flowerConfigXml);
-    }
-
-    if (roseConfig == null) {
-      String roseConfigXml =
-          await rootBundle.loadString('assets/roseConfig.xml');
-      roseConfig = xml.parse(roseConfigXml);
-    }
-
-    if (propConfig == null) {
-      String propConfigXml =
-          await rootBundle.loadString('assets/propConfig.xml');
-      propConfig = xml.parse(propConfigXml);
-    }
-
-    if (taskConfig == null) {
-      String taskConfigXml =
-          await rootBundle.loadString('assets/taskConfig.xml');
-      taskConfig = xml.parse(taskConfigXml);
-    }
-
     final directory = await getApplicationDocumentsDirectory();
+    final cfgDir = new Directory('${directory.path}/config');
+    if (!cfgDir.existsSync()) {
+      cfgDir.createSync();
+    }
+    print(cfgDir.path);
     if (userConfig == null) {
       final userConfigPath = "${directory.path}/userConfig.json";
 
@@ -73,7 +56,11 @@ class Config {
       }
       userConfig = UserConfig.fromJson(json.decode(userConfigJson));
     }
-    if (actGuideConfig == null) {
+    if (actGuideConfig == null ||
+        flowerConfig == null ||
+        propConfig == null ||
+        roseConfig == null ||
+        taskConfig == null) {
       Dio dio = new Dio();
       var res = await dio.get<String>(
           'https://meigui.qq.com/Strategy.xml?v=${new Random().nextDouble()}');
@@ -93,18 +80,27 @@ class Config {
         }
         var folderPathUrl = '';
         var actGuideConfigUrl = '';
+        var flowerConfigUrl = '';
+        var configZipUrl = '';
         for (var item in loadConfig.findAllElements('folderPath')) {
           folderPathUrl = item.getAttribute('url');
           break;
         }
         for (var item in loadConfig.findAllElements('item')) {
-          if (item.getAttribute('id') == 'actGuideConfig') {
-            actGuideConfigUrl = item.getAttribute('url');
+          if (actGuideConfigUrl != '' &&
+              flowerConfigUrl != '' &&
+              configZipUrl != '') {
             break;
           }
+          if (item.getAttribute('id') == 'actGuideConfig') {
+            actGuideConfigUrl = item.getAttribute('url');
+          } else if (item.getAttribute('id') == 'flowerConfig') {
+            flowerConfigUrl = item.getAttribute('url');
+          } else if (item.getAttribute('id') == 'config_zip') {
+            configZipUrl = item.getAttribute('url');
+          }
         }
-        File actGuideConfigFile = File(
-            "${directory.path}/${actGuideConfigUrl.replaceAll('config/', '')}");
+        File actGuideConfigFile = File("${directory.path}/$actGuideConfigUrl");
         if (!actGuideConfigFile.existsSync()) {
           res = await dio.get<String>('$folderPathUrl$actGuideConfigUrl');
           actGuideConfigFile.writeAsStringSync(res.data);
@@ -112,6 +108,45 @@ class Config {
         } else {
           actGuideConfig = xml.parse(actGuideConfigFile.readAsStringSync());
         }
+
+        File flowerConfigFile = File("${directory.path}/$flowerConfigUrl");
+        if (!flowerConfigFile.existsSync()) {
+          res = await dio.get<String>('$folderPathUrl$flowerConfigUrl');
+          flowerConfigFile.writeAsStringSync(res.data);
+          flowerConfig = xml.parse(res.data);
+        } else {
+          flowerConfig = xml.parse(flowerConfigFile.readAsStringSync());
+        }
+
+        File configZipFile = File("${directory.path}/$configZipUrl");
+        var configFileDir = Directory(
+            "${directory.path}/${configZipUrl.replaceAll('.game', '')}");
+        if (!configZipFile.existsSync()) {
+          await dio.download('$folderPathUrl$configZipUrl', configZipFile.path);
+        }
+        if (!configFileDir.existsSync()) {
+          List<int> bytes = configZipFile.readAsBytesSync();
+          Archive archive = ZipDecoder().decodeBytes(bytes);
+          for (ArchiveFile file in archive) {
+            String filename = file.name;
+            if (file.isFile) {
+              List<int> data = file.content;
+              File('${configFileDir.path}/$filename')
+                ..createSync(recursive: true)
+                ..writeAsBytesSync(data);
+            } else {
+              Directory('${configFileDir.path}/$filename')
+                ..create(recursive: true);
+            }
+          }
+        }
+
+        roseConfig = xml.parse(
+            File('${configFileDir.path}/roseConfig.xml').readAsStringSync());
+        taskConfig = xml.parse(
+            File('${configFileDir.path}/taskConfig.xml').readAsStringSync());
+        propConfig = xml.parse(
+            File('${configFileDir.path}/propConfig.xml').readAsStringSync());
       }
     }
   }
