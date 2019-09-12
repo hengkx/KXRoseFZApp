@@ -175,7 +175,8 @@ class Config {
   static XmlElement getPropById(int id) {
     var res = Config.propConfig
         .findAllElements("item")
-        .where((xe) => xe.getAttribute("id") == "$id")
+        .where((xe) =>
+            xe.getAttribute("id") == "$id" || xe.getAttribute("svrID") == "$id")
         .toList();
     if (res.length > 0) {
       return res[0];
