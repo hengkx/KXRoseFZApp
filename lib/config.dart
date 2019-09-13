@@ -172,6 +172,23 @@ class Config {
     return null;
   }
 
+  static XmlElement getFlowerInfoById(int id) {
+    var res = Config.flowerConfig
+        .findAllElements("item")
+        .where((xe) => xe.getAttribute("id") == "$id")
+        .toList();
+    if (res.length == 0) {
+      res = Config.roseConfig
+          .findAllElements("item")
+          .where((xe) => xe.getAttribute("id") == "$id")
+          .toList();
+    }
+    if (res.length > 0) {
+      return res[0];
+    }
+    return null;
+  }
+
   static XmlElement getPropById(int id) {
     var res = Config.propConfig
         .findAllElements("item")

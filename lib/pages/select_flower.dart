@@ -5,14 +5,13 @@ import 'package:lpinyin/lpinyin.dart';
 import '../config.dart';
 import '../utils/mg.dart';
 import '../widgets/round_rect.dart';
-import '../widgets/slide_filter.dart';
 import '../soil.dart';
 
 // import '../utils/mg.dart';
 
 class SelectFlowerPage extends StatefulWidget {
   final Soil soil;
-  SelectFlowerPage({Key key, @required this.soil}) : super(key: key);
+  SelectFlowerPage({Key key, this.soil}) : super(key: key);
   @override
   _SelectFlowerPageState createState() => _SelectFlowerPageState(this.soil);
 }
@@ -89,7 +88,19 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
         var seedId = int.parse(item.getAttribute("seedID"));
         int count = initFirstRes['vegetableseed$seedId'] ?? 0;
         int seedPrice = int.parse(item.getAttribute("seedPrice"));
-        if ((count > 0 || seedPrice > 0) &&
+        if (soil == null) {
+          var name = item.getAttribute("name");
+          flowers.add(new Flower(
+            plantId: plantId,
+            seedId: seedId,
+            type: type,
+            seedPrice: seedPrice,
+            seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
+            pyName: PinyinHelper.getShortPinyin(name),
+            name: name,
+            count: count,
+          ));
+        } else if ((count > 0 || seedPrice > 0) &&
             ((soil.type == 1 && type == 1 && soil.potLevel >= potLevel) ||
                 (soil.type == 3 &&
                     soil.hanglevel < 4 &&
@@ -116,7 +127,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
         }
       }
     }
-    if (soil.type == 0 || soil.hanglevel == 4) {
+    if (soil == null || soil.type == 0 || soil.hanglevel == 4) {
       for (var item in Config.roseConfig.findAllElements("item")) {
         var plantId = int.parse(item.getAttribute("id"));
         var seedId = int.parse(item.getAttribute("materials").split(",")[0]);
@@ -145,7 +156,6 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
         filters.add(str);
       }
     }
-    print(filters);
     this.setState(() {
       flowers = flowers;
       showFlowers = flowers;

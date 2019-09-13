@@ -13,12 +13,18 @@ UserConfig _$UserConfigFromJson(Map<String, dynamic> json) {
             ? null
             : SpeedFertilizer.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-  );
+  )
+    ..earthrPlant = json['earthrPlant'] as int
+    ..waterPlant = json['waterPlant'] as int
+    ..hangPlant = json['hangPlant'] as int;
 }
 
 Map<String, dynamic> _$UserConfigToJson(UserConfig instance) =>
     <String, dynamic>{
       'speeds': instance.speeds,
+      'earthrPlant': instance.earthrPlant,
+      'waterPlant': instance.waterPlant,
+      'hangPlant': instance.hangPlant,
     };
 
 SpeedFertilizer _$SpeedFertilizerFromJson(Map<String, dynamic> json) {

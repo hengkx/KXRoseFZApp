@@ -5,6 +5,9 @@ part 'user_config.g.dart';
 @JsonSerializable()
 class UserConfig {
   final List<SpeedFertilizer> speeds;
+  int earthrPlant;
+  int waterPlant;
+  int hangPlant;
 
   UserConfig({this.speeds});
 

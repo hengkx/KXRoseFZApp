@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './pages/home.dart';
 import './pages/one_key_login.dart';
 import './pages/settings/speed_fertilizer.dart';
+import 'pages/settings/plant.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => HomePage(),
         '/login': (_) => LoginPage(),
         '/settings/speed': (_) => SpeedFertilizerSetting(),
+        '/settings/plant': (_) => PlantSetting(),
       },
       initialRoute: '/',
     );
