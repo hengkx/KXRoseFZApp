@@ -294,7 +294,9 @@ class _PlantState extends State<Plant> {
     }
     if (id != null) {
       var flower = Config.getFlowerInfoById(id);
-      flower.count = initFirstRes['roseseed${flower.seedId}'] ?? 0;
+      flower.count = initFirstRes['vegetableseed${flower.seedId}'] ??
+          initFirstRes['roseseed${flower.seedId}'] ??
+          0;
       return flower;
     }
     return null;
