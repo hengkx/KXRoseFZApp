@@ -37,8 +37,7 @@ class _ActivityState extends State<Activity> {
 
   init() async {
     await Config.init();
-    if (User.initFirstResponse != null &&
-        User.initFirstResponse.huaYuanTreasure == 1) {
+    if (User.initFirstRes != null && User.initFirstRes.huaYuanTreasure == 1) {
       ActConfig actConfig = ActConfig();
       actConfig.id = 'huayuantreasure2017_npc';
       actConfig.name = '花园寻宝';

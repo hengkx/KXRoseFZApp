@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../pages/plant_oper.dart';
 import '../pages/select_flower.dart';
+import '../user.dart';
 import '../widgets/round_rect.dart';
 import '../utils/mg.dart';
 import '../soil.dart';
@@ -20,8 +21,6 @@ class Plant extends StatefulWidget {
 }
 
 class _PlantState extends State<Plant> {
-  dynamic initFirstRes;
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +29,7 @@ class _PlantState extends State<Plant> {
 
   init() async {
     await Config.init();
-    initFirstRes = await MGUtil.getInitFirst();
+    User.initFirstRes = await MGUtil.getInitFirst();
     await loadPlant();
   }
 
@@ -148,6 +147,12 @@ class _PlantState extends State<Plant> {
   Future<bool> buySeed(Flower flower) async {
     var res = await MGUtil.buySeed(flower.seedId, 1);
     if (res.result == 0) {
+      if (User.initFirstRes.warehouse.containsKey(flower.seedId.toString())) {
+        User.initFirstRes.warehouse[flower.seedId.toString()] += 1;
+      } else {
+        User.initFirstRes.warehouse[flower.seedId.toString()] = 1;
+      }
+
       showSnackBar("购买 ${flower.name} 种子成功");
     } else {
       showSnackBar(res.resultstr);
@@ -165,6 +170,7 @@ class _PlantState extends State<Plant> {
     var res = await MGUtil.plant(soil.no, flower.plantId);
     if (res.result == 0) {
       showSnackBar("${soil.no} 号盆 种植 ${flower.name} 成功");
+      User.initFirstRes.warehouse[flower.seedId.toString()] -= 1;
     } else {
       showSnackBar(res.resultstr);
     }
@@ -294,9 +300,7 @@ class _PlantState extends State<Plant> {
     }
     if (id != null) {
       var flower = Config.getFlowerInfoById(id);
-      flower.count = initFirstRes['vegetableseed${flower.seedId}'] ??
-          initFirstRes['roseseed${flower.seedId}'] ??
-          0;
+      flower.count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
       return flower;
     }
     return null;

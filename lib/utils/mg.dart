@@ -11,7 +11,7 @@ class MGUtil {
     return GetUserInfoResponse.fromJson(data);
   }
 
-  static Future<dynamic> getInitFirst() async {
+  static Future<GetInitFirstResponse> getInitFirst() async {
     var params = {
       "selforfriend": 0,
       "common": 1,
@@ -21,7 +21,15 @@ class MGUtil {
     };
     var res = await HttpUtil.getInstance()
         .post("rosary0909_get_init_first_self", data: params);
-    return res;
+    var response = GetInitFirstResponse.fromJson(res);
+    res.forEach((key, value) {
+      if (key.contains('vegetableseed') || key.contains('roseseed')) {
+        var id = key.replaceAll('vegetableseed', '').replaceAll('roseseed', '');
+        response.warehouse[id] = value;
+      }
+    });
+    response.data = res;
+    return response;
   }
 
   /// type 1 杀虫 2 晒阳光 3 除草

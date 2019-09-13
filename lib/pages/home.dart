@@ -49,8 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   void getUserInfo() async {
     var getUserInfoResponse = await MGUtil.getUserInfo();
-    dynamic initFirst = await MGUtil.getInitFirst();
-    User.initFirstResponse = GetInitFirstResponse.fromJson(initFirst);
+    User.initFirstRes = await MGUtil.getInitFirst();
     User.userInfo = getUserInfoResponse;
     if (getUserInfoResponse.result == 1000005) {
       login();

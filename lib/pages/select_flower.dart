@@ -82,7 +82,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
 
   init() async {
     await Config.init();
-    dynamic initFirstRes = await MGUtil.getInitFirst();
+    var initFirstRes = await MGUtil.getInitFirst();
     for (var item in Config.flowerConfig.findAllElements("item")) {
       var plantId = int.parse(item.getAttribute("id"));
       if (item.getAttribute("combineid") == null && plantId != 0) {
@@ -90,7 +90,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
         int potLevel = int.parse(item.getAttribute("potLevel") ?? "0");
         int season = int.parse(item.getAttribute("season") ?? "0");
         var seedId = int.parse(item.getAttribute("seedID"));
-        int count = initFirstRes['vegetableseed$seedId'] ?? 0;
+        int count = initFirstRes.warehouse[seedId.toString()] ?? 0;
         int seedPrice = int.parse(item.getAttribute("seedPrice"));
         if (soil == null) {
           var name = item.getAttribute("name");
@@ -135,7 +135,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
       for (var item in Config.roseConfig.findAllElements("item")) {
         var plantId = int.parse(item.getAttribute("id"));
         var seedId = int.parse(item.getAttribute("materials").split(",")[0]);
-        int count = initFirstRes['roseseed$seedId'] ?? 0;
+        int count = initFirstRes.warehouse[seedId.toString()] ?? 0;
         if (count > 0 &&
             item.getAttribute("combineid") == null &&
             plantId != 0) {
@@ -148,7 +148,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
             seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
             pyName: PinyinHelper.getShortPinyin(name),
             name: name,
-            count: initFirstRes['roseseed$seedId'] ?? 0,
+            count: count,
           ));
         }
       }

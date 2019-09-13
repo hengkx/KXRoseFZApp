@@ -80,6 +80,12 @@ class GetInitFirstResponse extends BaseResponse {
   @JsonKey(name: 'huayuantreasure2017_npc', defaultValue: 0)
   int huaYuanTreasure;
 
+  @JsonKey(ignore: true)
+  dynamic data;
+
+  @JsonKey(ignore: true)
+  Map<String, int> warehouse = Map<String, int>();
+
   GetInitFirstResponse(
       {result,
       resultstr,
@@ -90,7 +96,8 @@ class GetInitFirstResponse extends BaseResponse {
       this.moreferti,
       this.superQuickFerti,
       this.commonferti,
-      this.quickferti})
+      this.quickferti,
+      this.data})
       : super(result: result, resultstr: resultstr, uin: uin);
 
   factory GetInitFirstResponse.fromJson(Map<String, dynamic> json) =>

@@ -170,6 +170,9 @@ class UinCrypt {
   static int decryptUin(String str) {
     Uint8List bytes = Uint8List.fromList('rose1314minigame'.codeUnits);
     var buf = hexstr2buf(str);
-    return oiSymmetryDecrypt2(buf, 0, buf.length, bytes);
+    if (buf != null) {
+      return oiSymmetryDecrypt2(buf, 0, buf.length, bytes);
+    }
+    return null;
   }
 }
