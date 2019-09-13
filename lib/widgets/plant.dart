@@ -204,16 +204,7 @@ class _PlantState extends State<Plant> {
 
   List<Widget> getSlideSecondaryActions(Soil soil) {
     final List<Widget> slideActions = [];
-    if (soil.soilsate == 50) {
-      slideActions.add(SlideAction(
-        child: Text(
-          "松土",
-          style: TextStyle(color: Colors.white),
-        ),
-        color: Colors.orange,
-        onTap: () => hoe(soil),
-      ));
-    } else if (soil.soilsate == 51) {
+    if (soil.soilsate == 51) {
       slideActions.add(SlideAction(
         child: Text(
           "种植",
@@ -223,26 +214,7 @@ class _PlantState extends State<Plant> {
         onTap: () => showSelctFlower(soil),
       ));
     } else {
-      if (soil.rosestate == 5) {
-        slideActions.add(SlideAction(
-          child: Text(
-            "收获",
-            style: TextStyle(color: Colors.white),
-          ),
-          color: Colors.orange,
-          onTap: () => gain(soil),
-        ));
-      } else {
-        if (soil.isClutter || soil.isNoFood || soil.isNoShine) {
-          slideActions.add(SlideAction(
-            child: Text(
-              "一键操作",
-              style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.orange,
-            onTap: () => plantAction(soil),
-          ));
-        }
+      if (soil.rosestate != 5) {
         if (!soil.isDouble) {
           slideActions.add(SlideAction(
             child: Text(
