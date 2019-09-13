@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import '../response.dart';
 import 'package:dio/dio.dart';
 import 'package:gbk2utf8/gbk2utf8.dart';
@@ -56,8 +57,10 @@ class HttpUtil {
     print('post请求启动! url：$url ,body: $data');
     Response response;
     try {
-      response = await dio.post('https://cgi.meigui.qq.com/cgi-bin/' + url,
-          data: data, options: options);
+      response = await dio.post(
+          'https://cgi.meigui.qq.com/cgi-bin/$url?gprand=${Random().nextDouble()}',
+          data: data,
+          options: options);
       String res = gbk.decode(response.data);
       int pos = -1;
       while ((pos = res.indexOf("\\x")) != -1) {

@@ -35,7 +35,7 @@ class _PlantSettingState extends State<PlantSetting> {
       id = Config.userConfig.hangPlant;
     }
     if (id != null) {
-      return Config.getFlowerInfoById(id).getAttribute('name');
+      return Config.getFlowerInfoById(id).name;
     }
     return '未设置';
   }

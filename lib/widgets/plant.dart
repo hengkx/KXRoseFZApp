@@ -20,6 +20,8 @@ class Plant extends StatefulWidget {
 }
 
 class _PlantState extends State<Plant> {
+  dynamic initFirstRes;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,7 @@ class _PlantState extends State<Plant> {
 
   init() async {
     await Config.init();
+    initFirstRes = await MGUtil.getInitFirst();
     await loadPlant();
   }
 
@@ -280,35 +283,70 @@ class _PlantState extends State<Plant> {
     }
   }
 
+  Flower getPlantFlower(Soil soil) {
+    int id;
+    if (soil.type == 0) {
+      id = Config.userConfig.earthrPlant;
+    } else if (soil.type == 1) {
+      id = Config.userConfig.waterPlant;
+    } else if (soil.type == 3) {
+      id = Config.userConfig.hangPlant;
+    }
+    if (id != null) {
+      var flower = Config.getFlowerInfoById(id);
+      flower.count = initFirstRes['roseseed${flower.seedId}'] ?? 0;
+      return flower;
+    }
+    return null;
+  }
+
+  batchPlant() async {
+    var operSoils = soils.where((p) => p.soilsate == 51).toList();
+    if (operSoils.length == 0) {
+      return showSnackBar('没有需要种植的花盆');
+    }
+    for (var soil in operSoils) {
+      var flower = getPlantFlower(soil);
+      if (flower != null) {
+        await plant(soil, flower);
+      } else {
+        showSnackBar('未设置该盆需种植的花');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            ButtonBar(
-              children: <Widget>[
-                MaterialButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  child: new Text('一键铲土'),
-                  onPressed: batchHoe,
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  child: new Text('一键助手'),
-                  onPressed: batchPlantAction,
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  child: new Text('一键收花'),
-                  onPressed: batchGain,
-                ),
-              ],
-            )
+            MaterialButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: new Text('铲土'),
+              onPressed: batchHoe,
+            ),
+            MaterialButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: new Text('助手'),
+              onPressed: batchPlantAction,
+            ),
+            MaterialButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: new Text('收花'),
+              onPressed: batchGain,
+            ),
+            MaterialButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: Text('种植'),
+              onPressed: batchPlant,
+            ),
           ],
         ),
         Expanded(

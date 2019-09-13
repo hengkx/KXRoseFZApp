@@ -19,6 +19,8 @@ class SelectFlowerPage extends StatefulWidget {
 class Flower {
   final int plantId;
   final int seedId;
+  final int season;
+  final int potLevel;
 
   /// 1 水生 2 藤类 3 仙藤 99 陆植 100 玫瑰
   final int type;
@@ -37,6 +39,8 @@ class Flower {
     this.seedPriceQPoint,
     this.pyName,
     this.name,
+    this.season,
+    this.potLevel,
   });
 
   String getTypeName() {
