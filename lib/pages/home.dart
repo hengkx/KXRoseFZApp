@@ -113,12 +113,15 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(User.userInfo?.usernic ?? '未登录'),
-              accountEmail:
-                  Text('${UinCrypt.decryptUin('${User.userInfo?.uin}')}'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+            Container(
+              height: 100,
+              child: UserAccountsDrawerHeader(
+                accountName: Text(User.userInfo?.usernic ?? '未登录'),
+                accountEmail:
+                    Text('${UinCrypt.decryptUin('${User.userInfo?.uin}')}'),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
               ),
             ),
             getDrawerItem('默认种植设置', '/settings/plant'),
