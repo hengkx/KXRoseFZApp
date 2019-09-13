@@ -23,6 +23,7 @@ class Config {
   static XmlDocument propConfig;
   static XmlDocument taskConfig;
   static XmlDocument actGuideConfig;
+  static XmlDocument petPKConfig;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -62,7 +63,8 @@ class Config {
         flowerConfig == null ||
         propConfig == null ||
         roseConfig == null ||
-        taskConfig == null) {
+        taskConfig == null ||
+        petPKConfig == null) {
       Dio dio = new Dio();
       var res = await dio.get<String>(
           'https://meigui.qq.com/Strategy.xml?v=${Random().nextDouble()}');
@@ -149,6 +151,8 @@ class Config {
             File('${configFileDir.path}/taskConfig.xml').readAsStringSync());
         propConfig = parse(
             File('${configFileDir.path}/propConfig.xml').readAsStringSync());
+        petPKConfig = parse(
+            File('${configFileDir.path}/petPKConfig.xml').readAsStringSync());
       }
     }
   }
@@ -219,6 +223,17 @@ class Config {
         .findAllElements("item")
         .where((xe) =>
             xe.getAttribute("id") == "$id" || xe.getAttribute("svrID") == "$id")
+        .toList();
+    if (res.length > 0) {
+      return res[0];
+    }
+    return null;
+  }
+
+  static XmlElement getPetPKById(int id) {
+    var res = Config.propConfig
+        .findAllElements("item")
+        .where((xe) => xe.getAttribute("id") == "$id")
         .toList();
     if (res.length > 0) {
       return res[0];

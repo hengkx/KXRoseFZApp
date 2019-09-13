@@ -225,6 +225,11 @@ class _ActivityState extends State<Activity> {
         return showActivityOperSnackBar(
             actConfig, '获得 ${flower.getAttribute('name')} $count 个');
       }
+      var petPK = Config.getPetPKById(id);
+      if (petPK != null) {
+        return showActivityOperSnackBar(
+            actConfig, '获得 ${petPK.getAttribute('name')} $count 个');
+      }
       print(item);
       showActivityOperSnackBar(actConfig, '$id $type $count');
     }
@@ -261,8 +266,10 @@ class _ActivityState extends State<Activity> {
   // }
 
   /// 足球小将 cmd = 182
+  /// 燃花灯 cmd = 186
   /// 中秋月圆 cmd = 227
-  commonActivity(ActConfig actConfig, int cmd) async {
+  commonActivity(ActConfig actConfig, int cmd,
+      [Map<String, int> otherParams]) async {
     var parmas = {'request': 1, 'cmd': cmd};
     var initRes = await MGUtil.activityOper(parmas);
     if (initRes['result'] == 0) {
@@ -274,6 +281,9 @@ class _ActivityState extends State<Activity> {
           'auto': 0,
           'count': 1,
         };
+        if (otherParams != null) {
+          parmas.addAll(otherParams);
+        }
         var res = await MGUtil.activityOper(parmas);
         if (res['result'] == 0) {
           showActivityOperAward(actConfig, res['award']);
@@ -336,6 +346,9 @@ class _ActivityState extends State<Activity> {
         break;
       case '足球小将':
         await commonActivity(actConfig, 182);
+        break;
+      case '燃花灯':
+        await commonActivity(actConfig, 186, {'index': 1, 'auto': 0});
         break;
       default:
         showActivityOperSnackBar(
