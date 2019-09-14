@@ -5,8 +5,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:math' show Random;
 import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
-import 'package:kx_rose_fz/pages/select_flower.dart';
-import 'package:lpinyin/lpinyin.dart';
+import 'package:kx_rose_fz/models/flower.dart';
+import 'package:kx_rose_fz/utils/xe.dart';
 import 'package:xml/xml.dart';
 import 'package:path_provider/path_provider.dart';
 import './user_config.dart';
@@ -178,29 +178,6 @@ class Config {
     return null;
   }
 
-  static Flower xeToFlower(XmlElement item) {
-    var plantId = int.parse(item.getAttribute("id"));
-    int type = int.parse(item.getAttribute("type") ?? "99");
-    int potLevel = int.parse(item.getAttribute("potLevel") ?? "0");
-    int season = int.parse(item.getAttribute("season") ?? "0");
-    var seedId = int.parse(item.getAttribute("seedID"));
-    int seedPrice = int.parse(item.getAttribute("seedPrice"));
-    var name = item.getAttribute("name");
-    var flower = Flower(
-      plantId: plantId,
-      seedId: seedId,
-      type: type,
-      season: season,
-      potLevel: potLevel,
-      seedPrice: seedPrice,
-      seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
-      pyName: PinyinHelper.getShortPinyin(name),
-      name: name,
-    );
-
-    return flower;
-  }
-
   static Flower getFlowerInfoById(int id) {
     var res = Config.flowerConfig
         .findAllElements("item")
@@ -213,7 +190,7 @@ class Config {
           .toList();
     }
     if (res.length > 0) {
-      return xeToFlower(res[0]);
+      return XE.toFlower(res[0]);
     }
     return null;
   }

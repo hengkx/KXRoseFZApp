@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../user_config.dart';
-import '../../widgets/text_field_alert.dart';
+import 'package:kx_rose_fz/models/flower.dart';
 import '../../config.dart';
 import '../select_flower.dart';
 

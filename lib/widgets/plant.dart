@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:kx_rose_fz/models/flower.dart';
 
 import '../pages/plant_oper.dart';
 import '../pages/select_flower.dart';
@@ -145,19 +146,23 @@ class _PlantState extends State<Plant> {
   }
 
   Future<bool> buySeed(Flower flower) async {
-    var res = await MGUtil.buySeed(flower.seedId, 1);
-    if (res.result == 0) {
-      if (User.initFirstRes.warehouse.containsKey(flower.seedId.toString())) {
-        User.initFirstRes.warehouse[flower.seedId.toString()] += 1;
-      } else {
-        User.initFirstRes.warehouse[flower.seedId.toString()] = 1;
-      }
+    if (flower.isBuy()) {
+      var res = await MGUtil.buySeed(flower.seedId, 1);
+      if (res.result == 0) {
+        if (User.initFirstRes.warehouse.containsKey(flower.seedId.toString())) {
+          User.initFirstRes.warehouse[flower.seedId.toString()] += 1;
+        } else {
+          User.initFirstRes.warehouse[flower.seedId.toString()] = 1;
+        }
 
-      showSnackBar("购买 ${flower.name} 种子成功");
-    } else {
-      showSnackBar(res.resultstr);
+        showSnackBar("购买 ${flower.name} 种子成功");
+      } else {
+        showSnackBar(res.resultstr);
+      }
+      return res.result == 0;
     }
-    return res.result == 0;
+    showSnackBar('${flower.name} 花不能购买');
+    return false;
   }
 
   plant(Soil soil, Flower flower) async {
