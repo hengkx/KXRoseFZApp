@@ -37,9 +37,9 @@ class _PlantOperPageState extends State<PlantOperPage> {
   }
 
   init() async {
-    dynamic initFirst = await MGUtil.getInitFirst();
+    var initFirst = await MGUtil.getInitFirst();
     this.setState(() {
-      this.initFirstRes = GetInitFirstResponse.fromJson(initFirst);
+      this.initFirstRes = initFirst;
     });
   }
 
