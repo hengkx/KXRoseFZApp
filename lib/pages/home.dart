@@ -53,18 +53,20 @@ class _HomePageState extends State<HomePage> {
     if (getUserInfoResponse.result == 1000005) {
       login();
     }
-    setState(() {});
+    setState(() {
+      tabIndex = 0;
+    });
   }
 
   var _pageList = [
-    new PlantWidget(),
-    new Activity(),
-    new ExchangeWidget(),
-    new Task(),
+    PlantWidget(),
+    Activity(),
+    ExchangeWidget(),
+    Task(),
   ];
 
   getBottomNavigationBarItem(String title, IconData icon) {
-    return new BottomNavigationBarItem(
+    return BottomNavigationBarItem(
       title: Text(title),
       icon: Icon(icon),
       activeIcon: Icon(
