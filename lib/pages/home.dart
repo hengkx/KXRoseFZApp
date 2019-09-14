@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kx_rose_fz/utils/db.dart';
 import 'package:kx_rose_fz/utils/uin_crypt.dart';
 import 'package:package_info/package_info.dart';
 import '../user.dart';
@@ -89,6 +90,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // var db = DBUtil();
+    // db.getAllRequestLogs( limit: 1, offset: 0).then((val) {
+    //   print(val);
+    // });
     return Scaffold(
       appBar: AppBar(
         title: Text("开心小镇 - by hengkx"),

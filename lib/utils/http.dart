@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:gbk2utf8/gbk2utf8.dart';
+import 'package:kx_rose_fz/models/databases/request_log.dart';
+import 'package:kx_rose_fz/utils/db.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,12 +69,22 @@ class HttpUtil {
         res = res.replaceAll(
             temp, String.fromCharCode(int.parse(temp.substring(2), radix: 16)));
       }
+      var db = DBUtil();
+      RequestLog log = new RequestLog();
+      log.url = url;
+      log.params = data.toString();
+      log.response = res.replaceAll('\n', ' ');
+      log.time = DateTime.now().toString();
+
+      await db.addRequestLog(log);
 
       return json.decode(res.replaceAll('\n', ' '));
     } on DioError catch (e) {
       if (CancelToken.isCancel(e)) {
         print('post请求取消! ' + e.message);
       }
+      print('post请求发生错误：$e');
+    } on Error catch (e) {
       print('post请求发生错误：$e');
     }
   }

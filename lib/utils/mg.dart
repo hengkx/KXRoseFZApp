@@ -29,7 +29,6 @@ class MGUtil {
         response.warehouse[id] = value;
       }
     });
-    response.data = res;
     return response;
   }
 

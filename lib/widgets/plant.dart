@@ -408,7 +408,9 @@ class _PlantWidgetState extends State<PlantWidget> {
                                       Text(
                                         soil.status,
                                         style: new TextStyle(
-                                          color: Colors.grey,
+                                          color: soil.status == '[开花]'
+                                              ? Colors.pinkAccent
+                                              : Colors.grey,
                                           fontSize: 10,
                                         ),
                                       ),
