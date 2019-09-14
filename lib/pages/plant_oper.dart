@@ -1,4 +1,5 @@
 import 'package:kx_rose_fz/models/flower.dart';
+import 'package:kx_rose_fz/models/soil.dart';
 
 import '../config.dart';
 import '../response.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import '../utils/mg.dart';
-import '../soil.dart';
 import '../user_config.dart';
 import 'select_flower.dart';
 

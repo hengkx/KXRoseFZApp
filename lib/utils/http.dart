@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-import '../response.dart';
 import 'package:dio/dio.dart';
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'dart:io';
@@ -69,7 +68,7 @@ class HttpUtil {
             temp, String.fromCharCode(int.parse(temp.substring(2), radix: 16)));
       }
 
-      return json.decode(res);
+      return json.decode(res.replaceAll('\n', ' '));
     } on DioError catch (e) {
       if (CancelToken.isCancel(e)) {
         print('post请求取消! ' + e.message);

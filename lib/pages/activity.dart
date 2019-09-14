@@ -369,11 +369,22 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        MaterialButton(
-          color: Colors.blue,
-          textColor: Colors.white,
-          child: new Text('一键完成'),
-          onPressed: handleActivity,
+        Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: MaterialButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  child: new Text('一键完成'),
+                  onPressed: handleActivity,
+                ),
+              ),
+            ),
+          ],
         ),
         Expanded(
           child: ListView.separated(

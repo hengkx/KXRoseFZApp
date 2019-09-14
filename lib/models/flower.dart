@@ -46,4 +46,9 @@ class Flower {
   bool isBuy() {
     return seedPrice != 0 || seedPriceQPoint != 0;
   }
+
+  /// 能不能金币购买
+  bool isMoneyBuy() {
+    return seedPrice != 0;
+  }
 }

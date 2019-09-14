@@ -3,25 +3,26 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kx_rose_fz/models/flower.dart';
+import 'package:kx_rose_fz/models/soil.dart';
+import 'package:kx_rose_fz/utils/plant.dart';
 
 import '../pages/plant_oper.dart';
 import '../pages/select_flower.dart';
 import '../user.dart';
 import '../widgets/round_rect.dart';
 import '../utils/mg.dart';
-import '../soil.dart';
 import '../config.dart';
 
 final dateFormat = new DateFormat('MM-dd HH:mm');
 
-class Plant extends StatefulWidget {
+class PlantWidget extends StatefulWidget {
   @override
-  _PlantState createState() {
-    return new _PlantState();
+  _PlantWidgetState createState() {
+    return new _PlantWidgetState();
   }
 }
 
-class _PlantState extends State<Plant> {
+class _PlantWidgetState extends State<PlantWidget> {
   @override
   void initState() {
     super.initState();
@@ -146,7 +147,7 @@ class _PlantState extends State<Plant> {
   }
 
   Future<bool> buySeed(Flower flower) async {
-    if (flower.isBuy()) {
+    if (flower.isMoneyBuy()) {
       var res = await MGUtil.buySeed(flower.seedId, 1);
       if (res.result == 0) {
         if (User.initFirstRes.warehouse.containsKey(flower.seedId.toString())) {
@@ -319,7 +320,11 @@ class _PlantState extends State<Plant> {
     for (var soil in operSoils) {
       var flower = getPlantFlower(soil);
       if (flower != null) {
-        await plant(soil, flower);
+        if (Plant.isPlant(flower, soil)) {
+          await plant(soil, flower);
+        } else {
+          showSnackBar('${flower.name} 不符合种植条件');
+        }
       } else {
         showSnackBar('未设置该盆需种植的花');
       }

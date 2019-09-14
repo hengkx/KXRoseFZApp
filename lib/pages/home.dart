@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kx_rose_fz/utils/uin_crypt.dart';
 import 'package:package_info/package_info.dart';
-import '../response.dart';
 import '../user.dart';
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   var _pageList = [
-    new Plant(),
+    new PlantWidget(),
     new Activity(),
     new ExchangeWidget(),
     new Task(),

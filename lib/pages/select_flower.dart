@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kx_rose_fz/models/flower.dart';
+import 'package:kx_rose_fz/models/soil.dart';
+import 'package:kx_rose_fz/utils/plant.dart';
 import 'package:kx_rose_fz/utils/xe.dart';
 
 import '../config.dart';
 import '../user.dart';
 import '../utils/mg.dart';
 import '../widgets/round_rect.dart';
-import '../soil.dart';
 
 class SelectFlowerPage extends StatefulWidget {
   final Soil soil;
@@ -36,46 +37,20 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     await Config.init();
     User.initFirstRes = await MGUtil.getInitFirst();
     for (var item in Config.flowerConfig.findAllElements("item")) {
-      var plantId = int.parse(item.getAttribute("id"));
-      if (item.getAttribute("combineid") == null && plantId != 0) {
-        var flower = XE.toFlower(item);
-        int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
-        flower.count = count;
-        if (soil == null) {
-          flowers.add(flower);
-        } else if ((count > 0 || flower.seedPrice > 0) &&
-            ((soil.type == 1 &&
-                    flower.type == 1 &&
-                    soil.potLevel >= flower.potLevel) ||
-                (soil.type == 3 &&
-                    soil.hanglevel < 4 &&
-                    flower.type == 3 &&
-                    flower.potLevel <= soil.hanglevel) ||
-                (soil.type == 3 &&
-                    soil.hanglevel == 4 &&
-                    (flower.type == 2 ||
-                        flower.type == 3 ||
-                        (flower.type == 99 && flower.season < 4))) ||
-                (soil.type == 0 &&
-                    (flower.type == 2 ||
-                        flower.type == 100 ||
-                        (flower.type == 99 &&
-                            soil.potLevel >= flower.potLevel))))) {
-          var flower = XE.toFlower(item);
-          flower.count = count;
-          flowers.add(flower);
-        }
+      var flower = XE.toFlower(item);
+      int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
+      flower.count = count;
+      if (Plant.isPlant(flower, soil)) {
+        flowers.add(flower);
       }
     }
     if (soil == null || soil.type == 0 || soil.hanglevel == 4) {
       for (var item in Config.roseConfig.findAllElements("item")) {
         var flower = XE.toFlower(item);
-        flower.type = 100;
         int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
+        flower.type = 100;
         flower.count = count;
-        if (count > 0 &&
-            item.getAttribute("combineid") == null &&
-            flower.plantId != 0) {
+        if (Plant.isPlant(flower, soil)) {
           flowers.add(flower);
         }
       }

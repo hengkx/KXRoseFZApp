@@ -1,8 +1,9 @@
+import 'package:kx_rose_fz/models/soil.dart';
+
 import './http.dart';
 import 'package:intl/intl.dart';
 
 import '../response.dart';
-import '../soil.dart';
 
 class MGUtil {
   static Future<GetUserInfoResponse> getUserInfo() async {
