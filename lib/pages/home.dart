@@ -90,10 +90,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // var db = DBUtil();
-    // db.getAllRequestLogs( limit: 1, offset: 0).then((val) {
-    //   print(val);
-    // });
     return Scaffold(
       appBar: AppBar(
         title: Text("开心小镇 - by hengkx"),

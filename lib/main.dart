@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rose_fz/pages/log.dart';
 import 'package:rose_fz/pages/home.dart';
 import 'package:rose_fz/pages/one_key_login.dart';
 import 'package:rose_fz/pages/settings/plant.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/login': (_) => LoginPage(),
         '/settings/speed': (_) => SpeedFertilizerSetting(),
         '/settings/plant': (_) => PlantSetting(),
+        '/log': (_) => LogPage(),
       },
       initialRoute: '/',
     );

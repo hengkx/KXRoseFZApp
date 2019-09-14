@@ -43,6 +43,9 @@ class DBUtil {
         url TEXT, 
         params TEXT, 
         response TEXT, 
+        result INTEGER,
+        resultStr TEXT,
+        uin INTEGER,
         time TEXT
       )''');
   }
@@ -53,16 +56,26 @@ class DBUtil {
     return result;
   }
 
-  Future<List> getAllRequestLogs({int limit, int offset}) async {
+  Future<List<RequestLog>> getAllRequestLogs({int limit, int offset}) async {
     var dbClient = await db;
     var result = await dbClient.query(
       'request_log',
-      columns: ['id', 'url', 'params', 'response', 'time'],
+      columns: [
+        'id',
+        'url',
+        'params',
+        'response',
+        'result',
+        'resultStr',
+        'uin',
+        'time'
+      ],
       limit: limit,
       offset: offset,
+      orderBy: 'time DESC',
     );
 
-    return result.toList();
+    return result.map((val) => RequestLog.fromMap(val)).toList();
   }
 
   Future<int> getCount() async {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:rose_fz/models/databases/request_log.dart';
+import 'package:rose_fz/utils/db.dart';
 import 'package:rose_fz/global.dart';
 import 'package:rose_fz/models/flower.dart';
 import 'package:rose_fz/pages/select_flower.dart';
@@ -12,74 +14,73 @@ class LogPage extends StatefulWidget {
 }
 
 class _LogPageState extends State<LogPage> {
+  ScrollController scrollController = ScrollController();
+  List<RequestLog> logs = [];
+  int offset = 0;
+  bool finished = false;
+
   @override
   void initState() {
     super.initState();
-    init();
+    loadData();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        if (!finished) {
+          loadMore();
+        }
+      }
+    });
   }
 
-  init() async {
-    await Global.init();
+  Future loadMore() async {
+    var db = DBUtil();
+    var requestLogs = await db.getAllRequestLogs(limit: 20, offset: offset);
+    setState(() {
+      logs.addAll(requestLogs);
+      offset += 20;
+      finished = requestLogs.length < 20;
+    });
   }
 
-  var plantTypes = ['土盆', '水盆', '仙盆'];
-
-  getPlantInfo(int index) {
-    int id;
-    if (index == 0) {
-      id = Global.userConfig.earthrPlant;
-    } else if (index == 1) {
-      id = Global.userConfig.waterPlant;
-    } else if (index == 2) {
-      id = Global.userConfig.hangPlant;
-    }
-    if (id != null) {
-      return Global.getFlowerInfoById(id).name;
-    }
-    return '未设置';
-  }
-
-  setPlant(Flower flower, int index) {
-    if (index == 0) {
-      Global.userConfig.earthrPlant = flower.plantId;
-    }
-    if (index == 1) {
-      Global.userConfig.waterPlant = flower.plantId;
-    }
-    if (index == 2) {
-      return Global.userConfig.hangPlant = flower.plantId;
-    }
-    Global.saveUserConfig();
-    setState(() {});
+  Future loadData() async {
+    offset = 0;
+    finished = false;
+    var db = DBUtil();
+    var requestLogs = await db.getAllRequestLogs(limit: 20, offset: offset);
+    setState(() {
+      logs = requestLogs;
+      offset += 20;
+      finished = requestLogs.length < 20;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("种植设置"),
+        title: Text("日志"),
       ),
-      body: ListView.separated(
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(plantTypes[index]),
-            subtitle: Text(getPlantInfo(index)),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {
-              Navigator.of(context)
-                  .push<Flower>(MaterialPageRoute(
-                builder: (context) => SelectFlowerPage(),
-              ))
-                  .then((Flower flower) {
-                setPlant(flower, index);
-              });
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return new Container(height: 1.0, color: Colors.grey[300]);
-        },
-        itemCount: 3,
+      body: RefreshIndicator(
+        onRefresh: loadData,
+        child: ListView.separated(
+          itemBuilder: (BuildContext context, int index) {
+            var log = logs[index];
+            return Column(
+              children: <Widget>[
+                Text(log.url),
+                Text(log.params),
+                Text(log.result.toString()),
+                // Text(log.response),
+              ],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return new Container(height: 1.0, color: Colors.grey[300]);
+          },
+          itemCount: logs.length,
+          controller: scrollController,
+        ),
       ),
     );
   }

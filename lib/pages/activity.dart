@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:rose_fz/utils/mg_data.dart';
 import 'package:rose_fz/global.dart';
 import 'package:rose_fz/user.dart';
 import 'package:rose_fz/utils/mg.dart';
@@ -236,29 +237,34 @@ class _ActivityState extends State<Activity> {
       if (type == 6) {
         return showActivityOperSnackBar(actConfig, '获得 金币 $count');
       }
-      if (id != 0) {
-        if (type == 16) {
-          var cfg = Global.getPergolaDecorateById(id);
-          return showActivityOperSnackBar(
-              actConfig, '获得 ${cfg.getAttribute('name')} $count 个');
-        }
-        var prop = Global.getPropById(id);
-        if (prop != null) {
-          return showActivityOperSnackBar(
-              actConfig, '获得 ${prop.getAttribute('name')} $count 个');
-        }
-        var flower = Global.getFlowerInfoBySeedId(id);
-        if (flower != null) {
-          return showActivityOperSnackBar(
-              actConfig, '获得 ${flower.getAttribute('name')} $count 个');
-        }
-        var petPK = Global.getPetPKById(id);
-        if (petPK != null) {
-          return showActivityOperSnackBar(
-              actConfig, '获得 ${petPK.getAttribute('name')} $count 个');
-        }
+      // if (id != 0) {
+      //   if (type == 16) {
+      //     var cfg = Global.getPergolaDecorateById(id);
+      //     return showActivityOperSnackBar(
+      //         actConfig, '获得 ${cfg.getAttribute('name')} $count 个');
+      //   }
+      //   var prop = Global.getPropById(id);
+      //   if (prop != null) {
+      //     return showActivityOperSnackBar(
+      //         actConfig, '获得 ${prop.getAttribute('name')} $count 个');
+      //   }
+      //   var flower = Global.getFlowerInfoBySeedId(id);
+      //   if (flower != null) {
+      //     return showActivityOperSnackBar(
+      //         actConfig, '获得 ${flower.getAttribute('name')} $count 个');
+      //   }
+      //   var petPK = Global.getPetPKById(id);
+      //   if (petPK != null) {
+      //     return showActivityOperSnackBar(
+      //         actConfig, '获得 ${petPK.getAttribute('name')} $count 个');
+      //   }
+      // }
+      // print(item);
+      var mgInfo = MGDataUtil.dicMapId['$id'];
+      if (mgInfo != null) {
+        return showActivityOperSnackBar(
+            actConfig, '获得 ${mgInfo.name} $count ${mgInfo.unit}');
       }
-      print(item);
       showActivityOperSnackBar(actConfig, '$id $type $count');
     }
   }

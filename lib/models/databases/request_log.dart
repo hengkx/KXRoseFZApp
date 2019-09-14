@@ -4,6 +4,9 @@ class RequestLog {
   String params;
   String response;
   String time;
+  int result;
+  String resultStr;
+  int uin;
 
   RequestLog();
 
@@ -14,6 +17,9 @@ class RequestLog {
       'params': params,
       'response': response,
       'time': time,
+      'result': result,
+      'resultStr': resultStr,
+      'uin': uin,
     };
     return map;
   }
@@ -24,5 +30,8 @@ class RequestLog {
     params = map['params'];
     response = map['response'];
     time = map['time'];
+    result = map['result'];
+    resultStr = map['resultStr'];
+    uin = map['uin'];
   }
 }
