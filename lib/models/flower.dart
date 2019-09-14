@@ -11,7 +11,7 @@ class Flower {
   int count;
   final String name;
   final String pyName;
-  final int combineId;
+  final String combineId;
 
   Flower({
     this.plantId,
