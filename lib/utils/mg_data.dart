@@ -1,5 +1,5 @@
-import 'package:kx_rose_fz/global.dart';
-import 'package:kx_rose_fz/models/award.dart';
+import 'package:rose_fz/global.dart';
+import 'package:rose_fz/models/award.dart';
 import 'package:xml/xml.dart';
 
 class MGInfo {

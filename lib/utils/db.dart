@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:kx_rose_fz/models/databases/request_log.dart';
+import 'package:rose_fz/models/databases/request_log.dart';
 
 class DBUtil {
   static final DBUtil _instance = new DBUtil.internal();

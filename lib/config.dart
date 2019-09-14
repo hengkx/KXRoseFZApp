@@ -6,7 +6,6 @@ import 'dart:math' show Random;
 import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
 import 'package:rose_fz/models/flower.dart';
-import 'package:rose_fz/utils/mg_data.dart';
 import 'package:rose_fz/utils/xe.dart';
 import 'package:xml/xml.dart';
 import 'package:path_provider/path_provider.dart';
@@ -19,7 +18,14 @@ class ExchangeItem {
 }
 
 class Global {
-  static Map<String, XmlElement> config;
+  static XmlDocument flowerConfig;
+  static XmlDocument roseConfig;
+  static XmlDocument propConfig;
+  static XmlDocument taskConfig;
+  static XmlDocument actGuideConfig;
+  static XmlDocument petPKConfig;
+  static XmlDocument pergolaDecorateConfig;
+  static XmlDocument charmLevelsConfig;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -42,6 +48,7 @@ class Global {
     if (!cfgDir.existsSync()) {
       cfgDir.createSync();
     }
+    print(cfgDir.path);
     if (userConfig == null) {
       final userConfigPath = "${directory.path}/userConfig.json";
 
@@ -54,8 +61,14 @@ class Global {
       }
       userConfig = UserConfig.fromJson(json.decode(userConfigJson));
     }
-    if (config == null) {
-      config = Map();
+    if (actGuideConfig == null ||
+        flowerConfig == null ||
+        propConfig == null ||
+        roseConfig == null ||
+        taskConfig == null ||
+        petPKConfig == null ||
+        pergolaDecorateConfig == null ||
+        charmLevelsConfig == null) {
       Dio dio = new Dio();
       var res = await dio.get<String>(
           'https://meigui.qq.com/Strategy.xml?v=${Random().nextDouble()}');
@@ -73,50 +86,45 @@ class Global {
         } else {
           loadConfig = parse(loadConfigFile.readAsStringSync());
         }
-        var folderPathUrl = loadConfig
-            .findAllElements('folderPath')
-            .toList()[0]
-            .getAttribute('url');
-        var actGuideConfigUrl = loadConfig
-            .findAllElements('item')
-            .where((xe) => xe.getAttribute("id") == 'actGuideConfig')
-            .toList()[0]
-            .getAttribute('url');
-        var flowerConfigUrl = loadConfig
-            .findAllElements('item')
-            .where((xe) => xe.getAttribute("id") == 'flowerConfig')
-            .toList()[0]
-            .getAttribute('url');
-        var configZipUrl = loadConfig
-            .findAllElements('item')
-            .where((xe) => xe.getAttribute("id") == 'config_zip')
-            .toList()[0]
-            .getAttribute('url');
-
-        XmlDocument doc;
-
+        var folderPathUrl = '';
+        var actGuideConfigUrl = '';
+        var flowerConfigUrl = '';
+        var configZipUrl = '';
+        for (var item in loadConfig.findAllElements('folderPath')) {
+          folderPathUrl = item.getAttribute('url');
+          break;
+        }
+        for (var item in loadConfig.findAllElements('item')) {
+          if (actGuideConfigUrl != '' &&
+              flowerConfigUrl != '' &&
+              configZipUrl != '') {
+            break;
+          }
+          if (item.getAttribute('id') == 'actGuideConfig') {
+            actGuideConfigUrl = item.getAttribute('url');
+          } else if (item.getAttribute('id') == 'flowerConfig') {
+            flowerConfigUrl = item.getAttribute('url');
+          } else if (item.getAttribute('id') == 'config_zip') {
+            configZipUrl = item.getAttribute('url');
+          }
+        }
         File actGuideConfigFile = File("${directory.path}/$actGuideConfigUrl");
         if (!actGuideConfigFile.existsSync()) {
           res = await dio.get<String>('$folderPathUrl$actGuideConfigUrl');
           actGuideConfigFile.writeAsStringSync(res.data);
-          doc = parse(res.data);
+          actGuideConfig = parse(res.data);
         } else {
-          doc = parse(actGuideConfigFile.readAsStringSync());
+          actGuideConfig = parse(actGuideConfigFile.readAsStringSync());
         }
-
-        config['actGuideConfig'] = doc.findAllElements('data').toList()[0];
 
         File flowerConfigFile = File("${directory.path}/$flowerConfigUrl");
         if (!flowerConfigFile.existsSync()) {
           res = await dio.get<String>('$folderPathUrl$flowerConfigUrl');
           flowerConfigFile.writeAsStringSync(res.data);
-          doc = parse(res.data);
+          flowerConfig = parse(res.data);
         } else {
-          doc = parse(flowerConfigFile.readAsStringSync());
+          flowerConfig = parse(flowerConfigFile.readAsStringSync());
         }
-        config['flower'] = doc.findAllElements('flower').toList()[0];
-        config['variationFlowerSeed'] =
-            doc.findAllElements('variationFlowerSeed').toList()[0];
 
         File configZipFile = File("${directory.path}/$configZipUrl");
         var configFileDir = Directory(
@@ -140,42 +148,21 @@ class Global {
             }
           }
         }
-        configFileDir.listSync().forEach((item) {
-          File file = File(item.path);
-          var key = file.path
-              .substring(file.path.lastIndexOf('/') + 1)
-              .replaceAll('.xml', '');
-          doc = parse(file.readAsStringSync());
-          switch (key) {
-            case 'propConfig':
-              config['prop'] = doc.findAllElements('propConfig').toList()[0];
-              config['special'] = doc.findAllElements('special').toList()[0];
-              config['meterial'] = doc.findAllElements('meterial').toList()[0];
-              config['decoration'] =
-                  doc.findAllElements('decrateConfig').toList()[0];
-              config['otherProps'] =
-                  doc.findAllElements('otherProps').toList()[0];
-              config['bouquet'] = doc.findAllElements('bouquet').toList()[0];
-              break;
-            case 'ruleConfig':
-              config['gameRules'] =
-                  doc.findAllElements('ruleConfig').toList()[0];
-              config['gameExpLevel'] =
-                  doc.findAllElements('expLevel').toList()[0];
-              break;
-            case 'adventureConfig':
-              config['adventureEvent'] =
-                  doc.findAllElements('AdventureEvent').toList()[0];
-              config['adventureMap'] =
-                  doc.findAllElements('AdventureMap').toList()[0];
-              break;
-            default:
-              config[key.replaceAll('Config', '')] = doc.rootElement;
-              break;
-          }
-        });
+
+        roseConfig = parse(
+            File('${configFileDir.path}/roseConfig.xml').readAsStringSync());
+        taskConfig = parse(
+            File('${configFileDir.path}/taskConfig.xml').readAsStringSync());
+        propConfig = parse(
+            File('${configFileDir.path}/propConfig.xml').readAsStringSync());
+        petPKConfig = parse(
+            File('${configFileDir.path}/petPKConfig.xml').readAsStringSync());
+        pergolaDecorateConfig = parse(
+            File('${configFileDir.path}/petPKConfig.xml').readAsStringSync());
+        charmLevelsConfig = parse(
+            File('${configFileDir.path}/charmLevelsConfig.xml')
+                .readAsStringSync());
       }
-      MGDataUtil.initInfoMap();
     }
   }
 
@@ -190,7 +177,7 @@ class Global {
 
   /// 通过种子id查询鲜花信息
   static XmlElement getFlowerInfoBySeedId(int id) {
-    var res = Global.config['flower']
+    var res = Global.flowerConfig
         .findAllElements("item")
         .where((xe) => xe.getAttribute("seedID") == "$id")
         .toList();
@@ -201,12 +188,12 @@ class Global {
   }
 
   static Flower getFlowerInfoById(int id) {
-    var res = Global.config['flower']
+    var res = Global.flowerConfig
         .findAllElements("item")
         .where((xe) => xe.getAttribute("id") == "$id")
         .toList();
     if (res.length == 0) {
-      res = Global.config['roseConfig']
+      res = Global.roseConfig
           .findAllElements("item")
           .where((xe) => xe.getAttribute("id") == "$id")
           .toList();
@@ -218,7 +205,7 @@ class Global {
   }
 
   static XmlElement getPropById(int id) {
-    var res = Global.config['propConfig']
+    var res = Global.propConfig
         .findAllElements("item")
         .where((xe) =>
             xe.getAttribute("id") == "$id" || xe.getAttribute("svrID") == "$id")
@@ -230,7 +217,7 @@ class Global {
   }
 
   static XmlElement getPetPKById(int id) {
-    var res = Global.config['propConfig']
+    var res = Global.propConfig
         .findAllElements("item")
         .where((xe) => xe.getAttribute("id") == "$id")
         .toList();
@@ -241,7 +228,7 @@ class Global {
   }
 
   static XmlElement getPergolaDecorateById(int id) {
-    var res = Global.config['pergolaDecorateConfig']
+    var res = Global.pergolaDecorateConfig
         .findAllElements("item")
         .where((xe) => xe.getAttribute("id") == "$id")
         .toList();

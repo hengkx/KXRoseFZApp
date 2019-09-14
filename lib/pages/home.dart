@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kx_rose_fz/global.dart';
-import 'package:kx_rose_fz/utils/uin_crypt.dart';
+import 'package:rose_fz/global.dart';
+import 'package:rose_fz/utils/uin_crypt.dart';
 import 'package:package_info/package_info.dart';
 import '../user.dart';
 import '../utils/mg.dart';

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:gbk2utf8/gbk2utf8.dart';
-import 'package:kx_rose_fz/models/databases/request_log.dart';
-import 'package:kx_rose_fz/utils/db.dart';
+import 'package:rose_fz/models/databases/request_log.dart';
+import 'package:rose_fz/utils/db.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import './pages/home.dart';
-import './pages/one_key_login.dart';
-import './pages/settings/speed_fertilizer.dart';
-import 'pages/settings/plant.dart';
+import 'package:rose_fz/pages/home.dart';
+import 'package:rose_fz/pages/one_key_login.dart';
+import 'package:rose_fz/pages/settings/plant.dart';
+import 'package:rose_fz/pages/settings/speed_fertilizer.dart';
 
 void main() => runApp(MyApp());
 

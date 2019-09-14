@@ -1,5 +1,5 @@
-import 'package:kx_rose_fz/models/flower.dart';
-import 'package:kx_rose_fz/models/soil.dart';
+import 'package:rose_fz/models/flower.dart';
+import 'package:rose_fz/models/soil.dart';
 
 class PlantUtil {
   static bool isPlant(Flower flower, Soil soil) {

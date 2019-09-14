@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kx_rose_fz/models/flower.dart';
-import 'package:kx_rose_fz/models/soil.dart';
-import 'package:kx_rose_fz/utils/plant.dart';
-import 'package:kx_rose_fz/utils/xe.dart';
+import 'package:rose_fz/models/flower.dart';
+import 'package:rose_fz/models/soil.dart';
+import 'package:rose_fz/utils/plant.dart';
+import 'package:rose_fz/utils/xe.dart';
 
 import '../global.dart';
 import '../user.dart';

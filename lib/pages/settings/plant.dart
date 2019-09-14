@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kx_rose_fz/global.dart';
-import 'package:kx_rose_fz/models/flower.dart';
-import 'package:kx_rose_fz/pages/select_flower.dart';
+import 'package:rose_fz/global.dart';
+import 'package:rose_fz/models/flower.dart';
+import 'package:rose_fz/pages/select_flower.dart';
 
 class PlantSetting extends StatefulWidget {
   @override

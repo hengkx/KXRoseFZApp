@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:kx_rose_fz/global.dart';
-import 'package:kx_rose_fz/user.dart';
-import 'package:kx_rose_fz/utils/mg.dart';
+import 'package:rose_fz/global.dart';
+import 'package:rose_fz/user.dart';
+import 'package:rose_fz/utils/mg.dart';
 
 final dateFormat = new DateFormat('yyyy-MM-dd HH:mm');
 

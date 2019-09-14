@@ -1,4 +1,4 @@
-import 'package:kx_rose_fz/models/soil.dart';
+import 'package:rose_fz/models/soil.dart';
 
 import './http.dart';
 import 'package:intl/intl.dart';

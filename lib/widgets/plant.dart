@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:kx_rose_fz/models/flower.dart';
-import 'package:kx_rose_fz/models/soil.dart';
-import 'package:kx_rose_fz/utils/plant.dart';
+import 'package:rose_fz/models/flower.dart';
+import 'package:rose_fz/models/soil.dart';
+import 'package:rose_fz/utils/plant.dart';
 
 import '../pages/plant_oper.dart';
 import '../pages/select_flower.dart';

@@ -1,4 +1,4 @@
-import 'package:kx_rose_fz/models/flower.dart';
+import 'package:rose_fz/models/flower.dart';
 import 'package:lpinyin/lpinyin.dart';
 import 'package:xml/xml.dart';
 

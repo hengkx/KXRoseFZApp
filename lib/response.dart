@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:kx_rose_fz/global.dart';
+import 'package:rose_fz/global.dart';
 
 part 'response.g.dart';
 
