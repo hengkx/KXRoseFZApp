@@ -1,5 +1,5 @@
-import './soil.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:kx_rose_fz/models/soil.dart';
 
 part 'response.g.dart';
 
