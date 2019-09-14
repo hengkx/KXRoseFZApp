@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kx_rose_fz/utils/db.dart';
+import 'package:kx_rose_fz/global.dart';
 import 'package:kx_rose_fz/utils/uin_crypt.dart';
 import 'package:package_info/package_info.dart';
 import '../user.dart';
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   String version;
   init() async {
     packageInfo = await PackageInfo.fromPlatform();
-
+    await Global.init();
     setState(() {
       version = packageInfo.version;
     });
@@ -131,6 +131,7 @@ class _HomePageState extends State<HomePage> {
             ),
             getDrawerItem('默认种植设置', '/settings/plant'),
             getDrawerItem('加速化肥设置', '/settings/speed'),
+            getDrawerItem('日志', '/log'),
             getDrawerItem('切换帐号', '/login'),
             Text(
               "版本：$version",

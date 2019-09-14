@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../utils/mg.dart';
-import '../config.dart';
+import '../global.dart';
 
 final dateFormat = new DateFormat('MM-dd HH:mm');
 
@@ -31,7 +31,7 @@ class _TaskState extends State<Task> {
   }
 
   init() async {
-    await Config.init();
+    await Global.init();
     await loadTask();
   }
 
@@ -58,7 +58,7 @@ class _TaskState extends State<Task> {
 
   TaskConfig getTaskConfig(task) {
     TaskConfig taskConfig = new TaskConfig();
-    for (var item in Config.taskConfig.findAllElements("item")) {
+    for (var item in Global.config['task'].findAllElements("item")) {
       if (item.getAttribute('id') == "${task.taskID}") {
         taskConfig.name = item.getAttribute('name');
         var rule = item.findAllElements("rule").toList()[0];

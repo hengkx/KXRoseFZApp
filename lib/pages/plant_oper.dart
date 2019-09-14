@@ -1,7 +1,7 @@
 import 'package:kx_rose_fz/models/flower.dart';
 import 'package:kx_rose_fz/models/soil.dart';
 
-import '../config.dart';
+import '../global.dart';
 import '../response.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -60,7 +60,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
   }
 
   SpeedFertilizer matchFertilizer(int minute) {
-    var speeds = Config.userConfig.speeds;
+    var speeds = Global.userConfig.speeds;
     for (var i = 0; i < speeds.length; i++) {
       var speedFertilizer = speeds[i];
       if (speeds[i].use &&

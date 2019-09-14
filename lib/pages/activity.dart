@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../user.dart';
-import '../utils/mg.dart';
-import '../config.dart';
+import 'package:kx_rose_fz/global.dart';
+import 'package:kx_rose_fz/user.dart';
+import 'package:kx_rose_fz/utils/mg.dart';
 
 final dateFormat = new DateFormat('yyyy-MM-dd HH:mm');
 
@@ -36,7 +36,7 @@ class _ActivityState extends State<Activity> {
   }
 
   init() async {
-    await Config.init();
+    await Global.init();
     ActConfig actConfig = ActConfig();
     actConfig.id = '15';
     actConfig.name = '幸福蛋';
@@ -66,7 +66,8 @@ class _ActivityState extends State<Activity> {
     }
     DateTime now = DateTime.now();
     var unixtime = now.millisecondsSinceEpoch / 1000;
-    var limit = Config.actGuideConfig.findAllElements('limit').toList()[0];
+    var limit =
+        Global.config['actGuideConfig'].findAllElements('limit').toList()[0];
     for (var item in limit.findAllElements('item')) {
       var id = item.getAttribute('id');
       if (item.getAttribute('start') != null &&
@@ -237,21 +238,21 @@ class _ActivityState extends State<Activity> {
       }
       if (id != 0) {
         if (type == 16) {
-          var cfg = Config.getPergolaDecorateById(id);
+          var cfg = Global.getPergolaDecorateById(id);
           return showActivityOperSnackBar(
               actConfig, '获得 ${cfg.getAttribute('name')} $count 个');
         }
-        var prop = Config.getPropById(id);
+        var prop = Global.getPropById(id);
         if (prop != null) {
           return showActivityOperSnackBar(
               actConfig, '获得 ${prop.getAttribute('name')} $count 个');
         }
-        var flower = Config.getFlowerInfoBySeedId(id);
+        var flower = Global.getFlowerInfoBySeedId(id);
         if (flower != null) {
           return showActivityOperSnackBar(
               actConfig, '获得 ${flower.getAttribute('name')} $count 个');
         }
-        var petPK = Config.getPetPKById(id);
+        var petPK = Global.getPetPKById(id);
         if (petPK != null) {
           return showActivityOperSnackBar(
               actConfig, '获得 ${petPK.getAttribute('name')} $count 个');

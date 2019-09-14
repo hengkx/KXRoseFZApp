@@ -5,7 +5,7 @@ import 'package:kx_rose_fz/models/soil.dart';
 import 'package:kx_rose_fz/utils/plant.dart';
 import 'package:kx_rose_fz/utils/xe.dart';
 
-import '../config.dart';
+import '../global.dart';
 import '../user.dart';
 import '../utils/mg.dart';
 import '../widgets/round_rect.dart';
@@ -34,9 +34,9 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
   final List<String> filters = [];
 
   init() async {
-    await Config.init();
+    await Global.init();
     User.initFirstRes = await MGUtil.getInitFirst();
-    for (var item in Config.flowerConfig.findAllElements("item")) {
+    for (var item in Global.config['flower'].findAllElements("item")) {
       var flower = XE.toFlower(item);
       int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
       flower.count = count;
@@ -45,7 +45,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
       }
     }
     if (soil == null || soil.type == 0 || soil.hanglevel == 4) {
-      for (var item in Config.roseConfig.findAllElements("item")) {
+      for (var item in Global.config['rose'].findAllElements("item")) {
         var flower = XE.toFlower(item);
         int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
         flower.type = 100;

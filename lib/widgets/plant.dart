@@ -11,7 +11,7 @@ import '../pages/select_flower.dart';
 import '../user.dart';
 import '../widgets/round_rect.dart';
 import '../utils/mg.dart';
-import '../config.dart';
+import '../global.dart';
 
 final dateFormat = new DateFormat('MM-dd HH:mm');
 
@@ -30,7 +30,7 @@ class _PlantWidgetState extends State<PlantWidget> {
   }
 
   init() async {
-    await Config.init();
+    await Global.init();
     User.initFirstRes = await MGUtil.getInitFirst();
     await loadPlant();
   }
@@ -298,14 +298,14 @@ class _PlantWidgetState extends State<PlantWidget> {
   Flower getPlantFlower(Soil soil) {
     int id;
     if (soil.type == 0) {
-      id = Config.userConfig.earthrPlant;
+      id = Global.userConfig.earthrPlant;
     } else if (soil.type == 1) {
-      id = Config.userConfig.waterPlant;
+      id = Global.userConfig.waterPlant;
     } else if (soil.type == 3) {
-      id = Config.userConfig.hangPlant;
+      id = Global.userConfig.hangPlant;
     }
     if (id != null) {
-      var flower = Config.getFlowerInfoById(id);
+      var flower = Global.getFlowerInfoById(id);
       flower.count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
       return flower;
     }

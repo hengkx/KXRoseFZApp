@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../user_config.dart';
 import '../../widgets/text_field_alert.dart';
-import '../../config.dart';
+import '../../global.dart';
 
 class SpeedFertilizerSetting extends StatefulWidget {
   @override
@@ -15,11 +15,11 @@ class _SpeedFertilizerSettingState extends State<SpeedFertilizerSetting> {
   _onReorder(int oldIndex, int newIndex) {
     print('oldIndex: $oldIndex , newIndex: $newIndex');
     setState(() {
-      if (newIndex == Config.userConfig.speeds.length) {
-        newIndex = Config.userConfig.speeds.length - 1;
+      if (newIndex == Global.userConfig.speeds.length) {
+        newIndex = Global.userConfig.speeds.length - 1;
       }
-      var item = Config.userConfig.speeds.removeAt(oldIndex);
-      Config.userConfig.speeds.insert(newIndex, item);
+      var item = Global.userConfig.speeds.removeAt(oldIndex);
+      Global.userConfig.speeds.insert(newIndex, item);
       saveConfig();
     });
   }
@@ -46,7 +46,7 @@ class _SpeedFertilizerSettingState extends State<SpeedFertilizerSetting> {
   }
 
   saveConfig() {
-    Config.saveUserConfig();
+    Global.saveUserConfig();
   }
 
   @override
@@ -56,7 +56,7 @@ class _SpeedFertilizerSettingState extends State<SpeedFertilizerSetting> {
         title: Text("加速化肥设置"),
       ),
       body: ReorderableListView(
-        children: Config.userConfig.speeds
+        children: Global.userConfig.speeds
             .map((item) => Row(
                   key: ObjectKey(item),
                   children: <Widget>[

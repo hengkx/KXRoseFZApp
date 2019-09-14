@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../utils/mg.dart';
-import '../config.dart';
+import '../global.dart';
 
 class ExchangeWidget extends StatefulWidget {
   @override
@@ -55,7 +55,7 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
       alignment: Alignment(0, 0),
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          var exchange = Config.exhanges[index];
+          var exchange = Global.exhanges[index];
           return ListTile(
             title: Text(exchange.name),
             onTap: () {
@@ -63,7 +63,7 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
             },
           );
         },
-        itemCount: Config.exhanges.length,
+        itemCount: Global.exhanges.length,
       ),
     );
   }

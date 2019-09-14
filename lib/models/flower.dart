@@ -12,6 +12,8 @@ class Flower {
   final String name;
   final String pyName;
   final String combineId;
+  final String times;
+  final String multiSeason;
 
   Flower({
     this.plantId,
@@ -25,6 +27,8 @@ class Flower {
     this.season,
     this.potLevel,
     this.combineId,
+    this.times,
+    this.multiSeason,
   });
 
   String getTypeName() {

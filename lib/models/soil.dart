@@ -1,4 +1,4 @@
-import 'package:kx_rose_fz/config.dart';
+import 'package:kx_rose_fz/global.dart';
 import 'package:xml/xml.dart';
 
 class Soil {
@@ -77,10 +77,10 @@ class Soil {
     } else if (soilsate == 51) {
       plantShowName = "[空盆]";
     } else {
-      var flower = getFlowerInfoById(soilsate);
+      var flower = Global.getFlowerInfoById(soilsate);
       if (flower != null) {
-        plantShowName = flower.getAttribute("name");
-        if (flower.getAttribute("season") != null) {
+        plantShowName = flower.name;
+        if (flower.season != null && flower.season != 0) {
           plantShowName += " 第$season季";
         }
       }
@@ -96,28 +96,23 @@ class Soil {
           getGainTime(soilsate, soil["rosebegintime"].toString(), season);
     }
     if (soil["decorpot"] != null) {
-      var props = Config.propConfig
-          .findAllElements("item")
-          .where((xe) => xe.getAttribute("id") == "${soil["decorpot"]}")
-          .toList();
-      if (props.length > 0) {
-        decorpotName = props[0].getAttribute("name");
-      }
+      var prop = Global.getPropById(soil["decorpot"]);
+      decorpotName = prop.getAttribute("name");
     }
     rosestate = soil["rosestate"];
     status = getStatus(rosestate);
   }
 
   static getGainTime(int id, String beginTime, [int season = 1]) {
-    var flower = getFlowerInfoById(id);
+    var flower = Global.getFlowerInfoById(id);
 
     var strTimes = beginTime.toString().split("-");
     var plantTime = DateTime.parse(
         "${strTimes[0]}-${strTimes[1]}-${strTimes[2]} ${strTimes[3]}:${strTimes[4]}:${strTimes[5]}");
 
-    var times = flower.getAttribute("times").split(",");
+    var times = flower.times.split(",");
     if (season > 1) {
-      var multiSeasons = flower.getAttribute("multiSeason").split(",");
+      var multiSeasons = flower.multiSeason.split(",");
       return plantTime.add(new Duration(minutes: int.parse(multiSeasons[3])));
     }
     return plantTime.add(new Duration(minutes: int.parse(times[3])));
@@ -151,23 +146,6 @@ class Soil {
       default:
         return "[空]";
     }
-  }
-
-  static XmlElement getFlowerInfoById(int id) {
-    var res = Config.flowerConfig
-        .findAllElements("item")
-        .where((xe) => xe.getAttribute("id") == "$id")
-        .toList();
-    if (res.length == 0) {
-      res = Config.roseConfig
-          .findAllElements("item")
-          .where((xe) => xe.getAttribute("id") == "$id")
-          .toList();
-    }
-    if (res.length > 0) {
-      return res[0];
-    }
-    return null;
   }
 
   String getAttrString() {

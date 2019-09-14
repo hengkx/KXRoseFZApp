@@ -4,14 +4,14 @@ import 'package:kx_rose_fz/global.dart';
 import 'package:kx_rose_fz/models/flower.dart';
 import 'package:kx_rose_fz/pages/select_flower.dart';
 
-class PlantSetting extends StatefulWidget {
+class LogPage extends StatefulWidget {
   @override
-  _PlantSettingState createState() {
-    return new _PlantSettingState();
+  _LogPageState createState() {
+    return new _LogPageState();
   }
 }
 
-class _PlantSettingState extends State<PlantSetting> {
+class _LogPageState extends State<LogPage> {
   @override
   void initState() {
     super.initState();

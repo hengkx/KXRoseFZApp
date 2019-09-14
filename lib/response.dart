@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:kx_rose_fz/models/soil.dart';
+import 'package:kx_rose_fz/global.dart';
 
 part 'response.g.dart';
 
@@ -132,7 +132,7 @@ class PlantResponse extends BaseResponse {
 
   @override
   String toString() {
-    String roseName = Soil.getFlowerInfoById(soilsate).getAttribute("name");
+    String roseName = Global.getFlowerInfoById(soilsate).name;
     String fruitgiftStr = "";
     String giftStr = "";
     if (fruitgift != null) {
@@ -181,8 +181,7 @@ class GainResponse extends BaseResponse {
 
   @override
   String toString() {
-    String roseName =
-        Soil.getFlowerInfoById(igainrosetype).getAttribute("name");
+    String roseName = Global.getFlowerInfoById(igainrosetype).name;
     String fruitgiftStr = "";
     String giftStr = "";
     if (fruitgift != null) {

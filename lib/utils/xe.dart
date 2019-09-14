@@ -12,6 +12,8 @@ class XE {
     var seedId = int.parse(item.getAttribute("seedID") ?? '0');
     int seedPrice = int.parse(item.getAttribute("seedPrice"));
     var name = item.getAttribute("name");
+    var times = item.getAttribute("times");
+    var multiSeason = item.getAttribute("multiSeason");
     var flower = Flower(
       plantId: plantId,
       seedId: seedId,
@@ -23,6 +25,8 @@ class XE {
       pyName: PinyinHelper.getShortPinyin(name),
       name: name,
       combineId: combineId,
+      times: times,
+      multiSeason: multiSeason,
     );
 
     return flower;
