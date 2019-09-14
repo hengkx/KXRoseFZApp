@@ -5,6 +5,7 @@ import 'package:xml/xml.dart';
 class XE {
   static Flower toFlower(XmlElement item) {
     var plantId = int.parse(item.getAttribute("id"));
+    String combineId = item.getAttribute("combineid");
     int type = int.parse(item.getAttribute("type") ?? "99");
     int potLevel = int.parse(item.getAttribute("potLevel") ?? "0");
     int season = int.parse(item.getAttribute("season") ?? "0");
@@ -21,6 +22,7 @@ class XE {
       seedPriceQPoint: int.parse(item.getAttribute("seedPriceQPoint")),
       pyName: PinyinHelper.getShortPinyin(name),
       name: name,
+      combineId: combineId,
     );
 
     return flower;
