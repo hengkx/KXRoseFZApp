@@ -25,7 +25,7 @@ class ActConfig {
   int sort;
 }
 
-List<int> includeActivities = [26, 36, 42, 76, 78];
+List<int> includeActivities = [15, 26, 36, 42, 76, 78];
 List<int> excludeActivities = [62, 77];
 
 class _ActivityState extends State<Activity> {
@@ -37,6 +37,13 @@ class _ActivityState extends State<Activity> {
 
   init() async {
     await Config.init();
+    ActConfig actConfig = ActConfig();
+    actConfig.id = '15';
+    actConfig.name = '幸福蛋';
+    actConfig.desc = '小镇幸福蛋每日首敲必得稀有道具，还有多倍积分噢！';
+    actConfig.isActive = true;
+    actConfig.sort = 1000;
+    actConfigs.add(actConfig);
     if (User.initFirstRes != null && User.initFirstRes.huaYuanTreasure == 1) {
       ActConfig actConfig = ActConfig();
       actConfig.id = 'huayuantreasure2017_npc';
@@ -328,8 +335,54 @@ class _ActivityState extends State<Activity> {
     }
   }
 
+  /// 幸福蛋
+  xingFuDan(ActConfig actConfig) async {
+    int cmd = 198;
+    var parmas = {'request': 1, 'cmd': cmd};
+    var initRes = await MGUtil.activityOper(parmas);
+    if (initRes['result'] == 0) {
+      var activity;
+      for (var item in initRes['subActivity']) {
+        if (item['type'] == 1) {
+          activity = item;
+          break;
+        }
+      }
+      if (activity != null) {
+        if (activity['left'] > 0) {
+          parmas = {
+            'request': 3,
+            'cmd': cmd,
+            'auto': 0,
+            'count': 1,
+            'index': activity['uniqID']
+          };
+          if (DateTime.now().millisecondsSinceEpoch / 1000 >
+              activity['coolEndT']) {
+            var res = await MGUtil.activityOper(parmas);
+            if (res['result'] == 0) {
+              showActivityOperAward(actConfig, res['award']);
+            } else {
+              showActivityOperSnackBar(actConfig, res['resultstr']);
+            }
+          } else {
+            var coolEndT = DateFormat("yyyy-MM-dd HH:mm:ss").format(
+                DateTime.fromMillisecondsSinceEpoch(
+                    activity['coolEndT'] * 1000));
+            showActivityOperSnackBar(actConfig, '冷却时间$coolEndT');
+          }
+        }
+      }
+    } else {
+      showActivityOperSnackBar(actConfig, initRes['resultstr']);
+    }
+  }
+
   handleTap(ActConfig actConfig) async {
     switch (actConfig.name) {
+      case '幸福蛋':
+        await xingFuDan(actConfig);
+        break;
       case '花园寻宝':
         await huaYuanTreasure(actConfig);
         break;
