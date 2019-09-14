@@ -40,7 +40,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
       var flower = XE.toFlower(item);
       int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
       flower.count = count;
-      if (Plant.isPlant(flower, soil)) {
+      if (PlantUtil.isPlant(flower, soil)) {
         flowers.add(flower);
       }
     }
@@ -50,7 +50,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
         int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
         flower.type = 100;
         flower.count = count;
-        if (Plant.isPlant(flower, soil)) {
+        if (PlantUtil.isPlant(flower, soil)) {
           flowers.add(flower);
         }
       }

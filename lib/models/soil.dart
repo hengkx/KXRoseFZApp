@@ -23,6 +23,9 @@ class Soil {
   /// 花盆等级
   int potLevel;
 
+  /// 第几季
+  int season;
+
   String typeName;
   String decorpotName = "";
 
@@ -68,6 +71,7 @@ class Soil {
 
     typeName = getSoilType(soil["SoilType"]);
     soilsate = soil["soilsate"];
+    season = soil["season"];
     if (soilsate == 50) {
       plantShowName = "[枯萎]";
     } else if (soilsate == 51) {
@@ -76,9 +80,8 @@ class Soil {
       var flower = getFlowerInfoById(soilsate);
       if (flower != null) {
         plantShowName = flower.getAttribute("name");
-        var season = flower.getAttribute("season");
-        if (season != null) {
-          plantShowName += " 第${soil["season"]}季";
+        if (flower.getAttribute("season") != null) {
+          plantShowName += " 第$season季";
         }
       }
       isDouble = soil["isDouble"] == 1;
@@ -89,8 +92,8 @@ class Soil {
       plantTime = DateTime.parse(
           "${strTimes[0]}-${strTimes[1]}-${strTimes[2]} ${strTimes[3]}:${strTimes[4]}:${strTimes[5]}");
 
-      var times = flower.getAttribute("times").split(",");
-      gainTime = plantTime.add(new Duration(minutes: int.parse(times[3])));
+      gainTime =
+          getGainTime(soilsate, soil["rosebegintime"].toString(), season);
     }
     if (soil["decorpot"] != null) {
       var props = Config.propConfig
@@ -105,7 +108,7 @@ class Soil {
     status = getStatus(rosestate);
   }
 
-  static getGainTime(int id, String beginTime) {
+  static getGainTime(int id, String beginTime, [int season = 1]) {
     var flower = getFlowerInfoById(id);
 
     var strTimes = beginTime.toString().split("-");
@@ -113,6 +116,10 @@ class Soil {
         "${strTimes[0]}-${strTimes[1]}-${strTimes[2]} ${strTimes[3]}:${strTimes[4]}:${strTimes[5]}");
 
     var times = flower.getAttribute("times").split(",");
+    if (season > 1) {
+      var multiSeasons = flower.getAttribute("multiSeason").split(",");
+      return plantTime.add(new Duration(minutes: int.parse(multiSeasons[3])));
+    }
     return plantTime.add(new Duration(minutes: int.parse(times[3])));
   }
 

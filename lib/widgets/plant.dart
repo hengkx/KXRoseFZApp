@@ -320,7 +320,7 @@ class _PlantWidgetState extends State<PlantWidget> {
     for (var soil in operSoils) {
       var flower = getPlantFlower(soil);
       if (flower != null) {
-        if (Plant.isPlant(flower, soil)) {
+        if (PlantUtil.isPlant(flower, soil)) {
           await plant(soil, flower);
         } else {
           showSnackBar('${flower.name} 不符合种植条件');
