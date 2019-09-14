@@ -1,5 +1,5 @@
+import 'package:kx_rose_fz/config.dart';
 import 'package:xml/xml.dart';
-import 'config.dart';
 
 class Soil {
   int no;

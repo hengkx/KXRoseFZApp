@@ -1,3 +1,6 @@
+import 'package:kx_rose_fz/models/flower.dart';
+import 'package:kx_rose_fz/models/soil.dart';
+
 class Plant {
   static bool isPlant(Flower flower, Soil soil) {
     if (soil == null) {
