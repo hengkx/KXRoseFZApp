@@ -214,20 +214,22 @@ class _ActivityState extends State<Activity> {
       // print('$id $type $count');
       // 31007 0 5 3级灵石
       // 0 6 500
-      var prop = Config.getPropById(id);
-      if (prop != null) {
-        return showActivityOperSnackBar(
-            actConfig, '获得 ${prop.getAttribute('name')} $count 个');
-      }
-      var flower = Config.getFlowerInfoBySeedId(id);
-      if (flower != null) {
-        return showActivityOperSnackBar(
-            actConfig, '获得 ${flower.getAttribute('name')} $count 个');
-      }
-      var petPK = Config.getPetPKById(id);
-      if (petPK != null) {
-        return showActivityOperSnackBar(
-            actConfig, '获得 ${petPK.getAttribute('name')} $count 个');
+      if (id != 0) {
+        var prop = Config.getPropById(id);
+        if (prop != null) {
+          return showActivityOperSnackBar(
+              actConfig, '获得 ${prop.getAttribute('name')} $count 个');
+        }
+        var flower = Config.getFlowerInfoBySeedId(id);
+        if (flower != null) {
+          return showActivityOperSnackBar(
+              actConfig, '获得 ${flower.getAttribute('name')} $count 个');
+        }
+        var petPK = Config.getPetPKById(id);
+        if (petPK != null) {
+          return showActivityOperSnackBar(
+              actConfig, '获得 ${petPK.getAttribute('name')} $count 个');
+        }
       }
       print(item);
       showActivityOperSnackBar(actConfig, '$id $type $count');
