@@ -44,14 +44,25 @@ class _ActivityState extends State<Activity> {
     actConfig.isActive = true;
     actConfig.sort = 1000;
     actConfigs.add(actConfig);
-    if (User.initFirstRes != null && User.initFirstRes.huaYuanTreasure == 1) {
-      ActConfig actConfig = ActConfig();
-      actConfig.id = 'huayuantreasure2017_npc';
-      actConfig.name = '花园寻宝';
-      actConfig.desc = '花园寻宝';
-      actConfig.isActive = true;
-      actConfig.sort = 999;
-      actConfigs.add(actConfig);
+    if (User.initFirstRes != null) {
+      if (User.initFirstRes.huaYuanTreasure == 1) {
+        ActConfig actConfig = ActConfig();
+        actConfig.id = 'huayuantreasure2017_npc';
+        actConfig.name = '花园寻宝';
+        actConfig.desc = '花园寻宝';
+        actConfig.isActive = true;
+        actConfig.sort = 999;
+        actConfigs.add(actConfig);
+      }
+      if (User.initFirstRes.weekendWelfare == 1) {
+        ActConfig actConfig = ActConfig();
+        actConfig.id = 'weekendwelfare_npc';
+        actConfig.name = '周末活动';
+        actConfig.desc = '周末活动';
+        actConfig.isActive = true;
+        actConfig.sort = 999;
+        actConfigs.add(actConfig);
+      }
     }
     DateTime now = DateTime.now();
     var unixtime = now.millisecondsSinceEpoch / 1000;
@@ -218,10 +229,18 @@ class _ActivityState extends State<Activity> {
       if (type == 4) {
         return showActivityOperSnackBar(actConfig, '获得 经验值 $count');
       }
-      // print('$id $type $count');
-      // 31007 0 5 3级灵石
-      // 0 6 500
+      if (type == 5) {
+        return showActivityOperSnackBar(actConfig, '获得 魅力 $count');
+      }
+      if (type == 6) {
+        return showActivityOperSnackBar(actConfig, '获得 金币 $count');
+      }
       if (id != 0) {
+        if (type == 16) {
+          var cfg = Config.getPergolaDecorateById(id);
+          return showActivityOperSnackBar(
+              actConfig, '获得 ${cfg.getAttribute('name')} $count 个');
+        }
         var prop = Config.getPropById(id);
         if (prop != null) {
           return showActivityOperSnackBar(
@@ -246,32 +265,6 @@ class _ActivityState extends State<Activity> {
   showActivityOperSnackBar(ActConfig actConfig, String content) {
     showSnackBar('${actConfig.name} $content');
   }
-
-  // /// 中秋月圆
-  // zhongQiuYueYuan(ActConfig actConfig) async {
-  //   int cmd = 227;
-  //   var parmas = {'request': 1, 'cmd': cmd};
-  //   var initRes = await MGUtil.activityOper(parmas);
-  //   if (initRes['result'] == 0) {
-  //     var freeCount = initRes['free'];
-  //     if (freeCount > 0) {
-  //       parmas = {
-  //         'request': 3,
-  //         'cmd': cmd,
-  //         'auto': 0,
-  //         'count': 1,
-  //       };
-  //       var res = await MGUtil.activityOper(parmas);
-  //       if (res['result'] == 0) {
-  //         showActivityOperAward(actConfig, res['award']);
-  //       } else {
-  //         showActivityOperSnackBar(actConfig, res['resultstr']);
-  //       }
-  //     }
-  //   } else {
-  //     showActivityOperSnackBar(actConfig, initRes['resultstr']);
-  //   }
-  // }
 
   /// 足球小将 cmd = 182
   /// 燃花灯 cmd = 186
@@ -378,8 +371,36 @@ class _ActivityState extends State<Activity> {
     }
   }
 
+  /// 周末活动
+  zhouMoHuoDong(ActConfig actConfig) async {
+    int cmd = 220;
+    var parmas = {'request': 1, 'cmd': cmd};
+    var initRes = await MGUtil.activityOper(parmas);
+    if (initRes['result'] == 0) {
+      for (var i = 0; i < initRes['dailyTask'].length; i++) {
+        var item = initRes['dailyTask'][i];
+
+        if (item['done'] >= item['need'] && item['status'] == 0) {
+          parmas = {'request': 2, 'cmd': cmd, 'index': i + 1};
+
+          var res = await MGUtil.activityOper(parmas);
+          if (res['result'] == 0) {
+            showActivityOperAward(actConfig, res['award']);
+          } else {
+            showActivityOperSnackBar(actConfig, res['resultstr']);
+          }
+        }
+      }
+    } else {
+      showActivityOperSnackBar(actConfig, initRes['resultstr']);
+    }
+  }
+
   handleTap(ActConfig actConfig) async {
     switch (actConfig.name) {
+      case '周末活动':
+        await zhouMoHuoDong(actConfig);
+        break;
       case '幸福蛋':
         await xingFuDan(actConfig);
         break;

@@ -24,6 +24,7 @@ class Config {
   static XmlDocument taskConfig;
   static XmlDocument actGuideConfig;
   static XmlDocument petPKConfig;
+  static XmlDocument pergolaDecorateConfig;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -64,7 +65,8 @@ class Config {
         propConfig == null ||
         roseConfig == null ||
         taskConfig == null ||
-        petPKConfig == null) {
+        petPKConfig == null ||
+        pergolaDecorateConfig == null) {
       Dio dio = new Dio();
       var res = await dio.get<String>(
           'https://meigui.qq.com/Strategy.xml?v=${Random().nextDouble()}');
@@ -153,6 +155,8 @@ class Config {
             File('${configFileDir.path}/propConfig.xml').readAsStringSync());
         petPKConfig = parse(
             File('${configFileDir.path}/petPKConfig.xml').readAsStringSync());
+        pergolaDecorateConfig = parse(
+            File('${configFileDir.path}/petPKConfig.xml').readAsStringSync());
       }
     }
   }
@@ -209,6 +213,17 @@ class Config {
 
   static XmlElement getPetPKById(int id) {
     var res = Config.propConfig
+        .findAllElements("item")
+        .where((xe) => xe.getAttribute("id") == "$id")
+        .toList();
+    if (res.length > 0) {
+      return res[0];
+    }
+    return null;
+  }
+
+  static XmlElement getPergolaDecorateById(int id) {
+    var res = Config.pergolaDecorateConfig
         .findAllElements("item")
         .where((xe) => xe.getAttribute("id") == "$id")
         .toList();
