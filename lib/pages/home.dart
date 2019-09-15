@@ -83,7 +83,11 @@ class _HomePageState extends State<HomePage> {
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
         Navigator.of(context).pop();
-        Navigator.of(context).pushNamed(url);
+        Navigator.of(context).pushNamed(url).then((_) {
+          if (url.contains('login')) {
+            getUserInfo();
+          }
+        });
       },
     );
   }

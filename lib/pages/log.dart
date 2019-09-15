@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rose_fz/models/databases/request_log.dart';
 import 'package:rose_fz/utils/db.dart';
-import 'package:rose_fz/global.dart';
-import 'package:rose_fz/models/flower.dart';
-import 'package:rose_fz/pages/select_flower.dart';
 
 class LogPage extends StatefulWidget {
   @override
@@ -71,6 +68,7 @@ class _LogPageState extends State<LogPage> {
                 Text(log.url),
                 Text(log.params),
                 Text(log.result.toString()),
+                Text(log.uin.toString()),
                 // Text(log.response),
               ],
             );
