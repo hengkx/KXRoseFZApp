@@ -113,9 +113,10 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: Drawer(
         child: ListView(
+          padding: const EdgeInsets.all(0.0),
           children: <Widget>[
             Container(
-              height: 100,
+              height: 124,
               child: UserAccountsDrawerHeader(
                 accountName: Text(User.userInfo?.usernic ?? '未登录'),
                 accountEmail:
