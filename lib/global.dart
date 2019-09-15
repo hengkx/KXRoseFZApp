@@ -7,7 +7,7 @@ import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
 import 'package:rose_fz/models/flower.dart';
 import 'package:rose_fz/utils/mg_data.dart';
-import 'package:rose_fz/utils/xe.dart';
+import 'package:rose_fz/utils/xml.dart';
 import 'package:xml/xml.dart';
 import 'package:path_provider/path_provider.dart';
 import './user_config.dart';
@@ -19,7 +19,7 @@ class ExchangeItem {
 }
 
 class Global {
-  static Map<String, XmlElement> config;
+  static Map<String, dynamic> config;
   static UserConfig userConfig;
 
   static List<ExchangeItem> exhanges = [
@@ -124,6 +124,7 @@ class Global {
         if (!configZipFile.existsSync()) {
           await dio.download('$folderPathUrl$configZipUrl', configZipFile.path);
         }
+        // 判断配置压缩包有没有解压
         if (!configFileDir.existsSync()) {
           List<int> bytes = configZipFile.readAsBytesSync();
           Archive archive = ZipDecoder().decodeBytes(bytes);
@@ -140,8 +141,8 @@ class Global {
             }
           }
         }
-        configFileDir.listSync().forEach((item) {
-          File file = File(item.path);
+        configFileDir.listSync().forEach((fse) {
+          File file = File(fse.path);
           var key = file.path
               .substring(file.path.lastIndexOf('/') + 1)
               .replaceAll('.xml', '');
@@ -168,6 +169,12 @@ class Global {
                   doc.findAllElements('AdventureEvent').toList()[0];
               config['adventureMap'] =
                   doc.findAllElements('AdventureMap').toList()[0];
+              break;
+            case 'pergolaDecorateCfg':
+              var decorateCfgs = XML.toDecorate(doc);
+              config['shelf'] = Map();
+              config['shelf']['decorate'] = decorateCfgs[0];
+              config['shelf']['patch'] = decorateCfgs[1];
               break;
             default:
               config[key.replaceAll('Config', '')] = doc.rootElement;
@@ -212,13 +219,13 @@ class Global {
           .toList();
     }
     if (res.length > 0) {
-      return XE.toFlower(res[0]);
+      return XML.toFlower(res[0]);
     }
     return null;
   }
 
   static XmlElement getPropById(int id) {
-    var res = Global.config['propConfig']
+    var res = Global.config['prop']
         .findAllElements("item")
         .where((xe) =>
             xe.getAttribute("id") == "$id" || xe.getAttribute("svrID") == "$id")

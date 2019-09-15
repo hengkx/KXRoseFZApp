@@ -1,5 +1,5 @@
 import 'package:rose_fz/global.dart';
-import 'package:xml/xml.dart';
+import 'package:rose_fz/utils/mg_data.dart';
 
 class Soil {
   int no;
@@ -96,8 +96,7 @@ class Soil {
           getGainTime(soilsate, soil["rosebegintime"].toString(), season);
     }
     if (soil["decorpot"] != null) {
-      var prop = Global.getPropById(soil["decorpot"]);
-      decorpotName = prop.getAttribute("name");
+      decorpotName = MGDataUtil.getInfoByID(soil["decorpot"]).name;
     }
     rosestate = soil["rosestate"];
     status = getStatus(rosestate);

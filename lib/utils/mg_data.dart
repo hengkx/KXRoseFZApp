@@ -1,5 +1,5 @@
 import 'package:rose_fz/global.dart';
-import 'package:rose_fz/models/award.dart';
+import 'package:rose_fz/models/responses/award.dart';
 import 'package:xml/xml.dart';
 
 class MGInfo {
@@ -22,13 +22,49 @@ class MGInfo {
 }
 
 class MGDataUtil {
-  String getPropItemName(Award award) {
+  static String getPropItemName(Award award) {
     String name = '';
 
     switch (award.type) {
       case 0:
+        var propConfig = getInfoByID(award.id);
+        if (propConfig != null) {
+          name = propConfig.name;
+        } else {
+          name = '未知道具';
+          // Global.logger.debug(((('未知道具: type:' + prop.type) + ' id:') + prop.id));
+        }
+        break;
+      case 4:
+        name = '经验值';
+        break;
+      case 5:
+        name = '魅力值';
+        break;
+      case 6:
+        name = '金币';
+        break;
+      case 13:
+        name = '点丁香好感度';
+        break;
+      case 14:
+        name = 'Q币';
+        break;
+      case 7:
+      case 8:
+      case 9:
+        name = award.name;
+        break;
+      case 16:
+        if (award.id < 141049000) {
+          name = Global.config['shelf']['decorate'][award.id].name;
+        } else {
+          name = Global.config['shelf']['patch'][award.id].name;
+        }
         break;
       default:
+        name = '未知道具';
+        break;
     }
     return name;
   }
@@ -187,7 +223,7 @@ class MGDataUtil {
       if (mgInfo.id != null) {
         dicMapId['${mgInfo.id}'] = mgInfo;
         if (id >= 31005 && id <= 31009) {
-          var colors = ["#008800", "#2990EC", "#B72B97", "#C4661A", "#D03135"];
+          var colors = ['#008800', '#2990EC', '#B72B97', '#C4661A', '#D03135'];
           var index = id - 31005;
           mgInfo.name = "<font color='${colors[index]}'>${mgInfo.name}</font>";
         }
@@ -268,14 +304,14 @@ class MGDataUtil {
     }
   }
 
-  static MGInfo getInfoByID(int id, [bool needCount = true]) {
+  static MGInfo getInfoByID(int id, [bool needCount = false]) {
     var item;
     if (id == 0) {
       return null;
     }
 
     item = dicMapId['$id'];
-    if (item && needCount) {
+    if (item != null && needCount) {
       // need.count = this.getCountByID(id);
     }
 
@@ -285,7 +321,7 @@ class MGDataUtil {
   static int getPlantIDBySeedId(int id) {
     var xml = Global.config['flower']
         .findAllElements('item')
-        .where((xe) => xe.getAttribute("seedID") == "$id")
+        .where((xe) => xe.getAttribute('seedID') == '$id')
         .toList();
     if (xml.length > 0) {
       return int.parse(xml[0].getAttribute('id'));
@@ -294,7 +330,7 @@ class MGDataUtil {
         .findAllElements('seeds')
         .toList()[0]
         .findAllElements('item')
-        .where((xe) => xe.getAttribute("seedID") == "$id")
+        .where((xe) => xe.getAttribute('seedID') == '$id')
         .toList();
     if (xml.length > 0) {
       return int.parse(xml[0].getAttribute('id'));
@@ -313,29 +349,29 @@ class MGDataUtil {
     //           _local_3 = _local_2.type;
     var localId = mgInfo.localId;
     switch (mgInfo.type) {
-      //               case "exp":
+      //               case 'exp':
       //                   return (Number(this.m_myUserInfo.experice));
-      //               case "charm":
+      //               case 'charm':
       //                   return (int(this.m_myUserInfo.charmtotal));
-      //               case "coin":
+      //               case 'coin':
       //                   return (int(this.m_myUserInfo.rosemoney));
-      //               case "flower":
+      //               case 'flower':
       //                   return (int(this.m_gainData.flower[localId]));
-      //               case "rose":
+      //               case 'rose':
       //                   return (int(this.m_gainData.rose[localId]));
-      // case "flowerseed":
+      // case 'flowerseed':
       // localId = getPlantIDBySeedId(localId);
       //                   return (int(this.m_seedData.flower[localId]));
-      //               case "roseseed":
+      //               case 'roseseed':
       //                   localId = this.getPlantIDBySeedId(int(localId));
       //                   return (int(this.m_seedData.rose[localId]));
-      //               case "meterial":
+      //               case 'meterial':
       //                   if (((id >= 110) && (id < 22001)))
       //                   {
       //                       return (int(this.m_meterialData[localId]));
       //                   };
       //                   return (int(this.m_seedData.rose[localId]));
-      //               case "prop":
+      //               case 'prop':
       //                   return (int(this.m_propsData[localId]));
       default:
         return -1;

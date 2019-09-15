@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:rose_fz/models/responses/award.dart';
 import 'package:rose_fz/utils/mg_data.dart';
 import 'package:rose_fz/global.dart';
 import 'package:rose_fz/user.dart';
@@ -226,46 +227,11 @@ class _ActivityState extends State<Activity> {
   void showActivityOperAward(ActConfig actConfig, List<dynamic> awards) {
     for (var item in awards) {
       int id = item['id'];
-      int type = item['type'];
       int count = item['count'];
-      if (type == 4) {
-        return showActivityOperSnackBar(actConfig, '获得 经验值 $count');
-      }
-      if (type == 5) {
-        return showActivityOperSnackBar(actConfig, '获得 魅力 $count');
-      }
-      if (type == 6) {
-        return showActivityOperSnackBar(actConfig, '获得 金币 $count');
-      }
-      // if (id != 0) {
-      //   if (type == 16) {
-      //     var cfg = Global.getPergolaDecorateById(id);
-      //     return showActivityOperSnackBar(
-      //         actConfig, '获得 ${cfg.getAttribute('name')} $count 个');
-      //   }
-      //   var prop = Global.getPropById(id);
-      //   if (prop != null) {
-      //     return showActivityOperSnackBar(
-      //         actConfig, '获得 ${prop.getAttribute('name')} $count 个');
-      //   }
-      //   var flower = Global.getFlowerInfoBySeedId(id);
-      //   if (flower != null) {
-      //     return showActivityOperSnackBar(
-      //         actConfig, '获得 ${flower.getAttribute('name')} $count 个');
-      //   }
-      //   var petPK = Global.getPetPKById(id);
-      //   if (petPK != null) {
-      //     return showActivityOperSnackBar(
-      //         actConfig, '获得 ${petPK.getAttribute('name')} $count 个');
-      //   }
-      // }
-      // print(item);
       var mgInfo = MGDataUtil.dicMapId['$id'];
-      if (mgInfo != null) {
-        return showActivityOperSnackBar(
-            actConfig, '获得 ${mgInfo.name} $count ${mgInfo.unit}');
-      }
-      showActivityOperSnackBar(actConfig, '$id $type $count');
+      var award = Award.fromJson(item);
+      return showActivityOperSnackBar(actConfig,
+          '获得 ${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit}');
     }
   }
 
