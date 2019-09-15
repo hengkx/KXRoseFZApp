@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   var _pageList = [
     PlantWidget(),
     Activity(),
-    ExchangeWidget(),
+    ExchangePage(),
     Task(),
   ];
 
@@ -134,6 +134,7 @@ class _HomePageState extends State<HomePage> {
             getDrawerItem('默认种植设置', '/settings/plant'),
             getDrawerItem('加速化肥设置', '/settings/speed'),
             getDrawerItem('日志', '/log'),
+            getDrawerItem('万能种子兑换', '/exchange'),
             getDrawerItem('切换帐号', '/login'),
             Text(
               "版本：$version",

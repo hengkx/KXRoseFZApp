@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rose_fz/pages/exchange.dart';
 import 'package:rose_fz/pages/log.dart';
 import 'package:rose_fz/pages/home.dart';
 import 'package:rose_fz/pages/one_key_login.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.blue, 
+      statusBarColor: Colors.blue,
     ));
     return MaterialApp(
       title: '开心小镇',
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/settings/speed': (_) => SpeedFertilizerSetting(),
         '/settings/plant': (_) => PlantSetting(),
         '/log': (_) => LogPage(),
+        '/exchange': (_) => ExchangePage(),
       },
       initialRoute: '/',
     );

@@ -5,15 +5,15 @@ import 'package:flutter/widgets.dart';
 import '../utils/mg.dart';
 import '../global.dart';
 
-class ExchangeWidget extends StatefulWidget {
+class ExchangePage extends StatefulWidget {
   @override
-  _ExchangeWidgetState createState() {
-    return new _ExchangeWidgetState();
+  _ExchangePageState createState() {
+    return new _ExchangePageState();
   }
 }
 
-class _ExchangeWidgetState extends State<ExchangeWidget> {
-  showNumDialog(ExchangeItem item) {
+class _ExchangePageState extends State<ExchangePage> {
+  showNumDialog(BuildContext context, ExchangeItem item) {
     showDialog<String>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -26,44 +26,49 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
       },
     ).then((String text) {
       if (text != null) {
-        exchange(item, int.parse(text));
+        exchange(context, item, int.parse(text));
       }
     });
   }
 
-  showSnackBar(String tip) {
+  showSnackBar(BuildContext context, String tip) {
     Scaffold.of(context).showSnackBar(new SnackBar(
       content: new Text(tip),
       duration: Duration(seconds: 1),
     ));
   }
 
-  exchange(ExchangeItem item, int count) async {
+  exchange(BuildContext context, ExchangeItem item, int count) async {
     for (var i = 0; i < count; i++) {
       var res = await MGUtil.exchange(item.id);
       if (res.result == 0) {
-        showSnackBar("兑换一个 ${item.name} 成功");
+        showSnackBar(context, "兑换一个 ${item.name} 成功");
       } else {
-        showSnackBar("兑换 ${res.resultstr}");
+        showSnackBar(context, "兑换 ${res.resultstr}");
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment(0, 0),
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          var exchange = Global.exhanges[index];
-          return ListTile(
-            title: Text(exchange.name),
-            onTap: () {
-              showNumDialog(exchange);
-            },
-          );
-        },
-        itemCount: Global.exhanges.length,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("万能种子兑换"),
+      ),
+      body: Container(
+        alignment: Alignment(0, 0),
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            var exchange = Global.exhanges[index];
+            return ListTile(
+              title: Text(exchange.name),
+              onTap: () {
+                showNumDialog(context, exchange);
+              },
+            );
+          },
+          itemCount: Global.exhanges.length,
+        ),
       ),
     );
   }
