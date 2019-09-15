@@ -169,6 +169,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.16"
+  firebase_admob:
+    dependency: "direct main"
+    description:
+      name: firebase_admob
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.0+7"
   fixnum:
     dependency: transitive
     description:
@@ -256,13 +263,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.3"
-  image:
-    dependency: transitive
-    description:
-      name: image
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.1.4"
   intl:
     dependency: "direct main"
     description:
