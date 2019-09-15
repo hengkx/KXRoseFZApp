@@ -343,7 +343,7 @@ class MGDataUtil {
     //           var _local_2:Object;
     //           var _local_3:String;
     //           var localId:int;
-    var mgInfo = getInfoByID(id, false);
+    var mgInfo = getInfoByID(id);
     if (mgInfo == null) {
       return 0;
     }

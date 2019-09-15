@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.blue, // status bar color
+      statusBarColor: Colors.blue, 
     ));
     return MaterialApp(
-      title: '开心玫瑰辅助V',
+      title: '开心小镇',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
