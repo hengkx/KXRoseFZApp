@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rose_fz/global.dart';
+import 'package:rose_fz/pages/talent_pk.dart';
 import 'package:rose_fz/utils/uin_crypt.dart';
 import 'package:package_info/package_info.dart';
 import '../user.dart';
 import '../utils/mg.dart';
 import '../widgets/plant.dart';
 import '../widgets/task.dart';
-import './exchange.dart';
 import './activity.dart';
 import './one_key_login.dart';
 
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   var _pageList = [
     PlantWidget(),
     Activity(),
-    ExchangePage(),
+    TalentPKPage(),
     Task(),
   ];
 
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           getBottomNavigationBarItem("首页", Icons.home),
           getBottomNavigationBarItem("活动", Icons.assistant),
-          getBottomNavigationBarItem("兑换", Icons.compare_arrows),
+          getBottomNavigationBarItem("竞技场", Icons.add_box),
           getBottomNavigationBarItem("任务", Icons.assignment),
         ],
         currentIndex: tabIndex,

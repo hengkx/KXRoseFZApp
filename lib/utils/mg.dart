@@ -1,3 +1,4 @@
+import 'package:rose_fz/models/responses/talent_pk_response.dart';
 import 'package:rose_fz/models/soil.dart';
 
 import './http.dart';
@@ -168,5 +169,17 @@ class MGUtil {
     var res =
         await HttpUtil.getInstance().post("rosary_activity_oper", data: params);
     return res;
+  }
+
+  static Future<TalentPKResponse> talentPKOper(
+      Map<String, int> otherParmas) async {
+    var params = {
+      "benew0908": 1,
+      "cgiVersion": 43,
+    };
+    params.addAll(otherParmas);
+    var res =
+        await HttpUtil.getInstance().post("rosary_talentpk_oper", data: params);
+    return TalentPKResponse.fromJson(res);
   }
 }

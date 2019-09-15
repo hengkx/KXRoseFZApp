@@ -230,8 +230,8 @@ class _ActivityState extends State<Activity> {
       int count = item['count'];
       var mgInfo = MGDataUtil.dicMapId['$id'];
       var award = Award.fromJson(item);
-      return showActivityOperSnackBar(actConfig,
-          '获得 ${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit}');
+      showActivityOperSnackBar(actConfig,
+          '获得 ${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit ?? ''}');
     }
   }
 
