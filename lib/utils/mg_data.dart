@@ -304,16 +304,17 @@ class MGDataUtil {
     }
   }
 
-  static MGInfo getInfoByID(int id, [bool needCount = false]) {
+  // static MGInfo getInfoByID(int id, [bool needCount = false]) {
+  static MGInfo getInfoByID(int id) {
     var item;
     if (id == 0) {
       return null;
     }
 
     item = dicMapId['$id'];
-    if (item != null && needCount) {
-      // need.count = this.getCountByID(id);
-    }
+    // if (item != null && needCount) {
+    //   // need.count = this.getCountByID(id);
+    // }
 
     return item;
   }
