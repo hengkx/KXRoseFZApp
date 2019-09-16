@@ -160,11 +160,11 @@ class MGUtil {
     return TaskResponse.fromJson(res);
   }
 
-  static Future<dynamic> activityOper(Map<String, int> otherParmas) async {
+  static Future<dynamic> activityOper(dynamic otherParmas) async {
     var params = {
       "benew0908": 1,
       "cgiVersion": 43,
-    };
+    } as Map<String, dynamic>;
     params.addAll(otherParmas);
     var res =
         await HttpUtil.getInstance().post("rosary_activity_oper", data: params);

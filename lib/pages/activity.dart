@@ -8,7 +8,7 @@ import 'package:rose_fz/global.dart';
 import 'package:rose_fz/user.dart';
 import 'package:rose_fz/utils/mg.dart';
 
-final dateFormat = new DateFormat('yyyy-MM-dd HH:mm');
+final dateFormat = new DateFormat('yyyy-MM-dd HH:mm:ss');
 
 class Activity extends StatefulWidget {
   @override
@@ -25,10 +25,25 @@ class ActConfig {
   String desc;
   bool isActive;
   int sort;
+  int cmd;
+  dynamic initRes;
 }
 
 List<int> includeActivities = [15, 26, 36, 42, 76, 78];
 List<int> excludeActivities = [62, 77];
+
+var activityCmds = {
+  '花园寻宝': 155,
+  '捕虫大作战': 170,
+  '足球小将': 182,
+  '燃花灯': 186,
+  '夏日大作战': 188,
+  '幸福蛋': 198,
+  '大富翁': 209,
+  '周末活动': 220,
+  '拯救计划': 225,
+  '中秋月圆': 227,
+};
 
 class _ActivityState extends State<Activity> {
   @override
@@ -45,6 +60,7 @@ class _ActivityState extends State<Activity> {
     actConfig.desc = '小镇幸福蛋每日首敲必得稀有道具，还有多倍积分噢！';
     actConfig.isActive = true;
     actConfig.sort = 1000;
+    actConfig.cmd = activityCmds[actConfig.name];
     actConfigs.add(actConfig);
     if (User.initFirstRes != null) {
       if (User.initFirstRes.huaYuanTreasure == 1) {
@@ -54,6 +70,7 @@ class _ActivityState extends State<Activity> {
         actConfig.desc = '花园寻宝';
         actConfig.isActive = true;
         actConfig.sort = 999;
+        actConfig.cmd = activityCmds[actConfig.name];
         actConfigs.add(actConfig);
       }
       if (User.initFirstRes.weekendWelfare == 1) {
@@ -63,13 +80,13 @@ class _ActivityState extends State<Activity> {
         actConfig.desc = '周末活动';
         actConfig.isActive = true;
         actConfig.sort = 999;
+        actConfig.cmd = activityCmds[actConfig.name];
         actConfigs.add(actConfig);
       }
     }
     DateTime now = DateTime.now();
     var unixtime = now.millisecondsSinceEpoch / 1000;
-    var limit =
-        Global.config['actGuideConfig'].findAllElements('limit').toList()[0];
+    var limit = Global.config['actGuide'].findAllElements('limit').toList()[0];
     for (var item in limit.findAllElements('item')) {
       var id = item.getAttribute('id');
       if (item.getAttribute('start') != null &&
@@ -83,6 +100,7 @@ class _ActivityState extends State<Activity> {
         actConfig.isActive =
             unixtime > actConfig.start && unixtime < actConfig.end;
         actConfig.sort = actConfig.isActive ? int.parse(actConfig.id) : 0;
+        actConfig.cmd = activityCmds[actConfig.name];
         actConfigs.add(actConfig);
       }
     }
@@ -104,8 +122,8 @@ class _ActivityState extends State<Activity> {
 
   /// 夏日大作战
   xiaRiDaZuoZhan(ActConfig actConfig) async {
-    var parmas = {'request': 1, 'cmd': 188};
-    var initRes = await MGUtil.activityOper(parmas);
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       var digCount = int.parse(initRes['free'][0]);
       var catchCount = int.parse(initRes['free'][1]);
@@ -113,77 +131,53 @@ class _ActivityState extends State<Activity> {
       // 挖宝
       if (digCount > 0) {
         for (var i = 0; i < digCount; i++) {
-          parmas = {'request': 3, 'cmd': 188, 'auto': 0, 'count': 1};
-          var digRes = await MGUtil.activityOper(parmas);
-          if (digRes['result'] == 0) {
-            showActivityOperAward(actConfig, digRes['award']);
-          } else {
-            showActivityOperSnackBar(actConfig, digRes['resultstr']);
-          }
+          var parmas = {'request': 3, 'cmd': cmd, 'auto': 0, 'count': 1};
+          await activityOper(actConfig, parmas);
         }
       }
       // 捕抓小螃蟹
       if (catchCount > 0) {
-        parmas = {
+        var parmas = {
           'request': 4,
           'cmd': 188,
           'auto': 0,
           'count': catchCount,
           'index': 1
         };
-        var catchRes = await MGUtil.activityOper(parmas);
-        if (catchRes['result'] == 0) {
-          showActivityOperAward(actConfig, catchRes['award']);
-        } else {
-          showActivityOperSnackBar(actConfig, catchRes['resultstr']);
-        }
+        await activityOper(actConfig, parmas);
       }
       // 全服抓螃蟹
       if (globalCatchCount > 0) {
-        parmas = {'request': 11, 'cmd': 188, 'index': 1};
-        var globalCatchRes = await MGUtil.activityOper(parmas);
-        if (globalCatchRes['result'] == 0) {
-          showActivityOperAward(actConfig, globalCatchRes['award']);
-        } else {
-          showActivityOperSnackBar(actConfig, globalCatchRes['resultstr']);
-        }
+        var parmas = {'request': 11, 'cmd': 188, 'index': 1};
+        await activityOper(actConfig, parmas);
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
   }
 
   /// 拯救计划
   zhengJiuJiHua(ActConfig actConfig) async {
-    var parmas = {'request': 1, 'cmd': 225};
-    var initRes = await MGUtil.activityOper(parmas);
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       var freeCount = initRes['free'];
       if (freeCount > 0) {
         var index = initRes['birds'].indexOf('$freeCount') + 1;
-        parmas = {
+        var parmas = {
           'request': 3,
-          'cmd': 225,
+          'cmd': cmd,
           'auto': 0,
           'count': 1,
           'index': index
         };
-        var res = await MGUtil.activityOper(parmas);
-        if (res['result'] == 0) {
-          showActivityOperAward(actConfig, res['award']);
-        } else {
-          showActivityOperSnackBar(actConfig, res['resultstr']);
-        }
+        await activityOper(actConfig, parmas);
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
   }
 
   /// 捕虫大作战
   buChongDaZuoZhan(ActConfig actConfig) async {
-    var parmas = {'request': 1, 'cmd': 170};
-    var initRes = await MGUtil.activityOper(parmas);
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       var freeCount = initRes['free'];
       List<dynamic> insects = initRes['insect'];
@@ -203,24 +197,17 @@ class _ActivityState extends State<Activity> {
         }
       }
       if (freeCount > 0) {
-        parmas = {
+        var parmas = {
           'request': 3,
-          'cmd': 170,
+          'cmd': cmd,
           'auto': 0,
           'page': 1,
           'paytype': 1,
           'type': 1,
           'index': index,
         };
-        var res = await MGUtil.activityOper(parmas);
-        if (res['result'] == 0) {
-          showActivityOperAward(actConfig, res['award']);
-        } else {
-          showActivityOperSnackBar(actConfig, res['resultstr']);
-        }
+        await activityOper(actConfig, parmas);
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
   }
 
@@ -243,14 +230,13 @@ class _ActivityState extends State<Activity> {
   /// 燃花灯 cmd = 186
   /// 中秋月圆 cmd = 227
   /// 大富翁 cmd = 209
-  commonActivity(ActConfig actConfig, int cmd,
-      [Map<String, int> otherParams]) async {
-    var parmas = {'request': 1, 'cmd': cmd};
-    var initRes = await MGUtil.activityOper(parmas);
+  commonActivity(ActConfig actConfig, [Map<String, int> otherParams]) async {
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       var freeCount = initRes['free'];
       if (freeCount > 0) {
-        parmas = {
+        var parmas = {
           'request': 3,
           'cmd': cmd,
           'auto': 0,
@@ -259,72 +245,66 @@ class _ActivityState extends State<Activity> {
         if (otherParams != null) {
           parmas.addAll(otherParams);
         }
-        var res = await MGUtil.activityOper(parmas);
-        if (res['result'] == 0) {
-          showActivityOperAward(actConfig, res['award']);
-          if (res['specAward'] != null) {
-            showActivityOperAward(actConfig, res['specAward']);
-          }
-        } else {
-          showActivityOperSnackBar(actConfig, res['resultstr']);
-        }
+        await activityOper(actConfig, parmas);
       }
       // 大富翁领取全局
       var leftGlobalRewardCnt = initRes['leftGlobalRewardCnt'] ?? 0;
-      print(leftGlobalRewardCnt);
       while (leftGlobalRewardCnt > 0) {
-        var count = leftGlobalRewardCnt > 5 ? 5 : leftGlobalRewardCnt;
-        parmas = {
+        int count = leftGlobalRewardCnt > 5 ? 5 : leftGlobalRewardCnt;
+        var parmas = {
           'request': 10,
           'cmd': cmd,
           'count': count,
         };
-        var res = await MGUtil.activityOper(parmas);
+        var res = await activityOper(actConfig, parmas);
         if (res['result'] == 0) {
           leftGlobalRewardCnt -= count;
-          showActivityOperAward(actConfig, res['award']);
-        } else {
-          showActivityOperSnackBar(actConfig, res['resultstr']);
         }
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
   }
 
   /// 花园寻宝
   huaYuanTreasure(ActConfig actConfig) async {
-    int cmd = 155;
-    var parmas = {'request': 1, 'cmd': cmd};
-    var initRes = await MGUtil.activityOper(parmas);
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       var freeCount = initRes['globalPrize'];
       while (freeCount > 0) {
         var count = freeCount > 5 ? 5 : freeCount;
-        parmas = {
+        var parmas = {
           'request': 4,
           'cmd': cmd,
           'type': 1,
           'count': count,
         };
-        var res = await MGUtil.activityOper(parmas);
+        var res = await activityOper(actConfig, parmas);
         if (res['result'] == 0) {
           freeCount -= count;
-          showActivityOperAward(actConfig, res['award']);
-        } else {
-          showActivityOperSnackBar(actConfig, res['resultstr']);
         }
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
+  }
+
+  Future<dynamic> activityOper(ActConfig cfg, dynamic parmas) async {
+    var res = await MGUtil.activityOper(parmas);
+    if (res['result'] == 0) {
+      if (res['award'] != null) {
+        showActivityOperAward(cfg, res['award']);
+      }
+      if (res['specAward'] != null) {
+        showActivityOperAward(cfg, res['specAward']);
+      }
+    } else {
+      showActivityOperSnackBar(cfg, res['resultstr']);
+    }
+    return res;
   }
 
   /// 幸福蛋
   xingFuDan(ActConfig actConfig) async {
-    int cmd = 198;
-    var parmas = {'request': 1, 'cmd': cmd};
-    var initRes = await MGUtil.activityOper(parmas);
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       var activity;
       for (var item in initRes['subActivity']) {
@@ -335,7 +315,7 @@ class _ActivityState extends State<Activity> {
       }
       if (activity != null) {
         if (activity['left'] > 0) {
-          parmas = {
+          var parmas = {
             'request': 3,
             'cmd': cmd,
             'auto': 0,
@@ -344,12 +324,7 @@ class _ActivityState extends State<Activity> {
           };
           if (DateTime.now().millisecondsSinceEpoch / 1000 >
               activity['coolEndT']) {
-            var res = await MGUtil.activityOper(parmas);
-            if (res['result'] == 0) {
-              showActivityOperAward(actConfig, res['award']);
-            } else {
-              showActivityOperSnackBar(actConfig, res['resultstr']);
-            }
+            await activityOper(actConfig, parmas);
           } else {
             var coolEndT = DateFormat("yyyy-MM-dd HH:mm:ss").format(
                 DateTime.fromMillisecondsSinceEpoch(
@@ -358,37 +333,34 @@ class _ActivityState extends State<Activity> {
           }
         }
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
   }
 
   /// 周末活动
   zhouMoHuoDong(ActConfig actConfig) async {
-    int cmd = 220;
-    var parmas = {'request': 1, 'cmd': cmd};
-    var initRes = await MGUtil.activityOper(parmas);
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
     if (initRes['result'] == 0) {
       for (var i = 0; i < initRes['dailyTask'].length; i++) {
         var item = initRes['dailyTask'][i];
 
         if (item['done'] >= item['need'] && item['status'] == 0) {
-          parmas = {'request': 2, 'cmd': cmd, 'index': i + 1};
+          var parmas = {'request': 2, 'cmd': cmd, 'index': i + 1};
 
-          var res = await MGUtil.activityOper(parmas);
-          if (res['result'] == 0) {
-            showActivityOperAward(actConfig, res['award']);
-          } else {
-            showActivityOperSnackBar(actConfig, res['resultstr']);
-          }
+          await activityOper(actConfig, parmas);
         }
       }
-    } else {
-      showActivityOperSnackBar(actConfig, initRes['resultstr']);
     }
   }
 
   handleTap(ActConfig actConfig) async {
+    if (actConfig.cmd != null) {
+      var parmas = {'request': 1, 'cmd': actConfig.cmd};
+      actConfig.initRes = await activityOper(actConfig, parmas);
+      if (actConfig.initRes['result'] != 0) {
+        return;
+      }
+    }
     switch (actConfig.name) {
       case '周末活动':
         await zhouMoHuoDong(actConfig);
@@ -409,16 +381,16 @@ class _ActivityState extends State<Activity> {
         await buChongDaZuoZhan(actConfig);
         break;
       case '大富翁':
-        await commonActivity(actConfig, 209);
+        await commonActivity(actConfig);
         break;
       case '中秋月圆':
-        await commonActivity(actConfig, 227);
+        await commonActivity(actConfig);
         break;
       case '足球小将':
-        await commonActivity(actConfig, 182);
+        await commonActivity(actConfig);
         break;
       case '燃花灯':
-        await commonActivity(actConfig, 186, {'index': 1, 'auto': 0});
+        await commonActivity(actConfig, {'index': 1, 'auto': 0});
         break;
       default:
         showActivityOperSnackBar(

@@ -104,7 +104,7 @@ class Global {
           doc = parse(actGuideConfigFile.readAsStringSync());
         }
 
-        config['actGuideConfig'] = doc.findAllElements('data').toList()[0];
+        config['actGuide'] = doc.findAllElements('data').toList()[0];
 
         File flowerConfigFile = File("${directory.path}/$flowerConfigUrl");
         if (!flowerConfigFile.existsSync()) {
