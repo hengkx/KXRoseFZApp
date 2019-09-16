@@ -161,7 +161,7 @@ class _ActivityState extends State<Activity> {
     if (initRes['result'] == 0) {
       var freeCount = initRes['free'];
       if (freeCount > 0) {
-        var index = initRes['birds'].indexOf('$freeCount') + 1;
+        int index = initRes['birds'].indexOf('$freeCount') + 1;
         var parmas = {
           'request': 3,
           'cmd': cmd,
@@ -271,7 +271,7 @@ class _ActivityState extends State<Activity> {
     if (initRes['result'] == 0) {
       var freeCount = initRes['globalPrize'];
       while (freeCount > 0) {
-        var count = freeCount > 5 ? 5 : freeCount;
+        int count = freeCount > 5 ? 5 : freeCount;
         var parmas = {
           'request': 4,
           'cmd': cmd,
@@ -320,7 +320,7 @@ class _ActivityState extends State<Activity> {
             'cmd': cmd,
             'auto': 0,
             'count': 1,
-            'index': activity['uniqID']
+            'index': activity['uniqID'] as int
           };
           if (DateTime.now().millisecondsSinceEpoch / 1000 >
               activity['coolEndT']) {
