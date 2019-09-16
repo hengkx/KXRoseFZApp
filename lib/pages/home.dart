@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,9 +35,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance.initialize(
-        appId: 'ca-app-pub-6326384735097338~9850326329',
-        analyticsEnabled: true);
+    if (Platform.isAndroid) {
+      FirebaseAdMob.instance.initialize(
+          appId: 'ca-app-pub-6326384735097338~9850326329',
+          analyticsEnabled: true);
+    }
     getUserInfo();
     init();
   }
