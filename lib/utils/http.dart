@@ -57,7 +57,7 @@ class HttpUtil {
     String cookies = sharedPreferences.getString('cookies');
     headers['Cookie'] = cookies;
     Options options = Options(headers: headers);
-    print('post请求启动! url：$url ,body: $data');
+//    print('post请求启动! url：$url ,body: $data');
     Response response;
     try {
       response = await dio.post(

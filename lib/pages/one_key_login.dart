@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -18,6 +21,7 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   String redirectUrl =
       "https%3A//meigui.qq.com/other/loginproxy.https.html%3Ftype%3D0";
   String url;
+  BannerAd myBanner;
   static const EventChannel eventChannel =
       EventChannel('rose.hengkx.com/login');
 
@@ -26,8 +30,32 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    print('initState');
-    eventChannel.receiveBroadcastStream().listen(_onEvent);
+    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+      keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
+      childDirected: false,
+      testDevices: <String>[
+        '6E12CFF42AD75DB204F205C78113B0D2'
+      ], // Android emulators are considered test devices
+    );
+    myBanner = BannerAd(
+      adUnitId: 'ca-app-pub-6326384735097338/9084039564',
+      size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
+    );
+    myBanner
+      // typically this happens well before the ad is shown
+      ..load()
+      ..show(
+        // Positions the banner ad 60 pixels from the bottom of the screen
+        anchorOffset: 0,
+        // Positions the banner ad 10 pixels from the center of the screen to the right
+        horizontalCenterOffset: 0,
+        // Banner Position
+        anchorType: AnchorType.bottom,
+      );
+    if (Platform.isIOS) {
+      eventChannel.receiveBroadcastStream().listen(_onEvent);
+    }
     /**
      * 监听页面加载url
      */
@@ -52,6 +80,12 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
         launchUrl(url);
       }
     });
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    myBanner.dispose();
   }
 
   void _onEvent(Object event) {

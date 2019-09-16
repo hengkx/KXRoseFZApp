@@ -1,4 +1,3 @@
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -28,41 +27,6 @@ class _PlantWidgetState extends State<PlantWidget> {
   void initState() {
     super.initState();
     init();
-    // MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    //   keywords: <String>['flutterio', 'beautiful apps'],
-    //   contentUrl: 'https://flutter.io',
-    //   birthday: DateTime.now(),
-    //   childDirected: false,
-    //   designedForFamilies: false,
-    //   gender: MobileAdGender
-    //       .male, // or MobileAdGender.female, MobileAdGender.unknown
-    //   testDevices: <String>[], // Android emulators are considered test devices
-    // );
-    FirebaseAdMob.instance
-        .initialize(appId: 'ca-app-pub-6326384735097338~9850326329');
-    BannerAd myBanner = BannerAd(
-      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-      // https://developers.google.com/admob/android/test-ads
-      // https://developers.google.com/admob/ios/test-ads
-      adUnitId: 'ca-app-pub-6326384735097338/9084039564',
-      size: AdSize.smartBanner,
-      // targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        print("BannerAd event is $event");
-      },
-    );
-
-    myBanner
-      // typically this happens well before the ad is shown
-      ..load()
-      ..show(
-        // Positions the banner ad 60 pixels from the bottom of the screen
-        anchorOffset: 60.0,
-        // Positions the banner ad 10 pixels from the center of the screen to the right
-        horizontalCenterOffset: 0,
-        // Banner Position
-        anchorType: AnchorType.bottom,
-      );
   }
 
   init() async {
