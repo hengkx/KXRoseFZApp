@@ -242,6 +242,7 @@ class _ActivityState extends State<Activity> {
   /// 足球小将 cmd = 182
   /// 燃花灯 cmd = 186
   /// 中秋月圆 cmd = 227
+  /// 大富翁 cmd = 209
   commonActivity(ActConfig actConfig, int cmd,
       [Map<String, int> otherParams]) async {
     var parmas = {'request': 1, 'cmd': cmd};
@@ -264,6 +265,24 @@ class _ActivityState extends State<Activity> {
           if (res['specAward'] != null) {
             showActivityOperAward(actConfig, res['specAward']);
           }
+        } else {
+          showActivityOperSnackBar(actConfig, res['resultstr']);
+        }
+      }
+      // 大富翁领取全局
+      var leftGlobalRewardCnt = initRes['leftGlobalRewardCnt'] ?? 0;
+      print(leftGlobalRewardCnt);
+      while (leftGlobalRewardCnt > 0) {
+        var count = leftGlobalRewardCnt > 5 ? 5 : leftGlobalRewardCnt;
+        parmas = {
+          'request': 10,
+          'cmd': cmd,
+          'count': count,
+        };
+        var res = await MGUtil.activityOper(parmas);
+        if (res['result'] == 0) {
+          leftGlobalRewardCnt -= count;
+          showActivityOperAward(actConfig, res['award']);
         } else {
           showActivityOperSnackBar(actConfig, res['resultstr']);
         }
@@ -388,6 +407,9 @@ class _ActivityState extends State<Activity> {
         break;
       case '捕虫大作战':
         await buChongDaZuoZhan(actConfig);
+        break;
+      case '大富翁':
+        await commonActivity(actConfig, 209);
         break;
       case '中秋月圆':
         await commonActivity(actConfig, 227);
