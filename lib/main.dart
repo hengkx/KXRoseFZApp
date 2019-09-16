@@ -6,6 +6,7 @@ import 'package:rose_fz/pages/home.dart';
 import 'package:rose_fz/pages/one_key_login.dart';
 import 'package:rose_fz/pages/settings/plant.dart';
 import 'package:rose_fz/pages/settings/speed_fertilizer.dart';
+import 'package:rose_fz/pages/settings/talent_pk.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/login': (_) => LoginPage(),
         '/settings/speed': (_) => SpeedFertilizerSetting(),
         '/settings/plant': (_) => PlantSetting(),
+        '/settings/pk': (_) => TalentPKSetting(),
         '/log': (_) => LogPage(),
         '/exchange': (_) => ExchangePage(),
       },
