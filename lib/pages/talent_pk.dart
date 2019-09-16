@@ -59,15 +59,6 @@ class _TalentPKState extends State<TalentPKPage> {
       }
     }
 
-    if (res.free == 0) {
-      // 免费占卜
-      await MGUtil.talentPKOper({'augury': 1, 'type': 24});
-    }
-    if (res.selfAward == 1) {
-      // 领取奖励
-      var r = await MGUtil.talentPKOper({'type': 11});
-      showActivityOperAward(r.award);
-    }
     setState(() {
       selectPetPK = petPKs.firstWhere(
           (item) => item.index == res.advProgress - res.advProgress % 5);
@@ -185,10 +176,39 @@ class _TalentPKState extends State<TalentPKPage> {
     }
   }
 
+  handleOneKeyPressed() async {
+    if (talentPKResponse.free == 0) {
+      // 免费占卜
+      await MGUtil.talentPKOper({'augury': 1, 'type': 24});
+    }
+    if (talentPKResponse.selfAward == 1) {
+      // 领取奖励
+      var r = await MGUtil.talentPKOper({'type': 11});
+      showActivityOperAward(r.award);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: MaterialButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  child: new Text('一键完成占卜、领奖、训练、战旗、提升品质、契约'),
+                  onPressed: handleOneKeyPressed,
+                ),
+              ),
+            ),
+          ],
+        ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Row(
