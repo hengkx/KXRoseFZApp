@@ -212,13 +212,17 @@ class _ActivityState extends State<Activity> {
   }
 
   void showActivityOperAward(ActConfig actConfig, List<dynamic> awards) {
+    List<String> tips = [];
     for (var item in awards) {
       int id = item['id'];
       int count = item['count'];
       var mgInfo = MGDataUtil.dicMapId['$id'];
       var award = Award.fromJson(item);
-      showActivityOperSnackBar(actConfig,
-          '获得 ${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit ?? ''}');
+      tips.add(
+          '${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit ?? ''}');
+    }
+    if (tips.length > 0) {
+      showActivityOperSnackBar(actConfig, '获得 ${tips.join(',')}');
     }
   }
 
