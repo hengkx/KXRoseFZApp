@@ -30,31 +30,32 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) {
-      MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-        keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
-        childDirected: false,
-        testDevices: <String>[
-          '6E12CFF42AD75DB204F205C78113B0D2'
-        ], // Android emulators are considered test devices
+    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+      keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
+      childDirected: false,
+      testDevices: <String>[
+        '6E12CFF42AD75DB204F205C78113B0D2',
+        '500127c8dad2d2f05a12a1c733e8f888'
+      ], // Android emulators are considered test devices
+    );
+    myBanner = BannerAd(
+      adUnitId: Platform.isAndroid
+          ? 'ca-app-pub-6326384735097338/9084039564'
+          : 'ca-app-pub-6326384735097338/4914598376',
+      size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
+    );
+    myBanner
+      // typically this happens well before the ad is shown
+      ..load()
+      ..show(
+        // Positions the banner ad 60 pixels from the bottom of the screen
+        anchorOffset: 0,
+        // Positions the banner ad 10 pixels from the center of the screen to the right
+        horizontalCenterOffset: 0,
+        // Banner Position
+        anchorType: AnchorType.bottom,
       );
-      myBanner = BannerAd(
-        adUnitId: 'ca-app-pub-6326384735097338/9084039564',
-        size: AdSize.smartBanner,
-        targetingInfo: targetingInfo,
-      );
-      myBanner
-        // typically this happens well before the ad is shown
-        ..load()
-        ..show(
-          // Positions the banner ad 60 pixels from the bottom of the screen
-          anchorOffset: 0,
-          // Positions the banner ad 10 pixels from the center of the screen to the right
-          horizontalCenterOffset: 0,
-          // Banner Position
-          anchorType: AnchorType.bottom,
-        );
-    }
     if (Platform.isIOS) {
       eventChannel.receiveBroadcastStream().listen(_onEvent);
     }
@@ -87,9 +88,7 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   @override
   void deactivate() {
     super.deactivate();
-    if (Platform.isAndroid) {
-      myBanner.dispose();
-    }
+    myBanner.dispose();
   }
 
   void _onEvent(Object event) {

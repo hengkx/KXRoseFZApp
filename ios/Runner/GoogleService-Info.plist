@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>997239982777-6da0vmsajq9tunuc4j77jvafoug98iev.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.997239982777-6da0vmsajq9tunuc4j77jvafoug98iev</string>
+	<key>API_KEY</key>
+	<string>AIzaSyADoqxBX_1N4_-nwRgqJa2lt1a0qDTIrIk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>997239982777</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hengkx.mg</string>
+	<key>PROJECT_ID</key>
+	<string>rose-8d2dd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rose-8d2dd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:997239982777:ios:1bd062f789c7db4342a968</string>
+	<key>DATABASE_URL</key>
+	<string>https://rose-8d2dd.firebaseio.com</string>
+</dict>
+</plist>

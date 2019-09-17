@@ -35,11 +35,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) {
-      FirebaseAdMob.instance.initialize(
-          appId: 'ca-app-pub-6326384735097338~9850326329',
-          analyticsEnabled: true);
-    }
+    FirebaseAdMob.instance.initialize(
+        appId: Platform.isAndroid
+            ? 'ca-app-pub-6326384735097338~9850326329'
+            : 'ca-app-pub-6326384735097338~4924544925',
+        analyticsEnabled: true);
     getUserInfo();
     init();
   }
