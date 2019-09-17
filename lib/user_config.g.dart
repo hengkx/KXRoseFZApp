@@ -13,7 +13,20 @@ UserConfig _$UserConfigFromJson(Map<String, dynamic> json) {
             ? null
             : SpeedFertilizer.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    warFlags: (json['warFlags'] as Map<String, dynamic>)?.map(
+          (k, e) => MapEntry(int.parse(k), e as int),
+        ) ??
+        {},
   )
+    ..trainPets = (json['trainPets'] as Map<String, dynamic>)?.map(
+          (k, e) => MapEntry(int.parse(k), e as int),
+        ) ??
+        {}
+    ..contractPets = (json['contractPets'] as Map<String, dynamic>)?.map(
+          (k, e) => MapEntry(int.parse(k), e as int),
+        ) ??
+        {}
+    ..quality = json['quality'] as int
     ..earthrPlant = json['earthrPlant'] as int
     ..waterPlant = json['waterPlant'] as int
     ..hangPlant = json['hangPlant'] as int;
@@ -22,6 +35,11 @@ UserConfig _$UserConfigFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$UserConfigToJson(UserConfig instance) =>
     <String, dynamic>{
       'speeds': instance.speeds,
+      'warFlags': instance.warFlags?.map((k, e) => MapEntry(k.toString(), e)),
+      'trainPets': instance.trainPets?.map((k, e) => MapEntry(k.toString(), e)),
+      'contractPets':
+          instance.contractPets?.map((k, e) => MapEntry(k.toString(), e)),
+      'quality': instance.quality,
       'earthrPlant': instance.earthrPlant,
       'waterPlant': instance.waterPlant,
       'hangPlant': instance.hangPlant,

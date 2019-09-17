@@ -4,11 +4,9 @@ import 'package:rose_fz/models/responses/award.dart';
 import 'package:rose_fz/models/responses/talent_pk_response.dart';
 import 'package:rose_fz/utils/mg_data.dart';
 
-import '../response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../utils/mg.dart';
 import '../global.dart';
@@ -34,6 +32,8 @@ class _TalentPKState extends State<TalentPKPage> {
   List<PetPK> petPKs = [];
   PetPK selectPetPK;
   bool alwaysAdv = true;
+  int advNum = 0;
+  int challengeNum = 0;
 
   @override
   void initState() {
@@ -60,6 +60,8 @@ class _TalentPKState extends State<TalentPKPage> {
     }
 
     setState(() {
+      advNum = res.advNum;
+      challengeNum = res.cnum;
       selectPetPK = petPKs.firstWhere(
           (item) => item.index == res.advProgress - res.advProgress % 5);
       talentPKResponse = res;
@@ -89,6 +91,7 @@ class _TalentPKState extends State<TalentPKPage> {
       showSnackBar('挑战${res.isWin == 1 ? '成功' : '失败'}');
       showActivityOperAward(res.award);
       setState(() {
+        challengeNum--;
         talentPKResponse = res;
       });
     } else {
@@ -168,7 +171,7 @@ class _TalentPKState extends State<TalentPKPage> {
         showSnackBar('冒险${res.isWin == 1 ? '成功' : '失败'}');
         showActivityOperAward(res.award);
         setState(() {
-          talentPKResponse?.advNum--;
+          advNum--;
         });
       } else {
         showSnackBar(res.resultstr);
@@ -183,9 +186,67 @@ class _TalentPKState extends State<TalentPKPage> {
     }
     if (talentPKResponse.selfAward == 1) {
       // 领取奖励
-      var r = await MGUtil.talentPKOper({'type': 11});
-      showActivityOperAward(r.award);
+      var res = await MGUtil.talentPKOper({'type': 11});
+      showActivityOperAward(res.award);
     }
+    // 战旗
+    var res = await MGUtil.talentPKOper({'type': 25, 'action': 1});
+    int warFlagCount = res.total;
+    if (warFlagCount != null) {
+      Global.userConfig.warFlags.forEach((int key, int val) async {
+        if (val != 0 && warFlagCount > 0) {
+          var count = min(val, warFlagCount);
+          for (var i = 0; i < count; i++) {
+            res = await MGUtil.talentPKOper(
+                {'type': 25, 'action': 2, 'index': key, 'upgrade': 1});
+            if (res.result == 0) {
+              warFlagCount--;
+            }
+          }
+        }
+      });
+    }
+    // 宝宝列表
+    res = await MGUtil.talentPKOper({'type': 3});
+    int trainCount = res.tnum;
+    Global.userConfig.trainPets.forEach((int key, int val) async {
+      if (val != 0 && trainCount > 0) {
+        var count = min(val, trainCount);
+        for (var i = 0; i < count; i++) {
+          res = await MGUtil.talentPKOper({'type': 4, 'op': 1, 'id': key});
+          if (res.result == 0) {
+            showActivityOperAward(res.extraAward);
+            trainCount--;
+          }
+        }
+      }
+    });
+    int contactCount = res.contactCount;
+    Global.userConfig.contractPets.forEach((int key, int val) async {
+      if (val != 0 && contactCount > 0) {
+        var count = min(val, contactCount);
+        for (var i = 0; i < count; i++) {
+          res = await MGUtil.talentPKOper({
+            'type': 23,
+            'count': 1,
+            'paytype': 1,
+            'request': 2,
+            'upgrade': 1,
+            'pet': key
+          });
+          if (res.result == 0) {
+            contactCount--;
+          }
+        }
+      }
+    });
+    if (res.qnum > 0 &&
+        Global.userConfig.quality != null &&
+        Global.userConfig.quality != 0) {
+      res = await MGUtil.talentPKOper(
+          {'type': 15, 'paytype': 1, 'id': Global.userConfig.quality});
+    }
+    showSnackBar('一键执行完成');
   }
 
   @override
@@ -236,8 +297,7 @@ class _TalentPKState extends State<TalentPKPage> {
                 color: Colors.blue,
                 textColor: Colors.white,
                 child: Text('冒险'),
-                onPressed:
-                    (talentPKResponse?.advNum ?? 0) > 0 ? adventure : null,
+                onPressed: advNum > 0 ? adventure : null,
               ),
             ],
           ),
@@ -266,8 +326,7 @@ class _TalentPKState extends State<TalentPKPage> {
                 color: Colors.blue,
                 textColor: Colors.white,
                 child: Text('自动挑战'),
-                onPressed:
-                    (talentPKResponse?.cnum ?? 0) > 0 ? autoChallenge : null,
+                onPressed: challengeNum > 0 ? autoChallenge : null,
               ),
             ],
           ),
@@ -293,7 +352,7 @@ class _TalentPKState extends State<TalentPKPage> {
                       color: Colors.blue,
                       textColor: Colors.white,
                       child: Text('挑战'),
-                      onPressed: (talentPKResponse?.cnum ?? 0) > 0
+                      onPressed: challengeNum > 0
                           ? () {
                               challenge(10 - index);
                             }

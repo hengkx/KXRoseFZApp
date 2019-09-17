@@ -15,24 +15,35 @@ typedef PickerCallback = void Function(PickerItem item);
 class Picker extends StatefulWidget {
   final String label;
   final List<PickerItem> items;
-  final PickerCallback onSelect;
+  final ValueChanged<PickerItem> onChange;
+  final dynamic value;
 
-  Picker({this.label, this.items, this.onSelect});
+  Picker({
+    Key key,
+    this.label,
+    this.items,
+    @required this.value,
+    @required this.onChange,
+  }) : super(key: key);
 
   @override
   _PickerState createState() {
     return new _PickerState(
-        label: this.label, items: this.items, onSelect: this.onSelect);
+      label: this.label,
+      items: this.items,
+      value: this.value,
+      onChange: this.onChange,
+    );
   }
 }
 
 class _PickerState extends State<Picker> {
   final List<PickerItem> items;
   final String label;
-  final PickerCallback onSelect;
-  dynamic selectValue;
+  final ValueChanged<PickerItem> onChange;
+  dynamic value;
 
-  _PickerState({this.label, this.items, this.onSelect});
+  _PickerState({this.label, this.items, this.value, this.onChange});
 
   @override
   void initState() {
@@ -76,12 +87,12 @@ class _PickerState extends State<Picker> {
     ).then((item) {
       setState(() {
         if (item != null) {
-          selectValue = item.value;
+          value = item.value;
         } else {
-          selectValue = null;
+          value = null;
         }
       });
-      onSelect(item);
+      onChange(item);
     });
   }
 
@@ -96,18 +107,13 @@ class _PickerState extends State<Picker> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text(label),
                 ],
               ),
             ),
             Text(
               items
-                      .firstWhere((item) => item.value == selectValue,
+                      .firstWhere((item) => item.value == value,
                           orElse: () => null)
                       ?.text ??
                   '',

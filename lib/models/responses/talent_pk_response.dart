@@ -81,27 +81,31 @@ class TalentPKResponse extends BaseResponse {
   @JsonKey(name: 'winmax2')
   List<String> winmax2;
 
-  @JsonKey(name: 'lose1')
-  List<String> lose1;
+  @JsonKey(name: 'freecount')
+  int contactCount;
 
-  @JsonKey(name: 'lose2')
-  List<String> lose2;
+  /// 提升品质次数
+  int qnum;
 
-  @JsonKey(name: 'losemax1')
-  List<String> losemax1;
+  @JsonKey(name: 'extraaward')
+  List<Award> extraAward;
 
-  @JsonKey(name: 'losemax2')
-  List<String> losemax2;
+  /// 宝宝训练次数
+  int tnum;
 
   int free;
 
   @JsonKey(name: 'selfaward')
   int selfAward;
 
+  /// 战旗剩余次数
+  int total;
+
   TalentPKResponse(
     result,
     resultstr,
     uin,
+    this.total,
     this.selfAward,
     this.free,
     this.isWin,
@@ -130,10 +134,10 @@ class TalentPKResponse extends BaseResponse {
     this.win2,
     this.winmax1,
     this.winmax2,
-    this.lose1,
-    this.lose2,
-    this.losemax1,
-    this.losemax2,
+    this.contactCount,
+    this.qnum,
+    this.extraAward,
+    this.tnum,
   ) : super(result: result, resultstr: resultstr, uin: uin);
 
   factory TalentPKResponse.fromJson(Map<String, dynamic> srcJson) =>

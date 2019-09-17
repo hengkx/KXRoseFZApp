@@ -11,6 +11,7 @@ TalentPKResponse _$TalentPKResponseFromJson(Map<String, dynamic> json) {
     json['result'],
     json['resultstr'],
     json['uin'],
+    json['total'] as int,
     json['selfaward'] as int,
     json['free'] as int,
     json['iswin'] as int,
@@ -64,10 +65,13 @@ TalentPKResponse _$TalentPKResponseFromJson(Map<String, dynamic> json) {
     (json['win2'] as List)?.map((e) => e as String)?.toList(),
     (json['winmax1'] as List)?.map((e) => e as String)?.toList(),
     (json['winmax2'] as List)?.map((e) => e as String)?.toList(),
-    (json['lose1'] as List)?.map((e) => e as String)?.toList(),
-    (json['lose2'] as List)?.map((e) => e as String)?.toList(),
-    (json['losemax1'] as List)?.map((e) => e as String)?.toList(),
-    (json['losemax2'] as List)?.map((e) => e as String)?.toList(),
+    json['freecount'] as int,
+    json['qnum'] as int,
+    (json['extraaward'] as List)
+        ?.map(
+            (e) => e == null ? null : Award.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    json['tnum'] as int,
   );
 }
 
@@ -102,12 +106,13 @@ Map<String, dynamic> _$TalentPKResponseToJson(TalentPKResponse instance) =>
       'win2': instance.win2,
       'winmax1': instance.winmax1,
       'winmax2': instance.winmax2,
-      'lose1': instance.lose1,
-      'lose2': instance.lose2,
-      'losemax1': instance.losemax1,
-      'losemax2': instance.losemax2,
+      'freecount': instance.contactCount,
+      'qnum': instance.qnum,
+      'extraaward': instance.extraAward,
+      'tnum': instance.tnum,
       'free': instance.free,
       'selfaward': instance.selfAward,
+      'total': instance.total,
     };
 
 Rivals _$RivalsFromJson(Map<String, dynamic> json) {

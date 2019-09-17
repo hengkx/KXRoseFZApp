@@ -213,7 +213,7 @@ class Global {
         .where((xe) => xe.getAttribute("id") == "$id")
         .toList();
     if (res.length == 0) {
-      res = Global.config['roseConfig']
+      res = Global.config['rose']
           .findAllElements("item")
           .where((xe) => xe.getAttribute("id") == "$id")
           .toList();
