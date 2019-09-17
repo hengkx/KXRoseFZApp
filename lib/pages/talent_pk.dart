@@ -1,30 +1,18 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:rose_fz/global.dart';
 import 'package:rose_fz/models/pet_pk.dart';
 import 'package:rose_fz/models/responses/award.dart';
 import 'package:rose_fz/models/responses/talent_pk_response.dart';
+import 'package:rose_fz/utils/mg.dart';
 import 'package:rose_fz/utils/mg_data.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-
-import '../utils/mg.dart';
-import '../global.dart';
-
-final dateFormat = new DateFormat('MM-dd HH:mm');
 
 class TalentPKPage extends StatefulWidget {
   @override
   _TalentPKState createState() {
     return new _TalentPKState();
   }
-}
-
-class TaskConfig {
-  String name;
-  String ruleDesc;
-  String ruleTip;
-  int ruleLen;
 }
 
 class _TalentPKState extends State<TalentPKPage> {
