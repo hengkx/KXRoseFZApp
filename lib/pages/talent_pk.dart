@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -167,17 +168,50 @@ class _TalentPKState extends State<TalentPKPage> {
     }
   }
 
-  handleOneKeyPressed() async {
-    if (talentPKResponse.free == 0) {
-      // 免费占卜
-      await MGUtil.talentPKOper({'augury': 1, 'type': 24});
-    }
-    if (talentPKResponse.selfAward == 1) {
-      // 领取奖励
-      var res = await MGUtil.talentPKOper({'type': 11});
-      showActivityOperAward(res.award);
-    }
-    // 战旗
+  /// 宝宝训练
+  Future trainPet(int trainCount) async {
+    Global.userConfig.trainPets.forEach((int key, int val) async {
+      if (val != 0 && trainCount > 0) {
+        var count = min(val, trainCount);
+        for (var i = 0; i < count; i++) {
+          var res = await MGUtil.talentPKOper({'type': 4, 'op': 1, 'id': key});
+          if (res.result == 0) {
+            showActivityOperAward(res.extraAward);
+            trainCount--;
+          } else {
+            showSnackBar('宝宝训练 ${res.resultstr}');
+          }
+        }
+      }
+    });
+  }
+
+  /// 契约升级
+  Future contractPet(int contactCount) async {
+    Global.userConfig.contractPets.forEach((int key, int val) async {
+      if (val != 0 && contactCount > 0) {
+        var count = min(val, contactCount);
+        for (var i = 0; i < count; i++) {
+          var res = await MGUtil.talentPKOper({
+            'type': 23,
+            'count': 1,
+            'paytype': 1,
+            'request': 2,
+            'upgrade': 1,
+            'pet': key
+          });
+          if (res.result == 0) {
+            contactCount--;
+          } else {
+            showSnackBar('契约训练 ${res.resultstr}');
+          }
+        }
+      }
+    });
+  }
+
+  /// 战旗升级
+  Future warFlag() async {
     var res = await MGUtil.talentPKOper({'type': 25, 'action': 1});
     int warFlagCount = res.total;
     if (warFlagCount != null) {
@@ -189,45 +223,36 @@ class _TalentPKState extends State<TalentPKPage> {
                 {'type': 25, 'action': 2, 'index': key, 'upgrade': 1});
             if (res.result == 0) {
               warFlagCount--;
+            } else {
+              showSnackBar('战旗 ${res.resultstr}');
             }
           }
         }
       });
     }
+  }
+
+  handleOneKeyPressed() async {
+    if (talentPKResponse.free == 0) {
+      // 免费占卜
+      await MGUtil.talentPKOper({'augury': 1, 'type': 24});
+    }
+    if (talentPKResponse.selfAward == 1) {
+      // 领取奖励
+      var res = await MGUtil.talentPKOper({'type': 11});
+      showActivityOperAward(res.award);
+    }
+
+    await warFlag();
+
     // 宝宝列表
-    res = await MGUtil.talentPKOper({'type': 3});
+    var res = await MGUtil.talentPKOper({'type': 3});
     int trainCount = res.tnum;
-    Global.userConfig.trainPets.forEach((int key, int val) async {
-      if (val != 0 && trainCount > 0) {
-        var count = min(val, trainCount);
-        for (var i = 0; i < count; i++) {
-          res = await MGUtil.talentPKOper({'type': 4, 'op': 1, 'id': key});
-          if (res.result == 0) {
-            showActivityOperAward(res.extraAward);
-            trainCount--;
-          }
-        }
-      }
-    });
+    await trainPet(trainCount);
+
     int contactCount = res.contactCount;
-    Global.userConfig.contractPets.forEach((int key, int val) async {
-      if (val != 0 && contactCount > 0) {
-        var count = min(val, contactCount);
-        for (var i = 0; i < count; i++) {
-          res = await MGUtil.talentPKOper({
-            'type': 23,
-            'count': 1,
-            'paytype': 1,
-            'request': 2,
-            'upgrade': 1,
-            'pet': key
-          });
-          if (res.result == 0) {
-            contactCount--;
-          }
-        }
-      }
-    });
+    await contractPet(contactCount);
+
     if (res.qnum > 0 &&
         Global.userConfig.quality != null &&
         Global.userConfig.quality != 0) {
