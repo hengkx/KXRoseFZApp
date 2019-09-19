@@ -51,8 +51,10 @@ class _TalentPKState extends State<TalentPKPage> {
     setState(() {
       advNum = res.advNum;
       challengeNum = res.cnum;
-      selectPetPK = petPKs.firstWhere(
-          (item) => item.index == res.advProgress - res.advProgress % 5);
+      if (res.advProgress != 0) {
+        selectPetPK = petPKs.firstWhere(
+            (item) => item.index == res.advProgress - res.advProgress % 5);
+      }
       talentPKResponse = res;
     });
   }
@@ -290,7 +292,9 @@ class _TalentPKState extends State<TalentPKPage> {
               Container(
                 height: 30,
                 child: OutlineButton(
-                  child: Text('${selectPetPK?.name}(${selectPetPK?.stage})'),
+                  child: Text(selectPetPK != null
+                      ? '${selectPetPK?.name}(${selectPetPK?.stage})'
+                      : '未开始'),
                   onPressed: selectPetPKPressed,
                 ),
               ),
