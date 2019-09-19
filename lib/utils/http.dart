@@ -28,8 +28,7 @@ class HttpUtil {
         "https://qqgamecdnimg.qq.com/cdn/swf_0908/roseFrame_v6363.swf";
 
     dio = new Dio();
-    dio.options.contentType =
-        ContentType.parse("application/x-www-form-urlencoded");
+    dio.options.contentType = 'application/x-www-form-urlencoded';
     dio.options.responseType = ResponseType.bytes;
   }
 

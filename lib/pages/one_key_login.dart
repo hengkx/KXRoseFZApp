@@ -99,8 +99,12 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   }
 
   void launchUrl(String url) async {
-    url = url.replaceAll('googlechrome', 'kxrose');
-    url = "$url&schemacallback=kxrose%3A%2F%2F";
+    if (Platform.isAndroid) {
+    } else {
+      url = url.replaceAll('googlechrome', 'kxrose');
+      url = "$url&schemacallback=kxrose%3A%2F%2F";
+    }
+
     print(url);
     if (await canLaunch(url)) {
       await launch(url);
@@ -114,6 +118,7 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
     return WebviewScaffold(
       url: url ??
           "https://ui.ptlogin2.qq.com/cgi-bin/login?pt_hide_ad=1&style=9&appid=7000201&pt_no_auth=1&pt_wxtest=1&daid=5&s_url=${redirectUrl}",
+      // 'https://ui.ptlogin2.qq.com/cgi-bin/login?pt_hide_ad=1&style=9&appid=549000929&pt_no_auth=1&pt_wxtest=1&daid=5&s_url=https%3A%2F%2Fh5.qzone.qq.com%2Fmqzone%2Findex',
       appBar: AppBar(
         title: Text("QQ登录"),
         backgroundColor: Colors.grey,
