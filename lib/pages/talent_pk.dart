@@ -67,12 +67,16 @@ class _TalentPKState extends State<TalentPKPage> {
   }
 
   void showActivityOperAward(List<Award> awards) {
-    for (var award in awards) {
-      int id = award.id;
-      int count = award.count;
-      var mgInfo = MGDataUtil.dicMapId['$id'];
-      showSnackBar(
-          '获得 ${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit ?? ''}');
+    if (awards != null) {
+      List<String> tips = [];
+      for (var award in awards) {
+        int id = award.id;
+        int count = award.count;
+        var mgInfo = MGDataUtil.dicMapId['$id'];
+        tips.add(
+            '${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit ?? ''}');
+      }
+      showSnackBar('获得 ${tips.join(',')}');
     }
   }
 
