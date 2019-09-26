@@ -66,7 +66,7 @@ class _TalentPKState extends State<TalentPKPage> {
     ));
   }
 
-  void showActivityOperAward(List<Award> awards) {
+  void showActivityOperAward(List<Award> awards, [String tip = '']) {
     if (awards != null) {
       List<String> tips = [];
       for (var award in awards) {
@@ -76,15 +76,22 @@ class _TalentPKState extends State<TalentPKPage> {
         tips.add(
             '${MGDataUtil.getPropItemName(award)} $count ${mgInfo?.unit ?? ''}');
       }
-      showSnackBar('获得 ${tips.join(',')}');
+      showSnackBar('$tip 获得 ${tips.join(',')}');
     }
   }
 
+  List<Award> awards = [];
+  int succCount = 0;
+  int failCount = 0;
   Future challenge(int index) async {
     var res = await MGUtil.talentPKOper({'type': 2, 'uin': 0, 'rival': index});
     if (res.result == 0) {
-      showSnackBar('挑战${res.isWin == 1 ? '成功' : '失败'}');
-      showActivityOperAward(res.award);
+      awards.addAll(res.award);
+      if (res.isWin == 1) {
+        succCount++;
+      } else {
+        failCount++;
+      }
       setState(() {
         challengeNum--;
         talentPKResponse = res;
@@ -95,10 +102,12 @@ class _TalentPKState extends State<TalentPKPage> {
   }
 
   Future autoChallenge() async {
+    awards = [];
     var count = talentPKResponse?.cnum;
     for (var i = 0; i < count; i++) {
       await challenge(Random().nextInt(10) + 1);
     }
+    showActivityOperAward(awards, '挑战执行完成 成功 $succCount 次 失败 $failCount 次 ');
   }
 
   selectPetPKPressed() {
@@ -163,8 +172,7 @@ class _TalentPKState extends State<TalentPKPage> {
       var res =
           await MGUtil.talentPKOper({'type': 18, 'index': selectPetPK.index});
       if (res.result == 0) {
-        showSnackBar('冒险${res.isWin == 1 ? '成功' : '失败'}');
-        showActivityOperAward(res.award);
+        showActivityOperAward(res.award, '冒险${res.isWin == 1 ? '成功' : '失败'}');
         setState(() {
           advNum--;
         });
@@ -239,11 +247,12 @@ class _TalentPKState extends State<TalentPKPage> {
   }
 
   handleOneKeyPressed() async {
-    if (talentPKResponse.free == 0) {
+    var res = await MGUtil.talentPKOper({'type': 1});
+    if (res.free == 0) {
       // 免费占卜
       await MGUtil.talentPKOper({'augury': 1, 'type': 24});
     }
-    if (talentPKResponse.selfAward == 1) {
+    if (res.selfAward == 1) {
       // 领取奖励
       var res = await MGUtil.talentPKOper({'type': 11});
       showActivityOperAward(res.award);
@@ -252,7 +261,7 @@ class _TalentPKState extends State<TalentPKPage> {
     await warFlag();
 
     // 宝宝列表
-    var res = await MGUtil.talentPKOper({'type': 3});
+    res = await MGUtil.talentPKOper({'type': 3});
     int trainCount = res.tnum;
     await trainPet(trainCount);
 
