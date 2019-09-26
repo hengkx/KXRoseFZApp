@@ -1,5 +1,6 @@
 import 'package:rose_fz/models/responses/talent_pk_response.dart';
 import 'package:rose_fz/models/soil.dart';
+import 'package:rose_fz/utils/mg_data.dart';
 
 import './http.dart';
 import 'package:intl/intl.dart';
@@ -26,8 +27,9 @@ class MGUtil {
     var response = GetInitFirstResponse.fromJson(res);
     res.forEach((key, value) {
       if (key.contains('vegetableseed') || key.contains('roseseed')) {
-        var id = key.replaceAll('vegetableseed', '').replaceAll('roseseed', '');
-        response.warehouse[id] = value;
+        var id = int.parse(
+            key.replaceAll('vegetableseed', '').replaceAll('roseseed', ''));
+        response.warehouse[MGDataUtil.getPlantIDBySeedId(id)] = value;
       }
     });
     return response;

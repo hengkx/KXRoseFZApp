@@ -85,7 +85,7 @@ class GetInitFirstResponse extends BaseResponse {
   int weekendWelfare;
 
   @JsonKey(ignore: true)
-  Map<String, int> warehouse = Map<String, int>();
+  Map<int, int> warehouse = Map<int, int>();
 
   GetInitFirstResponse(
       {result,

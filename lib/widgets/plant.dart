@@ -147,10 +147,10 @@ class _PlantWidgetState extends State<PlantWidget> {
     if (flower.isMoneyBuy()) {
       var res = await MGUtil.buySeed(flower.seedId, 1);
       if (res.result == 0) {
-        if (User.initFirstRes.warehouse.containsKey(flower.seedId.toString())) {
-          User.initFirstRes.warehouse[flower.seedId.toString()] += 1;
+        if (User.initFirstRes.warehouse.containsKey(flower.plantId)) {
+          User.initFirstRes.warehouse[flower.plantId] += 1;
         } else {
-          User.initFirstRes.warehouse[flower.seedId.toString()] = 1;
+          User.initFirstRes.warehouse[flower.plantId] = 1;
         }
 
         showSnackBar("购买 ${flower.name} 种子成功");
@@ -313,7 +313,7 @@ class _PlantWidgetState extends State<PlantWidget> {
     }
     if (id != null) {
       var flower = Global.getFlowerInfoById(id);
-      flower.count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
+      flower.count = User.initFirstRes.warehouse[flower.plantId] ?? 0;
       return flower;
     }
     return null;

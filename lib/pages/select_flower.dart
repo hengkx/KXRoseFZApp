@@ -37,7 +37,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     User.initFirstRes = await MGUtil.getInitFirst();
     for (var item in Global.config['flower'].findAllElements("item")) {
       var flower = XML.toFlower(item);
-      int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
+      int count = User.initFirstRes.warehouse[flower.plantId] ?? 0;
       flower.count = count;
       if (PlantUtil.isPlant(flower, soil)) {
         flowers.add(flower);
@@ -46,7 +46,7 @@ class _SelectFlowerPageState extends State<SelectFlowerPage> {
     if (soil == null || soil.type == 0 || soil.hanglevel == 4) {
       for (var item in Global.config['rose'].findAllElements("item")) {
         var flower = XML.toFlower(item);
-        int count = User.initFirstRes.warehouse[flower.seedId.toString()] ?? 0;
+        int count = User.initFirstRes.warehouse[flower.plantId] ?? 0;
         flower.type = 100;
         flower.count = count;
         if (PlantUtil.isPlant(flower, soil)) {
