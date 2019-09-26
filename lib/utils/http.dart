@@ -51,7 +51,7 @@ class HttpUtil {
   //   return response.data;
   // }
 
-  post(url, {data}) async {
+  post(method, {data}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String cookies = sharedPreferences.getString('cookies');
     headers['Cookie'] = cookies;
@@ -59,10 +59,9 @@ class HttpUtil {
 //    print('post请求启动! url：$url ,body: $data');
     Response response;
     try {
-      response = await dio.post(
-          'https://cgi.meigui.qq.com/cgi-bin/$url?gprand=${Random().nextDouble()}',
-          data: data,
-          options: options);
+      var url =
+          'https://cgi.meigui.qq.com/cgi-bin/$method?gprand=${Random().nextDouble()}';
+      response = await dio.post(url, data: data, options: options);
       String res = gbk.decode(response.data);
       int pos = -1;
       while ((pos = res.indexOf("\\x")) != -1) {
@@ -83,6 +82,8 @@ class HttpUtil {
       log.time = DateTime.now().toString();
 
       await db.addRequestLog(log);
+
+      // sleep(Duration(seconds: 1));
 
       return result;
     } on DioError catch (e) {
