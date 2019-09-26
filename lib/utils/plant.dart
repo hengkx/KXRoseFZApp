@@ -3,6 +3,9 @@ import 'package:rose_fz/models/soil.dart';
 
 class PlantUtil {
   static bool isPlant(Flower flower, Soil soil) {
+    if (flower.combineId != null) {
+      return false;
+    }
     if (soil == null) {
       return true;
     }
