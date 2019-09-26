@@ -29,8 +29,8 @@ class ActConfig {
   dynamic initRes;
 }
 
-List<int> includeActivities = [15, 26, 36, 42, 76, 78];
-List<int> excludeActivities = [62, 77];
+// List<int> includeActivities = [15, 26, 36, 42, 76, 78];
+List<int> excludeActivities = [51, 62, 71, 77];
 
 var activityCmds = {
   '花园寻宝': 155,
@@ -39,6 +39,8 @@ var activityCmds = {
   '燃花灯': 186,
   '夏日大作战': 188,
   '幸福蛋': 198,
+  '星愿': 199,
+  '魔幻夺宝': 201,
   '大富翁': 209,
   '周末活动': 220,
   '拯救计划': 225,
@@ -149,6 +151,30 @@ class _ActivityState extends State<Activity> {
       // 全服抓螃蟹
       if (globalCatchCount > 0) {
         var parmas = {'request': 11, 'cmd': 188, 'index': 1};
+        await activityOper(actConfig, parmas);
+      }
+    }
+  }
+
+  /// 星源
+  xingYuan(ActConfig actConfig) async {
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
+    if (initRes['result'] == 0) {
+      var count = initRes['free'];
+      var globalRewardCount = int.parse(initRes['leftGlobalRewardCnt'][0]);
+      if (globalRewardCount > 0) {
+        var parmas = {'request': 4, 'cmd': cmd, 'count': globalRewardCount};
+        await activityOper(actConfig, parmas);
+      }
+      if (count > 0) {
+        var parmas = {
+          'request': 3,
+          'cmd': cmd,
+          'auto': 1,
+          'count': 1,
+          'index': 29 // 北极
+        };
         await activityOper(actConfig, parmas);
       }
     }
@@ -357,7 +383,7 @@ class _ActivityState extends State<Activity> {
     }
   }
 
-  handleTap(ActConfig actConfig) async {
+  handleTap(ActConfig actConfig, [bool isBatch = false]) async {
     if (actConfig.cmd != null) {
       var parmas = {'request': 1, 'cmd': actConfig.cmd};
       actConfig.initRes = await activityOper(actConfig, parmas);
@@ -368,6 +394,9 @@ class _ActivityState extends State<Activity> {
     switch (actConfig.name) {
       case '周末活动':
         await zhouMoHuoDong(actConfig);
+        break;
+      case '星愿':
+        await xingYuan(actConfig);
         break;
       case '幸福蛋':
         await xingFuDan(actConfig);
@@ -385,29 +414,28 @@ class _ActivityState extends State<Activity> {
         await buChongDaZuoZhan(actConfig);
         break;
       case '大富翁':
-        await commonActivity(actConfig);
-        break;
       case '中秋月圆':
-        await commonActivity(actConfig);
-        break;
       case '足球小将':
         await commonActivity(actConfig);
         break;
       case '燃花灯':
-        await commonActivity(actConfig, {'index': 1, 'auto': 0});
+      case '魔幻夺宝':
+        await commonActivity(actConfig, {'index': 1});
         break;
       default:
         showActivityOperSnackBar(
             actConfig, actConfig.isActive ? '活动未实现' : '活动时间未到');
         return;
     }
-    showActivityOperSnackBar(actConfig, '执行完毕');
+    if (!isBatch) {
+      showActivityOperSnackBar(actConfig, '执行完毕');
+    }
   }
 
   void handleActivity() async {
     for (var item in actConfigs) {
       if (item.isActive) {
-        await handleTap(item);
+        await handleTap(item, true);
       }
     }
   }
