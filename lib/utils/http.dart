@@ -83,7 +83,10 @@ class HttpUtil {
 
       await db.addRequestLog(log);
 
-      // sleep(Duration(seconds: 1));
+      if (result['result'] == 1000007) {
+        sleep(Duration(seconds: 3));
+        result = await post(method, data: data);
+      }
 
       return result;
     } on DioError catch (e) {

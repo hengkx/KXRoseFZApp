@@ -72,6 +72,7 @@ class DBUtil {
       ],
       limit: limit,
       offset: offset,
+      where: 'result != 0',
       orderBy: 'time DESC',
     );
 

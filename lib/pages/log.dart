@@ -68,7 +68,7 @@ class _LogPageState extends State<LogPage> {
                 Text(log.url),
                 Text(log.params),
                 Text(log.result.toString()),
-                Text(log.uin.toString()),
+                Text(log.resultStr.toString()),
                 // Text(log.response),
               ],
             );
