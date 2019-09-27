@@ -7,7 +7,7 @@ packages:
       name: analyzer
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.37.1+1"
+    version: "0.38.2"
   archive:
     dependency: "direct main"
     description:
@@ -206,7 +206,7 @@ packages:
       name: front_end
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.21+1"
+    version: "0.1.24"
   gbk2utf8:
     dependency: "direct main"
     description:
@@ -297,7 +297,7 @@ packages:
       name: kernel
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.21+1"
+    version: "0.3.24"
   logging:
     dependency: transitive
     description:

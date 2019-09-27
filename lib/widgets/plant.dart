@@ -173,7 +173,7 @@ class _PlantWidgetState extends State<PlantWidget> {
     var res = await MGUtil.plant(soil.no, flower.plantId);
     if (res.result == 0) {
       showSnackBar("${soil.no} 号盆 种植 ${flower.name} 成功");
-      User.initFirstRes.warehouse[flower.seedId.toString()] -= 1;
+      User.initFirstRes.warehouse[flower.plantId] -= 1;
     } else {
       showSnackBar(res.resultstr);
     }
