@@ -45,6 +45,7 @@ var activityCmds = {
   '周末活动': 220,
   '拯救计划': 225,
   '中秋月圆': 227,
+  '欢乐小黄鸭': 229,
 };
 
 class _ActivityState extends State<Activity> {
@@ -416,6 +417,7 @@ class _ActivityState extends State<Activity> {
       case '大富翁':
       case '中秋月圆':
       case '足球小将':
+      case '欢乐小黄鸭':
         await commonActivity(actConfig);
         break;
       case '燃花灯':
