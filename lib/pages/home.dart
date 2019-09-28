@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                 getDrawerItem('默认种植设置', '/settings/plant'),
                 getDrawerItem('加速化肥设置', '/settings/speed'),
                 getDrawerItem('竞技场设置', '/settings/pk'),
-                // getDrawerItem('日志', '/log'),
+                getDrawerItem('日志', '/log'),
                 getDrawerItem('万能种子兑换', '/exchange'),
                 ListTile(
                   title: Text('切换帐号'),
