@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:gbk2utf8/gbk2utf8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,7 +83,7 @@ class HttpUtil {
       await db.addRequestLog(log);
 
       if (result['result'] == 1000007) {
-        sleep(Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 3));
         result = await post(method, data: data);
       }
 
