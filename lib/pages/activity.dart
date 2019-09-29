@@ -30,12 +30,13 @@ class ActConfig {
 }
 
 // List<int> includeActivities = [15, 26, 36, 42, 76, 78];
-List<int> excludeActivities = [51, 62, 71, 77];
+const List<int> excludeActivities = [51, 62, 71, 77];
 
-var activityCmds = {
+const activityCmds = {
   '花园寻宝': 155,
   '捕虫大作战': 170,
   '足球小将': 182,
+  '弹弹珠': 183,
   '燃花灯': 186,
   '夏日大作战': 188,
   '幸福蛋': 198,
@@ -414,6 +415,7 @@ class _ActivityState extends State<Activity> {
       case '捕虫大作战':
         await buChongDaZuoZhan(actConfig);
         break;
+      case '弹弹珠':
       case '大富翁':
       case '中秋月圆':
       case '足球小将':
@@ -440,6 +442,7 @@ class _ActivityState extends State<Activity> {
         await handleTap(item, true);
       }
     }
+    showSnackBar('一键执行完毕');
   }
 
   @override
