@@ -1,5 +1,6 @@
 import 'package:rose_fz/models/flower.dart';
 import 'package:rose_fz/models/soil.dart';
+import 'package:rose_fz/utils/mg_data.dart';
 
 import '../global.dart';
 import '../response.dart';
@@ -12,21 +13,25 @@ import 'select_flower.dart';
 
 class PlantOperPage extends StatefulWidget {
   final Soil soil;
+  final int count;
 
-  PlantOperPage({Key key, @required this.soil}) : super(key: key);
+  PlantOperPage({Key key, @required this.soil, this.count}) : super(key: key);
 
   @override
-  _PlantOperPageState createState() => _PlantOperPageState(soil);
+  _PlantOperPageState createState() => _PlantOperPageState(soil, count);
 }
 
 class _PlantOperPageState extends State<PlantOperPage> {
-  _PlantOperPageState(this.soil);
+  final ScrollController _controller = ScrollController();
   Soil soil;
-  ScrollController _controller = ScrollController();
+  final int _count;
+  final Map<int, int> _gainCount = {};
+  Flower _flower;
+
+  _PlantOperPageState(this.soil, this._count);
 
   int choiceIndex = 0;
   String usernic = '';
-  Flower flower;
   List<String> logs = [];
   GetInitFirstResponse initFirstRes = new GetInitFirstResponse();
 
@@ -73,8 +78,8 @@ class _PlantOperPageState extends State<PlantOperPage> {
   }
 
   Future<bool> plant() async {
-    if (flower != null) {
-      var res = await MGUtil.plant(soil.no, flower.plantId);
+    if (_flower != null) {
+      var res = await MGUtil.plant(soil.no, _flower.plantId);
       if (res.result == 0) {
         soil.soilsate = res.soilsate;
         soil.rosestate = res.rosestate;
@@ -113,9 +118,15 @@ class _PlantOperPageState extends State<PlantOperPage> {
   Future<bool> gain() async {
     var res = await MGUtil.gain(soil.no);
     if (res.result == 0) {
+      if (!_gainCount.containsKey(res.igainrosetype)) {
+        _gainCount[res.igainrosetype] = 0;
+      }
+      _gainCount[res.igainrosetype] += res.igainrosecount;
       soil.rosestate = 0;
       soil.soilsate = 50;
       logs.add(res.toString());
+      logs.add(
+          '共收获 ${MGDataUtil.dicMapId['${res.igainrosetype}']?.name} ${_gainCount[res.igainrosetype]}');
     } else {
       logs.add("收获 ${res.resultstr}");
     }
@@ -215,7 +226,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: FlatButton(
                     child: Text(
-                      flower != null ? flower.name : "选择种子",
+                      _flower != null ? _flower.name : "选择种子",
                       style: TextStyle(color: Colors.white),
                     ),
                     color: Colors.green,
@@ -226,7 +237,7 @@ class _PlantOperPageState extends State<PlantOperPage> {
                       ))
                           .then((Flower flower) {
                         this.setState(() {
-                          this.flower = flower;
+                          this._flower = flower;
                         });
                       });
                     },
