@@ -47,7 +47,7 @@ class _PlantSettingState extends State<PlantSetting> {
       Global.userConfig.waterPlant = flower.plantId;
     }
     if (index == 2) {
-      return Global.userConfig.hangPlant = flower.plantId;
+      Global.userConfig.hangPlant = flower.plantId;
     }
     Global.saveUserConfig();
     setState(() {});
