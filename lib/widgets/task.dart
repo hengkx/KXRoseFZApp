@@ -1,3 +1,7 @@
+import 'package:rose_fz/models/task_config.dart';
+import 'package:rose_fz/user.dart';
+import 'package:rose_fz/utils/mg_data.dart';
+
 import '../response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,13 +20,6 @@ class Task extends StatefulWidget {
   }
 }
 
-class TaskConfig {
-  String name;
-  String ruleDesc;
-  String ruleTip;
-  int ruleLen;
-}
-
 class _TaskState extends State<Task> {
   @override
   void initState() {
@@ -35,15 +32,17 @@ class _TaskState extends State<Task> {
     await loadTask();
   }
 
-  List<UserTask> tasks = [];
-  final SlidableController slidableController = SlidableController();
+  List<UserTask> _tasks = [];
+  final SlidableController _slidableController = SlidableController();
 
   Future<void> loadTask() async {
     var data = await MGUtil.getTasks();
 
     this.setState(() {
-      tasks = data.userTasks.where((p) => p.state != 1).toList();
-      tasks.sort((prev, next) =>
+      // state 好像是完成
+      // _tasks = data.userTasks.where((p) => p.state != 1).toList();
+      _tasks = data.userTasks;
+      _tasks.sort((prev, next) =>
           (next.data1 + next.data2 + next.data3 + next.data4 + next.data5) -
           (prev.data1 + prev.data2 + prev.data3 + prev.data4 + prev.data5));
     });
@@ -56,39 +55,125 @@ class _TaskState extends State<Task> {
     ));
   }
 
-  TaskConfig getTaskConfig(task) {
-    TaskConfig taskConfig = new TaskConfig();
-    for (var item in Global.config['task'].findAllElements("item")) {
-      if (item.getAttribute('id') == "${task.taskID}") {
-        taskConfig.name = item.getAttribute('name');
-        var rule = item.findAllElements("rule").toList()[0];
-        taskConfig.ruleDesc = rule.getAttribute("comment");
-        var tips = rule.findAllElements("tip").toList();
-        if (tips.length > 0) {
-          taskConfig.ruleTip =
-              tips[0].text.replaceAll("\$propdata1\$", "${task.data1}").trim();
-        }
-        taskConfig.ruleLen = rule.findAllElements("prop").length;
-      }
+  int getMaterialCount(TaskCond cond) {
+    int count;
+    if (cond.type == 'flower') {
+      count = User.initFirstRes.warehouse[int.parse(cond.id)];
+    } else if (cond.type == 'rose') {
+      count = User.initFirstRes.warehouse[MGDataUtil.dicMapId[cond.id].localId];
+    } else {
+      print(cond.type);
+      return -1;
     }
-    return taskConfig;
+    return count ?? 0;
   }
 
-  String getTaskTip(UserTask task, TaskConfig taskConfig) {
-    switch (taskConfig.ruleLen) {
-      case 1:
-        return "${task.data1}";
-      case 2:
-        return "${task.data1} ${task.data2}";
-      case 3:
-        return "${task.data1} ${task.data2} ${task.data3}";
-      case 4:
-        return "${task.data1} ${task.data2} ${task.data3} ${task.data4}";
-      case 5:
-        return "${task.data1} ${task.data2} ${task.data3} ${task.data4} ${task.data5}";
-      default:
-        return "";
+  String getCondName(TaskCond cond) {
+    if (cond.name == null) {
+      return '次数';
     }
+    int count = getMaterialCount(cond);
+    if (count != -1) {
+      return '${cond.name}($count)';
+    }
+    return cond.name;
+  }
+
+  Widget buildCondProgress(int count, TaskCond cond) {
+    return Row(
+      children: <Widget>[
+        Container(
+          width: 70,
+          child: Text(
+            getCondName(cond),
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: Colors.black, fontSize: 12),
+          ),
+        ),
+        Container(
+          width: 50,
+          child: Text('$count',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                color: count >= cond.count ? Colors.red : Colors.grey,
+                fontSize: 12,
+              )),
+        ),
+        Text(' / '),
+        Container(
+          width: 60,
+          child: Text(
+            '${cond.count}',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        // Text('种子数量：${getMaterialCount(cond)}'),
+      ],
+    );
+  }
+
+  Widget buildTaskProgress(UserTask task, TaskConfig cfg) {
+    final List<Widget> widgets = [];
+    var len = cfg.conds.length;
+    if (len >= 1) {
+      widgets.add(buildCondProgress(task.data1, cfg.conds[0]));
+    }
+    if (len >= 2) {
+      widgets.add(buildCondProgress(task.data2, cfg.conds[1]));
+    }
+    if (len >= 3) {
+      widgets.add(buildCondProgress(task.data3, cfg.conds[2]));
+    }
+    if (len >= 4) {
+      widgets.add(buildCondProgress(task.data4, cfg.conds[3]));
+    }
+    if (len >= 5) {
+      widgets.add(buildCondProgress(task.data5, cfg.conds[4]));
+    }
+
+    return Column(children: widgets);
+  }
+
+  Widget buildName(TaskConfig cfg) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 5),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Text(
+                  cfg.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildRule(TaskConfig cfg) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 5),
+      child: Row(children: <Widget>[
+        Expanded(
+          child: Text(
+            cfg.ruleDesc,
+            style: new TextStyle(
+              color: Colors.grey[500],
+              fontSize: 12,
+            ),
+          ),
+        ),
+      ]),
+    );
   }
 
   @override
@@ -100,13 +185,13 @@ class _TaskState extends State<Task> {
             onRefresh: loadTask,
             child: ListView.separated(
               itemBuilder: (BuildContext context, int index) {
-                var task = tasks[index];
-                var taskConfig = getTaskConfig(task);
+                var task = _tasks[index];
+                var cfg = Global.getTaskInfoById(task.taskID);
                 final List<Widget> slideActions = [];
                 final List<Widget> slideSecondaryActions = [];
                 return Slidable(
                   key: ValueKey(task.taskID),
-                  controller: slidableController,
+                  controller: _slidableController,
                   actionPane: SlidableDrawerActionPane(),
                   actions: slideActions,
                   secondaryActions: slideSecondaryActions,
@@ -117,53 +202,9 @@ class _TaskState extends State<Task> {
                       padding: EdgeInsets.all(10),
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(bottom: 5),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(
-                                        taskConfig.name,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(bottom: 5),
-                            child: Row(children: <Widget>[
-                              Expanded(
-                                child: Text(
-                                  taskConfig.ruleDesc,
-                                  style: new TextStyle(
-                                    color: Colors.grey[500],
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Text(
-                                  taskConfig.ruleTip ??
-                                      getTaskTip(task, taskConfig),
-                                  style: new TextStyle(
-                                    color: Colors.grey[500],
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          buildName(cfg),
+                          buildRule(cfg),
+                          buildTaskProgress(task, cfg),
                         ],
                       ),
                     ),
@@ -174,7 +215,7 @@ class _TaskState extends State<Task> {
               separatorBuilder: (BuildContext context, int index) {
                 return new Container(height: 1.0, color: Colors.grey[300]);
               },
-              itemCount: tasks.length,
+              itemCount: _tasks.length,
             ),
           ),
         )

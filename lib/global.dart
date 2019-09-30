@@ -6,6 +6,7 @@ import 'dart:math' show Random;
 import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
 import 'package:rose_fz/models/flower.dart';
+import 'package:rose_fz/models/task_config.dart';
 import 'package:rose_fz/utils/mg_data.dart';
 import 'package:rose_fz/utils/xml.dart';
 import 'package:xml/xml.dart';
@@ -193,6 +194,38 @@ class Global {
     File file = File(userConfigPath);
     print(json.encode(Global.userConfig));
     file.writeAsStringSync(json.encode(Global.userConfig));
+  }
+
+  /// 通过id查询任务配置
+  static TaskConfig getTaskInfoById(int id) {
+    var res = Global.config['task']
+        .findAllElements("item")
+        .where((xe) => xe.getAttribute("id") == "$id")
+        .toList();
+    if (res.length > 0) {
+      XmlElement xe = res[0];
+      var cfg = TaskConfig(id: id, name: xe.getAttribute('name'));
+      cfg.conds = xe.findAllElements('prop').map((item) {
+        return TaskCond(
+          id: item.getAttribute('id'),
+          name: MGDataUtil.dicMapId[item.getAttribute('id')]?.name,
+          count: int.parse(item.getAttribute('count')),
+          type: item.getAttribute('type'),
+        );
+      }).toList();
+
+      var rule = xe.findAllElements("rule").toList()[0];
+      cfg.ruleDesc = rule.getAttribute("comment");
+      var tips = rule.findAllElements("tip").toList();
+      if (tips.length > 0) {
+        cfg.ruleTip = tips[0].text;
+        //.replaceAll("\$propdata1\$", "${task.data1}").trim();
+      }
+      // cfg.ruleLen = rule.findAllElements("prop").length;
+
+      return cfg;
+    }
+    return null;
   }
 
   /// 通过种子id查询鲜花信息
