@@ -30,10 +30,11 @@ class ActConfig {
 }
 
 // List<int> includeActivities = [15, 26, 36, 42, 76, 78];
-const List<int> excludeActivities = [51, 62, 71, 77];
+const List<int> excludeActivities = [51, 62, 71, 72, 77];
 
 const activityCmds = {
   '花园寻宝': 155,
+  '全民吃火锅': 160,
   '捕虫大作战': 170,
   '足球小将': 182,
   '弹弹珠': 183,
@@ -43,6 +44,8 @@ const activityCmds = {
   '星愿': 199,
   '魔幻夺宝': 201,
   '大富翁': 209,
+  '拯救兔兔': 212,
+  '致富密码': 216,
   '周末活动': 220,
   '拯救计划': 225,
   '中秋月圆': 227,
@@ -385,6 +388,37 @@ class _ActivityState extends State<Activity> {
     }
   }
 
+  /// 全民吃火锅
+  quanMinChiHuoGuo(ActConfig actConfig) async {
+    int cmd = actConfig.cmd;
+    var initRes = actConfig.initRes;
+    if (initRes['result'] == 0) {
+      var freeBamboo = initRes['freeBamboo'];
+      var freeWood = initRes['freeWood'];
+      if (freeWood > 0) {
+        var parmas = {
+          'paytype': 1,
+          'request': 3,
+          'cmd': cmd,
+          'auto': 0,
+          'type': 1,
+          'isspecial': 0
+        };
+        await activityOper(actConfig, parmas);
+      }
+      if (freeBamboo > 0) {
+        var parmas = {
+          'paytype': 1,
+          'request': 3,
+          'cmd': cmd,
+          'auto': 0,
+          'type': 2,
+        };
+        await activityOper(actConfig, parmas);
+      }
+    }
+  }
+
   handleTap(ActConfig actConfig, [bool isBatch = false]) async {
     if (actConfig.cmd != null) {
       var parmas = {'request': 1, 'cmd': actConfig.cmd};
@@ -394,6 +428,9 @@ class _ActivityState extends State<Activity> {
       }
     }
     switch (actConfig.name) {
+      case '全民吃火锅':
+        await quanMinChiHuoGuo(actConfig);
+        break;
       case '周末活动':
         await zhouMoHuoDong(actConfig);
         break;
@@ -424,6 +461,8 @@ class _ActivityState extends State<Activity> {
         break;
       case '燃花灯':
       case '魔幻夺宝':
+      case '拯救兔兔':
+      case '致富密码':
         await commonActivity(actConfig, {'index': 1});
         break;
       default:
@@ -484,7 +523,7 @@ class _ActivityState extends State<Activity> {
                               child: Row(
                                 children: <Widget>[
                                   Text(
-                                    actConfig.name,
+                                    actConfig.name, // + actConfig.id,
                                     style: TextStyle(
                                       color: actConfig.isActive
                                           ? Colors.black
