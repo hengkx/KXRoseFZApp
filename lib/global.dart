@@ -147,39 +147,42 @@ class Global {
           var key = file.path
               .substring(file.path.lastIndexOf('/') + 1)
               .replaceAll('.xml', '');
-          doc = parse(file.readAsStringSync());
-          switch (key) {
-            case 'propConfig':
-              config['prop'] = doc.findAllElements('propConfig').toList()[0];
-              config['special'] = doc.findAllElements('special').toList()[0];
-              config['meterial'] = doc.findAllElements('meterial').toList()[0];
-              config['decoration'] =
-                  doc.findAllElements('decrateConfig').toList()[0];
-              config['otherProps'] =
-                  doc.findAllElements('otherProps').toList()[0];
-              config['bouquet'] = doc.findAllElements('bouquet').toList()[0];
-              break;
-            case 'ruleConfig':
-              config['gameRules'] =
-                  doc.findAllElements('ruleConfig').toList()[0];
-              config['gameExpLevel'] =
-                  doc.findAllElements('expLevel').toList()[0];
-              break;
-            case 'adventureConfig':
-              config['adventureEvent'] =
-                  doc.findAllElements('AdventureEvent').toList()[0];
-              config['adventureMap'] =
-                  doc.findAllElements('AdventureMap').toList()[0];
-              break;
-            case 'pergolaDecorateCfg':
-              var decorateCfgs = XML.toDecorate(doc);
-              config['shelf'] = Map();
-              config['shelf']['decorate'] = decorateCfgs[0];
-              config['shelf']['patch'] = decorateCfgs[1];
-              break;
-            default:
-              config[key.replaceAll('Config', '')] = doc.rootElement;
-              break;
+          if (key != 'addonConfig') {
+            doc = parse(file.readAsStringSync());
+            switch (key) {
+              case 'propConfig':
+                config['prop'] = doc.findAllElements('propConfig').toList()[0];
+                config['special'] = doc.findAllElements('special').toList()[0];
+                config['meterial'] =
+                    doc.findAllElements('meterial').toList()[0];
+                config['decoration'] =
+                    doc.findAllElements('decrateConfig').toList()[0];
+                config['otherProps'] =
+                    doc.findAllElements('otherProps').toList()[0];
+                config['bouquet'] = doc.findAllElements('bouquet').toList()[0];
+                break;
+              case 'ruleConfig':
+                config['gameRules'] =
+                    doc.findAllElements('ruleConfig').toList()[0];
+                config['gameExpLevel'] =
+                    doc.findAllElements('expLevel').toList()[0];
+                break;
+              case 'adventureConfig':
+                config['adventureEvent'] =
+                    doc.findAllElements('AdventureEvent').toList()[0];
+                config['adventureMap'] =
+                    doc.findAllElements('AdventureMap').toList()[0];
+                break;
+              case 'pergolaDecorateCfg':
+                var decorateCfgs = XML.toDecorate(doc);
+                config['shelf'] = Map();
+                config['shelf']['decorate'] = decorateCfgs[0];
+                config['shelf']['patch'] = decorateCfgs[1];
+                break;
+              default:
+                config[key.replaceAll('Config', '')] = doc.rootElement;
+                break;
+            }
           }
         });
       }
