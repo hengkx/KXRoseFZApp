@@ -4,6 +4,7 @@ import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:rose_fz/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,20 +31,12 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-      keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
-      childDirected: false,
-      testDevices: <String>[
-        '6E12CFF42AD75DB204F205C78113B0D2',
-        '500127c8dad2d2f05a12a1c733e8f888'
-      ], // Android emulators are considered test devices
-    );
     myBanner = BannerAd(
       adUnitId: Platform.isAndroid
           ? 'ca-app-pub-6326384735097338/9084039564'
           : 'ca-app-pub-6326384735097338/4914598376',
       size: AdSize.smartBanner,
-      targetingInfo: targetingInfo,
+      targetingInfo: Global.targetingInfo,
     );
     myBanner
       // typically this happens well before the ad is shown

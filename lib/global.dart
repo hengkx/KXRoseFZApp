@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:math' show Random;
 import 'package:archive/archive.dart';
@@ -20,6 +21,15 @@ class ExchangeItem {
 }
 
 class Global {
+  static MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
+    childDirected: false,
+    testDevices: <String>[
+      '6E12CFF42AD75DB204F205C78113B0D2',
+      '500127c8dad2d2f05a12a1c733e8f888'
+    ],
+  );
+
   static Map<String, dynamic> config;
   static UserConfig userConfig;
 

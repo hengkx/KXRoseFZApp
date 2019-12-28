@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:rose_fz/global.dart';
+import 'package:rose_fz/pages/other.dart';
 import 'package:rose_fz/pages/talent_pk.dart';
 import 'package:rose_fz/store/index.dart';
 import 'package:rose_fz/store/models/user_model.dart';
@@ -42,27 +43,20 @@ class _HomePageState extends State<HomePage> {
             : 'ca-app-pub-6326384735097338~4924544925',
         analyticsEnabled: true);
     init();
-    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-      keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
-      childDirected: false,
-      testDevices: <String>[
-        '6E12CFF42AD75DB204F205C78113B0D2',
-        '500127c8dad2d2f05a12a1c733e8f888'
-      ], // Android emulators are considered test devices
-    );
-    var myInterstitial = InterstitialAd(
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-6326384735097338/2687195758'
-          : 'ca-app-pub-6326384735097338/4843968696',
-      targetingInfo: targetingInfo,
-    );
-    myInterstitial
-      ..load()
-      ..show(
-        anchorOffset: 0,
-        horizontalCenterOffset: 0,
-        anchorType: AnchorType.bottom,
-      );
+
+    // var myInterstitial = InterstitialAd(
+    //   adUnitId: Platform.isAndroid
+    //       ? 'ca-app-pub-6326384735097338/2687195758'
+    //       : 'ca-app-pub-6326384735097338/4843968696',
+    //   targetingInfo: targetingInfo,
+    // );
+    // myInterstitial
+    //   ..load()
+    //   ..show(
+    //     anchorOffset: 0,
+    //     horizontalCenterOffset: 0,
+    //     anchorType: AnchorType.bottom,
+    //   );
   }
 
   int tabIndex = 0;
@@ -93,6 +87,7 @@ class _HomePageState extends State<HomePage> {
     Activity(),
     TalentPKPage(),
     Task(),
+    Other(),
   ];
 
   getBottomNavigationBarItem(String title, IconData icon) {
@@ -137,6 +132,7 @@ class _HomePageState extends State<HomePage> {
               getBottomNavigationBarItem("活动", Icons.assistant),
               getBottomNavigationBarItem("竞技场", Icons.add_box),
               getBottomNavigationBarItem("任务", Icons.assignment),
+              getBottomNavigationBarItem("测试", Icons.assignment),
             ],
             currentIndex: tabIndex,
             fixedColor: Theme.of(context).primaryColor,

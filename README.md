@@ -7,4 +7,6 @@ flutter packages pub run build_runner watch
 flutter packages pub run build_runner clean
 # (flutter build 默认会包含 --release选项)
 flutter build apk
+# lock
+rm ./flutter/bin/cache/lockfile
 ```

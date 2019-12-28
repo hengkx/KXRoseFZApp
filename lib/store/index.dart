@@ -14,7 +14,7 @@ class Store {
     return MultiProvider(
       child: child,
       providers: [
-        ChangeNotifierProvider(builder: (_) => UserModel()),
+        ChangeNotifierProvider(create: (context) => UserModel()),
       ],
     );
   }
