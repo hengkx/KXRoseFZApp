@@ -22,7 +22,9 @@ class ExchangeItem {
 
 class Global {
   static MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花'],
+    keywords: <String>['玫瑰小镇', '休闲', '网页游戏', '种花', 'game'],
+    contentUrl:
+        'https://qqgame.gamebbs.qq.com/forum.php?mod=forumdisplay&fid=30650',
     childDirected: false,
     testDevices: <String>[
       '6E12CFF42AD75DB204F205C78113B0D2',

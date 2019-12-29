@@ -9,4 +9,15 @@ flutter packages pub run build_runner clean
 flutter build apk
 # lock
 rm ./flutter/bin/cache/lockfile
+
+flutter build apk --release --flavor=app --target-platform android-arm,android-arm64 --split-per-abi
+
+flutter run --flavor app -t lib/main_development.dart
+
+# Android 9 可以运行
+flutter build apk --target-platform android-arm64
+
+flutter build apk --target-platform android-arm,android-arm64
+
+source ~/.bash_profile
 ```
