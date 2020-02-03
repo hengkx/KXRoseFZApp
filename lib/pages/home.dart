@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:rose_fz/global.dart';
 import 'package:rose_fz/pages/other.dart';
 import 'package:rose_fz/pages/talent_pk.dart';
+import 'package:rose_fz/pages/warehouse.dart';
 import 'package:rose_fz/store/index.dart';
 import 'package:rose_fz/store/models/user_model.dart';
 import 'package:package_info/package_info.dart';
@@ -87,6 +88,7 @@ class _HomePageState extends State<HomePage> {
     Activity(),
     TalentPKPage(),
     Task(),
+    Warehouse(),
     Other(),
   ];
 
@@ -132,6 +134,7 @@ class _HomePageState extends State<HomePage> {
               getBottomNavigationBarItem("活动", Icons.assistant),
               getBottomNavigationBarItem("竞技场", Icons.add_box),
               getBottomNavigationBarItem("任务", Icons.assignment),
+              getBottomNavigationBarItem("仓库", Icons.assignment),
               getBottomNavigationBarItem("测试", Icons.assignment),
             ],
             currentIndex: tabIndex,

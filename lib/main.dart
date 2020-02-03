@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:screen/screen.dart';
 import 'package:rose_fz/pages/exchange.dart';
 import 'package:rose_fz/pages/log.dart';
 import 'package:rose_fz/pages/home.dart';
@@ -18,6 +20,11 @@ class MainApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.blue,
     ));
+    print(kReleaseMode);
+    if (!kReleaseMode) {
+      // 屏幕常亮
+      Screen.keepOn(true);
+    }
     return MaterialApp(
       title: '开心小镇',
       theme: ThemeData(
