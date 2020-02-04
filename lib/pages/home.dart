@@ -77,9 +77,10 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       tabIndex = 0;
     });
-    var res = await Store.value<UserModel>(context).getUserInfo();
+    var res =
+        await Provider.of<UserModel>(context, listen: false).getUserInfo();
     if (res.result != 0) {
-      Store.value<UserModel>(context).login(context);
+      Provider.of<UserModel>(context, listen: false).login(context);
     }
   }
 
