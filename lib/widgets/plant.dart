@@ -5,7 +5,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:rose_fz/models/flower.dart';
 import 'package:rose_fz/models/soil.dart';
-import 'package:rose_fz/store/index.dart';
 import 'package:rose_fz/store/models/user_model.dart';
 import 'package:rose_fz/utils/plant.dart';
 
@@ -40,7 +39,7 @@ class _PlantWidgetState extends State<PlantWidget> {
   final SlidableController slidableController = SlidableController();
 
   Future<void> loadPlant() async {
-    Store.value<UserModel>(context).loadPlant();
+    Provider.of<UserModel>(context, listen: false).loadPlant();
   }
 
   Color getSoilTypeColor(int type) {
@@ -261,7 +260,7 @@ class _PlantWidgetState extends State<PlantWidget> {
   }
 
   batchHoe() async {
-    var operSoils = Store.value<UserModel>(context)
+    var operSoils = Provider.of<UserModel>(context, listen: false)
         .user
         .soils
         .where((p) => p.soilsate == 50 && p.type != 2)
@@ -275,7 +274,7 @@ class _PlantWidgetState extends State<PlantWidget> {
   }
 
   batchPlantAction() async {
-    var operSoils = Store.value<UserModel>(context)
+    var operSoils = Provider.of<UserModel>(context, listen: false)
         .user
         .soils
         .where((p) => p.isNoFood || p.isClutter || p.isNoShine)
@@ -289,7 +288,7 @@ class _PlantWidgetState extends State<PlantWidget> {
   }
 
   batchGain() async {
-    var operSoils = Store.value<UserModel>(context)
+    var operSoils = Provider.of<UserModel>(context, listen: false)
         .user
         .soils
         .where((p) => p.rosestate == 5)
@@ -320,7 +319,7 @@ class _PlantWidgetState extends State<PlantWidget> {
   }
 
   batchPlant() async {
-    var operSoils = Store.value<UserModel>(context)
+    var operSoils = Provider.of<UserModel>(context, listen: false)
         .user
         .soils
         .where((p) => p.soilsate == 51)

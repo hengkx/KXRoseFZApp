@@ -16,11 +16,11 @@ import 'package:rose_fz/store/models/user_model.dart';
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Store.of(context);
+    // Store.of(context);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.blue,
     ));
-    print(kReleaseMode);
+    // 调试下设置屏幕常量
     if (!kReleaseMode) {
       // 屏幕常亮
       Screen.keepOn(true);

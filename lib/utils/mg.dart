@@ -25,11 +25,43 @@ class MGUtil {
     var res = await HttpUtil.getInstance()
         .post("rosary0909_get_init_first_self", data: params);
     var response = GetInitFirstResponse.fromJson(res);
+
+// 免费玫瑰种子个数
+    response.roseseed[998] = res['freeseedcount'];
+
     res.forEach((key, value) {
       if (key.contains('vegetableseed') || key.contains('roseseed')) {
         var id = int.parse(
             key.replaceAll('vegetableseed', '').replaceAll('roseseed', ''));
         response.warehouse[MGDataUtil.getPlantIDBySeedId(id)] = value;
+      }
+      // 鲜花
+      if (key.contains('vegetablefruit')) {
+        var id = int.parse(key.replaceAll('vegetablefruit', ''));
+        response.vegetablefruit[id] = value;
+      }
+      // 玫瑰原料
+      else if (key.contains('roseseed') ||
+          RegExp(r"^meterial\d+$").hasMatch(key)) {
+        var id = int.parse(
+            key.replaceAll('roseseed', '').replaceAll('meterial', ''));
+        response.roseseed[id] = value;
+      }
+      // 玫瑰
+      else if (RegExp(r"^rose\d+$").hasMatch(key)) {
+        var id = int.parse(key.replaceAll('rose', ''));
+        if (id > 14) {
+          response.rose[id] = value[0];
+        } else if (id <= 12) {
+          response.roseseed[id] = value[0];
+        }
+      }
+      // 特殊道具
+      else if (key.contains('prop')) {
+        var id = int.parse(key.replaceAll('prop', ''));
+        if (value > 0) {
+          response.prop[id] = value;
+        }
       }
     });
     return response;

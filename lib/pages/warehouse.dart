@@ -1,15 +1,13 @@
 import 'dart:io';
 
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:rose_fz/models/responses/award.dart';
-import 'package:rose_fz/utils/mg_data.dart';
 import 'package:rose_fz/global.dart';
 import 'package:rose_fz/user.dart';
 import 'package:rose_fz/utils/mg.dart';
+import 'package:rose_fz/utils/mg_data.dart';
 
 final dateFormat = new DateFormat('yyyy-MM-dd HH:mm:ss');
 
@@ -20,114 +18,208 @@ class Warehouse extends StatefulWidget {
   }
 }
 
-class ActConfig {
-  String id;
-  String name;
-  int start;
-  int end;
-  String desc;
-  bool isActive;
-  int sort;
-  int cmd;
-  dynamic initRes;
+class Item {
+  Item({
+    this.data,
+    this.headerValue,
+    this.isExpanded = false,
+  });
+
+  String headerValue;
+  bool isExpanded;
+  Map<int, int> data;
 }
 
-// List<int> includeActivities = [15, 26, 36, 42, 76, 78];
-const List<int> excludeActivities = [51, 62, 71, 72, 77];
-
-const activityCmds = {
-  '花园寻宝': 155,
-  '全民吃火锅': 160,
-  '捕虫大作战': 170,
-  '足球小将': 182,
-  '弹弹珠': 183,
-  '燃花灯': 186,
-  '夏日大作战': 188,
-  '幸福蛋': 198,
-  '星愿': 199,
-  '魔幻夺宝': 201,
-  '大富翁': 209,
-  '拯救兔兔': 212,
-  '致富密码': 216,
-  '周末活动': 220,
-  '拯救计划': 225,
-  '中秋月圆': 227,
-  '欢乐小黄鸭': 229,
-};
-
 class _ActivityState extends State<Warehouse> {
+  List<Item> _data = List();
+
   @override
   void initState() {
     super.initState();
-
-    RewardedVideoAd.instance.listener =
-        (RewardedVideoAdEvent event, {String rewardType, int rewardAmount}) {
-      switch (event) {
-        case RewardedVideoAdEvent.loaded:
-          RewardedVideoAd.instance.show();
-          break;
-        case RewardedVideoAdEvent.failedToLoad:
-          //读取失败！
-          showSnackBar("加载失败");
-          break;
-        case RewardedVideoAdEvent.opened:
-          break;
-        case RewardedVideoAdEvent.leftApplication:
-          break;
-        case RewardedVideoAdEvent.closed:
-          showSnackBar("关闭");
-          break;
-        case RewardedVideoAdEvent.rewarded:
-          showSnackBar("奖励");
-          break;
-        case RewardedVideoAdEvent.started:
-          showSnackBar("开始");
-          break;
-        case RewardedVideoAdEvent.completed:
-          showSnackBar("播放结束");
-          break;
-      }
-    };
+    init();
   }
 
-  showSnackBar(String tip) {
-    Scaffold.of(context).showSnackBar(new SnackBar(
-      content: new Text(tip),
-      duration: Duration(seconds: 1),
+  init() async {
+    await Global.init();
+    User.initFirstRes = await MGUtil.getInitFirst();
+    _data.add(Item(
+      headerValue: '鲜花',
+      data: User.initFirstRes.vegetablefruit,
     ));
+    _data.add(Item(
+      headerValue: '玫瑰',
+      data: User.initFirstRes.rose,
+    ));
+    _data.add(Item(
+      headerValue: '玫瑰原料',
+      data: User.initFirstRes.roseseed,
+    ));
+    _data.add(Item(
+      headerValue: '特殊道具',
+      data: User.initFirstRes.prop,
+    ));
+    setState(() {
+      _data = _data;
+    });
   }
 
-  void handleActivity() async {
-    RewardedVideoAd.instance.load(
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-6326384735097338/5666161357'
-          : 'ca-app-pub-6326384735097338/7963638745',
-      targetingInfo: Global.targetingInfo,
+  Widget _buildXianHua(Map<int, int> data) {
+    var keys = data.keys.toList();
+    keys.sort((a, b) => (b).compareTo(a));
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: keys.length,
+      itemBuilder: (context, i) {
+        var info = MGDataUtil.dicMapId[keys[i].toString()];
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(info?.name ?? '' + ' ' + keys[i].toString()),
+              ),
+              Text(data[keys[i]].toString())
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Container(height: 1.0, color: Colors.grey[300]);
+      },
+    );
+  }
+
+  Widget _buildMeiGui(Map<int, int> data) {
+    var keys = data.keys.toList();
+    // keys.sort((a, b) => (b).compareTo(a));
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: keys.length,
+      itemBuilder: (context, i) {
+        var name = Global.getFlowerInfoById(keys[i])?.name ??
+            '' + ' ' + keys[i].toString();
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(name),
+              ),
+              Text('${data[keys[i]] ~/ 30}束${data[keys[i]] % 30}朵')
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Container(height: 1.0, color: Colors.grey[300]);
+      },
+    );
+  }
+
+  Widget _buildMeiGuiYuanLiao(Map<int, int> data) {
+    var keys = data.keys.toList();
+    // keys.sort((a, b) => (b).compareTo(a));
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: keys.length,
+      itemBuilder: (context, i) {
+        var name = Global.getFlowerInfoById(keys[i])?.name ??
+            '' + ' ' + keys[i].toString();
+        var a = Global.config['meterial']
+            .findAllElements("item")
+            .where((xe) =>
+                xe.getAttribute('seedID') == '${keys[i]}' ||
+                xe.getAttribute('id') == '${keys[i]}')
+            .toList();
+        if (a.length > 0) {
+          name = a[0].getAttribute("name");
+        }
+        // var name = info?.name ?? '' + ' ' + keys[i].toString();
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(name),
+              ),
+              Text('${data[keys[i]]}')
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Container(height: 1.0, color: Colors.grey[300]);
+      },
+    );
+  }
+
+  Widget _buildTeShuDaoJu(Map<int, int> data) {
+    var keys = data.keys.toList();
+    keys.sort((a, b) => (b).compareTo(a));
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: keys.length,
+      itemBuilder: (context, i) {
+        var info = MGDataUtil.dicMapId[keys[i].toString()];
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(info?.name ?? '' + ' ' + keys[i].toString()),
+              ),
+              Text(data[keys[i]].toString())
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Container(height: 1.0, color: Colors.grey[300]);
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Flex(
-          direction: Axis.horizontal,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: MaterialButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  child: new Text('测试广告'),
-                  onPressed: handleActivity,
-                ),
-              ),
-            ),
-          ],
+    var vegetablefruit = User.initFirstRes.vegetablefruit;
+    var vegetablefruitKeys = vegetablefruit.keys.toList();
+    vegetablefruitKeys.sort((a, b) => (b).compareTo(a));
+    return SingleChildScrollView(
+      child: Container(
+        child: ExpansionPanelList.radio(
+          expansionCallback: (int index, bool isExpanded) {
+            setState(() {
+              _data[index].isExpanded = !isExpanded;
+            });
+          },
+          children: _data.map<ExpansionPanel>((Item item) {
+            Widget child;
+            if (item.headerValue == "鲜花") {
+              child = _buildXianHua(item.data);
+            } else if (item.headerValue == "玫瑰") {
+              child = _buildMeiGui(item.data);
+            } else if (item.headerValue == "玫瑰原料") {
+              child = _buildMeiGuiYuanLiao(item.data);
+            } else {
+              child = _buildTeShuDaoJu(item.data);
+            }
+            return ExpansionPanelRadio(
+              canTapOnHeader: true,
+              value: item.headerValue,
+              headerBuilder: (context, isExpanded) {
+                return ListTile(
+                  title: Text('${item.headerValue}(${item.data.length})'),
+                );
+              },
+              body: child,
+            );
+          }).toList(),
         ),
-      ],
+      ),
     );
   }
 }

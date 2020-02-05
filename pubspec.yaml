@@ -11,7 +11,7 @@ description: 玫瑰小镇辅助
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.11.1
+version: 0.11.5
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -44,7 +44,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.7.2
+  build_runner: ^1.7.3
   json_serializable: ^3.2.5
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

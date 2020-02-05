@@ -87,6 +87,21 @@ class GetInitFirstResponse extends BaseResponse {
   @JsonKey(ignore: true)
   Map<int, int> warehouse = Map<int, int>();
 
+  /// 鲜花
+  @JsonKey(ignore: true)
+  Map<int, int> vegetablefruit = Map<int, int>();
+
+  /// 玫瑰原料
+  @JsonKey(ignore: true)
+  Map<int, int> rose = Map<int, int>();
+
+  /// 玫瑰原料
+  @JsonKey(ignore: true)
+  Map<int, int> roseseed = Map<int, int>();
+
+  /// 特殊道具
+  @JsonKey(ignore: true)
+  Map<int, int> prop = Map<int, int>();
   GetInitFirstResponse(
       {result,
       resultstr,

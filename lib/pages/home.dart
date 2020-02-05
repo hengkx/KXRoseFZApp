@@ -8,7 +8,6 @@ import 'package:rose_fz/global.dart';
 import 'package:rose_fz/pages/other.dart';
 import 'package:rose_fz/pages/talent_pk.dart';
 import 'package:rose_fz/pages/warehouse.dart';
-import 'package:rose_fz/store/index.dart';
 import 'package:rose_fz/store/models/user_model.dart';
 import 'package:package_info/package_info.dart';
 import '../user.dart';
